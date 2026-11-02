@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>科创 AI 助手 - 在线测评</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1677FF',
+            'primary-light': '#E8F1FF',
+            'primary-hover': '#0E62E0',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #1f2937;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #d4d7dd; border-radius: 3px; }
+  </style>
+</head>
+
+<body class="min-h-screen">
+  <!-- 极简 Header -->
+  <header class="fixed left-0 right-0 top-0 z-20 flex h-14 items-center justify-between border-b border-gray-200 bg-white px-6">
+    <div class="flex items-center gap-2.5">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-blue-400 text-sm font-bold text-white">科</div>
+      <span class="text-sm font-medium text-gray-800">科创 AI 助手 - 在线测评</span>
+    </div>
+    <button id="btn-help" class="flex h-9 w-9 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-50 hover:text-primary" title="客服/帮助">
+      <i data-lucide="headset" class="h-5 w-5"></i>
+    </button>
+  </header>
+
+  <!-- 主内容 -->
+  <main class="mx-auto w-[800px] max-w-full px-4 pb-32 pt-20">
+    <div class="overflow-hidden rounded-2xl bg-white shadow-sm">
+
+      <!-- 第一步：企业身份确认 -->
+      <div id="step-1" class="px-12 py-14">
+        <div class="text-center">
+          <div class="text-2xl font-semibold text-gray-800">欢迎参加 <span class="text-primary">专精特新中小企业</span> 认定测评</div>
+          <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-gray-500">为了给您提供最精准的测评结果，请先确认您的企业身份，系统将自动为您带入已有档案数据。</p>
+        </div>
+        <div class="mx-auto mt-10 max-w-md space-y-5">
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">企业名称</label>
+            <input id="company-name" type="text" placeholder="例如：武汉汉企业科技有限公司" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+          </div>
+          <div>
+            <label class="mb-1.5 block text-sm font-medium text-gray-700">统一社会信用代码</label>
+            <input id="company-code" type="text" maxlength="18" placeholder="请输入 18 位统一社会信用代码" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+          </div>
+          <p class="text-xs text-gray-400">* 若系统中暂无该企业档案，填写后将为您自动创建。</p>
+          <button id="btn-start" class="w-full rounded-lg bg-primary py-3 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">确认企业并开始填表</button>
+        </div>
+      </div>
+
+      <!-- 第二步：人工问卷填写 -->
+      <div id="step-2" class="hidden">
+        <!-- 顶部状态栏 -->
+        <div class="flex items-center justify-between border-b border-gray-100 px-8 py-4">
+          <div class="flex items-center gap-2 text-sm">
+            <i data-lucide="building-2" class="h-4 w-4 text-primary"></i>
+            <span class="text-gray-500">已绑定企业：</span>
+            <span id="bound-company" class="font-medium text-gray-800">武汉汉企业科技有限公司</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-draft" class="flex items-center gap-1 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
+              <i data-lucide="save" class="h-3.5 w-3.5"></i> 保存草稿
+            </button>
+            <button id="btn-switch-company" class="flex items-center gap-1 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
+              <i data-lucide="refresh-cw" class="h-3.5 w-3.5"></i> 切换企业
+            </button>
+          </div>
+        </div>
+
+        <!-- 左右分栏 -->
+        <div class="flex">
+          <!-- 左：章节导航 -->
+          <aside class="w-56 flex-shrink-0 border-r border-gray-100 p-5">
+            <div class="sticky top-24">
+              <div class="flex items-center gap-3">
+                <div class="relative h-16 w-16 rounded-full" style="background: conic-gradient(#1677FF 30%, #e5e7eb 0);">
+                  <div class="absolute inset-[4px] flex items-center justify-center rounded-full bg-white">
+                    <span class="text-sm font-semibold text-primary">30%</span>
+                  </div>
+                </div>
+                <div class="text-xs text-gray-400">已完成进度</div>
+              </div>
+              <div class="mt-5 space-y-1">
+                <a href="#sec-1" class="nav-sec flex items-center gap-2 rounded-md bg-primary-light px-2.5 py-2 text-sm font-medium text-primary">一、企业基本情况</a>
+                <a href="#sec-2" class="nav-sec flex items-center gap-2 rounded-md px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50">二、专业化指标</a>
+                <a href="#sec-3" class="nav-sec flex items-center gap-2 rounded-md px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50">三、精细化指标</a>
+              </div>
+            </div>
+          </aside>
+
+          <!-- 右：表单 -->
+          <div class="flex-1 space-y-8 p-8">
+            <!-- 章节一 -->
+            <div id="sec-1">
+              <div class="mb-4 flex items-center gap-2 text-base font-semibold text-gray-800">一、企业基本情况</div>
+              <div class="space-y-4">
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">企业名称</label>
+                  <div class="relative">
+                    <input type="text" value="武汉汉企业科技有限公司" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                    <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">统一社会信用代码</label>
+                  <div class="relative">
+                    <input type="text" value="91420100MA4K*****" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                    <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">成立日期</label>
+                    <div class="relative">
+                      <input type="text" value="2015-06-18" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                      <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">注册资本</label>
+                    <div class="relative">
+                      <input type="text" value="5000 万元" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                      <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">上年度研发费用占营业收入比例（%）<span class="text-red-500">*</span></label>
+                  <input type="text" value="5.2" class="h-11 w-full rounded-lg border border-red-300 px-3 text-sm text-red-600 outline-none transition focus:border-red-500" />
+                  <p class="mt-1 flex items-center gap-1 text-xs text-red-500">
+                    <i data-lucide="alert-circle" class="h-3.5 w-3.5"></i> 研发费用占比 5.2%，低于行业平均 6.5%，建议补充说明
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 章节二 -->
+            <div id="sec-2">
+              <div class="mb-4 flex items-center gap-2 text-base font-semibold text-gray-800">二、专业化指标</div>
+              <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">核心知识产权数量</label>
+                    <div class="relative">
+                      <input type="text" value="15 项" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                      <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">发明专利数量</label>
+                    <div class="relative">
+                      <input type="text" value="2 项" readonly class="h-11 w-full rounded-lg border border-primary/20 bg-primary-light/40 px-3 pr-32 text-sm text-gray-700 outline-none" />
+                      <span class="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自动读取自档案</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">主导产品细分市场占有率（%）</label>
+                    <input type="text" placeholder="请输入" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700">主营业务收入占营业收入比重（%）</label>
+                    <input type="text" placeholder="请输入" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 章节三 -->
+            <div id="sec-3">
+              <div class="mb-4 flex items-center gap-2 text-base font-semibold text-gray-800">三、精细化指标</div>
+              <div class="space-y-4">
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">企业核心技术描述<span class="text-red-500">*</span></label>
+                  <div class="relative">
+                    <textarea rows="3" placeholder="请描述企业核心技术的创新性、先进性..." class="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 pr-28 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+                    <button class="js-ai-write absolute bottom-2 right-2 flex items-center gap-1 rounded-md bg-primary-light px-2 py-1 text-xs text-primary transition hover:opacity-80"><i data-lucide="sparkles" class="h-3.5 w-3.5"></i> AI 帮我写</button>
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">研发机构建设情况</label>
+                  <div class="relative">
+                    <textarea rows="3" placeholder="请描述研发机构、研发人员、研发设备等建设情况..." class="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 pr-28 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+                    <button class="js-ai-write absolute bottom-2 right-2 flex items-center gap-1 rounded-md bg-primary-light px-2 py-1 text-xs text-primary transition hover:opacity-80"><i data-lucide="sparkles" class="h-3.5 w-3.5"></i> AI 帮我写</button>
+                  </div>
+                </div>
+                <div>
+                  <label class="mb-1.5 block text-sm font-medium text-gray-700">质量管理体系认证</label>
+                  <select class="h-11 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
+                    <option>ISO9001 质量管理体系认证</option>
+                    <option>ISO14001 环境管理体系认证</option>
+                    <option>ISO27001 信息安全管理体系认证</option>
+                    <option>暂无认证</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 底部悬浮操作条（仅第二步） -->
+  <div id="bottom-bar" class="fixed bottom-0 left-0 right-0 z-20 hidden border-t border-gray-200 bg-white">
+    <div class="mx-auto flex w-[800px] max-w-full items-center justify-between px-4 py-4">
+      <label class="flex cursor-pointer items-center gap-2 text-sm text-gray-600">
+        <input id="agree" type="checkbox" class="h-4 w-4 accent-primary" />
+        我承诺以上填报信息真实有效
+      </label>
+      <button id="btn-submit" class="rounded-lg bg-primary px-8 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">提交并生成报告</button>
+    </div>
+  </div>
+
+  <!-- 生成中 Modal -->
+  <div id="gen-overlay" class="fixed inset-0 z-50 hidden bg-black/40"></div>
+  <div id="gen-modal" class="fixed left-1/2 top-1/2 z-50 hidden w-[360px] -translate-x-1/2 -translate-y-1/2 rounded-xl bg-white p-8 shadow-2xl">
+    <div class="flex flex-col items-center text-center">
+      <div id="gen-icon" class="flex h-12 w-12 items-center justify-center rounded-full bg-primary-light">
+        <i data-lucide="loader-2" class="h-6 w-6 animate-spin text-primary"></i>
+      </div>
+      <div id="gen-text" class="mt-4 text-sm font-medium text-gray-800">正在比对企业档案与测评模型...</div>
+    </div>
+  </div>
+
+  <script>
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;left:50%;top:24px;transform:translateX(-50%);background:#1f2937;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:100;transition:opacity .3s;';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2200);
+    }
+
+    // 第一步 → 第二步
+    document.getElementById('btn-start').addEventListener('click', () => {
+      const name = document.getElementById('company-name').value.trim();
+      const code = document.getElementById('company-code').value.trim();
+      if (!name) { showToast('请填写企业名称'); return; }
+      if (!code || code.length !== 18) { showToast('请填写 18 位统一社会信用代码'); return; }
+      document.getElementById('bound-company').textContent = name;
+      document.getElementById('step-1').classList.add('hidden');
+      document.getElementById('step-2').classList.remove('hidden');
+      document.getElementById('bottom-bar').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 客服/帮助
+    document.getElementById('btn-help').addEventListener('click', () => showToast('在线客服（演示）'));
+
+    // 保存草稿
+    document.getElementById('btn-draft').addEventListener('click', () => showToast('草稿已保存'));
+
+    // 切换企业 → 回到第一步
+    document.getElementById('btn-switch-company').addEventListener('click', () => {
+      document.getElementById('step-1').classList.remove('hidden');
+      document.getElementById('step-2').classList.add('hidden');
+      document.getElementById('bottom-bar').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 章节导航点击高亮
+    document.querySelectorAll('.nav-sec').forEach((link) => {
+      link.addEventListener('click', () => {
+        document.querySelectorAll('.nav-sec').forEach((l) => {
+          l.classList.remove('bg-primary-light', 'text-primary', 'font-medium');
+          l.classList.add('text-gray-600');
+        });
+        link.classList.add('bg-primary-light', 'text-primary', 'font-medium');
+        link.classList.remove('text-gray-600');
+      });
+    });
+
+    // AI 帮我写
+    document.querySelectorAll('.js-ai-write').forEach((btn) => {
+      btn.addEventListener('click', () => showToast('✨ AI 已为您生成参考内容（演示）'));
+    });
+
+    // 提交并生成报告
+    document.getElementById('btn-submit').addEventListener('click', () => {
+      if (!document.getElementById('agree').checked) { showToast('请先勾选信息真实有效承诺'); return; }
+      const overlay = document.getElementById('gen-overlay');
+      const modal = document.getElementById('gen-modal');
+      overlay.classList.remove('hidden');
+      modal.classList.remove('hidden');
+      document.getElementById('gen-text').textContent = '正在比对企业档案与测评模型...';
+      setTimeout(() => {
+        document.getElementById('gen-icon').innerHTML = '<i data-lucide="check-circle-2" class="h-8 w-8 text-green-500"></i>';
+        document.getElementById('gen-icon').classList.remove('bg-primary-light');
+        document.getElementById('gen-icon').classList.add('bg-green-50');
+        lucide.createIcons();
+        document.getElementById('gen-text').textContent = '提交成功，报告已生成';
+      }, 3000);
+    });
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
