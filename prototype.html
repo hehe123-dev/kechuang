@@ -356,29 +356,6 @@
       display: block;
     }
 
-    /* 智能体广场：Tab 切换 */
-    .agent-tab {
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-      border-radius: 0.375rem;
-      padding: 0.375rem 0.875rem;
-      font-size: 0.875rem;
-      color: #6b7280;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-    .agent-tab:hover {
-      color: #374151;
-    }
-    .agent-tab.agent-tab-active {
-      background: #1677ff;
-      color: #fff;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    }
-
     /* 智能体广场：分类标签 */
     .cat-chip {
       flex-shrink: 0;
@@ -556,6 +533,44 @@
     ::-webkit-scrollbar-track {
       background-color: transparent;
     }
+  </style>
+  <style>
+/* ===== 智能体广场：矩阵 / 运行 / 交付 ===== */
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.file-item:hover { background: #f3f4f6; }
+.file-item.file-item-active { background: #e8f1ff; }
+.file-item.file-item-active .file-item-name { color: #1677ff; }
+
+/* 电子表格 */
+.sheet-colhead {
+  background: #f1f5f9; color: #64748b; font-size: 12px; font-weight: 600;
+  text-align: center; padding: 4px 6px; border: 1px solid #e2e8f0;
+}
+.sheet-rowoff {
+  background: #f8fafc; color: #94a3b8; font-size: 12px;
+  text-align: center; padding: 4px 6px; border: 1px solid #e2e8f0;
+}
+.sheet-header-cell {
+  background: #1e40af; color: #fff; font-weight: 600;
+  padding: 8px 12px; border: 1px solid #1e3a8a;
+}
+.sheet-input-name { background: #fef9c3; color: #1d4ed8; font-weight: 500; padding: 4px 8px; border: 1px solid #fde68a; }
+.sheet-input-val { background: #fef9c3; color: #1d4ed8; font-weight: 600; padding: 4px 8px; border: 1px solid #fde68a; }
+.sheet-input-other { background: #fef9c3; color: #1d4ed8; padding: 4px 8px; border: 1px solid #fde68a; }
+.sheet-plain { background: #fff; color: #1f2937; padding: 4px 8px; border: 1px solid #e5e7eb; }
+.sheet-selected { box-shadow: inset 0 0 0 2px #16a34a; background: #f0fdf4 !important; position: relative; }
+.sheet-selected::after {
+  content: ''; position: absolute; right: 0; bottom: 0;
+  width: 7px; height: 7px; background: #16a34a; border: 1px solid #fff;
+}
   </style>
 </head>
 
@@ -2325,9 +2340,9 @@
               <div class="mb-3 flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-primary"></span>
                 <span class="text-sm font-medium text-gray-800">进行中</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">3</span>
+                <span id="project-inprogress-count" class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">3</span>
               </div>
-              <div class="space-y-3">
+              <div id="project-inprogress-list" class="space-y-3">
                 <div class="project-card rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-md" data-name="2024年高新技术企业认定" data-type="自主" data-status="进行中">
                   <div class="flex items-start justify-between gap-2">
                     <div class="text-sm font-medium leading-snug text-gray-800">2024年高新技术企业认定</div>
@@ -2637,164 +2652,280 @@
         </div>
 
         <!-- 智能体广场 -->
-        <div id="page-agent" class="page hidden">
-          <div class="mb-5">
-            <h2 class="text-xl font-semibold text-gray-800">智能体广场</h2>
-            <p class="mt-1 text-sm text-gray-400">海量 AI 智能体与优质科创服务，即选即用</p>
-          </div>
+        <div id="page-agent" class="page hidden -m-6 h-[calc(100vh-44px)]">
 
-          <!-- Tab 切换 -->
-          <div class="mb-5 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
-            <button data-agent-tab="matrix" class="agent-tab agent-tab-active">智能体矩阵</button>
-            <button data-agent-tab="mall" class="agent-tab">服务商城</button>
-          </div>
+          <!-- ============ 视图一：智能体矩阵（默认） ============ -->
+          <div id="agent-view-matrix" class="h-full overflow-y-auto">
+            <div class="mx-auto max-w-6xl p-6">
+              <!-- 面包屑 -->
+              <div class="mb-4 flex items-center gap-2 text-sm">
+                <span class="text-gray-400">工作台</span>
+                <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-gray-300"></i>
+                <span class="font-medium text-gray-800">智能体广场</span>
+              </div>
 
-          <!-- 智能体矩阵 -->
-          <div id="agent-tab-matrix">
-            <div class="mb-4 flex items-center justify-between gap-4">
-              <div class="relative w-72">
-                <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="搜索智能体…" class="h-9 w-full rounded-lg border border-gray-200 bg-white pl-9 pr-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+              <!-- 页头 -->
+              <div class="mb-6">
+                <h1 class="text-2xl font-semibold text-gray-900">智能体广场</h1>
+                <p class="mt-1 text-sm text-gray-500">六大 AI 智能体，覆盖「档案 → 政策 → 申报 → 体检 → 规划 → 服务」全链路，即选即用</p>
               </div>
-              <div class="flex items-center gap-2">
-                <button class="cat-chip cat-chip-active" data-cat="全部">全部</button>
-                <button class="cat-chip" data-cat="政策咨询">政策咨询</button>
-                <button class="cat-chip" data-cat="知识产权">知识产权</button>
-                <button class="cat-chip" data-cat="技术研发">技术研发</button>
-                <button class="cat-chip" data-cat="财税规划">财税规划</button>
-              </div>
-            </div>
-            <div class="grid grid-cols-4 gap-4">
-              <div class="agent-card rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-cat="政策咨询">
-                <div class="flex items-start gap-3">
-                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-blue-400">
-                    <i data-lucide="bot" class="h-6 w-6 text-white"></i>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="text-sm font-semibold text-gray-800">高企申报专家</div>
-                    <span class="mt-1 inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">
-                      <i data-lucide="cpu" class="h-3 w-3"></i>GPT-4
-                    </span>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs leading-relaxed text-gray-500">高企认定申报全流程智能辅导，材料清单梳理与合规检查</p>
-                <button class="js-quick-nav mt-4 w-full rounded-md bg-primary py-2 text-xs font-medium text-white transition hover:bg-primary-hover" data-target="page-ai">去对话</button>
-              </div>
-              <div class="agent-card rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-cat="知识产权">
-                <div class="flex items-start gap-3">
-                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-purple-500">
-                    <i data-lucide="bot" class="h-6 w-6 text-white"></i>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="text-sm font-semibold text-gray-800">专利检索助手</div>
-                    <span class="mt-1 inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">
-                      <i data-lucide="cpu" class="h-3 w-3"></i>文心一言
-                    </span>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs leading-relaxed text-gray-500">专利查新检索、侵权风险分析与高价值专利布局建议</p>
-                <button class="js-quick-nav mt-4 w-full rounded-md bg-primary py-2 text-xs font-medium text-white transition hover:bg-primary-hover" data-target="page-ai">去对话</button>
-              </div>
-              <div class="agent-card rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-cat="财税规划">
-                <div class="flex items-start gap-3">
-                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500">
-                    <i data-lucide="bot" class="h-6 w-6 text-white"></i>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="text-sm font-semibold text-gray-800">财税合规顾问</div>
-                    <span class="mt-1 inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">
-                      <i data-lucide="cpu" class="h-3 w-3"></i>GPT-4
-                    </span>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs leading-relaxed text-gray-500">研发费用归集、加计扣除与高新技术企业税务合规咨询</p>
-                <button class="js-quick-nav mt-4 w-full rounded-md bg-primary py-2 text-xs font-medium text-white transition hover:bg-primary-hover" data-target="page-ai">去对话</button>
-              </div>
-              <div class="agent-card rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-cat="技术研发">
-                <div class="flex items-start gap-3">
-                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-500">
-                    <i data-lucide="bot" class="h-6 w-6 text-white"></i>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="text-sm font-semibold text-gray-800">技术经理人</div>
-                    <span class="mt-1 inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">
-                      <i data-lucide="cpu" class="h-3 w-3"></i>文心一言
-                    </span>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs leading-relaxed text-gray-500">技术成果转化、需求对接与产学研合作撮合</p>
-                <button class="js-quick-nav mt-4 w-full rounded-md bg-primary py-2 text-xs font-medium text-white transition hover:bg-primary-hover" data-target="page-ai">去对话</button>
-              </div>
+
+              <!-- 智能体矩阵（JS 渲染） -->
+              <div id="agent-grid" class="grid grid-cols-3 gap-5"></div>
             </div>
           </div>
 
-          <!-- 服务商城 -->
-          <div id="agent-tab-mall" class="hidden">
-            <div class="grid grid-cols-4 gap-4">
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-32 items-center justify-center bg-gradient-to-br from-primary to-blue-400">
-                  <i data-lucide="award" class="h-12 w-12 text-white/80"></i>
+          <!-- ============ 视图二：智能体运行（检查 → 运行中 → 结果报告） ============ -->
+          <div id="agent-view-run" class="hidden h-full overflow-y-auto">
+            <div class="mx-auto max-w-6xl p-6">
+              <!-- 面包屑 + 返回 -->
+              <div class="mb-6 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-sm">
+                  <span class="text-gray-400">工作台</span>
+                  <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-gray-300"></i>
+                  <span class="text-gray-400">智能体广场</span>
+                  <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-gray-300"></i>
+                  <span class="font-medium text-gray-800">运行</span>
                 </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">高企认定全流程托管</div>
-                  <div class="mt-1.5 flex flex-wrap gap-1.5">
-                    <span class="rounded-full bg-primary-light px-2 py-0.5 text-[11px] text-primary">专家1对1</span>
-                    <span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">全流程</span>
+                <button onclick="switchAgentView('matrix')" class="flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
+                  <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回智能体广场
+                </button>
+              </div>
+
+              <!-- ===== 阶段一：运行前检查 / 运行中 ===== -->
+              <div id="run-config-phase">
+                <!-- 智能体摘要头 -->
+                <div class="mb-6 flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5">
+                  <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-400 text-white shadow-sm">
+                    <i data-lucide="bot" class="h-7 w-7"></i>
                   </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥5,000<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-add-cart rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="高企认定全流程托管">加入意向单</button>
+                  <div class="min-w-0 flex-1">
+                    <h2 id="run-title" class="text-xl font-semibold text-gray-900"></h2>
+                    <p id="run-intro" class="mt-1 text-sm leading-relaxed text-gray-500"></p>
+                  </div>
+                  <span class="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-primary-light px-3 py-1 text-xs text-primary">
+                    <i data-lucide="clock" class="h-3.5 w-3.5"></i><span id="run-tag"></span>
+                  </span>
+                </div>
+
+                <!-- 两栏：左说明 3/5 + 右配置 2/5 -->
+                <div class="grid grid-cols-5 items-start gap-6">
+                  <div class="col-span-3 space-y-6">
+                    <!-- 它交付什么 -->
+                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                      <h3 class="text-sm font-semibold text-gray-800">它交付什么</h3>
+                      <div id="run-deliverables" class="mt-4 space-y-2.5"></div>
+                    </div>
+
+                    <!-- 这条路的下一步（流程图） -->
+                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                      <h3 class="text-sm font-semibold text-gray-800">这条路的下一步</h3>
+                      <div class="mt-7 flex items-start">
+                        <div class="flex w-20 flex-col items-center text-center">
+                          <div class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-green-500 bg-green-50 text-green-600">
+                            <i data-lucide="check" class="h-4 w-4"></i>
+                          </div>
+                          <div class="mt-2 text-xs font-medium text-gray-700">数据校验</div>
+                          <div class="mt-0.5 text-[11px] text-green-600">已完成</div>
+                        </div>
+                        <div class="mt-[17px] h-0.5 flex-1 rounded bg-green-400"></div>
+                        <div class="flex w-20 flex-col items-center text-center">
+                          <div class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-primary bg-primary text-white">
+                            <i data-lucide="loader-2" class="h-4 w-4 animate-spin"></i>
+                          </div>
+                          <div class="mt-2 text-xs font-medium text-gray-800">模型测算</div>
+                          <div class="mt-0.5 text-[11px] text-primary">进行中</div>
+                        </div>
+                        <div class="mt-[17px] h-0.5 flex-1 rounded bg-gray-200"></div>
+                        <div class="flex w-20 flex-col items-center text-center">
+                          <div class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-300 bg-white text-gray-400">
+                            <i data-lucide="file-text" class="h-4 w-4"></i>
+                          </div>
+                          <div class="mt-2 text-xs font-medium text-gray-500">报告生成</div>
+                          <div class="mt-0.5 text-[11px] text-gray-400">待执行</div>
+                        </div>
+                        <div class="mt-[17px] h-0.5 flex-1 rounded bg-gray-200"></div>
+                        <div class="flex w-20 flex-col items-center text-center">
+                          <div class="flex h-9 w-9 items-center justify-center rounded-full border-2 border-gray-300 bg-white text-gray-400">
+                            <i data-lucide="archive" class="h-4 w-4"></i>
+                          </div>
+                          <div class="mt-2 text-xs font-medium text-gray-500">交付归档</div>
+                          <div class="mt-0.5 text-[11px] text-gray-400">待执行</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 右：运行配置面板 -->
+                  <div class="col-span-2">
+                    <div class="rounded-2xl border border-gray-200 bg-white p-5">
+                      <!-- 状态一：运行前检查 -->
+                      <div id="run-config-state">
+                        <h3 class="text-sm font-semibold text-gray-800">运行前检查</h3>
+                        <div class="mt-4 flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5">
+                          <div class="min-w-0">
+                            <div class="text-sm font-medium text-gray-700">企业档案数据完整</div>
+                            <div class="text-xs text-gray-400">切换「数据完整（匹配）/ 数据缺失（需补录）」场景</div>
+                          </div>
+                          <button id="archive-toggle" onclick="toggleArchiveComplete()" class="relative h-6 w-11 flex-shrink-0 rounded-full bg-gray-200 transition-colors">
+                            <span id="archive-toggle-dot" class="absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform"></span>
+                          </button>
+                        </div>
+                        <div id="run-checklist" class="mt-4 space-y-4"></div>
+
+                        <div class="mt-5 flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2.5 text-xs text-gray-500">
+                          <i data-lucide="coins" class="h-4 w-4 text-amber-500"></i>
+                          <span>消耗 20 积分</span>
+                          <span class="text-gray-300">/</span>
+                          <i data-lucide="clock" class="h-4 w-4 text-gray-400"></i>
+                          <span>预计耗时 3 分钟</span>
+                        </div>
+
+                        <button id="run-start-btn" onclick="startAgentRun()" class="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-3 text-base font-medium text-white shadow-sm transition hover:bg-primary-hover disabled:opacity-70">
+                          <i data-lucide="play" class="h-5 w-5"></i>
+                          <span>开始运行</span>
+                        </button>
+                      </div>
+
+                      <!-- 状态二：运行中（工具调用过程） -->
+                      <div id="run-running-state" class="hidden">
+                        <div class="flex items-center justify-between">
+                          <h3 class="text-sm font-semibold text-gray-800">运行中</h3>
+                          <span class="flex items-center gap-1.5 text-xs text-primary">
+                            <i data-lucide="loader-2" class="h-3.5 w-3.5 animate-spin"></i> 智能体执行中…
+                          </span>
+                        </div>
+                        <div class="mt-4">
+                          <div class="mb-1.5 flex items-center justify-between text-xs text-gray-500">
+                            <span>执行进度</span>
+                            <span id="proc-percent">0%</span>
+                          </div>
+                          <div class="h-2 overflow-hidden rounded-full bg-gray-100">
+                            <div id="proc-bar" class="h-full w-0 rounded-full bg-primary transition-all duration-500"></div>
+                          </div>
+                        </div>
+                        <div id="proc-steps" class="mt-4 space-y-3"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-32 items-center justify-center bg-gradient-to-br from-violet-500 to-purple-500">
-                  <i data-lucide="lightbulb" class="h-12 w-12 text-white/80"></i>
-                </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">发明专利快速预审代办</div>
-                  <div class="mt-1.5 flex flex-wrap gap-1.5">
-                    <span class="rounded-full bg-violet-50 px-2 py-0.5 text-[11px] text-violet-600">快速通道</span>
-                    <span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">官方备案</span>
+
+              <!-- ===== 阶段二：结果报告 ===== -->
+              <div id="run-report-phase" class="hidden">
+                <div class="flex items-start gap-6">
+                  <!-- 左：主报告卡片 -->
+                  <div class="min-w-0 flex-1 rounded-2xl border border-gray-200 bg-white">
+                    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-5">
+                      <h1 id="report-title" class="text-lg font-semibold text-gray-900"></h1>
+                      <div class="flex items-center gap-4">
+                        <span class="rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600">已完成 · 2分41秒</span>
+                        <a href="javascript:;" class="flex items-center gap-0.5 text-xs text-gray-400 transition hover:text-primary">依据6类数据 · 引用23条 <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i> 查看出处</a>
+                      </div>
+                    </div>
+
+                    <div class="space-y-6 px-6 py-6">
+                      <div>
+                        <div class="flex items-center justify-between">
+                          <h2 class="text-sm font-semibold text-gray-800">结论</h2>
+                          <span id="report-verdict" class="rounded-full bg-orange-50 px-2.5 py-1 text-xs text-orange-600"></span>
+                        </div>
+                        <p id="report-conclusion" class="mt-3 text-sm leading-relaxed text-gray-600"></p>
+                      </div>
+
+                      <div id="report-radar-module" class="hidden">
+                        <h2 class="text-sm font-semibold text-gray-800">五维评估</h2>
+                        <div id="report-radar" class="mt-3 h-56 w-full"></div>
+                      </div>
+
+                      <div id="report-todos-module">
+                        <div class="flex items-center justify-between">
+                          <h2 class="text-sm font-semibold text-gray-800">待办任务</h2>
+                          <button onclick="createProjectFromTodos()" class="flex items-center gap-1 rounded-md border border-primary/30 bg-primary-light px-2.5 py-1 text-xs font-medium text-primary transition hover:bg-primary hover:text-white">
+                            <i data-lucide="folder-plus" class="h-3.5 w-3.5"></i> 一键立项
+                          </button>
+                        </div>
+                        <div id="report-todos" class="mt-3 space-y-2"></div>
+                      </div>
+
+                      <div>
+                        <h2 class="text-sm font-semibold text-gray-800">建议动作</h2>
+                        <div id="report-actions" class="mt-3 space-y-2"></div>
+                      </div>
+
+                      <div>
+                        <h2 class="text-sm font-semibold text-gray-800">成果物</h2>
+                        <div id="report-deliverables" class="mt-3 space-y-2"></div>
+                      </div>
+
+                      <div class="rounded-xl bg-blue-50 px-4 py-4">
+                        <p class="text-sm text-blue-700">运行中您补充的材料已自动同步至「企业数字档案」，供后续智能体复用；智能体生成的成果物不自动入库。</p>
+                      </div>
+
+                      <div class="flex items-center gap-2 border-t border-gray-100 pt-4">
+                        <button onclick="showToast('转化建议（演示）')" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">转化建议</button>
+                        <button onclick="showToast('成果推介页（演示）')" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">成果推介页</button>
+                        <button onclick="showToast('融资可行性分析（演示）')" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">融资可行性分析</button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥3,800<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-add-cart rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="发明专利快速预审代办">加入意向单</button>
+
+                  <!-- 右：侧边卡片 -->
+                  <div class="w-72 flex-shrink-0 rounded-2xl border border-gray-200 bg-white">
+                    <div class="px-5 py-4">
+                      <h2 class="text-sm font-semibold text-gray-800">推荐服务</h2>
+                      <div id="report-services" class="mt-2 space-y-1.5"></div>
+                    </div>
+
+                    <div class="border-t border-gray-100"></div>
+
+                    <div class="px-5 py-4">
+                      <div class="space-y-1">
+                        <button onclick="showToast('已开始下载报告')" class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition hover:bg-gray-50">
+                          <div class="min-w-0"><div class="text-sm text-gray-700">下载</div><div class="text-xs text-gray-400">下载本次报告（PDF）</div></div>
+                          <i data-lucide="download" class="h-4 w-4 flex-shrink-0 text-gray-300"></i>
+                        </button>
+                        <button onclick="openReviewModal()" class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition hover:bg-gray-50">
+                          <div class="min-w-0"><div class="text-sm text-gray-700">转顾问复核</div><div class="text-xs text-gray-400">提交给专业顾问人工复核</div></div>
+                          <i data-lucide="user-check" class="h-4 w-4 flex-shrink-0 text-gray-300"></i>
+                        </button>
+                        <button onclick="showToast('已转为服务单')" class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition hover:bg-gray-50">
+                          <div class="min-w-0"><div class="text-sm text-gray-700">转成服务单</div><div class="text-xs text-gray-400">将需求转为服务订单</div></div>
+                          <i data-lucide="shopping-bag" class="h-4 w-4 flex-shrink-0 text-gray-300"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="border-t border-gray-100"></div>
+
+                    <div class="px-5 py-4">
+                      <h2 class="text-sm font-semibold text-gray-800">承接顾问</h2>
+                      <div class="mt-3 rounded-xl border border-gray-100 bg-gray-50 p-3">
+                        <div class="flex items-center gap-3">
+                          <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-blue-400 text-sm font-medium text-white">李</div>
+                          <div class="min-w-0">
+                            <div class="text-sm font-medium text-gray-800">李顾问</div>
+                            <div class="text-xs text-gray-400">已接 128 单 · 4.9 分</div>
+                          </div>
+                        </div>
+                        <div class="mt-3 space-y-1.5">
+                          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-green-500"></span>当前可承接</div>
+                          <div class="flex items-center gap-2 text-xs text-gray-600"><span class="h-2 w-2 rounded-full bg-orange-400"></span>平均响应约 10 分钟</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-32 items-center justify-center bg-gradient-to-br from-amber-500 to-orange-500">
-                  <i data-lucide="gem" class="h-12 w-12 text-white/80"></i>
-                </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">专精特新一对一辅导</div>
-                  <div class="mt-1.5 flex flex-wrap gap-1.5">
-                    <span class="rounded-full bg-amber-50 px-2 py-0.5 text-[11px] text-amber-600">专家1对1</span>
-                    <span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">定制方案</span>
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥8,000<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-add-cart rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="专精特新一对一辅导">加入意向单</button>
-                  </div>
-                </div>
-              </div>
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-32 items-center justify-center bg-gradient-to-br from-emerald-500 to-teal-500">
-                  <i data-lucide="calculator" class="h-12 w-12 text-white/80"></i>
-                </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">研发费用加计扣除服务</div>
-                  <div class="mt-1.5 flex flex-wrap gap-1.5">
-                    <span class="rounded-full bg-green-50 px-2 py-0.5 text-[11px] text-green-600">财税服务</span>
-                    <span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">合规</span>
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥2,000<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-add-cart rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="研发费用加计扣除服务">加入意向单</button>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          <input type="file" id="agent-upload-input" class="hidden" accept=".xlsx,.xls,.pdf,.doc,.docx" />
+
+          <!-- 通用弹窗：补录 / 复核 / 成果物预览 -->
+          <div id="agent-modal-overlay" class="pointer-events-none fixed inset-0 z-[100] flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200" onclick="if(event.target===this)closeAgentModal()">
+            <div id="agent-modal" class="pointer-events-none w-[640px] max-w-[92vw] scale-95 overflow-hidden rounded-2xl bg-white shadow-xl transition-transform duration-200">
+              <div id="agent-modal-body"></div>
             </div>
           </div>
         </div>
@@ -5048,36 +5179,860 @@
       window.addEventListener('resize', () => { if (radarChartInstance) radarChartInstance.resize(); });
     }
 
-    // ==================== 智能体广场 ====================
-    // Tab 切换
-    document.querySelectorAll('.agent-tab').forEach((tab) => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.agent-tab').forEach((t) => t.classList.remove('agent-tab-active'));
-        tab.classList.add('agent-tab-active');
-        const isMatrix = tab.dataset.agentTab === 'matrix';
-        document.getElementById('agent-tab-matrix').classList.toggle('hidden', !isMatrix);
-        document.getElementById('agent-tab-mall').classList.toggle('hidden', isMatrix);
-      });
-    });
+    // ==================== 智能体广场（矩阵 / 运行 / 交付） ====================
+    function agCell(v, cls, span) { return { v: v || '', cls: cls || 'sheet-plain', span: span || 0 }; }
+    function agName(v) { return agCell(v, 'sheet-input-name'); }
+    function agVal(v) { return agCell(v, 'sheet-input-val'); }
+    function agIO(v) { return agCell(v, 'sheet-input-other'); }
+    function agPlain(v) { return agCell(v, 'sheet-plain'); }
+    function fileIcon(ext) { return ext === 'xlsx' ? 'file-spreadsheet' : ext === 'html' ? 'globe' : 'file-text'; }
+    function fileIconColor(ext) { return ext === 'xlsx' ? 'text-green-600' : ext === 'html' ? 'text-blue-600' : 'text-red-500'; }
 
-    // 分类标签筛选
-    document.querySelectorAll('.cat-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        document.querySelectorAll('.cat-chip').forEach((c) => c.classList.remove('cat-chip-active'));
+    function agGenericSheet(subtitle) {
+      return {
+        subtitle: subtitle,
+        highlightRow: 6,
+        highlightCol: 1,
+        rows: [
+          [agCell(subtitle, 'sheet-header-cell', 4)],
+          [agName('评估基准日'), agVal('2026-11-02'), agIO(''), agIO('')],
+          [agName('数据源版本'), agVal('v2.4'), agIO(''), agIO('')],
+          [agName('样本数量'), agVal('1,286'), agIO('项'), agIO('')],
+          [agPlain(''), agPlain(''), agPlain(''), agPlain('')],
+          [agPlain('综合评分'), agPlain('86.5'), agPlain('分'), agPlain('（加权）')],
+          [agPlain('结论等级'), agPlain('A-'), agPlain(''), agPlain('')],
+          [agPlain(''), agPlain(''), agPlain(''), agPlain('')],
+        ],
+      };
+    }
+
+    function agReport(seq, title, conclusion) {
+      return {
+        title: title,
+        meta: '报告编号 QCT-2026-' + seq + ' · 密级 内部',
+        sections: [
+          { h: '一、核心结论', ps: [conclusion] },
+          { h: '二、主要依据', ps: ['基于企业数字档案、公开数据及量化模型自动测算生成，关键参数已做校验。'] },
+          { h: '三、风险提示', ps: ['结果依赖输入数据质量，建议结合专家复核后使用。'] },
+        ],
+      };
+    }
+
+    function makeAgent(cfg) {
+      return {
+        id: cfg.id,
+        title: cfg.title,
+        intro: cfg.intro,
+        tag: cfg.tag,
+        status: cfg.status,
+        statusText: cfg.statusText,
+        icon: cfg.icon,
+        grad: cfg.grad,
+        runTitle: cfg.runTitle || cfg.title,
+        runIntro: cfg.runIntro,
+        steps: cfg.steps,
+        deliverables: [
+          { ext: 'xlsx', name: cfg.artifacts[0] + '.xlsx', desc: cfg.dlDesc[0] },
+          { ext: 'html', name: cfg.artifacts[1] + '.html', desc: cfg.dlDesc[1] },
+          { ext: 'pdf', name: cfg.artifacts[2] + '.pdf', desc: cfg.dlDesc[2] },
+        ],
+        sheet: agGenericSheet(cfg.title + ' · 参数表'),
+        report: agReport(cfg.seq, cfg.reportTitle, cfg.conclusion),
+      };
+    }
+
+    const AGENTS = [
+      makeAgent({
+        id: 'archive',
+        title: '企业档案抽取智能体',
+        intro: '多源文档解析与结构化抽取，构建企业科创数字档案',
+        tag: '档案·约3分钟',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'database',
+        grad: 'from-blue-500 to-indigo-500',
+        runIntro: '解析上传的多源文档，抽取结构化信息并清洗归一，打标后生成企业数字档案。',
+        artifacts: ['企业数字档案', '企业档案结构树', '企业数字档案报告'],
+        dlDesc: ['十三维度档案数据表', '档案结构树可视化', '档案概要与数据质量说明'],
+        seq: 1101,
+        reportTitle: '企业数字档案报告',
+        conclusion: '已从多源文档中抽取并归一共 13 个维度的企业科创档案数据，标签覆盖完整，可作为全链路智能体的数据底座。',
+        steps: [
+          { icon: 'file-text', label: '多源文档解析', detail: '解析 PDF / Word / 图片多源文件' },
+          { icon: 'braces', label: '结构化信息抽取', detail: '抽取关键字段与实体关系' },
+          { icon: 'filter', label: '数据清洗归一', detail: '去重、补全与格式统一' },
+          { icon: 'tags', label: '科创标签打标', detail: '按十三维度标签体系标注' },
+          { icon: 'history', label: '档案版本管理', detail: '生成版本快照并输出档案' },
+        ],
+      }),
+      makeAgent({
+        id: 'policy',
+        title: '政策匹配智能体',
+        intro: '政策结构化解析与硬门槛校验，双向适配打分',
+        tag: '匹配·约2分钟',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'target',
+        grad: 'from-indigo-500 to-violet-500',
+        runIntro: '解析最新政策条款，校验硬性门槛，对匹配度双向打分并归因排序。',
+        artifacts: ['政策匹配清单', '政策匹配看板', '政策匹配报告'],
+        dlDesc: ['匹配政策与适配打分', '匹配结果可视化', '匹配结论与申报建议'],
+        seq: 1102,
+        reportTitle: '政策匹配报告',
+        conclusion: '共匹配到 6 项适配政策，其中 2 项满足全部硬门槛，匹配度评分位居前列，建议优先跟进。',
+        steps: [
+          { icon: 'file-text', label: '政策结构化解析', detail: '解析政策条款与申报条件' },
+          { icon: 'shield-check', label: '硬门槛规则校验', detail: '校验资质与硬性指标' },
+          { icon: 'scale', label: '双向适配打分', detail: '企业与政策双向匹配评分' },
+          { icon: 'alert-circle', label: '不满足原因归因', detail: '定位不满足项并给出原因' },
+          { icon: 'list-ordered', label: '匹配结果排序筛选', detail: '按适配度排序输出清单' },
+        ],
+      }),
+      makeAgent({
+        id: 'writer',
+        title: '申报书撰写智能体',
+        intro: '模板自动适配与章节生成，一键成稿并合规自检',
+        tag: '成稿·约5分钟',
+        status: 'warn',
+        statusText: '需补 2 项数据',
+        icon: 'pen-line',
+        grad: 'from-emerald-500 to-teal-500',
+        runIntro: '匹配申报模板，回填基础信息并生成项目章节，润色后完成合规自检。',
+        artifacts: ['申报书素材表', '申报书在线预览', '项目申报书'],
+        dlDesc: ['章节内容与要点', '成稿在线预览', '最终成稿'],
+        seq: 1103,
+        reportTitle: '项目申报书',
+        conclusion: '已按申报模板生成完整章节内容并回填基础信息，合规自检通过，可进入人工复核。',
+        steps: [
+          { icon: 'layout-template', label: '模板自动适配', detail: '匹配申报模板与章节结构' },
+          { icon: 'clipboard-list', label: '基础信息一键填充', detail: '回填企业档案基础数据' },
+          { icon: 'pen-line', label: '项目章节生成', detail: '按章节生成申报正文' },
+          { icon: 'sparkles', label: '内容润色优化', detail: '语言润色与表述优化' },
+          { icon: 'shield-check', label: '合规自检 & 格式规整', detail: '合规校验与格式统一' },
+        ],
+      }),
+      makeAgent({
+        id: 'checkup',
+        title: '科创体检智能体',
+        intro: '科创指标量化评估与风险排查，输出体检报告',
+        tag: '体检·约4分钟',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'activity',
+        grad: 'from-amber-500 to-orange-500',
+        runIntro: '量化评估科创指标，识别短板与申报风险，对标分析后生成体检报告。',
+        artifacts: ['科创体检评分表', '科创体检看板', '科创体检报告'],
+        dlDesc: ['指标评分明细', '雷达图对标可视化', '体检结论与整改建议'],
+        seq: 1104,
+        reportTitle: '科创体检报告',
+        conclusion: '综合科创能力得分 86.5 分，高于同行业均值；知识产权与研发组织管理表现突出，财务指标仍有提升空间。',
+        steps: [
+          { icon: 'gauge', label: '科创指标量化评估', detail: '量化测算各维度得分' },
+          { icon: 'search', label: '短板弱项识别', detail: '定位薄弱维度' },
+          { icon: 'alert-triangle', label: '申报风险排查', detail: '排查申报合规风险' },
+          { icon: 'bar-chart-3', label: '指标对标分析', detail: '与同行业均值对标' },
+          { icon: 'file-text', label: '体检报告生成', detail: '输出体检报告' },
+        ],
+      }),
+      makeAgent({
+        id: 'planning',
+        title: '申报规划智能体',
+        intro: '项目窗口期监控与分级培育，制定申报时序',
+        tag: '规划·约3分钟',
+        status: 'warn',
+        statusText: '需补 1 项数据',
+        icon: 'route',
+        grad: 'from-violet-500 to-purple-500',
+        runIntro: '监控项目申报窗口，分级培育项目并按时间轴排期，生成申报规划。',
+        artifacts: ['申报时序排期表', '申报规划看板', '申报规划报告'],
+        dlDesc: ['项目窗口与排期', '甘特图可视化', '规划结论与建议'],
+        seq: 1105,
+        reportTitle: '申报规划报告',
+        conclusion: '已梳理 8 个可申报项目窗口并按成熟度分级，建议优先推进 3 个近期截止的高匹配项目。',
+        steps: [
+          { icon: 'calendar-clock', label: '项目窗口期监控', detail: '监控申报时间窗口' },
+          { icon: 'layers', label: '项目分级培育', detail: '按成熟度分级' },
+          { icon: 'route', label: '申报时序排期', detail: '制定申报时间表' },
+          { icon: 'file-text', label: '申报规划报告撰写', detail: '输出规划报告' },
+        ],
+      }),
+      makeAgent({
+        id: 'service',
+        title: '服务挖掘智能体',
+        intro: '短板需求识别与服务线索匹配，分级推送',
+        tag: '挖掘·约3分钟',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'search',
+        grad: 'from-pink-500 to-rose-500',
+        runIntro: '识别企业短板需求，匹配科创服务线索并撰写挖掘报告，按优先级推送。',
+        artifacts: ['服务线索清单', '服务挖掘看板', '服务挖掘报告'],
+        dlDesc: ['匹配服务与需求线索', '线索可视化', '挖掘结论与推送建议'],
+        seq: 1106,
+        reportTitle: '服务挖掘报告',
+        conclusion: '识别出 3 项高优先级科创服务需求，匹配到 5 条可对接服务线索，建议按优先级分级推送。',
+        steps: [
+          { icon: 'search', label: '短板需求识别', detail: '识别企业短板与需求' },
+          { icon: 'link', label: '科创服务线索匹配', detail: '匹配可对接服务线索' },
+          { icon: 'file-text', label: '科创服务挖掘报告撰写', detail: '输出挖掘报告' },
+          { icon: 'send', label: '需求分级推送', detail: '按优先级分级推送' },
+        ],
+      }),
+    ];
+
+    let currentAgent = AGENTS[0];
+    let agentUploadReady = false;
+    let agentUploadName = '';
+    let archiveComplete = false;
+
+    function toggleArchiveComplete() {
+      archiveComplete = !archiveComplete;
+      const btn = document.getElementById('archive-toggle');
+      const dot = document.getElementById('archive-toggle-dot');
+      if (archiveComplete) {
+        btn.classList.remove('bg-gray-200');
+        btn.classList.add('bg-primary');
+        dot.classList.add('translate-x-5');
+      } else {
+        btn.classList.add('bg-gray-200');
+        btn.classList.remove('bg-primary');
+        dot.classList.remove('translate-x-5');
+      }
+      renderAgentChecklist();
+    }
+
+    function switchAgentView(view) {
+      ['matrix', 'run'].forEach(function (v) {
+        const el = document.getElementById('agent-view-' + v);
+        if (el) el.classList.toggle('hidden', v !== view);
+      });
+      if (procTimer) { clearTimeout(procTimer); procTimer = null; }
+      if (view === 'run') { renderAgentRun(); showRunState('config'); showRunPhase('config'); }
+      lucide.createIcons();
+    }
+
+    function openAgentRun(id) {
+      currentAgent = AGENTS.find(function (a) { return a.id === id; }) || AGENTS[0];
+      agentUploadReady = false;
+      agentUploadName = '';
+      switchAgentView('run');
+    }
+
+    function renderAgentMatrix() {
+      const grid = document.getElementById('agent-grid');
+      if (!grid) return;
+      let html = '';
+      AGENTS.forEach(function (a) { html += agentCardHTML(a); });
+      grid.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function agentCardHTML(a) {
+      const statusCls = a.status === 'ok' ? 'text-green-600' : 'text-amber-600';
+      const statusIcon = a.status === 'ok' ? 'check-circle' : 'alert-circle';
+      return '<div onclick="openAgentRun(\'' + a.id + '\')" role="button" class="group flex cursor-pointer flex-col rounded-2xl border border-gray-200 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md">' +
+        '<div class="flex items-start gap-4">' +
+          '<div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ' + a.grad + ' text-white shadow-sm"><i data-lucide="' + a.icon + '" class="h-7 w-7"></i></div>' +
+          '<div class="min-w-0">' +
+            '<div class="truncate text-base font-semibold text-gray-800">' + a.title + '</div>' +
+            '<p class="mt-1.5 text-sm leading-relaxed text-gray-500">' + a.intro + '</p>' +
+          '</div>' +
+        '</div>' +
+        '<div class="mt-4"><span class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-600"><i data-lucide="clock" class="h-3.5 w-3.5"></i>' + a.tag + '</span></div>' +
+        '<div class="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">' +
+          '<span class="flex items-center gap-1.5 text-sm ' + statusCls + '"><i data-lucide="' + statusIcon + '" class="h-4 w-4"></i>' + a.statusText + '</span>' +
+          '<span class="text-sm text-gray-400 transition group-hover:text-primary">立即运行 →</span>' +
+        '</div>' +
+      '</div>';
+    }
+
+    function renderAgentRun() {
+      const titleEl = document.getElementById('run-title');
+      const introEl = document.getElementById('run-intro');
+      const tagEl = document.getElementById('run-tag');
+      if (titleEl) titleEl.textContent = currentAgent.runTitle || currentAgent.title;
+      if (introEl) introEl.textContent = currentAgent.runIntro || '';
+      if (tagEl) tagEl.textContent = currentAgent.tag || '';
+      const dl = document.getElementById('run-deliverables');
+      if (dl) {
+        dl.innerHTML = currentAgent.deliverables.map(function (d) {
+          const ic = fileIcon(d.ext);
+          const icCls = fileIconColor(d.ext);
+          return '<div class="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5">' +
+            '<div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-white ' + icCls + '"><i data-lucide="' + ic + '" class="h-5 w-5"></i></div>' +
+            '<div class="min-w-0"><div class="truncate text-sm font-medium text-gray-700">' + d.name + '</div>' +
+            '<div class="truncate text-xs text-gray-400">' + d.desc + '</div></div></div>';
+        }).join('');
+      }
+      resetRunButton();
+      renderAgentChecklist();
+    }
+
+    function resetRunButton() {
+      const btn = document.getElementById('run-start-btn');
+      if (!btn) return;
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="play" class="h-5 w-5"></i><span>开始运行</span>';
+    }
+
+    function renderAgentChecklist() {
+      const box = document.getElementById('run-checklist');
+      if (!box) return;
+      const rows = [
+        { name: '成果基本信息与权属', ready: true, note: '已就绪' },
+        { name: '专利 / 软著清单', ready: true, note: '共 11 项，已就绪' },
+        { name: '客户/试用反馈', ready: archiveComplete || agentUploadReady, note: archiveComplete ? '已就绪' : (agentUploadReady ? '已上传 · ' + agentUploadName : '需上传') },
+      ];
+      let html = '';
+      rows.forEach(function (r) {
+        if (r.ready) {
+          html += '<div class="flex items-start gap-2.5"><div class="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600"><i data-lucide="check" class="h-3 w-3"></i></div><div class="min-w-0"><div class="text-sm text-gray-700">' + r.name + '</div><div class="text-xs text-gray-400">' + r.note + '</div></div></div>';
+        } else {
+          html += '<div class="flex items-start gap-2.5"><div class="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full border-2 border-gray-300"></div><div class="min-w-0 flex-1"><div class="text-sm text-gray-700">' + r.name + '</div><div class="text-xs text-gray-400">' + r.note + '</div>' +
+            '<div class="mt-2 cursor-pointer rounded-lg border border-dashed border-gray-300 bg-gray-50 px-3 py-3 text-center text-xs text-gray-400 transition hover:border-primary hover:text-primary" onclick="triggerAgentUpload()">' +
+            '<i data-lucide="upload-cloud" class="mx-auto mb-1 h-5 w-5"></i>点击上传</div></div></div>';
+        }
+      });
+      box.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function triggerAgentUpload() {
+      const input = document.getElementById('agent-upload-input');
+      if (input) { input.value = ''; input.click(); }
+    }
+
+    function startAgentRun() {
+      const btn = document.getElementById('run-start-btn');
+      if (!btn || btn.disabled) return;
+      showRunState('running');
+      resetRunProcess();
+      beginProcess();
+    }
+
+    const REPORT_VERDICTS = {
+      archive: '建议入库',
+      policy: '建议跟进申报',
+      writer: '需补材料后提交',
+      checkup: '建议整改提升',
+      planning: '建议按序申报',
+      service: '建议对接服务',
+    };
+
+    const REPORT_VERDICTS_OK = {
+      archive: '档案已就绪',
+      policy: '匹配，建议申报',
+      writer: '材料齐备，可提交',
+      checkup: '体检达标',
+      planning: '可按时序申报',
+      service: '需求已匹配',
+    };
+
+    const REPORT_TODOS_OK = {
+      archive: [{ text: '将档案同步至全链路智能体', action: '去同步' }],
+      policy: [{ text: '发起高匹配政策申报', action: '去发起' }],
+      writer: [{ text: '提交申报书至主管部门', action: '去提交' }],
+      checkup: [{ text: '按季复检，持续跟踪指标变化', action: '去关注' }],
+      planning: [{ text: '按排期推进重点申报', action: '去发起' }],
+      service: [{ text: '对接高优先级服务线索', action: '去对接' }],
+    };
+
+    const REPORT_CONCLUSIONS_OK = {
+      archive: '企业数字档案数据完整，13 个维度标签覆盖齐全，可直接作为全链路智能体的数据底座。',
+      policy: '企业档案数据完整，硬门槛全部满足，共匹配到 6 项高适配政策，建议优先申报。',
+      writer: '所需申报材料齐备，模板适配与内容生成均已通过合规自检，可提交。',
+      checkup: '企业科创指标整体达标，知识产权与研发组织管理表现突出，无重大申报风险。',
+      planning: '项目信息完整，已按申报窗口与成熟度完成排期，可按计划推进申报。',
+      service: '企业需求清晰，已匹配到多条可对接服务线索，建议按优先级对接。',
+    };
+
+    const REPORT_SERVICES = {
+      archive: [
+        { name: '企业档案数据补全服务', tag: '数据治理', price: '￥1,500' },
+        { name: '知识产权档案整理与归档', tag: '档案整理', price: '￥2,000' },
+      ],
+      policy: [
+        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
+        { name: '政策申报代理服务', tag: '申报代理', price: '￥3,000' },
+      ],
+      writer: [
+        { name: '申报材料专家辅导', tag: '专家1对1', price: '￥4,000' },
+        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
+      ],
+      checkup: [
+        { name: '科创能力整改提升服务', tag: '专家辅导', price: '￥6,000' },
+        { name: '知识产权布局规划', tag: '知产服务', price: '￥8,000' },
+      ],
+      planning: [
+        { name: '专精特新一对一辅导', tag: '专家1对1', price: '￥8,000' },
+        { name: '年度申报规划托管', tag: '全流程', price: '￥10,000' },
+      ],
+      service: [
+        { name: '发明专利快速预审代办', tag: '快速通道', price: '￥3,800' },
+        { name: '高企认定审计服务', tag: '官方备案', price: '￥8,000' },
+        { name: '研发费用加计扣除服务', tag: '财税合规', price: '￥2,000' },
+      ],
+    };
+
+    const REPORT_TODOS = {
+      archive: [
+        { text: '复核档案抽取结果，确认字段无误', action: '去复核' },
+        { text: '补充缺失的权属与授权材料', action: '去补录' },
+      ],
+      policy: [
+        { text: '确认高匹配政策清单', action: '去确认' },
+        { text: '发起高匹配政策申报', action: '去发起' },
+      ],
+      writer: [
+        { text: '补充财务审计等申报材料', action: '去补录' },
+        { text: '人工复核申报书正文', action: '去复核' },
+      ],
+      checkup: [
+        { text: '整改短板弱项（财务指标）', action: '去整改' },
+        { text: '补充申报材料并发起专家复核', action: '去发起' },
+      ],
+      planning: [
+        { text: '确认申报时序排期', action: '去确认' },
+        { text: '发起近期截止的重点申报', action: '去发起' },
+      ],
+      service: [
+        { text: '对接高优先级服务线索', action: '去对接' },
+        { text: '将需求转成服务单', action: '去转单' },
+      ],
+    };
+
+    const REPORT_RADAR = {
+      archive: { indicator: ['档案完整性', '数据质量', '标签覆盖', '版本管理', '溯源能力'], values: [88, 76, 82, 70, 74] },
+      policy: { indicator: ['政策覆盖', '门槛校验', '匹配精度', '归因能力', '排序合理'], values: [85, 90, 78, 82, 80] },
+      writer: { indicator: ['模板适配', '信息填充', '内容质量', '合规性', '格式规整'], values: [82, 75, 80, 88, 86] },
+      checkup: { indicator: ['知识产权', '研发管理', '成果转化', '企业成长', '财务指标'], values: [92, 78, 85, 70, 82] },
+      planning: { indicator: ['窗口监控', '分级培育', '时序排期', '规划完整', '风险控制'], values: [80, 76, 84, 78, 81] },
+      service: { indicator: ['需求识别', '线索匹配', '优先级', '推送及时', '转化率'], values: [78, 82, 85, 72, 76] },
+    };
+
+    let reportRadarChart = null;
+
+    function initReportRadar() {
+      const el = document.getElementById('report-radar');
+      if (!el || !window.echarts) return;
+      const cfg = REPORT_RADAR[currentAgent.id];
+      if (!cfg) return;
+      if (reportRadarChart) { reportRadarChart.dispose(); reportRadarChart = null; }
+      reportRadarChart = echarts.init(el);
+      reportRadarChart.setOption({
+        tooltip: {},
+        radar: {
+          indicator: cfg.indicator.map(function (n) { return { name: n, max: 100 }; }),
+          radius: '62%',
+          splitArea: { areaStyle: { color: ['#ffffff', '#f8fafc'] } },
+          splitLine: { lineStyle: { color: '#e5e7eb' } },
+          axisLine: { lineStyle: { color: '#e5e7eb' } },
+          axisName: { color: '#6b7280', fontSize: 12 },
+        },
+        series: [{
+          type: 'radar',
+          data: [{ value: cfg.values, name: '评估得分', areaStyle: { color: 'rgba(22,119,255,0.18)' }, lineStyle: { color: '#1677FF', width: 2 }, itemStyle: { color: '#1677FF' } }],
+        }],
+      });
+    }
+
+    window.addEventListener('resize', function () { if (reportRadarChart) reportRadarChart.resize(); });
+
+    function renderReport() {
+      const titleEl = document.getElementById('report-title');
+      const verdictEl = document.getElementById('report-verdict');
+      const conclusionEl = document.getElementById('report-conclusion');
+      const todosEl = document.getElementById('report-todos');
+      const actionsEl = document.getElementById('report-actions');
+      const deliverablesEl = document.getElementById('report-deliverables');
+      const servicesEl = document.getElementById('report-services');
+      const radarModule = document.getElementById('report-radar-module');
+      const todosModule = document.getElementById('report-todos-module');
+      const showRadar = currentAgent.id === 'checkup';
+      if (radarModule) radarModule.classList.toggle('hidden', !showRadar);
+      if (todosModule) todosModule.classList.toggle('hidden', archiveComplete);
+      if (titleEl) titleEl.textContent = currentAgent.report.title || currentAgent.title;
+      if (verdictEl) {
+        verdictEl.textContent = archiveComplete ? (REPORT_VERDICTS_OK[currentAgent.id] || '匹配') : (REPORT_VERDICTS[currentAgent.id] || '建议采纳');
+        verdictEl.className = archiveComplete ? 'rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600' : 'rounded-full bg-orange-50 px-2.5 py-1 text-xs text-orange-600';
+      }
+      if (conclusionEl) {
+        if (archiveComplete) {
+          conclusionEl.textContent = REPORT_CONCLUSIONS_OK[currentAgent.id] || '';
+        } else {
+          const first = (currentAgent.report.sections && currentAgent.report.sections[0]) || {};
+          conclusionEl.textContent = (first.ps && first.ps[0]) || '';
+        }
+      }
+      if (servicesEl) {
+        const services = REPORT_SERVICES[currentAgent.id] || [];
+        servicesEl.innerHTML = services.map(function (s) {
+          return '<div class="rounded-lg border border-primary/20 bg-primary-light/40 px-2.5 py-2">' +
+            '<div class="flex items-center justify-between gap-2">' +
+              '<div class="min-w-0">' +
+                '<div class="truncate text-sm font-medium text-gray-800" title="' + s.name + '">' + s.name + '</div>' +
+                '<div class="mt-0.5 text-xs font-semibold text-primary">' + s.price + '</div>' +
+              '</div>' +
+              '<button onclick="orderService(\'' + s.name + '\', \'' + s.price + '\')" class="flex-shrink-0 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+      if (todosEl) {
+        const todos = archiveComplete ? (REPORT_TODOS_OK[currentAgent.id] || []) : (REPORT_TODOS[currentAgent.id] || []);
+        const dotCls = archiveComplete ? 'bg-green-500' : 'bg-orange-400';
+        todosEl.innerHTML = todos.map(function (t) {
+          return '<div class="flex items-center justify-between gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
+            '<div class="flex min-w-0 items-center gap-2.5">' +
+              '<span class="h-2 w-2 flex-shrink-0 rounded-full ' + dotCls + '"></span>' +
+              '<span class="text-sm text-gray-600">' + t.text + '</span>' +
+            '</div>' +
+            '<button onclick="' + todoAction(t.action) + '" class="flex-shrink-0 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary">' + t.action + '</button>' +
+          '</div>';
+        }).join('');
+      }
+      if (actionsEl) {
+        const actions = archiveComplete
+          ? [
+              { text: '发起高匹配政策申报', btn: '去发起', type: 'primary' },
+              { text: '对接专业顾问复核', btn: '去复核', type: 'ghost' },
+              { text: '转成服务单，由平台跟进', btn: '去转单', type: 'ghost' },
+            ]
+          : [
+              { text: '补充缺失的申报材料（客户/试用反馈、财务审计）', btn: '去补录', type: 'primary' },
+              { text: '完善知识产权权属与授权信息', btn: '去补录', type: 'ghost' },
+              { text: '发起专家复核，确认结论后进入下一环节', btn: '去复核', type: 'ghost' },
+            ];
+        actionsEl.innerHTML = actions.map(function (a, i) {
+          const btnCls = a.type === 'primary'
+            ? 'rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover'
+            : 'rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary';
+          return '<div class="flex items-center justify-between gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
+            '<div class="flex min-w-0 items-start gap-2.5">' +
+              '<span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-medium text-gray-500">' + (i + 1) + '</span>' +
+              '<span class="text-sm text-gray-600">' + a.text + '</span>' +
+            '</div>' +
+            '<button onclick="' + todoAction(a.btn) + '" class="flex-shrink-0 ' + btnCls + '">' + a.btn + '</button>' +
+          '</div>';
+        }).join('');
+      }
+      if (deliverablesEl) {
+        deliverablesEl.innerHTML = currentAgent.deliverables.map(function (d) {
+          const ic = fileIcon(d.ext);
+          const icCls = fileIconColor(d.ext);
+          return '<div class="flex cursor-pointer items-center justify-between gap-3 rounded-lg border border-gray-100 px-3 py-2.5 transition hover:border-primary/40 hover:bg-gray-50" onclick="openDeliverablePreview(\'' + d.ext + '\')">' +
+            '<div class="flex min-w-0 items-center gap-2.5">' +
+              '<span class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gray-50 ' + icCls + '"><i data-lucide="' + ic + '" class="h-4 w-4"></i></span>' +
+              '<div class="min-w-0"><div class="truncate text-sm font-medium text-gray-700">' + d.name + '</div>' +
+              '<div class="truncate text-xs text-gray-400">' + d.desc + '</div></div>' +
+            '</div>' +
+            '<div class="flex flex-shrink-0 items-center gap-1">' +
+              '<button onclick="event.stopPropagation(); showToast(\'已开始下载\')" class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-primary hover:text-primary" title="下载"><i data-lucide="download" class="h-4 w-4"></i></button>' +
+              '<button onclick="event.stopPropagation(); openDeliverablePreview(\'' + d.ext + '\')" class="flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 text-gray-400 transition hover:border-primary hover:text-primary" title="在线预览"><i data-lucide="eye" class="h-4 w-4"></i></button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+      if (showRadar) initReportRadar();
+    }
+
+    function openAgentModal(html) {
+      const overlay = document.getElementById('agent-modal-overlay');
+      const modal = document.getElementById('agent-modal');
+      const body = document.getElementById('agent-modal-body');
+      if (!overlay || !modal || !body) return;
+      body.innerHTML = html;
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.remove('scale-95', 'pointer-events-none');
+      lucide.createIcons();
+    }
+
+    function closeAgentModal() {
+      const overlay = document.getElementById('agent-modal-overlay');
+      const modal = document.getElementById('agent-modal');
+      if (overlay) overlay.classList.add('opacity-0', 'pointer-events-none');
+      if (modal) modal.classList.add('scale-95', 'pointer-events-none');
+    }
+
+    function todoAction(action) {
+      if (action === '去补录') return 'openSupplementModal()';
+      if (action === '去复核') return 'openReviewModal()';
+      if (action === '去确认') return "showToast('已确认，任务已受理','success')";
+      if (action === '去发起') return "showToast('已发起，进入后续流程','success')";
+      if (action === '去整改') return "showToast('已发起整改任务','success')";
+      if (action === '去对接') return "showToast('已发起对接，等待服务商响应','success')";
+      if (action === '去转单') return "showToast('已转为服务单，可在服务商城查看','success')";
+      if (action === '去同步') return "showToast('已同步至全链路智能体','success')";
+      if (action === '去提交') return "showToast('已提交，等待受理','success')";
+      if (action === '去关注') return "showToast('已设置复检提醒','success')";
+      return "showToast('操作已发起','success')";
+    }
+
+    function openSupplementModal() {
+      openAgentModal(
+        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
+          '<h3 class="text-base font-semibold text-gray-900">补充材料</h3>' +
+          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
+        '</div>' +
+        '<div class="space-y-4 px-6 py-5">' +
+          '<div><label class="text-sm text-gray-600">材料名称</label><input class="mt-1 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="如：客户试用反馈、财务审计报告" /></div>' +
+          '<div><label class="text-sm text-gray-600">上传文件</label><div class="mt-1 cursor-pointer rounded-lg border border-dashed border-gray-300 bg-gray-50 px-4 py-8 text-center text-sm text-gray-400 transition hover:border-primary hover:text-primary" onclick="showToast(\'已选择文件\')"><i data-lucide="upload-cloud" class="mx-auto mb-1 h-6 w-6"></i>点击上传（支持 PDF / Word / Excel / 图片）</div></div>' +
+          '<div><label class="text-sm text-gray-600">补充说明（可选）</label><textarea rows="3" class="mt-1 w-full resize-none rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" placeholder="补充说明"></textarea></div>' +
+        '</div>' +
+        '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
+          '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
+          '<button onclick="submitSupplement()" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">确认补录</button>' +
+        '</div>'
+      );
+    }
+
+    function submitSupplement() {
+      closeAgentModal();
+      showToast('材料已补录，结果将基于新数据重新生成', 'success');
+    }
+
+    function openReviewModal() {
+      openAgentModal(
+        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
+          '<h3 class="text-base font-semibold text-gray-900">发起顾问复核</h3>' +
+          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
+        '</div>' +
+        '<div class="space-y-4 px-6 py-5">' +
+          '<div class="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 p-4">' +
+            '<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-blue-400 text-sm font-medium text-white">李</div>' +
+            '<div class="min-w-0"><div class="text-sm font-medium text-gray-800">李顾问</div><div class="text-xs text-gray-400">已接 128 单 · 4.9 分</div></div>' +
+          '</div>' +
+          '<div class="text-sm leading-relaxed text-gray-600">顾问将在 <span class="font-medium text-gray-800">3 个工作日</span>内出具专业意见书，覆盖结论合理性、数据依据与风险提示。</div>' +
+          '<div class="flex items-center justify-between rounded-lg bg-gray-50 px-4 py-3"><span class="text-sm text-gray-600">复核费用</span><span class="text-base font-semibold text-primary">￥680<span class="text-xs font-normal text-gray-400"> / 次</span></span></div>' +
+        '</div>' +
+        '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
+          '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
+          '<button onclick="submitReview()" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">确认发起</button>' +
+        '</div>'
+      );
+    }
+
+    function submitReview() {
+      closeAgentModal();
+      showToast('已发起顾问复核，3 个工作日内出具意见书', 'success');
+    }
+
+    let pendingOrder = null;
+    function orderService(name, price) {
+      pendingOrder = { name: name, price: price };
+      openAgentModal(
+        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
+          '<h3 class="text-base font-semibold text-gray-900">确认下单</h3>' +
+          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
+        '</div>' +
+        '<div class="space-y-4 px-6 py-5">' +
+          '<div class="rounded-xl border border-gray-100 bg-gray-50 p-4">' +
+            '<div class="text-sm font-medium text-gray-800">' + name + '</div>' +
+            '<div class="mt-1 text-lg font-semibold text-primary">' + price + '</div>' +
+          '</div>' +
+          '<div class="text-sm leading-relaxed text-gray-600">下单后将生成服务单，可在服务商城「我的订单」中查看，并由专属顾问跟进履约。</div>' +
+        '</div>' +
+        '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
+          '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
+          '<button onclick="confirmOrder()" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">确认下单</button>' +
+        '</div>'
+      );
+    }
+
+    function confirmOrder() {
+      const name = pendingOrder ? pendingOrder.name : '';
+      closeAgentModal();
+      showToast('已为「' + name + '」生成服务单，可在服务商城查看', 'success');
+    }
+
+    function createProjectFromTodos() {
+      const todos = REPORT_TODOS[currentAgent.id] || [];
+      if (!todos.length) { showToast('当前没有待办任务可立项', 'warning'); return; }
+      const list = document.getElementById('project-inprogress-list');
+      if (!list) return;
+      const name = currentAgent.title + ' · 待办跟进';
+      if (list.querySelector('.project-card[data-name="' + name + '"]')) {
+        showToast('该项目已立项，请前往「项目与申报」查看', 'warning');
+        return;
+      }
+      const taskHtml = todos.map(function (t) {
+        return '<div class="flex items-center gap-1.5 text-xs text-gray-600"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-400"></span>' + t.text + '</div>';
+      }).join('');
+      const card = document.createElement('div');
+      card.className = 'project-card rounded-lg border border-gray-100 bg-white p-4 shadow-sm transition hover:shadow-md';
+      card.setAttribute('data-name', name);
+      card.setAttribute('data-type', '自主');
+      card.setAttribute('data-status', '进行中');
+      card.innerHTML =
+        '<div class="flex items-start justify-between gap-2">' +
+          '<div class="text-sm font-medium leading-snug text-gray-800">' + name + '</div>' +
+          '<span class="flex-shrink-0 rounded-full bg-primary-light px-2 py-0.5 text-xs font-medium text-primary">自主</span>' +
+        '</div>' +
+        '<div class="mt-2 text-xs text-gray-400">由智能体「' + currentAgent.title + '」结果一键立项</div>' +
+        '<div class="mt-2 space-y-1">' + taskHtml + '</div>' +
+        '<div class="mt-3 flex items-center justify-between">' +
+          '<span class="text-xs text-gray-400">共 ' + todos.length + ' 项待办</span>' +
+          '<span class="text-xs font-medium text-red-500">距截止 7 天</span>' +
+        '</div>';
+      list.insertBefore(card, list.firstChild);
+      const countEl = document.getElementById('project-inprogress-count');
+      if (countEl) countEl.textContent = list.querySelectorAll('.project-card').length;
+      showToast('已立项，请前往「项目与申报」查看', 'success');
+    }
+
+    function openDeliverablePreview(ext) {
+      const d = currentAgent.deliverables.find(function (x) { return x.ext === ext; }) || currentAgent.deliverables[0];
+      let content = '';
+      if (ext === 'xlsx') content = renderSheetPreview(currentAgent.sheet);
+      else if (ext === 'pdf') content = renderTextPreview(currentAgent.report);
+      else content = renderHtmlPreview();
+      openAgentModal(
+        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
+          '<div class="flex min-w-0 items-center gap-2"><i data-lucide="' + fileIcon(d.ext) + '" class="h-4 w-4 ' + fileIconColor(d.ext) + '"></i><h3 class="truncate text-base font-semibold text-gray-900">' + d.name + '</h3></div>' +
+          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
+        '</div>' +
+        '<div class="max-h-[62vh] overflow-auto px-6 py-5">' + content + '</div>'
+      );
+    }
+
+    function renderSheetPreview(sheet) {
+      let html = '<table class="w-full border-collapse text-sm">';
+      html += '<thead><tr><th class="sheet-colhead"></th><th class="sheet-colhead">A</th><th class="sheet-colhead">B</th><th class="sheet-colhead">C</th><th class="sheet-colhead">D</th></tr></thead><tbody>';
+      sheet.rows.forEach(function (cells, idx) {
+        html += '<tr><td class="sheet-rowoff">' + (idx + 1) + '</td>';
+        if (cells.length === 1 && cells[0].span) {
+          html += '<td colspan="4" class="' + cells[0].cls + '">' + cells[0].v + '</td>';
+        } else {
+          cells.forEach(function (cell) { html += '<td class="' + (cell.cls || 'sheet-plain') + '">' + cell.v + '</td>'; });
+        }
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      return html;
+    }
+
+    function renderTextPreview(r) {
+      let html = '<h1 class="text-xl font-semibold text-gray-900">' + r.title + '</h1>';
+      html += '<div class="mt-2 text-xs text-gray-400">' + r.meta + '</div>';
+      html += '<div class="my-4 border-t border-gray-200"></div>';
+      r.sections.forEach(function (s) {
+        html += '<div class="mt-4"><h2 class="text-sm font-semibold text-gray-800">' + s.h + '</h2>';
+        s.ps.forEach(function (p) { html += '<p class="mt-2 text-sm leading-relaxed text-gray-600">' + p + '</p>'; });
+        html += '</div>';
+      });
+      return html;
+    }
+
+    function renderHtmlPreview() {
+      const bars = [42, 68, 55, 80, 63, 90, 74];
+      let barHtml = bars.map(function (h) { return '<div class="flex-1 rounded-t bg-gradient-to-t from-primary/70 to-primary" style="height:' + h + '%"></div>'; }).join('');
+      return '<div class="rounded-xl border border-gray-100 bg-gray-50 p-4"><div class="flex h-44 items-end gap-2">' + barHtml + '</div><p class="mt-3 text-center text-xs text-gray-400">交互式看板预览（演示）</p></div>';
+    }
+
+    let procTimer = null;
+    let procStates = [];
+
+    function setProcPercent(p) {
+      const bar = document.getElementById('proc-bar');
+      const label = document.getElementById('proc-percent');
+      if (bar) bar.style.width = p + '%';
+      if (label) label.textContent = p + '%';
+    }
+
+    function procStepHTML(s, state) {
+      let dot, statusText, statusCls;
+      if (state === 'done') {
+        dot = '<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600"><i data-lucide="check" class="h-4 w-4"></i></div>';
+        statusText = '已完成'; statusCls = 'text-green-600';
+      } else if (state === 'active') {
+        dot = '<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary text-white"><i data-lucide="loader-2" class="h-4 w-4 animate-spin"></i></div>';
+        statusText = '进行中'; statusCls = 'text-primary';
+      } else {
+        dot = '<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border-2 border-gray-200 bg-gray-50 text-gray-300"><i data-lucide="' + s.icon + '" class="h-4 w-4"></i></div>';
+        statusText = '等待'; statusCls = 'text-gray-300';
+      }
+      return '<div class="flex items-start gap-3">' + dot +
+        '<div class="min-w-0 flex-1"><div class="text-sm font-medium ' + (state === 'pending' ? 'text-gray-400' : 'text-gray-800') + '">' + s.label + '</div>' +
+        '<div class="mt-0.5 text-xs ' + (state === 'done' ? 'text-gray-500' : 'text-gray-400') + '">' + s.detail + '</div></div>' +
+        '<span class="flex-shrink-0 text-xs ' + statusCls + '">' + statusText + '</span></div>';
+    }
+
+    function renderProcessSteps() {
+      const box = document.getElementById('proc-steps');
+      if (!box) return;
+      box.innerHTML = currentAgent.steps.map(function (s, i) {
+        return procStepHTML(s, procStates[i] || 'pending');
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function showRunState(state) {
+      const cfg = document.getElementById('run-config-state');
+      const running = document.getElementById('run-running-state');
+      if (cfg) cfg.classList.toggle('hidden', state !== 'config');
+      if (running) running.classList.toggle('hidden', state !== 'running');
+    }
+
+    function showRunPhase(phase) {
+      const cfg = document.getElementById('run-config-phase');
+      const report = document.getElementById('run-report-phase');
+      if (cfg) cfg.classList.toggle('hidden', phase !== 'config');
+      if (report) report.classList.toggle('hidden', phase !== 'report');
+    }
+
+    function resetRunProcess() {
+      procStates = (currentAgent.steps || []).map(function () { return 'pending'; });
+      setProcPercent(0);
+      renderProcessSteps();
+    }
+
+    function beginProcess() {
+      const total = procStates.length;
+      let i = 0;
+      function next() {
+        if (i >= total) {
+          showRunPhase('report');
+          renderReport();
+          const runView = document.getElementById('agent-view-run');
+          if (runView) runView.scrollTop = 0;
+          return;
+        }
+        procStates[i] = 'active';
+        renderProcessSteps();
+        procTimer = setTimeout(function () {
+          procStates[i] = 'done';
+          i += 1;
+          setProcPercent(total ? Math.round((i / total) * 100) : 100);
+          renderProcessSteps();
+          next();
+        }, 620);
+      }
+      next();
+    }
+
+    // 服务商城分类标签（保留激活态）
+    document.querySelectorAll('.cat-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('.cat-chip').forEach(function (c) { c.classList.remove('cat-chip-active'); });
         chip.classList.add('cat-chip-active');
-        const cat = chip.dataset.cat;
-        document.querySelectorAll('.agent-card').forEach((card) => {
-          card.classList.toggle('hidden', cat !== '全部' && card.dataset.cat !== cat);
-        });
       });
     });
 
-    // 加入意向单
-    document.querySelectorAll('.js-add-cart').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        showToast('已将「' + btn.dataset.name + '」加入意向单', 'success');
+    // 上传「客户/试用反馈」
+    const agentUploadInput = document.getElementById('agent-upload-input');
+    if (agentUploadInput) {
+      agentUploadInput.addEventListener('change', function (e) {
+        if (e.target.files && e.target.files.length) {
+          agentUploadReady = true;
+          agentUploadName = e.target.files[0].name;
+          renderAgentChecklist();
+          showToast('已上传「' + agentUploadName + '」', 'success');
+        }
       });
-    });
+    }
+
+    // 初始化矩阵
+    renderAgentMatrix();
 
     // ==================== 成员与角色 ====================
     document.getElementById('invite-member-btn').addEventListener('click', () => {
