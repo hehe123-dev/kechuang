@@ -571,6 +571,101 @@
   content: ''; position: absolute; right: 0; bottom: 0;
   width: 7px; height: 7px; background: #16a34a; border: 1px solid #fff;
 }
+
+/* ===== 企业科创培育进阶路径：阶梯图 ===== */
+.ladder {
+  display: flex;
+  align-items: stretch;
+}
+.lg-step {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+.lg-step:not(:last-child) {
+  margin-right: 22px;
+}
+.lg-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -17px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid #d1d5db;
+  border-right: 2px solid #d1d5db;
+  transform: translateY(-50%) rotate(45deg);
+  z-index: 1;
+}
+.lg-card {
+  height: 100%;
+  border-radius: 10px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.lg-nm { font-size: 14px; font-weight: 600; color: #374151; }
+.lg-st { font-size: 12px; color: #9ca3af; }
+.lg-gap { font-size: 11px; color: #f59e0b; }
+
+.lg-step.done .lg-card { border-color: #bbf7d0; background: #f0fdf4; }
+.lg-step.done .lg-nm { color: #16a34a; }
+.lg-step.done .lg-gap { color: #16a34a; }
+
+.lg-step.now .lg-card { border: 2px solid #1677ff; background: #e8f1ff; }
+.lg-step.now .lg-nm { color: #1677ff; font-weight: 700; }
+.lg-step.now .lg-st { color: #1677ff; }
+
+/* 甘特图 Tab */
+.gantt-tab {
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  color: #6b7280;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+.gantt-tab:hover { color: #374151; }
+.gantt-tab.gantt-tab-active { background: #1677ff; color: #fff; }
+
+/* ===== 科创体检模块 ===== */
+.g-a{background:#E8FFEA;color:#00B42A}.g-b{background:#E8F3FF;color:#37A2FF}
+.g-c{background:#FFF3E8;color:#FF7D00}.g-d{background:#FFECE8;color:#F53F3F}
+.health-d-card{background:#FFF5F5;border:1px solid #FFD6D6;border-left:3px solid #F53F3F}
+.health-c-card{background:#FFF9F0;border:1px solid #FFE2C2;border-left:3px solid #FF7D00}
+.health-svc{background:#F7F7FB;border:1px dashed #722ED1}
+.health-tab{padding:6px 14px;border-radius:6px;font-size:14px;color:#6b7280;cursor:pointer;white-space:nowrap;transition:all .15s}
+.health-tab.health-tab-active{background:#1677ff;color:#fff}
+.health-step{display:flex;gap:10px;padding:10px 8px;border-radius:6px;cursor:pointer}
+.health-step .hnum{width:22px;height:22px;border-radius:50%;background:#f3f4f6;color:#6b7280;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.health-step.health-active{background:#e8f1ff}
+.health-step.health-active .hnum{background:#1677ff;color:#fff}
+.health-step.health-done .hnum{background:#00B42A;color:#fff}
+.health-cell-d{background:#FFECE8;color:#F53F3F;font-weight:600}
+.health-cell-c{background:#FFF3E8;color:#FF7D00;font-weight:600}
+.health-ring{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.health-ring .hr-val{position:absolute;font-weight:700}
+.health-drawer{position:fixed;top:0;right:0;bottom:0;background:#fff;z-index:120;box-shadow:-4px 0 20px rgba(0,0,0,.08);transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column}
+.health-drawer.health-open{transform:translateX(0)}
+.health-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:119;display:none}
+.health-overlay.health-open{display:block}
+
+/* 服务商城（知识产权服务市场） */
+.mall-sort-tab{border:0;background:transparent;padding:6px 12px;border-radius:6px;font-size:13px;color:#6b7280;transition:.15s;white-space:nowrap}
+.mall-sort-tab:hover{color:#1677ff}
+.mall-sort-tab.active{background:#fff;color:#1677ff;font-weight:600;box-shadow:0 1px 3px rgba(17,26,46,.1)}
+.mall-page-btn{min-width:34px;height:34px;padding:0 12px;border:1px solid #e5e7eb;background:#fff;border-radius:8px;font-size:13px;color:#4b5563;transition:.15s}
+.mall-page-btn:hover:not(:disabled):not(.active){border-color:#bcd0fb;color:#1677ff}
+.mall-page-btn.active{background:#1677ff;border-color:#1677ff;color:#fff;font-weight:600}
+.mall-page-btn:disabled{opacity:.42;cursor:not-allowed}
+.mall-view-tab{padding:6px 14px;border-radius:6px;font-size:14px;color:#6b7280;cursor:pointer;white-space:nowrap;transition:.15s}
+.mall-view-tab:hover{color:#1677ff}
+.mall-view-tab.mall-view-tab-active{background:#1677ff;color:#fff}
   </style>
 </head>
 
@@ -724,10 +819,123 @@
 
         <!-- AI工作台 -->
         <div id="page-ai" class="page -m-6 h-[calc(100vh-44px)]">
+          <!-- ===== 1级落地页：对话框 + 待办/政策/申报模块 ===== -->
+          <div id="ai-landing" class="h-full overflow-y-auto bg-gray-50">
+            <div class="p-6">
+              <div class="mx-auto max-w-2xl text-center">
+                <div class="flex flex-col items-center">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-400 text-white shadow-sm">
+                    <i data-lucide="bot" class="h-6 w-6"></i>
+                  </div>
+                  <h2 class="mt-3 text-xl font-semibold text-gray-900">您好，我是科创 AI 助手</h2>
+                  <p class="mt-1 text-sm text-gray-500">可以帮您分析企业数据、匹配政策、生成申报材料</p>
+                </div>
+                <div class="mt-5 flex items-end gap-2 rounded-2xl border border-gray-200 bg-white p-2 shadow-sm transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
+                  <textarea id="ai-landing-input" rows="2" placeholder="输入您的问题，或点击下方快捷提问…" class="max-h-32 flex-1 resize-none bg-transparent px-2 py-1.5 text-sm leading-relaxed text-gray-700 outline-none placeholder:text-gray-400"></textarea>
+                  <button onclick="enterAiChat()" class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm transition hover:bg-primary-hover" title="发送">
+                    <i data-lucide="send" class="h-4 w-4"></i>
+                  </button>
+                </div>
+                <div class="mt-4 flex flex-wrap justify-center gap-2">
+                  <button class="js-landing-prompt rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-prompt="帮我分析近两年的研发费用占比">帮我分析近两年的研发费用占比</button>
+                  <button class="js-landing-prompt rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-prompt="匹配适合我的专精特新政策">匹配适合我的专精特新政策</button>
+                  <button class="js-landing-prompt rounded-full border border-gray-200 bg-white px-3.5 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-prompt="生成高企申报材料清单">生成高企申报材料清单</button>
+                </div>
+              </div>
+
+              <div class="mt-6 grid grid-cols-3 gap-5">
+                <!-- 待办事项 -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <div class="flex items-center justify-between">
+                    <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="check-square" class="h-4 w-4 text-primary"></i> 待办事项</h3>
+                    <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-project">查看全部</button>
+                  </div>
+                  <div class="mt-3 space-y-2">
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-orange-400"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">补充财务审计材料</div><div class="text-xs text-gray-400">高企认定 · 距截止 3 天</div></div>
+                    </div>
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-red-500"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">确认申报时序排期</div><div class="text-xs text-red-500">今日到期</div></div>
+                    </div>
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-orange-400"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">对接高优先级服务线索</div><div class="text-xs text-gray-400">待处理</div></div>
+                    </div>
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-orange-400"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">完善知识产权权属信息</div><div class="text-xs text-gray-400">高企认定 · 距截止 5 天</div></div>
+                    </div>
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-amber-400"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">补充客户试用反馈材料</div><div class="text-xs text-gray-400">成果转化 · 距截止 7 天</div></div>
+                    </div>
+                    <div class="flex items-start gap-2.5 rounded-lg border border-gray-100 px-3 py-2.5">
+                      <span class="mt-1 h-2 w-2 flex-shrink-0 rounded-full bg-gray-300"></span>
+                      <div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">复核申报书初稿</div><div class="text-xs text-gray-400">待处理</div></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 收藏的政策 -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <div class="flex items-center justify-between">
+                    <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="compass" class="h-4 w-4 text-green-600"></i> 收藏的政策</h3>
+                    <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-policy">查看全部</button>
+                  </div>
+                  <div class="mt-3 space-y-2">
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">2024年高新技术企业认定</div><div class="mt-0.5 text-xs text-red-500">截止 11-30 · 剩 5 天</div></div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">专精特新“小巨人”培育</div><div class="mt-0.5 text-xs text-red-500">截止 11-04 · 剩 3 天</div></div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">科技型中小企业评价</div><div class="mt-0.5 text-xs text-amber-600">截止 11-09 · 剩 8 天</div></div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">湖北省重点研发计划</div><div class="mt-0.5 text-xs text-amber-600">截止 11-13 · 剩 12 天</div></div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">东湖高新区瞪羚企业认定</div><div class="mt-0.5 text-xs text-amber-600">截止 11-16 · 剩 15 天</div></div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5"><div class="truncate text-sm text-gray-700">武汉市科技成果转化项目</div><div class="mt-0.5 text-xs text-gray-400">截止 12-05 · 剩 30 天</div></div>
+                  </div>
+                </div>
+
+                <!-- 申报任务 -->
+                <div class="rounded-2xl border border-gray-200 bg-white p-6">
+                  <div class="flex items-center justify-between">
+                    <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="briefcase" class="h-4 w-4 text-amber-500"></i> 申报任务</h3>
+                    <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-project">查看全部</button>
+                  </div>
+                  <div class="mt-3 space-y-2">
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5">
+                      <div class="flex items-center justify-between"><span class="truncate text-sm text-gray-700">高企认定申报</span><span class="flex-shrink-0 rounded-full bg-primary-light px-2 py-0.5 text-[11px] text-primary">进行中</span></div>
+                      <div class="mt-1.5"><div class="mb-1 flex items-center justify-between text-xs text-gray-400"><span>任务进度</span><span>8/15</span></div><div class="h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:53%"></div></div></div>
+                    </div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5">
+                      <div class="flex items-center justify-between"><span class="truncate text-sm text-gray-700">湖北省重点研发计划</span><span class="flex-shrink-0 rounded-full bg-violet-50 px-2 py-0.5 text-[11px] text-violet-600">托管</span></div>
+                      <div class="mt-1.5"><div class="mb-1 flex items-center justify-between text-xs text-gray-400"><span>任务进度</span><span>6/12</span></div><div class="h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:50%"></div></div></div>
+                    </div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5">
+                      <div class="flex items-center justify-between"><span class="truncate text-sm text-gray-700">专精特新“小巨人”培育</span><span class="flex-shrink-0 rounded-full bg-primary-light px-2 py-0.5 text-[11px] text-primary">进行中</span></div>
+                      <div class="mt-1.5"><div class="mb-1 flex items-center justify-between text-xs text-gray-400"><span>任务进度</span><span>4/10</span></div><div class="h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:40%"></div></div></div>
+                    </div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5">
+                      <div class="flex items-center justify-between"><span class="truncate text-sm text-gray-700">科技型中小企业评价</span><span class="flex-shrink-0 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] text-amber-600">待审核</span></div>
+                      <div class="mt-1.5 text-xs text-gray-400">已提交材料，等待主管部门审核</div>
+                    </div>
+                    <div class="rounded-lg border border-gray-100 px-3 py-2.5">
+                      <div class="flex items-center justify-between"><span class="truncate text-sm text-gray-700">东湖高新区瞪羚企业认定</span><span class="flex-shrink-0 rounded-full bg-amber-50 px-2 py-0.5 text-[11px] text-amber-600">待审核</span></div>
+                      <div class="mt-1.5 text-xs text-gray-400">已提交材料，等待主管部门审核</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== 2级页面：对话工作台 ===== -->
+          <div id="ai-chat" class="hidden h-full">
           <div class="flex h-full overflow-hidden">
             <!-- 左侧：历史对话 -->
             <aside class="flex h-full w-72 flex-shrink-0 flex-col border-r border-gray-200 bg-white">
               <div class="space-y-2 p-3">
+                <button onclick="enterAiLanding()" class="flex w-full items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
+                  <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回工作台
+                </button>
                 <button id="new-chat-btn" class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
                   <i data-lucide="plus" class="h-4 w-4"></i> 新建对话
                 </button>
@@ -996,6 +1204,7 @@
                 </aside>
               </div>
             </div>
+          </div>
           </div>
         </div>
 
@@ -1464,20 +1673,8 @@
                   <button data-archive-tab="materials" class="archive-tab">材料管理</button>
                 </div>
                 <div class="flex-1 overflow-y-auto p-3">
-                  <!-- 事实维护（默认）：13维度目录树 -->
+                  <!-- 事实维护（默认）：5大分类目录树 -->
                   <div id="archive-tab-facts">
-                    <div class="mb-1">
-                      <div class="tree-item folder-row" data-folder="企业基础信息">
-                        <span class="folder-chevron rotated"><i data-lucide="chevron-down" class="h-3.5 w-3.5 text-gray-400"></i></span>
-                        <i data-lucide="folder" class="h-4 w-4 flex-shrink-0 text-amber-500"></i>
-                        <span class="flex-1 truncate">企业基础信息</span>
-                      </div>
-                      <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
-                        <div class="tree-item leaf-item" data-dim="企业基础"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">工商基础</span></div>
-                        <div class="tree-item leaf-item" data-dim="企业基础"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">股权结构</span></div>
-                        <div class="tree-item leaf-item" data-dim="企业基础"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">信用合规</span></div>
-                      </div>
-                    </div>
                     <div class="mb-1">
                       <div class="tree-item folder-row" data-folder="核心科创资产">
                         <span class="folder-chevron rotated"><i data-lucide="chevron-down" class="h-3.5 w-3.5 text-gray-400"></i></span>
@@ -1485,9 +1682,17 @@
                         <span class="flex-1 truncate">核心科创资产</span>
                       </div>
                       <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
-                        <div class="tree-item leaf-item active" data-dim="知识产权"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span><span class="truncate">知识产权</span></div>
-                        <div class="tree-item leaf-item" data-dim="科创资质"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">科创资质</span></div>
-                        <div class="tree-item leaf-item" data-dim="标准资质"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">标准资质</span></div>
+                        <div class="tree-item leaf-item active" data-dim="核心科创资产"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"></span><span class="truncate">知识产权 · 资质 · 标准</span></div>
+                      </div>
+                    </div>
+                    <div class="mb-1">
+                      <div class="tree-item folder-row" data-folder="企业基础">
+                        <span class="folder-chevron rotated"><i data-lucide="chevron-down" class="h-3.5 w-3.5 text-gray-400"></i></span>
+                        <i data-lucide="folder" class="h-4 w-4 flex-shrink-0 text-amber-500"></i>
+                        <span class="flex-1 truncate">企业基础</span>
+                      </div>
+                      <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
+                        <div class="tree-item leaf-item" data-dim="企业基础"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">工商 · 股权 · 信用</span></div>
                       </div>
                     </div>
                     <div class="mb-1">
@@ -1497,9 +1702,7 @@
                         <span class="flex-1 truncate">研发与创新</span>
                       </div>
                       <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
-                        <div class="tree-item leaf-item" data-dim="科研投入"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">科研投入</span></div>
-                        <div class="tree-item leaf-item" data-dim="科技项目"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">科技项目</span></div>
-                        <div class="tree-item leaf-item" data-dim="科创平台"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">科创平台</span></div>
+                        <div class="tree-item leaf-item" data-dim="研发与创新"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">投入 · 项目 · 平台</span></div>
                       </div>
                     </div>
                     <div class="mb-1">
@@ -1509,9 +1712,7 @@
                         <span class="flex-1 truncate">经营与财务</span>
                       </div>
                       <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
-                        <div class="tree-item leaf-item" data-dim="财务成长"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">财务成长</span></div>
-                        <div class="tree-item leaf-item" data-dim="市场维度"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">市场维度</span></div>
-                        <div class="tree-item leaf-item" data-dim="经营市场"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">经营市场</span></div>
+                        <div class="tree-item leaf-item" data-dim="经营与财务"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">财务 · 市场 · 经营</span></div>
                       </div>
                     </div>
                     <div class="mb-1">
@@ -1521,9 +1722,7 @@
                         <span class="flex-1 truncate">团队与能力</span>
                       </div>
                       <div class="folder-children ml-4 border-l border-gray-100 pl-2 hidden">
-                        <div class="tree-item leaf-item" data-dim="人才团队"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">人才团队</span></div>
-                        <div class="tree-item leaf-item" data-dim="管理体系"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">管理体系</span></div>
-                        <div class="tree-item leaf-item" data-dim="绿色发展"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">绿色发展</span></div>
+                        <div class="tree-item leaf-item" data-dim="团队与能力"><span class="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><span class="truncate">人才 · 体系 · 绿色</span></div>
                       </div>
                     </div>
                   </div>
@@ -1605,7 +1804,7 @@
                   <div class="flex-1 text-sm leading-relaxed text-amber-800">
                     <b class="font-semibold">系统发现 2 项数据冲突：</b>
                     <div class="mt-1">1. 【知识产权-有效发明专利数量】系统识别为 12 项，与手动填写的 10 项不符。</div>
-                    <div>2. 【科研投入-研发费用占比】新旧财报数据不一致。</div>
+                    <div>2. 【研发与创新-研发费用占比】新旧财报数据不一致。</div>
                   </div>
                   <div class="flex flex-shrink-0 gap-2">
                     <button id="conflict-handle" class="rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">去处理</button>
@@ -1655,22 +1854,14 @@
                   </div>
                 </div>
 
-                <!-- 13维度详细数据 -->
+                <!-- 5大分类详细数据 -->
                 <div>
                   <div class="mb-3 flex items-center gap-2 overflow-x-auto pb-1">
-                    <button class="dim-tab dim-tab-active" data-dim="知识产权">知识产权</button>
-                    <button class="dim-tab" data-dim="科创资质">科创资质</button>
-                    <button class="dim-tab" data-dim="科创平台">科创平台</button>
-                    <button class="dim-tab" data-dim="科技项目">科技项目</button>
-                    <button class="dim-tab" data-dim="人才团队">人才团队</button>
-                    <button class="dim-tab" data-dim="科研投入">科研投入</button>
-                    <button class="dim-tab" data-dim="财务成长">财务成长</button>
-                    <button class="dim-tab" data-dim="市场维度">市场维度</button>
-                    <button class="dim-tab" data-dim="标准资质">标准资质</button>
-                    <button class="dim-tab" data-dim="管理体系">管理体系</button>
-                    <button class="dim-tab" data-dim="经营市场">经营市场</button>
-                    <button class="dim-tab" data-dim="绿色发展">绿色发展</button>
+                    <button class="dim-tab dim-tab-active" data-dim="核心科创资产">核心科创资产</button>
                     <button class="dim-tab" data-dim="企业基础">企业基础</button>
+                    <button class="dim-tab" data-dim="研发与创新">研发与创新</button>
+                    <button class="dim-tab" data-dim="经营与财务">经营与财务</button>
+                    <button class="dim-tab" data-dim="团队与能力">团队与能力</button>
                   </div>
                   <div id="dim-panels"></div>
                 </div>
@@ -1690,168 +1881,158 @@
 
         <!-- 科创体检 -->
         <div id="page-health" class="page hidden">
-          <div class="mb-5">
-            <h2 class="text-xl font-semibold text-gray-800">科创体检</h2>
-            <p class="mt-1 text-sm text-gray-400">企业科技创新能力多维诊断评估</p>
+          <!-- 子导航 -->
+          <div class="mb-4 flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1" style="width:fit-content">
+            <button class="health-tab health-tab-active" data-health="home">工作台</button>
+            <button class="health-tab" data-health="orders">我的服务</button>
           </div>
 
-          <!-- 顶部选择区 -->
-          <div class="mb-5 rounded-lg bg-white p-5 shadow-sm">
-            <div class="flex items-start gap-8">
-              <div class="min-w-0 flex-1">
-                <div class="mb-3 text-sm font-medium text-gray-800">选择测评项目</div>
+          <!-- P1 工作台 -->
+          <div id="health-home" class="health-view">
+            <!-- 新建体检（置顶） -->
+            <div class="rounded-lg bg-white p-6 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">新建体检</div>
+              <div class="mb-2 text-sm text-gray-600">① 选择申报项目（可多选）</div>
+              <div class="grid grid-cols-2 gap-3" id="health-proj-grid"></div>
+              <div class="mt-6 flex justify-end">
+                <button class="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">开始体检 →</button>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-amber-50 p-4" style="border:1px solid #FFE7A6">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2"><i data-lucide="alert-triangle" class="h-4 w-4 text-amber-500"></i><span class="text-sm font-medium text-amber-700">上次体检未完成</span><span class="text-sm text-gray-500">智能体已调取企业档案，可继续评估</span></div>
+                <button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">继续体检</button>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-sm font-semibold text-gray-800">体检任务</div>
+              <table class="w-full text-sm">
+                <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">体检单号</th><th class="px-3 py-2.5 font-medium">企业名称</th><th class="px-3 py-2.5 font-medium">申报项目</th><th class="px-3 py-2.5 font-medium">体检进度</th><th class="px-3 py-2.5 font-medium">当前得分</th><th class="px-3 py-2.5 font-medium">等级</th><th class="px-3 py-2.5 font-medium">状态</th><th class="px-3 py-2.5 font-medium">更新时间</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead>
+                <tbody>
+                  <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1102</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">高新技术企业认定</td><td class="px-3 py-2.5">5/8</td><td class="px-3 py-2.5">68.0</td><td class="px-3 py-2.5"><span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span></td><td class="px-3 py-2.5">进行中</td><td class="px-3 py-2.5 text-gray-500">2024-11-05</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('wizard')">继续填报</a>　<a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                  <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1088</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">专精特新中小企业</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5">82.5</td><td class="px-3 py-2.5"><span class="g-b rounded px-1.5 py-0.5 text-xs">B 达标</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-10-28</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                  <tr><td class="px-3 py-2.5">JC-2024-1041</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">科技型中小企业评价</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5">91.0</td><td class="px-3 py-2.5"><span class="g-a rounded px-1.5 py-0.5 text-xs">A 卓越</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-09-15</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- P5 评估进度 -->
+          <div id="health-progress" class="health-view hidden">
+            <div class="mx-auto max-w-md rounded-lg bg-white p-8 text-center shadow-sm">
+              <div class="flex justify-center"><div class="health-ring" id="health-eval-ring"></div></div>
+              <div class="mt-4 text-base font-semibold text-gray-800">正在评估</div>
+              <div id="health-eval-tasks" class="mx-auto mt-4 max-w-xs text-left"></div>
+              <div class="mt-4 text-sm text-gray-400">预计还需 30 秒，可离开此页</div>
+              <button id="health-btn-view" class="mt-5 hidden rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="switchHealth('result')">查看体检结果 →</button>
+            </div>
+          </div>
+
+          <!-- P6 体检结果 -->
+          <div id="health-result" class="health-view hidden">
+            <div class="grid grid-cols-2 gap-4" style="grid-template-columns:1fr 400px">
+              <div class="rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-sm font-semibold text-gray-800">企业档案</div>
+                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                  <div>企业名称：<b>武汉汉企业科技有限公司</b></div><div>信用代码：91420100MA4K*****</div>
+                  <div>成立时间：2015-06-18</div><div>技术领域：人工智能</div>
+                  <div>申报项目：高新技术企业认定</div><div>体检单号：JC-2024-1102</div>
+                  <div>日期：2024-11-06</div><div>机构：武汉科创平台</div>
+                  <div>顾问：张伟</div><div>资质：<span class="g-b rounded px-1.5 py-0.5 text-xs">高新技术企业</span></div>
+                </div>
+              </div>
+              <div class="rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-sm font-semibold text-gray-800">总分</div>
+                <div class="flex items-center gap-5">
+                  <div class="health-ring" id="health-total-ring"></div>
+                  <div class="text-sm text-gray-600">等级：<span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span><div class="mt-2">达标 12/26　不达标 5　一票否决 2</div><div class="mt-1 text-xs text-gray-400">行业百分位：前 38%</div></div>
+                </div>
+                <div class="mt-3"><div class="text-xs text-gray-400">达标线 80</div><div class="relative mt-1 h-1.5 w-full rounded-full bg-gray-100"><div class="h-1.5 rounded-full" style="width:72.5%;background:#FF7D00"></div><div class="absolute top-[-3px]" style="left:80%;height:12px;width:2px;background:#00B42A"></div></div></div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">六维度量化打分</span></div>
+              <div class="flex items-center gap-6">
+                <div class="flex-shrink-0" id="health-radar"></div>
+                <div class="flex-1">
+                  <div class="text-xs text-gray-500"><span class="mr-1 inline-block h-3 w-3 rounded-sm" style="background:#1677ff"></span>企业实际　<span class="mr-1 ml-3 inline-block h-0 w-3 border-t-2 border-dashed" style="border-color:#FF7D00"></span>申报标准　<span class="mr-1 ml-3 inline-block h-3 w-3 rounded-sm" style="background:rgba(245,63,63,.15)"></span>差距区域</div>
+                  <div id="health-dim-cards" class="mt-3 grid grid-cols-2 gap-3"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">差距问题汇总</div>
+              <div class="health-d-card mb-4 rounded-md p-3"><b style="color:#F53F3F">⚠ 检出 2 项一票否决红线</b></div>
+              <div id="health-veto"></div>
+              <div class="mb-2 mt-4 text-sm font-semibold text-gray-800">差距问题清单</div>
+              <div id="health-problems" class="space-y-2"></div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">结论与建议</div>
+              <div class="text-sm font-semibold text-gray-800">体检结论</div>
+              <div class="mt-2 grid grid-cols-4 gap-3" id="health-concl"></div>
+              <div class="mt-4 text-sm font-semibold text-gray-800">推荐整改服务方案</div>
+              <div class="health-svc mt-3 rounded-lg p-4">
                 <div class="grid grid-cols-3 gap-3">
-                  <div class="assess-card assess-card-active rounded-lg p-3" data-project="国家高新技术企业">
-                    <div class="flex items-center gap-2">
-                      <i data-lucide="award" class="h-4 w-4 text-primary"></i>
-                      <span class="text-sm font-medium text-gray-800">国家高新技术企业</span>
-                      <i data-lucide="check-circle-2" class="assess-check ml-auto h-4 w-4 text-primary"></i>
-                    </div>
-                    <div class="mt-1.5 text-xs text-gray-400">最高奖励 30 万元</div>
-                  </div>
-                  <div class="assess-card rounded-lg p-3" data-project="专精特新中小企业">
-                    <div class="flex items-center gap-2">
-                      <i data-lucide="gem" class="h-4 w-4 text-violet-500"></i>
-                      <span class="text-sm font-medium text-gray-800">专精特新中小企业</span>
-                      <i data-lucide="check-circle-2" class="assess-check ml-auto h-4 w-4 text-primary"></i>
-                    </div>
-                    <div class="mt-1.5 text-xs text-gray-400">最高奖励 50 万元</div>
-                  </div>
-                  <div class="assess-card rounded-lg p-3" data-project="科技型中小企业">
-                    <div class="flex items-center gap-2">
-                      <i data-lucide="flask-conical" class="h-4 w-4 text-green-600"></i>
-                      <span class="text-sm font-medium text-gray-800">科技型中小企业</span>
-                      <i data-lucide="check-circle-2" class="assess-check ml-auto h-4 w-4 text-primary"></i>
-                    </div>
-                    <div class="mt-1.5 text-xs text-gray-400">研发费用加计扣除</div>
-                  </div>
+                  <div class="rounded-lg bg-white p-4"><b>单项自选</b><div class="mt-1 text-xs text-gray-400">覆盖 1 项问题</div><div class="mt-2 text-lg font-bold text-gray-800">￥2,000<span class="text-xs font-normal text-gray-400"> 起</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
+                  <div class="rounded-lg border-2 bg-white p-4" style="border-color:#722ED1"><div class="flex items-center"><b>达标加速包</b><span class="ml-2 rounded px-1.5 py-0.5 text-xs text-white" style="background:#FFB400">★ 推荐</span></div><div class="mt-1 text-xs text-gray-400">覆盖 5 项 · 预计补齐至 B 级</div><div class="mt-2 text-lg font-bold text-gray-800">￥9,800<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥13,500</span></div><button class="mt-2 rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthService()">查看方案详情</button></div>
+                  <div class="rounded-lg bg-white p-4"><b>全托管</b><div class="mt-1 text-xs text-gray-400">覆盖全部 · 全程代办</div><div class="mt-2 text-lg font-bold text-gray-800">￥28,000<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥32,000</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
                 </div>
-                <div class="mt-4 flex items-center gap-5">
-                  <div>
-                    <label class="mb-1 block text-xs text-gray-500">年度</label>
-                    <select class="h-9 w-36 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
-                      <option>2024 年</option>
-                      <option>2023 年</option>
-                      <option>2022 年</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label class="mb-1 block text-xs text-gray-500">地区</label>
-                    <select class="h-9 w-36 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
-                      <option>湖北省</option>
-                      <option>武汉市</option>
-                      <option>东湖高新区</option>
-                    </select>
-                  </div>
-                </div>
+                <div class="mt-3 text-xs text-gray-400">增值服务 · 不影响体检评分与结论</div>
               </div>
-              <div class="flex flex-shrink-0 flex-col justify-center gap-3">
-                <button id="ai-assess-btn" class="flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-                  <i data-lucide="sparkles" class="h-4 w-4"></i> AI 智能测评
-                </button>
-                <button id="manual-assess-btn" class="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-8 py-3.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="clipboard-list" class="h-4 w-4"></i> 人工问卷测评
-                </button>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">风险专项提示</div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>申报窗口期风险</b><span class="g-d rounded px-1.5 py-0.5 text-xs">高</span></div><div class="mt-2 text-sm text-gray-500">高企申报窗口即将关闭，时间紧张。</div></div>
+                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>政策变动风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">研发费用加计扣除口径或有调整。</div></div>
+                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>数据合规风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">申报数据需与审计报告一致。</div></div>
+                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>知识产权权属风险</b><span class="g-b rounded px-1.5 py-0.5 text-xs">低</span></div><div class="mt-2 text-sm text-gray-500">部分专利为共同申请，权属需确认。</div></div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">归档签字区</span><div class="flex gap-2"><button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">导出完整报告 PDF</button><button class="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">导出精简版</button></div></div>
+              <table class="w-full text-sm"><thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2 font-medium">姓名</th><th class="px-3 py-2 font-medium">电话</th><th class="px-3 py-2 font-medium">单位</th><th class="px-3 py-2 font-medium">电子签名</th><th class="px-3 py-2 font-medium">日期</th></tr></thead><tbody><tr><td class="px-3 py-2.5">张伟</td><td class="px-3 py-2.5">138****1234</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">张伟（已签）</td><td class="px-3 py-2.5">2024-11-06</td></tr></tbody></table>
+            </div>
+
+            <div id="health-service-entry" class="health-svc mt-4 rounded-lg p-4">
+              <div class="flex items-center justify-between"><b style="color:#722ED1">整改服务入口</b><span class="rounded px-1.5 py-0.5 text-xs" style="background:#FFF7E0;color:#FFB400">增值服务 · 不影响体检评分与结论</span></div>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">一键委托整改</button>
+                <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看全部科创服务 →</button>
               </div>
             </div>
           </div>
 
-          <!-- 主展示区 -->
-          <div class="rounded-lg bg-white p-6 shadow-sm">
-            <!-- 测评结论 -->
-            <div class="mb-6 flex items-center justify-between">
-              <div>
-                <div class="text-2xl font-semibold text-gray-800">测评结论：<span class="text-green-600">符合认定条件</span></div>
-                <div class="mt-1.5 text-sm text-gray-400">基于企业数字档案自动采集数据 · 2024 年 · 湖北省</div>
-              </div>
-              <div class="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 text-4xl font-bold text-white shadow-lg">A+</div>
+          <!-- P9 订单列表 -->
+          <div id="health-orders" class="health-view hidden">
+            <div class="rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">我的服务</div>
+              <div class="mb-3 flex flex-wrap gap-2" id="health-order-tabs"></div>
+              <table class="w-full text-sm"><thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">订单号</th><th class="px-3 py-2.5 font-medium">服务名称</th><th class="px-3 py-2.5 font-medium">关联体检单</th><th class="px-3 py-2.5 font-medium">金额</th><th class="px-3 py-2.5 font-medium">下单时间</th><th class="px-3 py-2.5 font-medium">状态</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead><tbody id="health-order-list"></tbody></table>
             </div>
+          </div>
 
-            <!-- 两栏 -->
-            <div class="grid grid-cols-2 gap-6">
-              <div class="rounded-lg border border-gray-100 p-4">
-                <div class="mb-2 text-sm font-medium text-gray-800">五维能力雷达</div>
-                <div id="radar-chart" class="h-80 w-full"></div>
-              </div>
-              <div class="rounded-lg border border-gray-100 p-4">
-                <div class="mb-3 text-sm font-medium text-gray-800">硬性条件核验</div>
-                <div class="space-y-2.5">
-                  <div class="flex items-center gap-3 rounded-lg border border-green-100 bg-green-50/40 p-3">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div class="min-w-0 flex-1">
-                      <span class="text-sm text-gray-700">成立年限</span>
-                      <span class="ml-1.5 text-xs text-gray-400">已满 3 年</span>
-                    </div>
-                    <span class="text-sm font-medium text-green-600">✅ 达标</span>
-                  </div>
-                  <div class="flex items-center gap-3 rounded-lg border border-green-100 bg-green-50/40 p-3">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div class="min-w-0 flex-1">
-                      <span class="text-sm text-gray-700">核心知识产权</span>
-                      <span class="ml-1.5 text-xs text-gray-400">拥有 15 项</span>
-                    </div>
-                    <span class="text-sm font-medium text-green-600">✅ 达标</span>
-                  </div>
-                  <div class="flex items-center gap-3 rounded-lg border border-green-100 bg-green-50/40 p-3">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div class="min-w-0 flex-1">
-                      <span class="text-sm text-gray-700">高新技术产品收入占比</span>
-                      <span class="ml-1.5 text-xs text-gray-400">62%</span>
-                    </div>
-                    <span class="text-sm font-medium text-green-600">✅ 达标</span>
-                  </div>
-                  <div class="flex items-center gap-3 rounded-lg border border-green-100 bg-green-50/40 p-3">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div class="min-w-0 flex-1">
-                      <span class="text-sm text-gray-700">科技人员占比</span>
-                      <span class="ml-1.5 text-xs text-gray-400">35%</span>
-                    </div>
-                    <span class="text-sm font-medium text-green-600">✅ 达标</span>
-                  </div>
-                  <div class="flex items-center gap-3 rounded-lg border border-green-100 bg-green-50/40 p-3">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div class="min-w-0 flex-1">
-                      <span class="text-sm text-gray-700">研发费用占比</span>
-                      <span class="ml-1.5 text-xs text-gray-400">5.2%</span>
-                    </div>
-                    <span class="text-sm font-medium text-green-600">✅ 达标</span>
-                  </div>
-                </div>
-                <p class="mt-3 border-t border-gray-100 pt-3 text-xs leading-relaxed text-gray-400">数据参考：本地区同赛道企业在【知识产权】维度处于【中等】水平，您的企业处于【领先】水平。</p>
-              </div>
+          <!-- P10 服务进度详情 -->
+          <div id="health-order-detail" class="health-view hidden">
+            <div class="rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">订单进度详情</span><button class="rounded-lg border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary" onclick="switchHealth('orders')">返回列表</button></div>
+              <div class="grid grid-cols-2 gap-2 text-sm"><div>订单号：<b>FW-2024-1106-01</b></div><div>服务名称：<b>研发费用归集整改服务</b></div><div>关联体检单：JC-2024-1102</div><div>金额：￥2,000</div></div>
             </div>
-
-            <!-- 后续建议与差距分析 -->
-            <div class="mt-6">
-              <div class="mb-3 text-sm font-medium text-gray-800">后续建议与差距分析</div>
-              <div class="space-y-2.5">
-                <div class="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50/40 p-3">
-                  <i data-lucide="alert-triangle" class="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500"></i>
-                  <div class="min-w-0 flex-1">
-                    <div class="text-sm font-medium text-gray-800">研发费用占比略低于行业平均水平</div>
-                    <div class="mt-0.5 text-xs text-gray-500">当前 5.2%，行业平均 6.5%，建议加大研发投入并规范费用归集口径</div>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50/40 p-3">
-                  <i data-lucide="alert-triangle" class="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500"></i>
-                  <div class="min-w-0 flex-1">
-                    <div class="text-sm font-medium text-gray-800">科技成果转化证据链不完整</div>
-                    <div class="mt-0.5 text-xs text-gray-500">建议补充销售合同、发票、用户验收报告等佐证材料</div>
-                  </div>
-                </div>
-                <div class="flex items-start gap-3 rounded-lg border border-amber-100 bg-amber-50/40 p-3">
-                  <i data-lucide="alert-triangle" class="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-500"></i>
-                  <div class="min-w-0 flex-1">
-                    <div class="text-sm font-medium text-gray-800">发明专利占比偏低</div>
-                    <div class="mt-0.5 text-xs text-gray-500">现有知识产权以实用新型为主，建议布局高价值发明专利</div>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4 flex justify-end">
-                <button id="go-mall-btn" class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-                  <i data-lucide="shopping-bag" class="h-4 w-4"></i> 去商城购买辅导服务
-                </button>
-              </div>
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-sm font-semibold text-gray-800">状态时间轴</div>
+              <div class="flex" id="health-order-timeline"></div>
+            </div>
+            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-sm font-semibold text-gray-800">关联问题</div>
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-600">研发费用占营收比低于标准</span><span class="g-c rounded px-1.5 py-0.5 text-xs">已整改待复检</span><button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">发起复检</button></div>
             </div>
           </div>
         </div>
@@ -1940,6 +2121,9 @@
                   <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="截止时间从近到远">截止时间从近到远</div>
                 </div>
               </div>
+              <button id="policy-rematch-btn" class="ml-auto flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
+                <i data-lucide="refresh-cw" class="h-4 w-4"></i> 重新匹配
+              </button>
             </div>
 
             <!-- 政策卡片列表 -->
@@ -2093,51 +2277,37 @@
           <!-- 一、顶部：进阶阶梯图 + 路线图 -->
           <div class="mb-5 grid grid-cols-3 gap-4">
             <div class="col-span-2 rounded-lg bg-white p-6 shadow-sm">
-              <div class="mb-5 text-sm font-medium text-gray-800">企业科创培育进阶路径</div>
-              <div class="flex items-start">
-                <div class="flex-1">
-                  <div class="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50/60 px-3 py-2.5">
-                    <i data-lucide="check-circle-2" class="h-5 w-5 flex-shrink-0 text-green-500"></i>
-                    <div>
-                      <div class="text-sm font-semibold text-green-600">科技型中小企业</div>
-                      <div class="text-[11px] text-gray-400">已完成 · 2022年</div>
-                    </div>
+              <div class="mb-5 flex items-center">
+                <h3 class="text-sm font-medium text-gray-800">企业科创培育进阶路径</h3>
+                <span class="ml-auto rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">当前：高新技术企业（重新认定中）</span>
+              </div>
+              <div class="ladder">
+                <div class="lg-step done">
+                  <div class="lg-card">
+                    <div class="lg-nm">科技型中小企业</div>
+                    <div class="lg-st">已完成 · 2022 年</div>
+                    <div class="lg-gap">入库编号 2022420100xxxx</div>
                   </div>
                 </div>
-                <div class="flex flex-shrink-0 items-center px-1 pt-4 text-gray-300"><i data-lucide="chevron-right" class="h-4 w-4"></i></div>
-                <div class="flex-1">
-                  <div class="flex items-center gap-2 rounded-lg border-2 border-primary bg-primary-light px-3 py-2.5 shadow-sm">
-                    <i data-lucide="target" class="h-5 w-5 flex-shrink-0 text-primary"></i>
-                    <div>
-                      <div class="text-sm font-bold text-primary">高新技术企业</div>
-                      <div class="text-[11px] text-primary/70">当前阶段 · 2023年</div>
-                    </div>
+                <div class="lg-step now">
+                  <div class="lg-card">
+                    <div class="lg-nm">高新技术企业</div>
+                    <div class="lg-st">当前阶段 · 证书已逾期</div>
+                    <div class="lg-gap">重新认定进行中，任务 8/15</div>
                   </div>
                 </div>
-                <div class="flex flex-shrink-0 items-center px-1 pt-4 text-gray-300"><i data-lucide="chevron-right" class="h-4 w-4"></i></div>
-                <div class="flex-1">
-                  <div class="rounded-lg border border-dashed border-gray-300 px-3 py-2.5">
-                    <div class="flex items-center gap-2">
-                      <i data-lucide="flag" class="h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                      <div>
-                        <div class="text-sm font-medium text-gray-600">专精特新中小企业</div>
-                        <div class="text-[11px] text-gray-400">2024 目标</div>
-                      </div>
-                    </div>
-                    <div class="mt-1.5 text-[11px] text-amber-600">达成差距：缺 2 项发明专利</div>
+                <div class="lg-step">
+                  <div class="lg-card">
+                    <div class="lg-nm">专精特新中小企业</div>
+                    <div class="lg-st">2027 目标</div>
+                    <div class="lg-gap">达成差距：缺 2 项发明专利</div>
                   </div>
                 </div>
-                <div class="flex flex-shrink-0 items-center px-1 pt-4 text-gray-300"><i data-lucide="chevron-right" class="h-4 w-4"></i></div>
-                <div class="flex-1">
-                  <div class="rounded-lg border border-dashed border-gray-300 px-3 py-2.5">
-                    <div class="flex items-center gap-2">
-                      <i data-lucide="flag" class="h-5 w-5 flex-shrink-0 text-gray-400"></i>
-                      <div>
-                        <div class="text-sm font-medium text-gray-600">专精特新小巨人</div>
-                        <div class="text-[11px] text-gray-400">2026 目标</div>
-                      </div>
-                    </div>
-                    <div class="mt-1.5 text-[11px] text-amber-600">达成差距：研发占比需提升至 4%</div>
+                <div class="lg-step">
+                  <div class="lg-card">
+                    <div class="lg-nm">专精特新「小巨人」</div>
+                    <div class="lg-st">2028 目标</div>
+                    <div class="lg-gap">达成差距：细分市场占有率证明</div>
                   </div>
                 </div>
               </div>
@@ -2170,13 +2340,202 @@
             </div>
           </div>
 
-          <!-- 二、甘特图 -->
+          <!-- 二、申报时间轴与甘特图 -->
           <div class="mb-5 rounded-lg bg-white p-5 shadow-sm">
-            <div class="mb-3 flex items-center justify-between">
-              <span class="text-sm font-medium text-gray-800">申报时间轴与甘特图</span>
-              <span class="text-xs text-gray-400">横向滚动查看完整周期</span>
+            <div class="mb-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="text-sm font-medium text-gray-800">申报时间轴与甘特图</span>
+                <div class="inline-flex items-center gap-1 rounded-lg border border-gray-200 p-1">
+                  <button data-gantt-tab="year" class="gantt-tab gantt-tab-active">年度申报</button>
+                  <button data-gantt-tab="month" class="gantt-tab">月度待办</button>
+                </div>
+              </div>
+              <div id="gantt-legend" class="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-primary"></span>进行中</span>
+                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-amber-400"></span>筹备中</span>
+                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-violet-400"></span>规划中</span>
+                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-gray-300"></span>未开始</span>
+              </div>
             </div>
-            <div id="planning-gantt" class="h-64 w-full"></div>
+
+            <!-- 年度申报甘特图 -->
+            <div id="gantt-year">
+            <!-- 月份轴 -->
+            <div class="flex items-center pb-2 text-xs text-gray-400">
+              <div class="w-44 flex-shrink-0 pr-3">申报事项</div>
+              <div class="flex flex-1 justify-between">
+                <span class="font-medium text-red-500">11月▽</span>
+                <span>12月</span><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span>
+              </div>
+              <div class="w-16 flex-shrink-0 text-right">状态</div>
+            </div>
+
+            <!-- 甘特行 -->
+            <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
+              <div class="flex items-center">
+                <div class="w-44 flex-shrink-0 pr-3">
+                  <div class="truncate text-sm text-gray-800">高企重新认定</div>
+                  <div class="text-xs text-gray-400">截止 2024-11-30 · 剩 24 天</div>
+                </div>
+                <div class="relative h-6 flex-1 rounded bg-gray-50">
+                  <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:8.33%" title="2024-11 申报窗口"></div>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-44 flex-shrink-0 pr-3">
+                  <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定</div>
+                  <div class="text-xs text-gray-400">截止 2024-11-16 · 剩 10 天</div>
+                </div>
+                <div class="relative h-6 flex-1 rounded bg-gray-50">
+                  <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:5.5%" title="2024-11 申报窗口"></div>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-44 flex-shrink-0 pr-3">
+                  <div class="truncate text-sm text-gray-800">湖北省重点研发计划</div>
+                  <div class="text-xs text-gray-400">截止 2024-12-05 · 材料准备中</div>
+                </div>
+                <div class="relative h-6 flex-1 rounded bg-gray-50">
+                  <div class="absolute inset-y-1 rounded-full bg-amber-400" style="left:0%; width:13%" title="2024-11 ~ 12 筹备窗口"></div>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">筹备中</div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-44 flex-shrink-0 pr-3">
+                  <div class="truncate text-sm text-gray-800">专精特新中小企业培育</div>
+                  <div class="text-xs text-gray-400">目标 2025-03 · 缺 2 项发明专利</div>
+                </div>
+                <div class="relative h-6 flex-1 rounded bg-gray-50">
+                  <div class="absolute inset-y-1 rounded-full bg-violet-400" style="left:16.67%; width:16.67%" title="2025-01 ~ 03 培育窗口"></div>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-violet-600">规划中</div>
+              </div>
+
+              <div class="flex items-center">
+                <div class="w-44 flex-shrink-0 pr-3">
+                  <div class="truncate text-sm text-gray-800">海外专利布局</div>
+                  <div class="text-xs text-gray-400">目标 2025-06 · PCT 申请</div>
+                </div>
+                <div class="relative h-6 flex-1 rounded bg-gray-50">
+                  <div class="absolute inset-y-1 rounded-full bg-gray-300" style="left:33.33%; width:25%" title="2025-03 ~ 06 布局窗口"></div>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">未开始</div>
+              </div>
+            </div>
+
+            <!-- 图注 + 关键节点 -->
+            <div class="mt-4 border-t border-gray-100 pt-3">
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+                <span class="flex items-center gap-1"><span class="h-3 w-0.5 bg-red-500"></span>今天 2024-11（红色▽标记）</span>
+                <span>时间范围：2024-11 ~ 2025-10</span>
+              </div>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-16 瞪羚企业认定截止</span>
+                <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-30 高企认定截止</span>
+                <span class="rounded-md bg-amber-50 px-2 py-1 text-[11px] text-amber-600">12-05 重点研发计划截止</span>
+                <span class="rounded-md bg-violet-50 px-2 py-1 text-[11px] text-violet-600">2025-03 专精特新培育目标</span>
+              </div>
+            </div>
+            </div>
+
+            <!-- 月度待办甘特图 -->
+            <div id="gantt-month" class="hidden">
+              <div class="mb-3 flex items-center justify-between text-xs text-gray-500">
+                <span class="text-sm font-medium text-gray-700">2024 年 11 月 · 待办事项甘特</span>
+                <div class="flex items-center gap-3">
+                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-red-500"></span>今日/紧急</span>
+                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-amber-400"></span>3 天内</span>
+                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-gray-300"></span>本月待办</span>
+                </div>
+              </div>
+
+              <!-- 日轴 -->
+              <div class="flex items-center pb-2 text-xs text-gray-400">
+                <div class="w-48 flex-shrink-0 pr-3">待办事项</div>
+                <div class="flex flex-1 justify-between">
+                  <span>1日</span><span>5日</span><span>10日</span><span>15日</span><span>20日</span><span>25日</span><span>30日</span>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right">截止</div>
+              </div>
+
+              <!-- 行 -->
+              <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">确认申报时序排期</div>
+                    <div class="text-xs text-gray-400">申报规划 · 立项任务</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:20%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-06</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">补充财务审计材料</div>
+                    <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:30%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-09</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">完善知识产权权属信息</div>
+                    <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:40%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-12</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定截止</div>
+                    <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:53%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-16</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">对接高优先级服务线索</div>
+                    <div class="text-xs text-gray-400">服务挖掘 · 待处理</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-gray-300" style="left:66.5%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">11-20</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-48 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">高企认定申报截止</div>
+                    <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:98%"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-30</div>
+                </div>
+              </div>
+
+              <div class="mt-3 border-t border-gray-100 pt-2 text-xs text-gray-400">
+                竖线位置为该待办事项的截止日期（今天 11-06），红色=今日/紧急、黄色=3天内、灰色=本月待办。
+              </div>
+            </div>
           </div>
 
           <!-- 三、分层培育看板 -->
@@ -2849,7 +3208,7 @@
                       </div>
 
                       <div>
-                        <h2 class="text-sm font-semibold text-gray-800">建议动作</h2>
+                        <h2 class="flex items-center gap-2 text-sm font-semibold text-gray-800">建议动作<span class="text-xs font-normal text-gray-400">中长期优化建议 · 不参与立项</span></h2>
                         <div id="report-actions" class="mt-3 space-y-2"></div>
                       </div>
 
@@ -2888,10 +3247,6 @@
                         <button onclick="openReviewModal()" class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition hover:bg-gray-50">
                           <div class="min-w-0"><div class="text-sm text-gray-700">转顾问复核</div><div class="text-xs text-gray-400">提交给专业顾问人工复核</div></div>
                           <i data-lucide="user-check" class="h-4 w-4 flex-shrink-0 text-gray-300"></i>
-                        </button>
-                        <button onclick="showToast('已转为服务单')" class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-left transition hover:bg-gray-50">
-                          <div class="min-w-0"><div class="text-sm text-gray-700">转成服务单</div><div class="text-xs text-gray-400">将需求转为服务订单</div></div>
-                          <i data-lucide="shopping-bag" class="h-4 w-4 flex-shrink-0 text-gray-300"></i>
                         </button>
                       </div>
                     </div>
@@ -2932,118 +3287,77 @@
 
         <!-- 服务商城 -->
         <div id="page-mall" class="page hidden">
-          <div class="mb-5">
-            <h2 class="text-xl font-semibold text-gray-800">服务商城</h2>
-            <p class="mt-1 text-sm text-gray-400">优质科创服务，一站式在线选购</p>
+          <div class="mb-4 flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1" style="width:fit-content">
+            <button class="mall-view-tab mall-view-tab-active" data-mall-view="market">服务市场</button>
+            <button class="mall-view-tab" data-mall-view="orders">我的订单</button>
           </div>
 
-          <!-- Tab 切换 -->
-          <div class="mb-5 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
-            <button data-mall-tab="mall" class="mall-tab mall-tab-active">服务商城</button>
-            <button data-mall-tab="orders" class="mall-tab">我的订单</button>
-          </div>
+          <div id="mall-market-view">
+          <div class="flex items-start gap-5">
+            <!-- 左侧分类 -->
+            <aside class="w-56 flex-shrink-0 rounded-lg bg-white p-3 shadow-sm" style="position:sticky;top:20px">
+              <div class="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-400">知识产权服务</div>
+              <div id="mall-cat-list"></div>
+              <div class="mb-2 mt-6 px-2 text-xs font-semibold uppercase tracking-wide text-gray-400">我的空间</div>
+              <div class="space-y-1">
+                <a class="flex cursor-pointer items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50" onclick="mallSwitchView('orders')">我的订单</a>
+                <a class="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50">我的知识产权</a>
+                <a class="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50">发票管理</a>
+                <a class="flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm text-gray-600 transition hover:bg-gray-50">企业信息</a>
+              </div>
+            </aside>
 
-          <!-- 服务商城 Tab -->
-          <div id="mall-tab-mall">
-            <div class="mb-5">
-              <div class="relative">
-                <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="搜索您需要的科创服务，如：专利代理、高企审计..." class="h-11 w-full rounded-lg border border-gray-200 bg-white pl-10 pr-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+            <!-- 右侧主内容 -->
+            <div class="min-w-0 flex-1">
+              <div class="mb-4">
+                <h1 class="text-xl font-bold text-gray-900">知识产权服务市场</h1>
+                <p class="mt-1 text-sm text-gray-400">商标、专利、版权一站式服务，在线签约、进度可查、平台全程监管。</p>
               </div>
-              <div class="mt-3 flex items-center gap-2">
-                <button class="cat-chip cat-chip-active" data-cat="全部">全部</button>
-                <button class="cat-chip" data-cat="知识产权">知识产权</button>
-                <button class="cat-chip" data-cat="审计财税">审计财税</button>
-                <button class="cat-chip" data-cat="资质申报">资质申报</button>
-                <button class="cat-chip" data-cat="产学研合作">产学研合作</button>
-                <button class="cat-chip" data-cat="技术转移">技术转移</button>
-              </div>
-            </div>
 
-            <div class="grid grid-cols-4 gap-4">
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-36 items-center justify-center bg-gray-100">
-                  <i data-lucide="image" class="h-10 w-10 text-gray-300"></i>
-                </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">发明专利快速预审代办</div>
-                  <div class="mt-1.5 flex gap-1.5">
-                    <span class="rounded-full bg-primary-light px-2 py-0.5 text-[11px] text-primary">专家1对1</span>
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥5,000<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-view-service rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="发明专利快速预审代办">查看详情</button>
-                  </div>
-                </div>
+              <div class="mb-4 flex items-center gap-2.5 rounded-lg px-4 py-3 text-sm text-blue-800" style="background:linear-gradient(90deg,#eef4ff,#f7faff);border:1px solid #dbe7ff">
+                <span class="flex-shrink-0 rounded bg-primary px-2 py-0.5 text-[11px] font-bold text-white">公告</span>
+                <span class="flex-1 truncate">平台已上线「商标监测预警」功能，可对已注册商标进行近似监控与抢注提醒，登录后即可开启。</span>
+                <a class="flex-shrink-0 cursor-pointer font-semibold text-primary">查看详情</a>
               </div>
-              <div class="overflow-hidden rounded-lg bg-white shadow-sm transition hover:shadow-md">
-                <div class="flex h-36 items-center justify-center bg-gray-100">
-                  <i data-lucide="image" class="h-10 w-10 text-gray-300"></i>
+
+              <div class="mb-4 flex flex-wrap items-center gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm">
+                <label class="flex h-9 min-w-[240px] max-w-[380px] flex-1 items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 transition focus-within:border-primary focus-within:bg-white">
+                  <i data-lucide="search" class="h-4 w-4 flex-shrink-0 text-gray-400"></i>
+                  <input id="mall-search" type="text" placeholder="搜索服务名称 / 服务编号" class="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400">
+                </label>
+                <div class="flex items-center gap-0.5 rounded-lg bg-gray-100 p-1" id="mall-sort-tabs">
+                  <button class="mall-sort-tab active" data-sort="default">综合推荐</button>
+                  <button class="mall-sort-tab" data-sort="sales">销量优先</button>
+                  <button class="mall-sort-tab" data-sort="price-asc">价格从低到高</button>
+                  <button class="mall-sort-tab" data-sort="price-desc">价格从高到低</button>
                 </div>
-                <div class="p-4">
-                  <div class="text-sm font-semibold text-gray-800">高企认定审计服务</div>
-                  <div class="mt-1.5 flex gap-1.5">
-                    <span class="rounded-full bg-green-50 px-2 py-0.5 text-[11px] text-green-600">官方备案</span>
-                  </div>
-                  <div class="mt-3 flex items-center justify-between">
-                    <span class="text-base font-semibold text-primary">￥8,000<span class="text-xs font-normal text-gray-400"> 起</span></span>
-                    <button class="js-view-service rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-name="高企认定审计服务">查看详情</button>
-                  </div>
-                </div>
+                <button class="h-9 rounded-lg border border-gray-200 bg-white px-4 text-sm text-gray-600 transition hover:border-primary hover:text-primary" id="mall-reset">重置</button>
+                <span class="ml-auto text-sm text-gray-400" id="mall-count"></span>
               </div>
-              <div class="flex min-h-[260px] flex-col items-center justify-center rounded-lg border border-dashed border-gray-200 bg-gray-50 text-center">
-                <i data-lucide="hourglass" class="h-10 w-10 text-gray-300"></i>
-                <div class="mt-3 px-4 text-sm text-gray-400">更多优质服务正在接入中，敬请期待</div>
+
+              <div id="mall-service-list" class="space-y-3"></div>
+
+              <div id="mall-empty" class="hidden rounded-xl border border-dashed border-gray-300 bg-white py-16 text-center">
+                <div class="text-3xl">🗂️</div>
+                <div class="mt-3 text-base font-bold text-gray-800">没有找到匹配的知识产权服务</div>
+                <div class="mt-1.5 text-sm text-gray-400">换个关键词或选择其他分类试试</div>
+                <button class="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" id="mall-empty-reset">查看全部服务</button>
               </div>
+
+              <div id="mall-pagination" class="mt-6 flex flex-wrap items-center justify-center gap-1.5"></div>
             </div>
           </div>
+          </div>
 
-          <!-- 我的订单 Tab -->
-          <div id="mall-tab-orders" class="hidden">
-            <div class="mb-4 flex items-center gap-3">
-              <div class="relative policy-filter">
-                <button class="policy-filter-btn flex h-9 items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-600 transition hover:bg-gray-50">
-                  <span class="policy-filter-label">全部订单</span>
-                  <i data-lucide="chevron-down" class="h-4 w-4 text-gray-400"></i>
-                </button>
-                <div class="policy-filter-menu absolute left-0 top-full z-20 mt-1 hidden w-36 rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="全部订单">全部订单</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="待支付">待支付</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="服务中">服务中</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="已完成">已完成</div>
-                </div>
-              </div>
-              <select class="h-9 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-600">
-                <option>全部时间</option>
-                <option>最近一个月</option>
-                <option>最近三个月</option>
-                <option>近一年</option>
-              </select>
-            </div>
-            <div class="overflow-hidden rounded-lg bg-white shadow-sm">
+          <!-- 我的订单视图 -->
+          <div id="mall-orders-view" class="hidden">
+            <div class="rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-3 text-base font-semibold text-gray-800">我的订单</div>
               <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500">
-                    <th class="px-5 py-3 font-medium">订单编号</th>
-                    <th class="px-5 py-3 font-medium">商品名称</th>
-                    <th class="px-5 py-3 font-medium">下单时间</th>
-                    <th class="px-5 py-3 font-medium">订单金额</th>
-                    <th class="px-5 py-3 font-medium">订单状态</th>
-                    <th class="px-5 py-3 font-medium">操作</th>
-                  </tr>
-                </thead>
+                <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-4 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
                 <tbody>
-                  <tr>
-                    <td colspan="6" class="px-5 py-16">
-                      <div class="flex flex-col items-center justify-center">
-                        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gray-50">
-                          <i data-lucide="shopping-bag" class="h-8 w-8 text-gray-300"></i>
-                        </div>
-                        <div class="mt-3 text-sm text-gray-400">暂无相关订单，去商城看看吧</div>
-                        <button id="btn-go-mall" class="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">去服务商城</button>
-                      </div>
-                    </td>
-                  </tr>
+                  <tr class="border-b border-gray-100"><td class="px-4 py-2.5">FW-2024-1106-01</td><td class="px-4 py-2.5">商标注册申请</td><td class="px-4 py-2.5 text-gray-500">2024-11-06</td><td class="px-4 py-2.5">¥800</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="cursor-pointer text-primary hover:underline">详情</a></td></tr>
+                  <tr><td class="px-4 py-2.5">FW-2024-1102-03</td><td class="px-4 py-2.5">软件著作权登记</td><td class="px-4 py-2.5 text-gray-500">2024-11-02</td><td class="px-4 py-2.5">¥1,200</td><td class="px-4 py-2.5"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td><td class="px-4 py-2.5"><a class="cursor-pointer text-primary hover:underline">详情</a></td></tr>
                 </tbody>
               </table>
             </div>
@@ -4007,6 +4321,69 @@
     </div>
   </div>
 
+  <!-- 科创体检：服务推荐抽屉 -->
+  <div class="health-overlay" id="health-svc-overlay" onclick="closeHealthService()"></div>
+  <div class="health-drawer" id="health-svc-drawer" style="width:480px">
+    <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><div><b>服务推荐</b><div class="text-xs text-gray-400" id="health-svc-ctx">研发费用占营收比 · C 待提升</div></div><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthService()">✕</button></div>
+    <div class="flex-1 overflow-auto p-5">
+      <div class="text-xs text-gray-400">为你匹配 2 项服务，按可解决程度排序</div>
+      <div id="health-svc-list" class="mt-3 space-y-3"></div>
+      <div class="mt-4 rounded-lg border border-gray-100 p-4 text-center"><div class="text-sm text-gray-500">没有合适的？</div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light">提交需求，顾问帮你找</button></div>
+    </div>
+    <div class="border-t border-gray-100 bg-gray-50 px-5 py-3 text-xs text-gray-400">免责：增值服务不影响体检评分与结论　<a class="cursor-pointer text-primary hover:underline">查看全部科创服务 →</a></div>
+  </div>
+
+  <!-- 科创体检：订单确认抽屉 -->
+  <div class="health-overlay" id="health-ord-overlay" onclick="closeHealthOrder()"></div>
+  <div class="health-drawer" id="health-ord-drawer" style="width:560px">
+    <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><b>确认下单</b><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthOrder()">✕</button></div>
+    <div class="flex-1 overflow-auto p-5">
+      <div class="rounded-lg bg-gray-50 p-3"><b id="health-ord-name">研发费用归集整改服务</b><div class="mt-1 text-xs text-gray-400">￥2,000 / 次</div></div>
+      <div class="mt-3 grid grid-cols-2 gap-3"><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>数量：1</option><option>数量：2</option></select></div><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>标准服务</option><option>加急服务（+￥500）</option></select></div></div>
+      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">关联问题清单（只读）</label><div class="rounded-md border border-gray-100 p-3 text-sm text-gray-600">研发费用占营收比低于标准（C 待提升）</div></div>
+      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">关联体检单</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>JC-2024-1102</option></select></div>
+      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">发票信息</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>不开票</option><option>普票</option><option>专票</option></select></div>
+      <div class="mt-4 flex items-center justify-between"><span class="text-sm text-gray-500">应付金额</span><span class="text-xl font-bold text-primary">￥2,000</span></div>
+    </div>
+    <div class="border-t border-gray-100 bg-gray-50 px-5 py-3">
+      <label class="mb-2 flex items-center gap-2 text-xs text-gray-500"><input type="checkbox" id="health-agree" class="h-3.5 w-3.5"> 已阅读并同意服务协议</label>
+      <div class="flex gap-2"><button class="flex-1 rounded-lg border border-gray-200 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary" onclick="closeHealthOrder()">加入需求单</button><button class="flex-1 rounded-lg bg-primary py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthSubmitOrder()">提交并支付 ￥2,000</button></div>
+    </div>
+  </div>
+
+  <!-- 临期待办提醒弹窗 -->
+  <div id="todo-remind-overlay" class="pointer-events-none fixed inset-0 z-[200] flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200" onclick="if(event.target===this)closeTodoRemind()">
+    <div id="todo-remind-modal" class="pointer-events-none w-[440px] max-w-[92vw] scale-95 overflow-hidden rounded-2xl bg-white shadow-xl transition-transform duration-200">
+      <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+        <div class="flex items-center gap-2">
+          <i data-lucide="bell-ring" class="h-5 w-5 text-amber-500"></i>
+          <h3 class="text-base font-semibold text-gray-900">临期待办提醒</h3>
+        </div>
+        <button onclick="closeTodoRemind()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>
+      </div>
+      <div class="px-6 py-4">
+        <p class="text-sm text-gray-500">以下事项将在 <span class="font-medium text-red-500">3 天内</span>截止，请及时处理：</p>
+        <div class="mt-3 space-y-2">
+          <div class="flex items-center justify-between gap-2 rounded-lg border border-red-100 bg-red-50 px-3 py-2.5">
+            <div class="min-w-0"><div class="truncate text-sm text-gray-700">确认申报时序排期</div><div class="text-xs text-gray-400">申报规划 · 立项任务</div></div>
+            <span class="flex-shrink-0 rounded-full bg-red-500 px-2 py-0.5 text-[11px] text-white">今日到期</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 rounded-lg border border-amber-100 bg-amber-50 px-3 py-2.5">
+            <div class="min-w-0"><div class="truncate text-sm text-gray-700">补充财务审计材料</div><div class="text-xs text-gray-400">高企认定 · 立项任务</div></div>
+            <span class="flex-shrink-0 rounded-full bg-amber-500 px-2 py-0.5 text-[11px] text-white">剩 3 天</span>
+          </div>
+          <div class="flex items-center justify-between gap-2 rounded-lg border border-amber-100 bg-amber-50 px-3 py-2.5">
+            <div class="min-w-0"><div class="truncate text-sm text-gray-700">专精特新“小巨人”申报</div><div class="text-xs text-gray-400">申报任务 · 立项任务</div></div>
+            <span class="flex-shrink-0 rounded-full bg-amber-500 px-2 py-0.5 text-[11px] text-white">剩 3 天</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end border-t border-gray-100 px-6 py-4">
+        <button onclick="closeTodoRemind()" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">知道了</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ==================== 菜单切换 ====================
     const navItems = document.querySelectorAll('.nav-item');
@@ -4032,8 +4409,6 @@
         if (target === 'page-archive') initArchiveCharts();
         // 驾驶舱：进入时懒加载图表
         if (target === 'page-dashboard') initDashboardCharts();
-        // 科创体检：进入时懒加载雷达图
-        if (target === 'page-health') initRadarChart();
         // 年度申报规划：进入时懒加载甘特图
         if (target === 'page-planning') initPlanningGantt();
       });
@@ -4173,6 +4548,46 @@
 
     // 新建对话
     document.getElementById('new-chat-btn').addEventListener('click', () => showToast('已新建对话（演示）'));
+
+    // ==================== AI工作台：落地页 / 对话页切换 ====================
+    function switchAiView(view) {
+      const landing = document.getElementById('ai-landing');
+      const chat = document.getElementById('ai-chat');
+      if (landing) landing.classList.toggle('hidden', view !== 'landing');
+      if (chat) chat.classList.toggle('hidden', view !== 'chat');
+    }
+
+    function enterAiChat() {
+      const input = document.getElementById('ai-landing-input');
+      const q = input ? input.value.trim() : '';
+      if (q) {
+        const chatInput = document.getElementById('chat-input');
+        if (chatInput) chatInput.value = q;
+      }
+      switchAiView('chat');
+    }
+
+    function enterAiLanding() {
+      switchAiView('landing');
+    }
+
+    document.querySelectorAll('.js-landing-prompt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const chatInput = document.getElementById('chat-input');
+        if (chatInput) chatInput.value = btn.dataset.prompt || '';
+        switchAiView('chat');
+      });
+    });
+
+    const landingInput = document.getElementById('ai-landing-input');
+    if (landingInput) {
+      landingInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          enterAiChat();
+        }
+      });
+    }
 
     // 查看详情 → 跳转政策发现
     document.getElementById('ai-view-detail').addEventListener('click', () => {
@@ -4414,136 +4829,6 @@
 
     // ==================== 企业数字档案 ====================
     const dimensionData = {
-      '知识产权': {
-        groups: [
-          { name: '专利资产', items: [
-            { label: '有效发明专利', value: '12 件', source: '自动提取' },
-            { label: '实用新型', value: '20 件', source: '自动提取' },
-            { label: 'PCT 申请', value: '2 件', source: '手动填报' },
-            { label: '外观设计', value: '8 件', source: '自动提取' },
-          ]},
-          { name: '软件著作权', items: [
-            { label: '软著数量', value: '15 件', source: '自动提取' },
-            { label: '近一年新增软著', value: '5 件', source: '手动填报' },
-          ]},
-          { name: '知识产权运营', items: [
-            { label: '标准必要专利', value: '3 件', source: '自动提取' },
-            { label: '技术秘密数量', value: '7 项', source: '手动填报' },
-            { label: '专利许可/转让', value: '4 笔', source: '自动提取' },
-          ]},
-        ],
-      },
-      '科创资质': {
-        groups: [
-          { name: '资质认定', items: [
-            { label: '高新技术企业', value: '2021 年认定', source: '自动提取' },
-            { label: '专精特新中小企业', value: '2023 年认定', source: '自动提取' },
-            { label: '科技型中小企业', value: '2024 年入库', source: '自动提取' },
-            { label: '瞪羚企业', value: '2022 年认定', source: '手动填报' },
-          ]},
-        ],
-      },
-      '科创平台': {
-        groups: [
-          { name: '创新平台', items: [
-            { label: '省级企业技术中心', value: '2022 年获批', source: '自动提取' },
-            { label: '市级工程技术研究中心', value: '2021 年获批', source: '自动提取' },
-            { label: '博士后创新实践基地', value: '2023 年获批', source: '手动填报' },
-            { label: '校企联合实验室', value: '2 个', source: '手动填报' },
-          ]},
-        ],
-      },
-      '科技项目': {
-        groups: [
-          { name: '承担项目', items: [
-            { label: '国家重点研发计划', value: '1 项', source: '自动提取' },
-            { label: '湖北省重点研发计划', value: '2 项', source: '自动提取' },
-            { label: '武汉市科技计划项目', value: '3 项', source: '自动提取' },
-            { label: '企业自主立项', value: '18 项', source: '手动填报' },
-          ]},
-        ],
-      },
-      '人才团队': {
-        groups: [
-          { name: '人员结构', items: [
-            { label: '员工总数', value: '86 人', source: '自动提取' },
-            { label: '研发人员', value: '32 人', source: '自动提取' },
-            { label: '硕士及以上', value: '18 人', source: '手动填报' },
-            { label: '高层次人才（3551）', value: '3 人', source: '自动提取' },
-          ]},
-        ],
-      },
-      '科研投入': {
-        groups: [
-          { name: '投入规模', items: [
-            { label: '研发费用总额', value: '1200 万', source: '自动提取' },
-            { label: '研发费用占营收比', value: '15%', source: '自动提取' },
-            { label: '2022 年研发投入', value: '1050 万', source: '自动提取' },
-            { label: '2021 年研发投入', value: '900 万', source: '自动提取' },
-            { label: '加计扣除金额', value: '1180 万', source: '手动填报' },
-          ]},
-        ],
-      },
-      '财务成长': {
-        groups: [
-          { name: '成长性指标', items: [
-            { label: '营业收入（2023）', value: '8000 万', source: '自动提取' },
-            { label: '营业收入复合增长率', value: '22%', source: '自动提取' },
-            { label: '净利润', value: '960 万', source: '自动提取' },
-            { label: '净资产', value: '5200 万', source: '自动提取' },
-          ]},
-        ],
-      },
-      '市场维度': {
-        groups: [
-          { name: '市场表现', items: [
-            { label: '主营业务收入占比', value: '88%', source: '自动提取' },
-            { label: '核心产品市占率', value: '6.3%', source: '手动填报' },
-            { label: '海外收入占比', value: '12%', source: '自动提取' },
-            { label: '客户集中度（前五）', value: '41%', source: '手动填报' },
-          ]},
-        ],
-      },
-      '标准资质': {
-        groups: [
-          { name: '标准制定', items: [
-            { label: '参与国家标准', value: '2 项', source: '自动提取' },
-            { label: '参与行业标准', value: '3 项', source: '自动提取' },
-            { label: '参与团体标准', value: '1 项', source: '手动填报' },
-            { label: '企业标准', value: '8 项', source: '手动填报' },
-          ]},
-        ],
-      },
-      '管理体系': {
-        groups: [
-          { name: '体系认证', items: [
-            { label: '质量管理体系 ISO9001', value: '有效', source: '自动提取' },
-            { label: '信息安全管理 ISO27001', value: '有效', source: '自动提取' },
-            { label: '知识产权管理体系', value: 'GB/T 29490', source: '自动提取' },
-            { label: '两化融合管理体系', value: 'AA 级', source: '手动填报' },
-          ]},
-        ],
-      },
-      '经营市场': {
-        groups: [
-          { name: '经营往来', items: [
-            { label: '主要客户', value: '12 家', source: '手动填报' },
-            { label: '核心供应商', value: '8 家', source: '手动填报' },
-            { label: '销售区域', value: '覆盖 15 省', source: '自动提取' },
-            { label: '在履合同金额', value: '1.2 亿', source: '手动填报' },
-          ]},
-        ],
-      },
-      '绿色发展': {
-        groups: [
-          { name: '绿色指标', items: [
-            { label: '绿色工厂认证', value: '市级', source: '自动提取' },
-            { label: '单位产值能耗', value: '同比下降 6%', source: '自动提取' },
-            { label: '环保合规', value: '无违规记录', source: '自动提取' },
-            { label: '碳排放', value: '已纳入监测', source: '手动填报' },
-          ]},
-        ],
-      },
       '企业基础': {
         groups: [
           { name: '工商基础', items: [
@@ -4566,6 +4851,163 @@
           ]},
         ],
       },
+      '核心科创资产': {
+        groups: [
+          { name: '专利资产', items: [
+            { label: '有效发明专利', value: '12 件', source: '自动提取', details: [
+              '一种基于深度学习的图像识别方法', '一种分布式数据存储系统及方法', '一种智能语音交互装置',
+              '一种工业物联网数据采集方法', '一种区块链数据存证系统', '一种边缘计算任务调度方法',
+              '一种自然语言处理模型训练方法', '一种计算机视觉目标检测装置', '一种云平台资源调度方法',
+              '一种知识图谱构建方法', '一种数据加密传输系统', '一种智能推荐算法及装置',
+            ]},
+            { label: '实用新型', value: '20 件', source: '自动提取', details: [
+              '一种数据采集终端', '一种设备状态监测装置', '一种信号调理电路', '一种散热结构',
+              '一种安装固定支架', '一种防尘密封结构', '一种传感器安装组件', '一种线缆固定装置',
+              '一种防护外壳', '一种测试治具', '一种电源管理模块', '一种通信接口装置',
+              '一种显示组件', '一种按键结构', '一种连接器', '一种滤波电路',
+              '一种天线结构', '一种屏蔽罩', '一种定位装置', '一种存储装置',
+            ]},
+            { label: 'PCT 申请', value: '2 件', source: '手动填报', details: [
+              'Image Recognition Method Based on Deep Learning', 'Distributed Data Storage System',
+            ]},
+            { label: '外观设计', value: '8 件', source: '自动提取', details: [
+              '智能数据采集终端（外观）', '工业网关（外观）', '控制面板（外观）', '传感器模组（外观）',
+              '手持终端（外观）', '显示屏（外观）', '机箱（外观）', '遥控器（外观）',
+            ]},
+          ]},
+          { name: '软件著作权', items: [
+            { label: '软著数量', value: '15 件', source: '自动提取', details: [
+              '科创数据中台软件 V2.0', '工业物联网采集平台 V1.0', '智能图像识别系统 V3.1', '数据可视化大屏系统 V1.2',
+              '设备远程运维平台 V2.3', '供应链协同系统 V1.0', '智能客服机器人系统 V1.5', '知识图谱构建平台 V1.0',
+              '边缘计算管理平台 V2.0', '数据分析引擎 V1.8', '云资源调度系统 V1.0', '智能推荐引擎 V2.1',
+              '区块链存证系统 V1.0', '移动巡检系统 V1.3', '报表中心系统 V1.0',
+            ]},
+            { label: '近一年新增软著', value: '5 件', source: '手动填报' },
+          ]},
+          { name: '知识产权运营', items: [
+            { label: '标准必要专利', value: '3 件', source: '自动提取', details: [
+              '一种视频编码方法（标准必要）', '一种无线通信同步方法（标准必要）', '一种数据接口协议实现方法（标准必要）',
+            ]},
+            { label: '技术秘密数量', value: '7 项', source: '手动填报', details: [
+              '核心算法参数配置方案', '高精度标定工艺', '特种材料配方', '关键器件选型清单',
+              '生产工艺参数表', '测试验证方案', '软件架构设计文档',
+            ]},
+            { label: '专利许可/转让', value: '4 笔', source: '自动提取', details: [
+              '向 A 公司许可图像识别专利（2023）', '向 B 公司转让存储专利（2022）',
+              '向 C 公司许可通信专利（2023）', '向 D 研究院转让算法专利（2021）',
+            ]},
+          ]},
+          { name: '资质认定', items: [
+            { label: '高新技术企业', value: '2021 年认定', source: '自动提取' },
+            { label: '专精特新中小企业', value: '2023 年认定', source: '自动提取' },
+            { label: '科技型中小企业', value: '2024 年入库', source: '自动提取' },
+            { label: '瞪羚企业', value: '2022 年认定', source: '手动填报' },
+          ]},
+          { name: '标准制定', items: [
+            { label: '参与国家标准', value: '2 项', source: '自动提取', details: [
+              'GB/T 工业互联网平台技术要求', 'GB/T 人工智能图像识别规范',
+            ]},
+            { label: '参与行业标准', value: '3 项', source: '自动提取', details: [
+              'SJ/T 智能传感器通用规范', 'YD/T 边缘计算设备要求', 'JB/T 工业数据采集接口规范',
+            ]},
+            { label: '参与团体标准', value: '1 项', source: '手动填报', details: [
+              'T/WHKX 科创企业数字化水平评价',
+            ]},
+            { label: '企业标准', value: '8 项', source: '手动填报', details: [
+              'Q/HKJ 001 智能终端技术规范', 'Q/HKJ 002 数据采集接口规范', 'Q/HKJ 003 产品质量检验标准', 'Q/HKJ 004 设备安装调试规范',
+              'Q/HKJ 005 售后服务规范', 'Q/HKJ 006 信息安全规范', 'Q/HKJ 007 环保包装规范', 'Q/HKJ 008 供应链管理规范',
+            ]},
+          ]},
+        ],
+      },
+      '研发与创新': {
+        groups: [
+          { name: '投入规模', items: [
+            { label: '研发费用总额', value: '1200 万', source: '自动提取' },
+            { label: '研发费用占营收比', value: '15%', source: '自动提取' },
+            { label: '2022 年研发投入', value: '1050 万', source: '自动提取' },
+            { label: '2021 年研发投入', value: '900 万', source: '自动提取' },
+            { label: '加计扣除金额', value: '1180 万', source: '手动填报' },
+          ]},
+          { name: '承担项目', items: [
+            { label: '国家重点研发计划', value: '1 项', source: '自动提取', details: [
+              '面向工业互联网的智能感知关键技术研究',
+            ]},
+            { label: '湖北省重点研发计划', value: '2 项', source: '自动提取', details: [
+              '新一代人工智能图像识别关键技术研发', '工业大数据智能分析与应用示范',
+            ]},
+            { label: '武汉市科技计划项目', value: '3 项', source: '自动提取', details: [
+              '智能传感终端研发与产业化', '边缘计算平台关键技术攻关', '科技成果转化服务平台建设',
+            ]},
+            { label: '企业自主立项', value: '18 项', source: '手动填报', details: [
+              '智能检测设备研发', '数据中台二期建设', '算法模型优化', '边缘网关升级', '云平台迁移', '移动端应用开发',
+              '数据安全加固', '知识库建设', '智能问答系统', '报表自动化', '设备预测性维护', '供应链数字化',
+              '客户画像系统', '智能推荐优化', '区块链试点', '视觉质检系统', '语音交互升级', '数字化展厅',
+            ]},
+          ]},
+          { name: '创新平台', items: [
+            { label: '省级企业技术中心', value: '2022 年获批', source: '自动提取' },
+            { label: '市级工程技术研究中心', value: '2021 年获批', source: '自动提取' },
+            { label: '博士后创新实践基地', value: '2023 年获批', source: '手动填报' },
+            { label: '校企联合实验室', value: '2 个', source: '手动填报', details: [
+              '与华中科技大学共建智能感知联合实验室', '与武汉理工大学共建工业大数据联合实验室',
+            ]},
+          ]},
+        ],
+      },
+      '经营与财务': {
+        groups: [
+          { name: '成长性指标', items: [
+            { label: '营业收入（2023）', value: '8000 万', source: '自动提取' },
+            { label: '营业收入复合增长率', value: '22%', source: '自动提取' },
+            { label: '净利润', value: '960 万', source: '自动提取' },
+            { label: '净资产', value: '5200 万', source: '自动提取' },
+          ]},
+          { name: '市场表现', items: [
+            { label: '主营业务收入占比', value: '88%', source: '自动提取' },
+            { label: '核心产品市占率', value: '6.3%', source: '手动填报' },
+            { label: '海外收入占比', value: '12%', source: '自动提取' },
+            { label: '客户集中度（前五）', value: '41%', source: '手动填报' },
+          ]},
+          { name: '经营往来', items: [
+            { label: '主要客户', value: '12 家', source: '手动填报', details: [
+              '武汉某智能制造集团', '湖北某能源科技公司', '华中某通信设备公司', '武汉某医疗设备公司',
+              '湖北某汽车零部件公司', '武汉某光电科技公司', '华中某轨道交通公司', '武汉某环保科技公司',
+              '湖北某农业科技公司', '武汉某金融科技公司', '华中某教育科技公司', '武汉某物流科技公司',
+            ]},
+            { label: '核心供应商', value: '8 家', source: '手动填报', details: [
+              '武汉某芯片供应商', '深圳某传感器供应商', '上海某软件服务商', '武汉某结构件供应商',
+              '东莞某电子元器件供应商', '武汉某包装供应商', '江苏某光学器件供应商', '武汉某物流服务商',
+            ]},
+            { label: '销售区域', value: '覆盖 15 省', source: '自动提取' },
+            { label: '在履合同金额', value: '1.2 亿', source: '手动填报' },
+          ]},
+        ],
+      },
+      '团队与能力': {
+        groups: [
+          { name: '人员结构', items: [
+            { label: '员工总数', value: '86 人', source: '自动提取' },
+            { label: '研发人员', value: '32 人', source: '自动提取' },
+            { label: '硕士及以上', value: '18 人', source: '手动填报' },
+            { label: '高层次人才（3551）', value: '3 人', source: '自动提取', details: [
+              '张伟 · 3551 光谷人才计划', '李娜 · 武汉市黄鹤英才', '王强 · 东湖高新区高层次人才',
+            ]},
+          ]},
+          { name: '体系认证', items: [
+            { label: '质量管理体系 ISO9001', value: '有效', source: '自动提取' },
+            { label: '信息安全管理 ISO27001', value: '有效', source: '自动提取' },
+            { label: '知识产权管理体系', value: 'GB/T 29490', source: '自动提取' },
+            { label: '两化融合管理体系', value: 'AA 级', source: '手动填报' },
+          ]},
+          { name: '绿色指标', items: [
+            { label: '绿色工厂认证', value: '市级', source: '自动提取' },
+            { label: '单位产值能耗', value: '同比下降 6%', source: '自动提取' },
+            { label: '环保合规', value: '无违规记录', source: '自动提取' },
+            { label: '碳排放', value: '已纳入监测', source: '手动填报' },
+          ]},
+        ],
+      },
     };
 
     function renderAllDimPanels() {
@@ -4573,20 +5015,35 @@
       if (!container) return;
       let html = '';
       Object.keys(dimensionData).forEach((dim) => {
-        html += '<div class="dim-panel' + (dim === '知识产权' ? '' : ' hidden') + '" data-dim="' + dim + '"><div class="space-y-4">';
+        html += '<div class="dim-panel' + (dim === '核心科创资产' ? '' : ' hidden') + '" data-dim="' + dim + '"><div class="space-y-4">';
         dimensionData[dim].groups.forEach((g) => {
-          html += '<div class="overflow-hidden rounded-lg border border-gray-200">' +
+          html += '<div class="overflow-hidden rounded-2xl border border-gray-200">' +
             '<div class="border-b border-gray-200 bg-gray-50 px-4 py-2.5 text-sm font-medium text-gray-700">' + g.name + '</div>' +
-            '<div class="divide-y divide-gray-100">';
+            '<div class="grid grid-cols-3 gap-3 p-3">';
           g.items.forEach((it) => {
             const srcClass = it.source === '自动提取' ? 'bg-green-50 text-green-600' : 'bg-amber-50 text-amber-600';
-            html += '<div class="flex items-center justify-between px-4 py-3">' +
-              '<span class="text-sm text-gray-700">' + it.label + '</span>' +
-              '<div class="flex items-center gap-2.5">' +
-                '<span class="text-sm font-medium text-gray-800">' + it.value + '</span>' +
-                '<span class="rounded-full px-2 py-0.5 text-[11px] ' + srcClass + '">来源：' + it.source + '</span>' +
-                '<button class="js-view-evidence text-xs text-primary hover:underline" data-label="' + it.label + '" data-source="' + it.source + '">[查看证据]</button>' +
+            const hasDetail = it.details && it.details.length;
+            const detailHtml = hasDetail
+              ? '<div class="card-detail mt-2 hidden border-t border-gray-100 pt-2">' +
+                  it.details.map(function (d) {
+                    return '<div class="flex items-start gap-1.5 py-1"><span class="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-gray-300"></span><span class="text-xs leading-relaxed text-gray-600">' + d + '</span></div>';
+                  }).join('') +
+                '</div>'
+              : '';
+            const toggleHtml = hasDetail
+              ? '<button class="js-card-toggle flex items-center gap-0.5 text-[11px] text-primary hover:underline"><span>明细(' + it.details.length + ')</span><i data-lucide="chevron-down" class="h-3 w-3 js-card-chevron transition-transform"></i></button>'
+              : '';
+            html += '<div class="field-card rounded-xl border border-gray-100 bg-white p-3 transition hover:border-primary/30 hover:shadow-sm' + (hasDetail ? ' cursor-pointer' : '') + '" data-has-detail="' + (hasDetail ? '1' : '0') + '">' +
+              '<div class="truncate text-xs text-gray-500" title="' + it.label + '">' + it.label + '</div>' +
+              '<div class="mt-1.5 truncate text-base font-semibold text-gray-800" title="' + it.value + '">' + it.value + '</div>' +
+              '<div class="mt-2 flex items-center justify-between">' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<span class="rounded-full px-1.5 py-0.5 text-[10px] ' + srcClass + '">' + it.source + '</span>' +
+                  toggleHtml +
+                '</div>' +
+                '<button class="js-view-evidence text-[11px] text-primary hover:underline" data-label="' + it.label + '" data-source="' + it.source + '">查看证据</button>' +
               '</div>' +
+              detailHtml +
             '</div>';
           });
           html += '</div></div>';
@@ -4594,9 +5051,10 @@
         html += '</div></div>';
       });
       container.innerHTML = html;
+      lucide.createIcons();
     }
 
-    const graphDimensions = ['知识产权', '科技项目', '人才团队'];
+    const graphDimensions = ['核心科创资产', '研发与创新', '团队与能力'];
     let graphChartInstance = null;
 
     function switchDimension(dim) {
@@ -4783,7 +5241,7 @@
     }
 
     renderAllDimPanels();
-    ensureFolderExpanded('知识产权');
+    ensureFolderExpanded('核心科创资产');
 
     // 左侧栏左右折叠/展开
     const archiveSidebar = document.getElementById('archive-sidebar');
@@ -4827,7 +5285,7 @@
     });
 
     document.getElementById('complete-profile-btn').addEventListener('click', () => {
-      showToast('已打开完善指引（演示）：建议优先补充「财务成长」「市场维度」「绿色发展」维度数据');
+      showToast('已打开完善指引（演示）：建议优先补充「经营与财务」「团队与能力」分类数据');
     });
 
     // ==================== 证据查看弹窗 ====================
@@ -4885,6 +5343,16 @@
       }
     });
 
+    // 字段卡片：点击展开/收起明细
+    document.addEventListener('click', (e) => {
+      const card = e.target.closest('.field-card[data-has-detail="1"]');
+      if (!card || e.target.closest('.js-view-evidence')) return;
+      const detail = card.querySelector('.card-detail');
+      if (detail) detail.classList.toggle('hidden');
+      const chevron = card.querySelector('.js-card-chevron');
+      if (chevron) chevron.classList.toggle('rotate-180');
+    });
+
     document.getElementById('evidence-close').addEventListener('click', closeEvidence);
     document.getElementById('evidence-confirm').addEventListener('click', closeEvidence);
     evidenceOverlay.addEventListener('click', closeEvidence);
@@ -4899,6 +5367,20 @@
         document.getElementById('policy-tab-opportunity').classList.toggle('hidden', !isOpp);
         document.getElementById('policy-tab-calculator').classList.toggle('hidden', isOpp);
       });
+    });
+
+    // 重新匹配
+    document.getElementById('policy-rematch-btn').addEventListener('click', function () {
+      const btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader-2" class="h-4 w-4 animate-spin"></i> 匹配中…';
+      lucide.createIcons();
+      setTimeout(function () {
+        btn.disabled = false;
+        btn.innerHTML = '<i data-lucide="refresh-cw" class="h-4 w-4"></i> 重新匹配';
+        lucide.createIcons();
+        showToast('已重新为企业匹配政策，推荐结果已更新', 'success');
+      }, 1500);
     });
 
     // 筛选器下拉
@@ -5109,75 +5591,166 @@
       window.addEventListener('resize', () => dashboardCharts.forEach((c) => c.resize()));
     }
 
-    // ==================== 科创体检 ====================
-    // 测评项目选择
-    document.querySelectorAll('.assess-card').forEach((card) => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.assess-card').forEach((c) => c.classList.remove('assess-card-active'));
-        card.classList.add('assess-card-active');
-      });
-    });
+    // ==================== 科创体检（P1-P10 模块） ====================
+    const HEALTH_DIMS = [
+      { name:'企业主体资质', w:15, items:[{n:'成立年限',v:'9 年',s:'≥1 年',g:'A'},{n:'高新技术企业资格',v:'已认定',s:'需有效',g:'A'},{n:'行业领域',v:'人工智能',s:'符合领域',g:'A'}] },
+      { name:'研发投入强度', w:20, items:[{n:'研发费用占营收比',v:'3.0%',s:'≥5%',g:'D',note:'占比不足'},{n:'研发费用总额',v:'240 万',s:'≥300 万',g:'C'},{n:'加计扣除金额',v:'180 万',s:'-',g:'B'}] },
+      { name:'知识产权储备', w:20, items:[{n:'发明专利数量',v:'2 件',s:'≥5 件',g:'C',note:'发明不足'},{n:'知识产权总数',v:'45 件',s:'≥15 件',g:'A'},{n:'核心知识产权',v:'有',s:'需有',g:'A'}] },
+      { name:'技术创新能力', w:15, items:[{n:'省级以上研发平台',v:'有',s:'加分项',g:'A'},{n:'研发项目数量',v:'18 项',s:'≥5 项',g:'A'},{n:'成果转化',v:'4 项',s:'≥3 项',g:'B'}] },
+      { name:'经营成长性', w:15, items:[{n:'营收复合增长率',v:'12%',s:'≥20%',g:'C',note:'增速不足'},{n:'净资产增长率',v:'8%',s:'≥15%',g:'C'},{n:'主营收入占比',v:'88%',s:'≥60%',g:'A'}] },
+      { name:'创新管理规范', w:15, items:[{n:'研发组织管理',v:'规范',s:'需规范',g:'A'},{n:'研发费用辅助账',v:'有',s:'需有',g:'A'},{n:'创新管理制度',v:'有',s:'需有',g:'A'}] },
+    ];
 
-    // 测评按钮
-    document.getElementById('ai-assess-btn').addEventListener('click', () => {
-      showToast('AI 智能测评已开始，正在分析企业档案数据…', 'success');
-    });
-    document.getElementById('manual-assess-btn').addEventListener('click', openSurveyLinkModal);
+    const HEALTH_PROBLEMS = [
+      { dim:'研发投入强度', lv:'D', name:'研发费用占营收比低于标准', desc:'当前 3.0%，申报标准 ≥5%。', sug:'归集研发费用、补做研发立项与工时记录。', veto:false, entrust:false },
+      { dim:'研发投入强度', lv:'C', name:'研发费用总额不足', desc:'当前 240 万，标准 300 万。', sug:'补充研发投入凭证。', veto:false, entrust:false },
+      { dim:'知识产权储备', lv:'C', name:'发明专利数量不足', desc:'当前 2 件，标准 5 件。', sug:'布局高价值发明专利。', veto:false, entrust:false },
+      { dim:'经营成长性', lv:'C', name:'营收复合增长率不足', desc:'当前 12%，标准 20%。', sug:'优化业务结构。', veto:false, entrust:false },
+      { dim:'研发投入强度', lv:'D', name:'研发人员占比低于 10%', desc:'一票否决项：当前 8%。', sug:'调整研发人员结构。', veto:true, entrust:false },
+      { dim:'经营成长性', lv:'D', name:'近一年存在行政处罚', desc:'一票否决项：环保处罚 1 次。', sug:'核实并准备说明材料。', veto:true, entrust:false },
+    ];
 
-    // 去商城购买辅导服务
-    document.getElementById('go-mall-btn').addEventListener('click', () => {
-      const nav = document.querySelector('.nav-item[data-target="page-mall"]');
-      if (nav) nav.click();
-    });
+    const HEALTH_SERVICES = [
+      { name:'研发费用归集整改服务', star:5, type:'官方合作机构', served:328, rate:98, solve:'研发费用归集、辅助账建立', price:2000 },
+      { name:'高价值发明专利布局', star:4, type:'知识产权服务商', served:512, rate:97, solve:'发明专利挖掘与申请', price:8000 },
+    ];
 
-    // 雷达图懒加载
-    let radarChartInited = false;
-    let radarChartInstance = null;
-    function initRadarChart() {
-      if (radarChartInited || !window.echarts) return;
-      const el = document.getElementById('radar-chart');
-      if (!el) return;
-      radarChartInstance = echarts.init(el);
-      radarChartInstance.setOption({
-        tooltip: {},
-        legend: { bottom: 0, itemWidth: 14, itemHeight: 10, textStyle: { fontSize: 11, color: '#6b7280' } },
-        radar: {
-          indicator: [
-            { name: '知识产权', max: 100 },
-            { name: '科技成果转化', max: 100 },
-            { name: '研发组织管理', max: 100 },
-            { name: '企业成长性', max: 100 },
-            { name: '财务指标', max: 100 },
-          ],
-          radius: '58%',
-          axisName: { color: '#374151', fontSize: 12 },
-          splitArea: { areaStyle: { color: ['#ffffff', '#f8fafc'] } },
-          splitLine: { lineStyle: { color: '#e5e7eb' } },
-          axisLine: { lineStyle: { color: '#e5e7eb' } },
-        },
-        series: [{
-          type: 'radar',
-          data: [
-            {
-              value: [92, 78, 85, 70, 82],
-              name: '本企业得分',
-              areaStyle: { color: 'rgba(22,119,255,0.18)' },
-              lineStyle: { color: '#1677FF', width: 2 },
-              itemStyle: { color: '#1677FF' },
-            },
-            {
-              value: [75, 82, 78, 72, 76],
-              name: '同行业均值',
-              areaStyle: { color: 'rgba(249,115,22,0.08)' },
-              lineStyle: { color: '#f97316', width: 2, type: 'dashed' },
-              itemStyle: { color: '#f97316' },
-            },
-          ],
-        }],
-      });
-      radarChartInited = true;
-      window.addEventListener('resize', () => { if (radarChartInstance) radarChartInstance.resize(); });
+    let healthOrders = [{ no:'FW-2024-1106-01', name:'研发费用归集整改服务', jc:'JC-2024-1102', amt:2000, time:'2024-11-06', status:'服务中' }];
+
+    function switchHealth(view) {
+      document.querySelectorAll('.health-view').forEach(v => v.classList.add('hidden'));
+      const el = document.getElementById('health-' + view);
+      if (el) el.classList.remove('hidden');
+      document.querySelectorAll('.health-tab').forEach(t => t.classList.toggle('health-tab-active', t.dataset.health === view));
     }
+    document.querySelectorAll('.health-tab').forEach(t => t.addEventListener('click', () => switchHealth(t.dataset.health)));
+
+    // 进度环 SVG
+    function healthRing(percent, color, fs) {
+      const r = 52, c = 2 * Math.PI * r;
+      return '<svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="#f3f4f6" stroke-width="10"/><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="10" stroke-linecap="round" stroke-dasharray="' + (c * percent / 100) + ' ' + c + '" transform="rotate(-90 55 55)"/><text x="55" y="55" text-anchor="middle" dominant-baseline="middle" font-size="' + fs + '" font-weight="700" fill="' + color + '">' + percent + '</text></svg>';
+    }
+
+    // 雷达图 SVG（企业实际 vs 申报标准）
+    function healthRadarSVG() {
+      const names = HEALTH_DIMS.map(d => d.name);
+      const actual = [85, 45, 60, 90, 55, 95];
+      const standard = [70, 80, 80, 70, 80, 70];
+      const n = names.length, cx = 190, cy = 170, R = 120;
+      const pt = (vals, i, r) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n; return [cx + Math.cos(a) * r * vals[i] / 100, cy + Math.sin(a) * r * vals[i] / 100]; };
+      const poly = vals => vals.map((v, i) => { const p = pt(vals, i, R); return p[0] + ',' + p[1]; }).join(' ');
+      const ringGrid = [0.25, 0.5, 0.75, 1].map(k => '<polygon points="' + poly(Array(n).fill(k * 100)) + '" fill="none" stroke="#E5E6EB" stroke-width="1"/>').join('');
+      const axes = names.map((d, i) => { const p = pt(Array(n).fill(100), i, R); return '<line x1="' + cx + '" y1="' + cy + '" x2="' + p[0] + '" y2="' + p[1] + '" stroke="#E5E6EB" stroke-width="1"/>'; }).join('');
+      const labels = names.map((d, i) => { const p = pt(Array(n).fill(122), i, R); return '<text x="' + p[0] + '" y="' + p[1] + '" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#4E5969">' + d + '</text>'; }).join('');
+      const dots = actual.map((v, i) => { const p = pt(actual, i, R); return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4" fill="#1677ff"/>'; }).join('');
+      return '<svg width="380" height="340" viewBox="0 0 380 340">' + ringGrid + axes +
+        '<polygon points="' + poly(standard) + '" fill="none" stroke="#FF7D00" stroke-width="1.5" stroke-dasharray="4 3"/>' +
+        '<polygon points="' + poly(actual) + '" fill="rgba(245,63,63,.15)" stroke="#1677ff" stroke-width="2"/>' + dots + labels + '</svg>';
+    }
+
+    // P2 新建体检
+    const HEALTH_PROJECTS = [
+      { n:'高新技术企业认定', d:'科技/财政/税务', m:87 }, { n:'科技型中小企业评价', d:'科技部火炬中心', m:92 },
+      { n:'专精特新', d:'工信部门', m:72 }, { n:'创新型中小企业', d:'工信部门', m:81 },
+      { n:'省市重点研发计划', d:'科技厅/局', m:65 }, { n:'研发费用加计扣除', d:'税务部门', m:95 },
+    ];
+    function renderHealthProjects() {
+      document.getElementById('health-proj-grid').innerHTML = HEALTH_PROJECTS.map((p, i) =>
+        '<div class="cursor-pointer rounded-lg border p-3 transition hover:shadow-sm' + (i === 0 ? ' border-primary' : ' border-gray-200') + '" onclick="healthPickProj(this)"><div class="flex items-center justify-between"><b class="text-sm">' + p.n + '</b><span class="g-b rounded px-1.5 py-0.5 text-xs">' + p.m + '%</span></div><div class="mt-1 text-xs text-gray-400">主管：' + p.d + '</div></div>').join('');
+    }
+    function healthPickProj(el) { el.parentElement.querySelectorAll('div').forEach(d => { d.className = d.className.replace(' border-primary', ''); if (!d.className.includes('border-gray')) d.className += ' border-gray-200'; }); el.className = el.className.replace(' border-gray-200', '') + ' border-primary'; }
+    function healthPickMode(el) { el.parentElement.querySelectorAll('div').forEach(d => { d.className = d.className.replace(' border-2 border-primary', ''); d.className += ' border border-gray-200'; }); el.className = el.className.replace(' border border-gray-200', '') + ' border-2 border-primary'; }
+
+    // P6 结果
+    function renderHealthDimCards() {
+      document.getElementById('health-dim-cards').innerHTML = HEALTH_DIMS.map(d => {
+        const worst = d.items.some(i => i.g === 'D') ? 'D' : d.items.some(i => i.g === 'C') ? 'C' : 'A';
+        return '<div class="rounded-lg border border-gray-100 p-3"><div class="flex items-center"><b class="text-sm">' + d.name + '</b><span class="g-' + worst.toLowerCase() + ' ml-2 rounded px-1.5 py-0.5 text-xs">权重 ' + d.w + '%</span></div><table class="mt-2 w-full text-xs"><tbody>' +
+          d.items.map(i => '<tr class="border-b border-gray-50"><td class="py-1.5">' + i.n + '</td><td class="py-1.5">' + i.v + '</td><td class="py-1.5 text-gray-400">' + i.s + '</td><td class="health-cell-' + i.g.toLowerCase() + ' py-1.5">' + i.g + '</td></tr>').join('') +
+          '</tbody></table></div>';
+      }).join('');
+    }
+    function renderHealthVeto() {
+      document.getElementById('health-veto').innerHTML = HEALTH_PROBLEMS.filter(p => p.veto).map(p =>
+        '<div class="health-d-card mb-2 rounded-md p-3"><b style="color:#F53F3F">⛔ ' + p.name + '</b><div class="mt-1 text-sm text-gray-600">' + p.desc + '</div><div class="mt-1 text-xs text-gray-400">政策依据 · <a class="cursor-pointer text-primary hover:underline">溯源</a> · 处置：' + p.sug + '</div></div>').join('');
+    }
+    function renderHealthProblems() {
+      document.getElementById('health-problems').innerHTML = HEALTH_PROBLEMS.filter(p => !p.veto).map(p =>
+        '<div class="rounded-lg border p-3' + (p.entrust ? ' border-purple-400' : ' border-gray-100') + '"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="g-' + p.lv.toLowerCase() + ' rounded px-1.5 py-0.5 text-xs">' + p.lv + '</span><b class="text-sm">' + p.name + '</b>' + (p.entrust ? '<span class="rounded px-1.5 py-0.5 text-xs" style="background:#F5EDFF;color:#722ED1">已委托</span>' : '') + '</div><span class="text-xs text-gray-400">' + p.dim + '</span></div><div class="mt-1.5 text-sm text-gray-600">' + p.desc + '</div><div class="mt-1 text-xs text-gray-400">整改建议：' + p.sug + ' · <a class="cursor-pointer text-primary hover:underline">溯源</a></div><div class="mt-2 flex items-center justify-between"><a class="cursor-pointer text-primary hover:underline">查看整改建议</a>' + (p.entrust ? '<button class="rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600">查看服务进度</button>' : '<button class="rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService(\'' + p.name + '\')">委托专业服务 →</button>') + '</div></div>').join('');
+    }
+    function renderHealthConcl() {
+      const opts = ['建议立即申报', '建议完善后申报', '暂缓申报', '不建议申报'];
+      document.getElementById('health-concl').innerHTML = opts.map((o, i) =>
+        '<div class="cursor-pointer rounded-lg border p-3' + (i === 1 ? ' border-primary' : ' border-gray-200') + '" onclick="healthPickConcl(this)"><b class="text-sm">' + o + '</b></div>').join('');
+    }
+    function healthPickConcl(el) { el.parentElement.querySelectorAll('div').forEach(d => d.className = d.className.replace(' border-primary', '') + ' border-gray-200'); el.className = el.className.replace(' border-gray-200', '') + ' border-primary'; }
+
+    // 抽屉
+    function openHealthService(name) {
+      document.getElementById('health-svc-ctx').textContent = name || '研发费用占营收比 · C 待提升';
+      document.getElementById('health-svc-list').innerHTML = HEALTH_SERVICES.map(s =>
+        '<div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>' + s.name + '</b><span style="color:#FFB400">★' + s.star + '.0</span></div><div class="mt-1 flex flex-wrap gap-1.5"><span class="rounded px-1.5 py-0.5 text-xs" style="background:#E0F7F7;color:#00B2B2">' + s.type + '</span><span class="text-xs text-gray-400">已服务 ' + s.served + ' 家 · 好评 ' + s.rate + '%</span></div><div class="mt-2 text-sm text-gray-600">可解决：' + s.solve + '</div><div class="mt-2 flex items-center justify-between"><span class="text-lg font-bold text-primary">￥' + s.price + '</span><div class="flex gap-2"><button class="rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600">查看详情</button><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthOrder(\'' + s.name + '\',' + s.price + ')">立即下单</button></div></div></div>').join('');
+      document.getElementById('health-svc-overlay').classList.add('health-open');
+      document.getElementById('health-svc-drawer').classList.add('health-open');
+    }
+    function closeHealthService() { document.getElementById('health-svc-overlay').classList.remove('health-open'); document.getElementById('health-svc-drawer').classList.remove('health-open'); }
+    function openHealthOrder(name, price) {
+      document.getElementById('health-ord-name').textContent = name;
+      document.getElementById('health-ord-overlay').classList.add('health-open');
+      document.getElementById('health-ord-drawer').classList.add('health-open');
+    }
+    function closeHealthOrder() { document.getElementById('health-ord-overlay').classList.remove('health-open'); document.getElementById('health-ord-drawer').classList.remove('health-open'); }
+    function healthSubmitOrder() {
+      if (!document.getElementById('health-agree').checked) { showToast('请先勾选服务协议', 'warning'); return; }
+      closeHealthOrder();
+      showToast('下单成功，问题卡片状态已更新为「已委托」', 'success');
+      HEALTH_PROBLEMS.forEach(p => { if (p.name.includes('研发费用')) p.entrust = true; });
+      renderHealthProblems();
+      healthOrders.unshift({ no: 'FW-2024-1106-0' + (healthOrders.length + 2), name: '研发费用归集整改服务', jc: 'JC-2024-1102', amt: 2000, time: '2024-11-06', status: '待支付' });
+      renderHealthOrders();
+    }
+
+    // P9 订单
+    function renderHealthOrderTabs() {
+      const tabs = ['全部', '待支付', '待接单', '服务中', '待验收', '已完成', '已取消'];
+      document.getElementById('health-order-tabs').innerHTML = tabs.map((t, i) => '<button class="rounded-lg px-3 py-1.5 text-sm ' + (i === 0 ? 'bg-primary text-white' : 'border border-gray-200 text-gray-600') + '">' + t + '</button>').join('');
+    }
+    function renderHealthOrders() {
+      document.getElementById('health-order-list').innerHTML = healthOrders.map(o =>
+        '<tr class="border-b border-gray-100"><td class="px-3 py-2.5">' + o.no + '</td><td class="px-3 py-2.5">' + o.name + '</td><td class="px-3 py-2.5">' + o.jc + '</td><td class="px-3 py-2.5">￥' + o.amt + '</td><td class="px-3 py-2.5 text-gray-500">' + o.time + '</td><td class="px-3 py-2.5"><span class="g-b rounded px-1.5 py-0.5 text-xs">' + o.status + '</span></td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth(\'order-detail\')">详情</a>　<a class="cursor-pointer text-primary hover:underline">联系服务商</a></td></tr>').join('');
+    }
+    function renderHealthOrderTimeline() {
+      const st = ['待支付', '待接单', '服务中', '待验收', '已完成'];
+      document.getElementById('health-order-timeline').innerHTML = st.map((s, i) =>
+        '<div class="flex-1 text-center"><div class="mx-auto h-3.5 w-3.5 rounded-full" style="background:' + (i < 2 ? '#00B42A' : i === 2 ? '#1677ff' : '#E5E6EB') + '"></div><div class="mt-1.5 text-xs" style="color:' + (i <= 2 ? '#1D2129' : '#86909C') + '">' + s + '</div></div>').join('');
+    }
+
+    // P5 评估动画（智能体调用系统数据）
+    function healthRunEval() {
+      switchHealth('progress');
+      const tasks = ['调取企业数字档案', '解析档案数据', '匹配申报标准', '量化打分', '红线校验', '生成建议', '生成报告'];
+      const box = document.getElementById('health-eval-tasks');
+      box.innerHTML = tasks.map(t => '<div class="text-gray-400">○ ' + t + '</div>').join('');
+      let p = 0, i = 0;
+      const iv = setInterval(() => {
+        p += 7; if (p > 100) p = 100;
+        document.getElementById('health-eval-ring').innerHTML = healthRing(p, '#1677ff', 34);
+        while (i < tasks.length && p >= (i + 1) * 100 / tasks.length) { if (box.children[i]) box.children[i].innerHTML = '<span style="color:#00B42A">✓ ' + tasks[i] + '</span>'; i++; }
+        if (p >= 100) { clearInterval(iv); document.getElementById('health-btn-view').classList.remove('hidden'); }
+      }, 280);
+    }
+
+    // 初始化
+    renderHealthProjects();
+    renderHealthDimCards();
+    renderHealthVeto();
+    renderHealthProblems();
+    renderHealthConcl();
+    renderHealthOrderTabs();
+    renderHealthOrders();
+    renderHealthOrderTimeline();
+    document.getElementById('health-radar').innerHTML = healthRadarSVG();
+    document.getElementById('health-total-ring').innerHTML = healthRing(72, '#FF7D00', 40);
 
     // ==================== 智能体广场（矩阵 / 运行 / 交付） ====================
     function agCell(v, cls, span) { return { v: v || '', cls: cls || 'sheet-plain', span: span || 0 }; }
@@ -5242,29 +5815,6 @@
     }
 
     const AGENTS = [
-      makeAgent({
-        id: 'archive',
-        title: '企业档案抽取智能体',
-        intro: '多源文档解析与结构化抽取，构建企业科创数字档案',
-        tag: '档案·约3分钟',
-        status: 'ok',
-        statusText: '服务包内',
-        icon: 'database',
-        grad: 'from-blue-500 to-indigo-500',
-        runIntro: '解析上传的多源文档，抽取结构化信息并清洗归一，打标后生成企业数字档案。',
-        artifacts: ['企业数字档案', '企业档案结构树', '企业数字档案报告'],
-        dlDesc: ['十三维度档案数据表', '档案结构树可视化', '档案概要与数据质量说明'],
-        seq: 1101,
-        reportTitle: '企业数字档案报告',
-        conclusion: '已从多源文档中抽取并归一共 13 个维度的企业科创档案数据，标签覆盖完整，可作为全链路智能体的数据底座。',
-        steps: [
-          { icon: 'file-text', label: '多源文档解析', detail: '解析 PDF / Word / 图片多源文件' },
-          { icon: 'braces', label: '结构化信息抽取', detail: '抽取关键字段与实体关系' },
-          { icon: 'filter', label: '数据清洗归一', detail: '去重、补全与格式统一' },
-          { icon: 'tags', label: '科创标签打标', detail: '按十三维度标签体系标注' },
-          { icon: 'history', label: '档案版本管理', detail: '生成版本快照并输出档案' },
-        ],
-      }),
       makeAgent({
         id: 'policy',
         title: '政策匹配智能体',
@@ -5416,6 +5966,9 @@
       agentUploadReady = false;
       agentUploadName = '';
       switchAgentView('run');
+      showRunPhase('report');
+      renderReport();
+      lucide.createIcons();
     }
 
     function renderAgentMatrix() {
@@ -5511,7 +6064,6 @@
     }
 
     const REPORT_VERDICTS = {
-      archive: '建议入库',
       policy: '建议跟进申报',
       writer: '需补材料后提交',
       checkup: '建议整改提升',
@@ -5520,7 +6072,6 @@
     };
 
     const REPORT_VERDICTS_OK = {
-      archive: '档案已就绪',
       policy: '匹配，建议申报',
       writer: '材料齐备，可提交',
       checkup: '体检达标',
@@ -5529,7 +6080,6 @@
     };
 
     const REPORT_TODOS_OK = {
-      archive: [{ text: '将档案同步至全链路智能体', action: '去同步' }],
       policy: [{ text: '发起高匹配政策申报', action: '去发起' }],
       writer: [{ text: '提交申报书至主管部门', action: '去提交' }],
       checkup: [{ text: '按季复检，持续跟踪指标变化', action: '去关注' }],
@@ -5538,7 +6088,6 @@
     };
 
     const REPORT_CONCLUSIONS_OK = {
-      archive: '企业数字档案数据完整，13 个维度标签覆盖齐全，可直接作为全链路智能体的数据底座。',
       policy: '企业档案数据完整，硬门槛全部满足，共匹配到 6 项高适配政策，建议优先申报。',
       writer: '所需申报材料齐备，模板适配与内容生成均已通过合规自检，可提交。',
       checkup: '企业科创指标整体达标，知识产权与研发组织管理表现突出，无重大申报风险。',
@@ -5547,10 +6096,6 @@
     };
 
     const REPORT_SERVICES = {
-      archive: [
-        { name: '企业档案数据补全服务', tag: '数据治理', price: '￥1,500' },
-        { name: '知识产权档案整理与归档', tag: '档案整理', price: '￥2,000' },
-      ],
       policy: [
         { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
         { name: '政策申报代理服务', tag: '申报代理', price: '￥3,000' },
@@ -5575,13 +6120,9 @@
     };
 
     const REPORT_TODOS = {
-      archive: [
-        { text: '复核档案抽取结果，确认字段无误', action: '去复核' },
-        { text: '补充缺失的权属与授权材料', action: '去补录' },
-      ],
       policy: [
-        { text: '确认高匹配政策清单', action: '去确认' },
-        { text: '发起高匹配政策申报', action: '去发起' },
+        { text: '补充「高新技术企业认定」的研发费用占比佐证材料', action: '去补录' },
+        { text: '发起「高新技术企业认定」申报立项', action: '去发起' },
       ],
       writer: [
         { text: '补充财务审计等申报材料', action: '去补录' },
@@ -5602,12 +6143,39 @@
     };
 
     const REPORT_RADAR = {
-      archive: { indicator: ['档案完整性', '数据质量', '标签覆盖', '版本管理', '溯源能力'], values: [88, 76, 82, 70, 74] },
       policy: { indicator: ['政策覆盖', '门槛校验', '匹配精度', '归因能力', '排序合理'], values: [85, 90, 78, 82, 80] },
       writer: { indicator: ['模板适配', '信息填充', '内容质量', '合规性', '格式规整'], values: [82, 75, 80, 88, 86] },
       checkup: { indicator: ['知识产权', '研发管理', '成果转化', '企业成长', '财务指标'], values: [92, 78, 85, 70, 82] },
       planning: { indicator: ['窗口监控', '分级培育', '时序排期', '规划完整', '风险控制'], values: [80, 76, 84, 78, 81] },
       service: { indicator: ['需求识别', '线索匹配', '优先级', '推送及时', '转化率'], values: [78, 82, 85, 72, 76] },
+    };
+
+    const REPORT_SUGGESTIONS = {
+      policy: [
+        { text: '提升研发费用占营收比至 5% 以上（当前 3.0%）' },
+        { text: '布局高价值发明专利（当前 2 件，建议 5 件以上）' },
+        { text: '完善研发费用辅助账与工时记录规范' },
+      ],
+      writer: [
+        { text: '布局高价值发明专利，提升专利资产价值' },
+        { text: '提升营收复合增长率至 20% 以上' },
+        { text: '完善知识产权管理规范体系' },
+      ],
+      checkup: [
+        { text: '提升研发费用占营收比，补齐研发投入短板' },
+        { text: '布局高价值发明专利，优化专利结构' },
+        { text: '提升营收复合增长率，增强成长性' },
+      ],
+      planning: [
+        { text: '布局高价值发明专利，支撑后续申报' },
+        { text: '提升营收复合增长率，增强成长性指标' },
+        { text: '完善研发费用辅助账，夯实申报基础' },
+      ],
+      service: [
+        { text: '布局高价值发明专利，提升专利资产价值' },
+        { text: '提升研发费用占营收比，增强研发投入强度' },
+        { text: '完善知识产权管理规范体系' },
+      ],
     };
 
     let reportRadarChart = null;
@@ -5682,37 +6250,28 @@
         const todos = archiveComplete ? (REPORT_TODOS_OK[currentAgent.id] || []) : (REPORT_TODOS[currentAgent.id] || []);
         const dotCls = archiveComplete ? 'bg-green-500' : 'bg-orange-400';
         todosEl.innerHTML = todos.map(function (t) {
+          const confirmed = agentConfirmedTodos[currentAgent.id + '::' + t.text];
+          const actionBtn = confirmed
+            ? '<span class="flex flex-shrink-0 items-center gap-1 text-xs font-medium text-green-600"><i data-lucide="check" class="h-3.5 w-3.5"></i>已确认</span>'
+            : '<button data-agent-action="' + t.action + '" data-agent-todo="' + t.text + '" class="flex-shrink-0 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary">' + t.action + '</button>';
           return '<div class="flex items-center justify-between gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
             '<div class="flex min-w-0 items-center gap-2.5">' +
-              '<span class="h-2 w-2 flex-shrink-0 rounded-full ' + dotCls + '"></span>' +
-              '<span class="text-sm text-gray-600">' + t.text + '</span>' +
+              '<span class="h-2 w-2 flex-shrink-0 rounded-full ' + (confirmed ? 'bg-green-500' : dotCls) + '"></span>' +
+              '<span class="text-sm ' + (confirmed ? 'text-gray-400 line-through' : 'text-gray-600') + '">' + t.text + '</span>' +
             '</div>' +
-            '<button onclick="' + todoAction(t.action) + '" class="flex-shrink-0 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary">' + t.action + '</button>' +
+            actionBtn +
           '</div>';
         }).join('');
       }
       if (actionsEl) {
-        const actions = archiveComplete
-          ? [
-              { text: '发起高匹配政策申报', btn: '去发起', type: 'primary' },
-              { text: '对接专业顾问复核', btn: '去复核', type: 'ghost' },
-              { text: '转成服务单，由平台跟进', btn: '去转单', type: 'ghost' },
-            ]
-          : [
-              { text: '补充缺失的申报材料（客户/试用反馈、财务审计）', btn: '去补录', type: 'primary' },
-              { text: '完善知识产权权属与授权信息', btn: '去补录', type: 'ghost' },
-              { text: '发起专家复核，确认结论后进入下一环节', btn: '去复核', type: 'ghost' },
-            ];
-        actionsEl.innerHTML = actions.map(function (a, i) {
-          const btnCls = a.type === 'primary'
-            ? 'rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover'
-            : 'rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary';
+        const suggestions = REPORT_SUGGESTIONS[currentAgent.id] || [];
+        actionsEl.innerHTML = suggestions.map(function (s, i) {
           return '<div class="flex items-center justify-between gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
             '<div class="flex min-w-0 items-start gap-2.5">' +
               '<span class="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-medium text-gray-500">' + (i + 1) + '</span>' +
-              '<span class="text-sm text-gray-600">' + a.text + '</span>' +
+              '<span class="text-sm text-gray-600">' + s.text + '</span>' +
             '</div>' +
-            '<button onclick="' + todoAction(a.btn) + '" class="flex-shrink-0 ' + btnCls + '">' + a.btn + '</button>' +
+            '<button data-agent-action="去委托" data-agent-todo="' + s.text + '" class="flex-shrink-0 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-600 transition hover:border-primary hover:text-primary">委托整改</button>' +
           '</div>';
         }).join('');
       }
@@ -5754,19 +6313,36 @@
       if (modal) modal.classList.add('scale-95', 'pointer-events-none');
     }
 
-    function todoAction(action) {
-      if (action === '去补录') return 'openSupplementModal()';
-      if (action === '去复核') return 'openReviewModal()';
-      if (action === '去确认') return "showToast('已确认，任务已受理','success')";
-      if (action === '去发起') return "showToast('已发起，进入后续流程','success')";
-      if (action === '去整改') return "showToast('已发起整改任务','success')";
-      if (action === '去对接') return "showToast('已发起对接，等待服务商响应','success')";
-      if (action === '去转单') return "showToast('已转为服务单，可在服务商城查看','success')";
-      if (action === '去同步') return "showToast('已同步至全链路智能体','success')";
-      if (action === '去提交') return "showToast('已提交，等待受理','success')";
-      if (action === '去关注') return "showToast('已设置复检提醒','success')";
-      return "showToast('操作已发起','success')";
+    const agentConfirmedTodos = {};
+
+    function handleAgentAction(action, todoText) {
+      if (action === '去补录') { openSupplementModal(); }
+      else if (action === '去复核') { openReviewModal(); }
+      else if (action === '去发起') {
+        // 去发起 → 打开立项弹窗，创建申报项目
+        openProjectModal(todoText || currentAgent.title);
+      }
+      else if (action === '去确认') {
+        // 去确认 → 标记该待办为已确认
+        const key = currentAgent.id + '::' + todoText;
+        agentConfirmedTodos[key] = true;
+        renderReport();
+        showToast('已确认「' + todoText + '」', 'success');
+      }
+      else if (action === '去整改') { showToast('已发起整改任务', 'success'); }
+      else if (action === '去委托') { showToast('已为您匹配整改服务，可在右侧「推荐服务」中查看', 'success'); }
+      else if (action === '去对接') { showToast('已发起对接，等待服务商响应', 'success'); }
+      else if (action === '去转单') { showToast('已转为服务单，可在服务商城查看', 'success'); }
+      else if (action === '去同步') { showToast('已同步至全链路智能体', 'success'); }
+      else if (action === '去提交') { showToast('已提交，等待受理', 'success'); }
+      else if (action === '去关注') { showToast('已设置复检提醒', 'success'); }
+      else { showToast('操作已发起', 'success'); }
     }
+
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest('[data-agent-action]');
+      if (btn) handleAgentAction(btn.dataset.agentAction, btn.dataset.agentTodo);
+    });
 
     function openSupplementModal() {
       openAgentModal(
@@ -6433,6 +7009,19 @@
       });
     });
 
+    // 甘特图：年度申报 / 月度待办 切换
+    document.querySelectorAll('.gantt-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.gantt-tab').forEach((t) => t.classList.remove('gantt-tab-active'));
+        tab.classList.add('gantt-tab-active');
+        const isYear = tab.dataset.ganttTab === 'year';
+        document.getElementById('gantt-year').classList.toggle('hidden', !isYear);
+        document.getElementById('gantt-month').classList.toggle('hidden', isYear);
+        const legend = document.getElementById('gantt-legend');
+        if (legend) legend.classList.toggle('hidden', !isYear);
+      });
+    });
+
     // 加入培育计划
     document.querySelectorAll('.js-join-plan').forEach((btn) => {
       btn.addEventListener('click', () => {
@@ -6496,47 +7085,155 @@
       window.addEventListener('resize', () => chart.resize());
     }
 
-    // ==================== 服务商城 ====================
-    document.querySelectorAll('.mall-tab').forEach((tab) => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.mall-tab').forEach((t) => t.classList.remove('mall-tab-active'));
-        tab.classList.add('mall-tab-active');
-        const isMall = tab.dataset.mallTab === 'mall';
-        document.getElementById('mall-tab-mall').classList.toggle('hidden', !isMall);
-        document.getElementById('mall-tab-orders').classList.toggle('hidden', isMall);
-      });
-    });
+    // ==================== 服务商城（知识产权服务市场） ====================
+    const MALL_CATS = [
+      { key:'all',      name:'全部服务',   c:'47 117 235' },
+      { key:'商标服务',  name:'商标服务',   c:'47 117 235' },
+      { key:'专利服务',  name:'专利服务',   c:'23 166 190' },
+      { key:'版权服务',  name:'版权服务',   c:'112 85 224' },
+      { key:'知产交易',  name:'知产交易',   c:'40 166 111' },
+      { key:'维权诉讼',  name:'维权诉讼',   c:'221 82 121' },
+      { key:'贯标管理',  name:'贯标与管理', c:'235 142 50' },
+      { key:'涉外知产',  name:'涉外知产',   c:'23 150 173' },
+    ];
 
-    const serviceModalOverlay = document.getElementById('service-modal-overlay');
-    const serviceModal = document.getElementById('service-modal');
+    const MALL_PRODUCTS = [
+      { id:'IP-TM2026001', name:'商标注册申请', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'商标', desc:'1 个类别 10 个小项，近似检索＋材料撰写＋提交申报＋进度跟踪。', priceMain:'¥800', priceUnit:'/类起', priceNum:800, rating:4.9, sold:1286, hot:true },
+      { id:'IP-TM2026002', name:'商标驳回复审', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'复审', desc:'针对驳回通知撰写复审理由书，附证据材料，争取商标获准注册。', priceMain:'¥3,000', priceUnit:'起', priceNum:3000, rating:4.8, sold:238 },
+      { id:'IP-TM2026003', name:'商标续展 / 变更', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'续展', desc:'到期续展、名义或地址变更、补发注册证，全流程代办。', priceMain:'¥1,500', priceUnit:'/件', priceNum:1500, rating:4.9, sold:412 },
+      { id:'IP-PT2026001', name:'发明专利申请代理', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'发明', desc:'技术交底书撰写、权利要求布局、答复审查意见，全程专业代理。', priceMain:'¥6,000', priceUnit:'起', priceNum:6000, rating:4.9, sold:365, hot:true },
+      { id:'IP-PT2026002', name:'实用新型专利申请', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'实用', desc:'适合结构类技术改进，授权周期短，材料撰写与申报全包。', priceMain:'¥3,000', priceUnit:'起', priceNum:3000, rating:4.8, sold:521 },
+      { id:'IP-PT2026003', name:'外观设计专利申请', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'外观', desc:'产品外观图制作与申报，保护产品造型、图案与色彩设计。', priceMain:'¥2,000', priceUnit:'起', priceNum:2000, rating:4.8, sold:297 },
+      { id:'IP-PT2026004', name:'专利检索与分析报告', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'检索', desc:'查新检索、竞争对手专利监控、专利布局建议，出具分析报告。', priceMain:'¥5,000', priceUnit:'起', priceNum:5000, rating:4.9, sold:143 },
+      { id:'IP-CR2026001', name:'软件著作权登记', cat:'版权服务', c1:'#6c62e5', c2:'#9f87ed', badge:'软著', desc:'源代码与说明书整理、材料提交、加急通道，最快 1 个工作日受理。', priceMain:'¥1,200', priceUnit:'/件起', priceNum:1200, rating:4.9, sold:864, hot:true },
+      { id:'IP-CR2026002', name:'作品著作权登记', cat:'版权服务', c1:'#6c62e5', c2:'#9f87ed', badge:'版权', desc:'文字、美术、摄影、视听等作品登记，可用于维权与商业化授权。', priceMain:'¥800', priceUnit:'/件', priceNum:800, rating:4.8, sold:326 },
+      { id:'IP-TR2026001', name:'商标转让 / 过户', cat:'知产交易', c1:'#2aaa78', c2:'#6bc79a', badge:'转让', desc:'现成 R 标选购、转让协议起草、官方备案过户全程代办。', priceMain:'¥2,500', priceUnit:'起', priceNum:2500, rating:4.8, sold:189 },
+      { id:'IP-TR2026002', name:'专利转让与许可备案', cat:'知产交易', c1:'#2aaa78', c2:'#6bc79a', badge:'许可', desc:'专利价值评估、转让合同拟定、许可备案登记与年费代缴。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.7, sold:76 },
+      { id:'IP-EN2026001', name:'商标侵权诉讼代理', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'诉讼', desc:'侵权证据固定、律师函、行政投诉与民事诉讼全流程代理。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.9, sold:52 },
+      { id:'IP-EN2026002', name:'电商平台侵权投诉下架', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'投诉', desc:'主流电商平台投诉通道提交，侵权链接快速下架处理。', priceMain:'¥1,500', priceUnit:'/次起', priceNum:1500, rating:4.8, sold:274 },
+      { id:'IP-EN2026003', name:'专利侵权分析（FTO）', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'FTO', desc:'产品上市前自由实施分析，识别侵权风险并出具规避建议。', priceMain:'¥8,000', priceUnit:'起', priceNum:8000, rating:4.9, sold:68, new:true },
+      { id:'IP-MG2026001', name:'知识产权贯标认证', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'贯标', desc:'GB/T 29490 体系搭建、文件编制、内审辅导与认证对接。', priceMain:'¥30,000', priceUnit:'起', priceNum:30000, rating:4.8, sold:47 },
+      { id:'IP-MG2026002', name:'知识产权年度托管', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'托管', desc:'年费监控、期限提醒、布局规划与年度知产盘点，一站式托管。', priceMain:'¥12,000', priceUnit:'/年起', priceNum:12000, rating:4.9, sold:132, hot:true },
+      { id:'IP-MG2026003', name:'高价值专利培育', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'培育', desc:'围绕核心技术挖掘专利组合，提升授权率与专利资产价值。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.8, sold:39 },
+      { id:'IP-OV2026001', name:'马德里商标国际注册', cat:'涉外知产', c1:'#176bdc', c2:'#19b6bd', badge:'国际', desc:'单一申请覆盖多国，指定国选择、材料翻译与外所对接。', priceMain:'¥8,000', priceUnit:'起', priceNum:8000, rating:4.9, sold:64 },
+      { id:'IP-OV2026002', name:'PCT 国际专利申请', cat:'涉外知产', c1:'#176bdc', c2:'#19b6bd', badge:'PCT', desc:'国际阶段申请、检索报告答复与进入国家阶段规划。', priceMain:'¥25,000', priceUnit:'起', priceNum:25000, rating:4.9, sold:31, new:true },
+    ];
 
-    function openServiceModal(name) {
-      document.getElementById('service-modal-name').textContent = name;
-      serviceModalOverlay.classList.remove('pointer-events-none', 'opacity-0');
-      serviceModal.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+    const mallState = { cat:'all', sort:'default', q:'', page:1, pageSize:6 };
+
+    function mallRenderCats() {
+      const counts = {};
+      MALL_PRODUCTS.forEach(p => counts[p.cat] = (counts[p.cat] || 0) + 1);
+      document.getElementById('mall-cat-list').innerHTML = MALL_CATS.map(c => {
+        const n = c.key === 'all' ? MALL_PRODUCTS.length : (counts[c.key] || 0);
+        const active = mallState.cat === c.key;
+        return '<button class="mall-cat flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm transition ' + (active ? 'bg-primary-light font-semibold text-primary' : 'text-gray-600 hover:bg-gray-50') + '" data-cat="' + c.key + '">' +
+          '<span class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md text-[11px] font-bold" style="background:rgba(' + c.c + ',.12);color:rgb(' + c.c + ')">' + c.name.charAt(0) + '</span>' +
+          '<span class="flex-1 text-left">' + c.name + '</span>' +
+          '<span class="text-[11px] text-gray-400">' + n + '</span></button>';
+      }).join('');
     }
-    function closeServiceModal() {
-      serviceModalOverlay.classList.add('pointer-events-none', 'opacity-0');
-      serviceModal.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+
+    function mallGetList() {
+      let list = MALL_PRODUCTS.slice();
+      if (mallState.cat !== 'all') list = list.filter(p => p.cat === mallState.cat);
+      if (mallState.q) { const q = mallState.q.trim().toLowerCase(); list = list.filter(p => (p.name + p.cat + p.id + p.desc).toLowerCase().includes(q)); }
+      if (mallState.sort === 'sales') list.sort((a, b) => b.sold - a.sold);
+      else if (mallState.sort === 'price-asc') list.sort((a, b) => (a.priceNum ?? Infinity) - (b.priceNum ?? Infinity));
+      else if (mallState.sort === 'price-desc') list.sort((a, b) => (b.priceNum ?? -1) - (a.priceNum ?? -1));
+      return list;
     }
 
-    document.querySelectorAll('.js-view-service').forEach((btn) => {
-      btn.addEventListener('click', () => openServiceModal(btn.dataset.name));
-    });
-    document.getElementById('service-close').addEventListener('click', closeServiceModal);
-    serviceModalOverlay.addEventListener('click', closeServiceModal);
+    function mallRender() {
+      const list = mallGetList();
+      const total = list.length;
+      const pages = Math.max(1, Math.ceil(total / mallState.pageSize));
+      if (mallState.page > pages) mallState.page = pages;
+      const start = (mallState.page - 1) * mallState.pageSize;
+      const items = list.slice(start, start + mallState.pageSize);
+      document.getElementById('mall-count').innerHTML = '共 <b class="font-bold text-gray-800">' + total + '</b> 项服务';
+      const listEl = document.getElementById('mall-service-list');
+      const emptyEl = document.getElementById('mall-empty');
+      if (!items.length) {
+        listEl.innerHTML = ''; listEl.classList.add('hidden'); emptyEl.classList.remove('hidden');
+        document.getElementById('mall-pagination').innerHTML = '';
+        return;
+      }
+      listEl.classList.remove('hidden'); emptyEl.classList.add('hidden');
+      listEl.innerHTML = items.map((p, i) => {
+        const isText = !p.priceMain.startsWith('¥');
+        const badges = '<span class="rounded bg-gray-100 px-2 py-0.5 text-[11px] text-gray-600">' + p.cat + '</span>' +
+          (p.hot ? '<span class="rounded px-2 py-0.5 text-[11px] text-amber-600" style="background:#fff5e6">热门</span>' : '') +
+          (p.new ? '<span class="rounded px-2 py-0.5 text-[11px] text-green-600" style="background:#e8faf2">新上架</span>' : '');
+        return '<article class="flex items-center gap-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md" style="animation-delay:' + (i * 35) + 'ms">' +
+          '<div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white" style="background:linear-gradient(135deg,' + p.c1 + ',' + p.c2 + ')">' + p.badge + '</div>' +
+          '<div class="min-w-0 flex-1">' +
+            '<div class="flex flex-wrap items-center gap-2"><strong class="text-[15px] font-bold text-gray-900">' + p.name + '</strong>' + badges + '</div>' +
+            '<p class="mt-1.5 truncate text-sm text-gray-400">' + p.desc + '</p>' +
+            '<div class="mt-2 flex items-center gap-3 text-xs text-gray-400"><span>编号 ' + p.id + '</span><span class="h-3 w-px bg-gray-200"></span><span class="font-semibold text-amber-500">★ ' + p.rating + '</span><span class="h-3 w-px bg-gray-200"></span><span>' + p.sold + ' 家企业已采购</span></div>' +
+          '</div>' +
+          '<div class="flex flex-col items-end gap-2.5 border-l border-gray-100 pl-5" style="min-width:190px">' +
+            '<div class="flex items-baseline gap-1"><span class="' + (isText ? 'text-sm' : 'text-lg') + ' font-bold text-red-500">' + p.priceMain + '</span><span class="text-xs text-gray-400">' + p.priceUnit + '</span></div>' +
+            '<div class="flex gap-2"><button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-mall-detail="' + p.name + '">查看详情</button><button class="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-mall-buy="' + p.name + '">立即咨询</button></div>' +
+          '</div></article>';
+      }).join('');
+      mallRenderPagination(pages);
+    }
 
-    document.getElementById('service-submit').addEventListener('click', () => {
-      closeServiceModal();
-      showToast('意向单已提交，商务经理将尽快与您联系', 'success');
+    function mallRenderPagination(pages) {
+      const box = document.getElementById('mall-pagination');
+      if (pages <= 1) { box.innerHTML = ''; return; }
+      let html = '<button class="mall-page-btn" data-page="' + (mallState.page - 1) + '" ' + (mallState.page === 1 ? 'disabled' : '') + '>上一页</button>';
+      for (let i = 1; i <= pages; i++) html += '<button class="mall-page-btn ' + (i === mallState.page ? 'active' : '') + '" data-page="' + i + '">' + i + '</button>';
+      html += '<button class="mall-page-btn" data-page="' + (mallState.page + 1) + '" ' + (mallState.page === pages ? 'disabled' : '') + '>下一页</button>';
+      box.innerHTML = html;
+    }
+
+    function mallReset() {
+      mallState.cat = 'all'; mallState.q = ''; mallState.sort = 'default'; mallState.page = 1;
+      document.getElementById('mall-search').value = '';
+      document.querySelectorAll('#mall-sort-tabs .mall-sort-tab').forEach((b, i) => b.classList.toggle('active', i === 0));
+      mallRenderCats(); mallRender();
+    }
+
+    document.getElementById('mall-cat-list').addEventListener('click', e => {
+      const btn = e.target.closest('.mall-cat'); if (!btn) return;
+      mallState.cat = btn.dataset.cat; mallState.page = 1; mallRenderCats(); mallRender();
+    });
+    document.getElementById('mall-sort-tabs').addEventListener('click', e => {
+      const btn = e.target.closest('.mall-sort-tab'); if (!btn) return;
+      document.querySelectorAll('#mall-sort-tabs .mall-sort-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); mallState.sort = btn.dataset.sort; mallState.page = 1; mallRender();
+    });
+    let mallSearchTimer = null;
+    document.getElementById('mall-search').addEventListener('input', e => {
+      clearTimeout(mallSearchTimer);
+      mallSearchTimer = setTimeout(() => { mallState.q = e.target.value; mallState.page = 1; mallRender(); }, 220);
+    });
+    document.getElementById('mall-reset').addEventListener('click', mallReset);
+    document.getElementById('mall-empty-reset').addEventListener('click', mallReset);
+    document.getElementById('mall-pagination').addEventListener('click', e => {
+      const btn = e.target.closest('.mall-page-btn'); if (!btn || btn.disabled) return;
+      const p = Number(btn.dataset.page); if (!p || p === mallState.page) return;
+      mallState.page = p; mallRender(); window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.getElementById('mall-service-list').addEventListener('click', e => {
+      const buy = e.target.closest('[data-mall-buy]');
+      if (buy) { showToast('已提交「' + buy.dataset.mallBuy + '」咨询，知产顾问将在 2 小时内联系您', 'success'); return; }
+      const detail = e.target.closest('[data-mall-detail]');
+      if (detail) { showToast('正在打开「' + detail.dataset.mallDetail + '」详情页…'); }
     });
 
-    document.getElementById('btn-go-mall').addEventListener('click', () => {
-      document.querySelectorAll('.mall-tab').forEach((t) => t.classList.remove('mall-tab-active'));
-      document.querySelector('.mall-tab[data-mall-tab="mall"]').classList.add('mall-tab-active');
-      document.getElementById('mall-tab-mall').classList.remove('hidden');
-      document.getElementById('mall-tab-orders').classList.add('hidden');
-    });
+    mallRenderCats();
+    mallRender();
+
+    // 服务市场 / 我的订单 视图切换
+    function mallSwitchView(view) {
+      document.getElementById('mall-market-view').classList.toggle('hidden', view !== 'market');
+      document.getElementById('mall-orders-view').classList.toggle('hidden', view !== 'orders');
+      document.querySelectorAll('.mall-view-tab').forEach(t => t.classList.toggle('mall-view-tab-active', t.dataset.mallView === view));
+    }
+    document.querySelectorAll('.mall-view-tab').forEach(t => t.addEventListener('click', () => mallSwitchView(t.dataset.mallView)));
 
     // ==================== 申报书编辑器：缺失材料引导 ====================
     function appendMissingMaterialsCard() {
@@ -6630,6 +7327,24 @@
     document.getElementById('doc-upload-material').addEventListener('click', () => {
       showToast('已打开补充材料上传面板（演示）');
     });
+
+    // ==================== 临期待办提醒弹窗 ====================
+    function showTodoRemind() {
+      const overlay = document.getElementById('todo-remind-overlay');
+      const modal = document.getElementById('todo-remind-modal');
+      if (overlay) overlay.classList.remove('opacity-0', 'pointer-events-none');
+      if (modal) modal.classList.remove('scale-95', 'pointer-events-none');
+    }
+
+    function closeTodoRemind() {
+      const overlay = document.getElementById('todo-remind-overlay');
+      const modal = document.getElementById('todo-remind-modal');
+      if (overlay) overlay.classList.add('opacity-0', 'pointer-events-none');
+      if (modal) modal.classList.add('scale-95', 'pointer-events-none');
+    }
+
+    // 进入系统页面时自动弹出（延迟 800ms，等首屏渲染完成）
+    setTimeout(showTodoRemind, 800);
 
     // ==================== 渲染图标 ====================
     lucide.createIcons();
