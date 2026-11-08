@@ -651,6 +651,8 @@
 .health-svc{background:#F7F7FB;border:1px dashed #722ED1}
 .health-tab{padding:6px 14px;border-radius:6px;font-size:14px;color:#6b7280;cursor:pointer;white-space:nowrap;transition:all .15s}
 .health-tab.health-tab-active{background:#1677ff;color:#fff}
+.cultivation-tab{padding:6px 14px;border-radius:6px;font-size:14px;color:#6b7280;cursor:pointer;white-space:nowrap;transition:all .15s}
+.cultivation-tab.cultivation-tab-active{background:#1677ff;color:#fff}
 .health-step{display:flex;gap:10px;padding:10px 8px;border-radius:6px;cursor:pointer}
 .health-step .hnum{width:22px;height:22px;border-radius:50%;background:#f3f4f6;color:#6b7280;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .health-step.health-active{background:#e8f1ff}
@@ -665,7 +667,7 @@
 .health-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:119;display:none}
 .health-overlay.health-open{display:block}
 
-/* 服务商城（知识产权服务市场） */
+/* 服务商城（科创服务市场） */
 .mall-sort-tab{border:0;background:transparent;padding:6px 12px;border-radius:6px;font-size:13px;color:#6b7280;transition:.15s;white-space:nowrap}
 .mall-sort-tab:hover{color:#1677ff}
 .mall-sort-tab.active{background:#fff;color:#1677ff;font-weight:600;box-shadow:0 1px 3px rgba(17,26,46,.1)}
@@ -705,44 +707,40 @@
             <i data-lucide="folder-open" class="nav-icon"></i>
             <span>企业数字档案</span>
           </div>
+          <div class="nav-item" data-target="page-cultivation" data-title="科创培育工作">
+            <i data-lucide="sprout" class="nav-icon"></i>
+            <span>科创培育工作</span>
+          </div>
         </div>
 
         <!-- 能力中心 -->
         <div class="nav-group-label mt-6">能力中心</div>
         <div class="space-y-1">
-          <div class="nav-item" data-target="page-health" data-title="科创体检">
-            <i data-lucide="activity" class="nav-icon"></i>
-            <span>科创体检</span>
+          <div class="nav-item" data-target="page-agent" data-title="科创专家">
+            <i data-lucide="bot" class="nav-icon"></i>
+            <span>科创专家</span>
           </div>
           <div class="nav-item" data-target="page-policy" data-title="政策发现">
             <i data-lucide="compass" class="nav-icon"></i>
             <span>政策发现</span>
           </div>
-          <div class="nav-item" data-target="page-planning" data-title="年度申报规划">
-            <i data-lucide="route" class="nav-icon"></i>
-            <span>年度申报规划</span>
+          <div class="nav-item" data-target="page-skills" data-title="技能">
+            <i data-lucide="sparkles" class="nav-icon"></i>
+            <span>技能</span>
           </div>
-          <div class="nav-item" data-target="page-doc-expert" data-title="AI 申报书专家">
-            <i data-lucide="pen-tool" class="nav-icon"></i>
-            <span>AI 申报书专家</span>
+          <div class="nav-item" data-target="page-connector" data-title="连接器">
+            <i data-lucide="plug" class="nav-icon"></i>
+            <span>连接器</span>
           </div>
+        </div>
+
+        <!-- 服务与订单 -->
+        <div class="nav-group-label mt-6">服务与订单</div>
+        <div class="space-y-1">
           <div class="nav-item" data-target="page-mall" data-title="服务商城">
             <i data-lucide="shopping-bag" class="nav-icon"></i>
             <span>服务商城</span>
           </div>
-        </div>
-
-        <!-- 其余功能（平铺，不分组） -->
-        <div class="mt-6 space-y-1">
-          <div class="nav-item" data-target="page-agent" data-title="科创专家">
-            <i data-lucide="bot" class="nav-icon"></i>
-            <span>科创专家</span>
-          </div>
-        </div>
-
-        <!-- 我的空间 -->
-        <div class="nav-group-label mt-6">我的空间</div>
-        <div class="space-y-1">
           <div class="nav-item" data-target="page-my-orders" data-title="我的订单">
             <i data-lucide="clipboard-list" class="nav-icon"></i>
             <span>我的订单</span>
@@ -1233,8 +1231,53 @@
           </div>
         </div>
 
+        <!-- 科创培育工作 -->
+        <div id="page-cultivation" class="page hidden">
+          <div class="mb-5">
+            <h1 class="text-xl font-bold text-gray-900">科创培育工作</h1>
+            <p class="mt-1 text-sm text-gray-400">体检 → 诊断 → 规划，一站式科创培育工作流</p>
+          </div>
+
+          <!-- Tab -->
+          <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
+            <button class="cultivation-tab cultivation-tab-active" data-cultivation="health">体检</button>
+            <button class="cultivation-tab" data-cultivation="diagnosis">诊断</button>
+            <button class="cultivation-tab" data-cultivation="planning">规划</button>
+          </div>
+
+          <!-- 体检 -->
+          <div id="cultivation-health" class="cultivation-view">
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <div class="text-base font-semibold text-gray-800">体检</div>
+              <p class="mt-2 text-sm leading-relaxed text-gray-500">对企业科创能力进行五维量化体检，核验硬性条件、排查申报风险，输出体检报告与评级。</p>
+              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
+            </div>
+          </div>
+
+          <!-- 诊断 -->
+          <div id="cultivation-diagnosis" class="cultivation-view hidden">
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <div class="text-base font-semibold text-gray-800">诊断</div>
+              <p class="mt-2 text-sm leading-relaxed text-gray-500">基于体检结果定位短板弱项与差距清单，明确补短板方向与优先级。</p>
+              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
+            </div>
+          </div>
+
+          <!-- 规划 -->
+          <div id="cultivation-planning" class="cultivation-view hidden">
+            <div class="rounded-2xl border border-gray-200 bg-white p-6">
+              <div class="text-base font-semibold text-gray-800">规划</div>
+              <p class="mt-2 text-sm leading-relaxed text-gray-500">生成科小→高企→专精特新→小巨人梯度培育路线图与任务时序排布。</p>
+              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
+            </div>
+          </div>
+        </div>
+
         <!-- AI 申报书专家 -->
         <div id="page-doc-expert" class="page hidden">
+          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
+            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
+          </button>
           <!-- 顶部 Hero -->
           <div class="rounded-2xl bg-gradient-to-br from-primary via-blue-500 to-purple-500 p-10 text-white shadow-sm">
             <div class="text-3xl font-bold">让 AI 为您撰写专业项目申报书</div>
@@ -1906,6 +1949,9 @@
 
         <!-- 科创体检 -->
         <div id="page-health" class="page hidden">
+          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
+            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
+          </button>
           <!-- 子导航 -->
           <div class="mb-4 flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1" style="width:fit-content">
             <button class="health-tab health-tab-active" data-health="home">工作台</button>
@@ -2384,6 +2430,9 @@
 
         <!-- 年度申报规划 -->
         <div id="page-planning" class="page hidden">
+          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
+            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
+          </button>
           <!-- 一、顶部：进阶阶梯图 + 路线图 -->
           <div class="mb-5 grid grid-cols-3 gap-4">
             <div class="col-span-2 rounded-lg bg-white p-6 shadow-sm">
@@ -3136,10 +3185,10 @@
               <!-- 页头 -->
               <div class="mb-6">
                 <h1 class="text-2xl font-semibold text-gray-900">科创专家</h1>
-                <p class="mt-1 text-sm text-gray-500">六大 AI 智能体，覆盖「档案 → 政策 → 申报 → 体检 → 规划 → 服务」全链路，即选即用</p>
+                <p class="mt-1 text-sm text-gray-500">十二大科创专家智能体，覆盖企业科创能力建设全链路</p>
               </div>
 
-              <!-- 智能体矩阵（JS 渲染） -->
+              <!-- 科创专家矩阵（JS 渲染） -->
               <div id="agent-grid" class="grid grid-cols-3 gap-5"></div>
             </div>
           </div>
@@ -3388,37 +3437,340 @@
           <input type="file" id="agent-upload-input" class="hidden" accept=".xlsx,.xls,.pdf,.doc,.docx" />
         </div>
 
+        <!-- 技能 -->
+        <div id="page-skills" class="page hidden -m-6 h-[calc(100vh-44px)]">
+          <div class="h-full overflow-y-auto">
+            <div class="mx-auto max-w-6xl p-6">
+              <!-- 面包屑 -->
+              <div class="mb-4 flex items-center gap-2 text-sm">
+                <span class="text-gray-400">能力中心</span>
+                <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-gray-300"></i>
+                <span class="font-medium text-gray-800">技能</span>
+              </div>
+
+              <!-- 页头 -->
+              <div class="mb-5">
+                <h1 class="text-2xl font-semibold text-gray-900">技能</h1>
+                <p class="mt-1 text-sm text-gray-500">科创研究方法与工作流：一次定义，交给你的科创专家反复执行</p>
+              </div>
+
+              <!-- 分类筛选 -->
+              <div id="skill-cat-bar" class="mb-5 flex flex-wrap items-center gap-2">
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-primary text-white" data-cat="全部">全部 16</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="文档解析">文档解析 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="数据治理">数据治理 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="评估诊断">评估诊断 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="规则校验">规则校验 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="政策工程">政策工程 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="匹配计算">匹配计算 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="财税处理">财税处理 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="差距诊断">差距诊断 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="规划编排">规划编排 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="文本生成">文本生成 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="IP分析">IP分析 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="监控提醒">监控提醒 2</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="对标研究">对标研究 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="证据组织">证据组织 1</button>
+                <button class="skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-cat="融资分析">融资分析 1</button>
+              </div>
+
+              <!-- 技能矩阵 -->
+              <div id="skill-grid" class="grid grid-cols-3 gap-5">
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="file-search" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">多源文档结构化抽取</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">解析审计报告、财报、营业执照等多源凭证，自动抽取研发费用/营收/人员等结构化字段并附证据页码</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">文档解析</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：档案管家、体检专家、研发费用专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="git-compare" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">数据冲突检测与档案校验</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">比对系统自动提取值与企业手填值，输出数据冲突清单与证据比对</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">数据治理</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：档案管家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="radar" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">五维科创能力雷达测评</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">基于企业数字档案全量指标，输出 A+/A/B 评级与五维雷达图</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">评估诊断</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：体检诊断专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="shield-check" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">硬门槛条件核验</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">逐项校验申报条件清单与企业档案数据，输出达标/未达标表与缺口</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">规则校验</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：高企专家、专精特新专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="file-text" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">政策结构化解析与门槛抽取</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">从政策原文中抽取申报条件、奖励金额、截止时间、主管部门、适用区域</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">政策工程</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：政策匹配专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="scale" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">双向匹配度打分</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">企业画像 × 政策条件双向适配打分，输出匹配度百分比与命中/未命中项</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">匹配计算</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：政策匹配专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="calculator" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">研发费用辅助账归集</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">按八大类归集研发费用，输出高企口径与加计扣除口径差异表</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">财税处理</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：研发费用专家、高企专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="trending-down" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">梯度差距分析</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">当前阶段指标 vs 下一阶段申报条件，输出差距清单与补短板建议</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">差距诊断</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：培育专家、专精特新专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="gantt-chart" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">培育路线图与甘特图生成</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">基于差距清单与政策窗口期，生成即刻/短期/中长期三段式任务时间轴</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">规划编排</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：梯度培育专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="pen-line" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">申报书章节生成与合规自检</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">按申报模板章节结构生成正文，挂接证据凭证，完成合规自检</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">文本生成</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：申报书专家、高企专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="shield" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">知识产权资产盘点与价值评估</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">盘点专利/软著/PCT，计算发明专利占比，识别高价值专利与临期项</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">IP分析</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：IP布局专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="bell-ring" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">临期资质预警监控</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">监控知识产权证书与资质证书到期日，输出已逾期/30天/60天预警清单</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">监控提醒</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：档案管家、IP专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="crosshair" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">同赛道对标分析</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">企业指标 × 同区域同赛道样本库，输出领先/中等/落后定位与标杆榜</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">对标研究</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：对标专家、体检专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="link" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">成果转化证据链梳理</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">按高企评分要求组织销售合同、发票、用户验收报告等转化佐证</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">证据组织</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：成果转化专家、IP专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="trending-up" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">融资可行性分析</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">基于财务成长数据与在研成果，输出融资建议、估值区间与推介页</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">融资分析</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：成果转化专家</div>
+                </div>
+
+                <div class="flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:border-primary/40 hover:shadow-md">
+                  <div class="flex items-start justify-between">
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="calendar-clock" class="h-5 w-5"></i></div>                  </div>
+                  <div class="mt-3 text-base font-semibold text-gray-800">申报窗口期监控与提醒</div>
+                  <p class="mt-1.5 flex-1 text-sm leading-relaxed text-gray-500">监控政策截止日历与企业匹配度，输出倒计时与消息中心推送</p>
+                  <div class="mt-3 flex flex-wrap items-center gap-1.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500">监控提醒</span></div>
+                  <div class="mt-3 border-t border-gray-100 pt-3 text-xs text-gray-400">被调用：政策匹配专家</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 连接器 -->
+        <div id="page-connector" class="page hidden -m-6 h-[calc(100vh-44px)]">
+          <div class="h-full overflow-y-auto">
+            <div class="mx-auto max-w-6xl p-6">
+              <!-- 面包屑 -->
+              <div class="mb-4 flex items-center gap-2 text-sm">
+                <span class="text-gray-400">能力中心</span>
+                <i data-lucide="chevron-right" class="h-3.5 w-3.5 text-gray-300"></i>
+                <span class="font-medium text-gray-800">连接器</span>
+              </div>
+
+              <!-- 页头 -->
+              <div class="mb-5">
+                <h1 class="text-2xl font-semibold text-gray-900">连接器</h1>
+                <p class="mt-1 text-sm text-gray-500">为科创专家接入外部数据源与业务系统，数据不落地、按需调用</p>
+              </div>
+
+              <!-- 状态概览 -->
+              <div class="mb-5 grid grid-cols-4 gap-4">
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div class="text-xs text-gray-500">已连接</div>
+                  <div class="mt-1 text-2xl font-semibold text-green-600">5</div>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div class="text-xs text-gray-500">未连接</div>
+                  <div class="mt-1 text-2xl font-semibold text-amber-500">3</div>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div class="text-xs text-gray-500">今日调用次数</div>
+                  <div class="mt-1 text-2xl font-semibold text-gray-800">1,284</div>
+                </div>
+                <div class="rounded-2xl border border-gray-200 bg-white p-4">
+                  <div class="text-xs text-gray-500">覆盖字段</div>
+                  <div class="mt-1 text-2xl font-semibold text-gray-800">42</div>
+                </div>
+              </div>
+
+              <!-- 连接器列表 -->
+              <div id="connector-list" class="space-y-3">
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="building-2" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">工商数据接口</span><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>已连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：天眼查 · 10 分钟前同步</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：企业基础信息、股权结构、对外投资、行政处罚</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：档案管家、体检专家</div>
+                  </div>
+                  <button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">配置</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="landmark" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">税务/财报接口</span><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>已连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：税务局授权 · 1 小时前同步</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：近三年营收、净利润、纳税信用等级</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：体检专家、研发费用专家</div>
+                  </div>
+                  <button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">配置</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="file-text" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">政策文件库</span><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>已连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：科技部/省科技厅 · 每日更新</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：高企/专精特新/重点研发计划等政策原文</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：政策匹配专家</div>
+                  </div>
+                  <button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">配置</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="lightbulb" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">专利数据库</span><span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-600"><span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>未连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：incoPat · 未连接</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：发明专利、实用新型、软著、PCT 全量检索</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：IP布局专家（待授权后可用）</div>
+                  </div>
+                  <button onclick="showToast('跳转incoPat授权（演示）')" class="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">去授权</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="send" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">科技项目申报系统</span><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>已连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：湖北政务服务网 · 实时</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：申报状态回写、材料提交、评审进度</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：项目与申报模块</div>
+                  </div>
+                  <button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">配置</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="credit-card" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">银行/征信接口</span><span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-600"><span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>未连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：合作银行 · 未连接</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：融资可行性分析所需征信与授信数据</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：成果转化专家（待对接）</div>
+                  </div>
+                  <button onclick="showToast('跳转合作银行授权（演示）')" class="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">去授权</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="users" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">社保/人员接口</span><span class="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-1 text-xs text-green-600"><span class="h-1.5 w-1.5 rounded-full bg-green-500"></span>已连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：人社局授权 · 每日同步</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：科技人员名单、社保缴纳、学历结构</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：高企专家、体检专家</div>
+                  </div>
+                  <button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">配置</button>
+                </div>
+
+                <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+                  <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100 text-gray-500"><i data-lucide="file-badge" class="h-6 w-6"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center gap-2"><span class="text-base font-semibold text-gray-800">招投标/合同数据</span><span class="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs text-amber-600"><span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>未连接</span></div>
+                    <div class="mt-1 text-xs text-gray-400">来源：公开招投标平台 · 未连接</div>
+                    <div class="mt-2 text-sm text-gray-600">覆盖字段：中标合同、销售合同、客户集中度</div>
+                    <div class="mt-1 text-xs text-gray-400">被调用：成果转化专家（待对接）</div>
+                  </div>
+                  <button onclick="showToast('跳转公开招投标平台授权（演示）')" class="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">去授权</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- 服务商城 -->
         <div id="page-mall" class="page hidden">
           <div id="mall-market-view">
             <div class="mb-4">
               <h1 class="text-xl font-bold text-gray-900">服务商城</h1>
-              <p class="mt-1 text-sm text-gray-400">商标、专利、版权一站式服务，在线签约、进度可查、平台全程监管。</p>
+              <p class="mt-1 text-sm text-gray-400">专家报告、申报填报、财税知产与辅导培育一站式服务，在线签约、进度可查、平台全程监管。</p>
             </div>
 
             <!-- 分类（列表上方） -->
             <div id="mall-cat-list" class="mb-4 flex flex-wrap items-center gap-2 rounded-lg bg-white p-2 shadow-sm"></div>
 
-              <div class="mb-4 flex flex-wrap items-center gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm">
-                <label class="flex h-9 min-w-[240px] max-w-[380px] flex-1 items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 transition focus-within:border-primary focus-within:bg-white">
-                  <i data-lucide="search" class="h-4 w-4 flex-shrink-0 text-gray-400"></i>
-                  <input id="mall-search" type="text" placeholder="搜索服务名称 / 服务编号" class="min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-gray-400">
-                </label>
-                <div class="flex items-center gap-0.5 rounded-lg bg-gray-100 p-1" id="mall-sort-tabs">
-                  <button class="mall-sort-tab active" data-sort="default">综合推荐</button>
-                  <button class="mall-sort-tab" data-sort="sales">销量优先</button>
-                  <button class="mall-sort-tab" data-sort="price-asc">价格从低到高</button>
-                  <button class="mall-sort-tab" data-sort="price-desc">价格从高到低</button>
-                </div>
-                <button class="h-9 rounded-lg border border-gray-200 bg-white px-4 text-sm text-gray-600 transition hover:border-primary hover:text-primary" id="mall-reset">重置</button>
-                <span class="ml-auto text-sm text-gray-400" id="mall-count"></span>
-              </div>
-
               <div id="mall-service-list" class="grid grid-cols-3 gap-4"></div>
 
               <div id="mall-empty" class="hidden rounded-xl border border-dashed border-gray-300 bg-white py-16 text-center">
                 <div class="text-3xl">🗂️</div>
-                <div class="mt-3 text-base font-bold text-gray-800">没有找到匹配的知识产权服务</div>
+                <div class="mt-3 text-base font-bold text-gray-800">没有找到匹配的科创服务</div>
                 <div class="mt-1.5 text-sm text-gray-400">换个关键词或选择其他分类试试</div>
                 <button class="mt-4 rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" id="mall-empty-reset">查看全部服务</button>
               </div>
@@ -3427,7 +3779,7 @@
           </div>
         </div>
 
-        <!-- 我的空间：我的订单 -->
+        <!-- 服务与订单：我的订单 -->
         <div id="page-my-orders" class="page hidden">
           <div class="mb-5">
             <h2 class="text-xl font-semibold text-gray-800">我的订单</h2>
@@ -3492,7 +3844,7 @@
           </div>
         </div>
 
-        <!-- 我的空间：发票管理 -->
+        <!-- 服务与订单：发票管理 -->
         <div id="page-my-invoice" class="page hidden">
           <div class="mb-5 flex items-start justify-between">
             <div>
@@ -4501,27 +4853,51 @@
     const pages = document.querySelectorAll('.page');
     const breadcrumbCurrent = document.getElementById('breadcrumb-current');
 
+    // 已并入「科创专家」的专业工具，无独立菜单项时的标题兜底
+    const EXPERT_TOOL_TITLES = {
+      'page-health': '科创体检',
+      'page-policy': '政策发现',
+      'page-doc-expert': 'AI 申报书专家',
+      'page-planning': '年度申报规划',
+    };
+
+    function goToPage(target, title) {
+      navItems.forEach((i) => i.classList.remove('nav-active'));
+      const nav = document.querySelector('.nav-item[data-target="' + target + '"]');
+      if (nav) {
+        nav.classList.add('nav-active');
+      } else if (EXPERT_TOOL_TITLES[target]) {
+        const agentNav = document.querySelector('.nav-item[data-target="page-agent"]');
+        if (agentNav) agentNav.classList.add('nav-active');
+      }
+
+      pages.forEach((p) => p.classList.toggle('hidden', p.id !== target));
+      breadcrumbCurrent.textContent = title || (nav && nav.dataset.title) || EXPERT_TOOL_TITLES[target] || target;
+
+      // 企业数字档案：进入时懒加载图表
+      if (target === 'page-archive') initArchiveCharts();
+      // 驾驶舱：进入时懒加载图表
+      if (target === 'page-dashboard') initDashboardCharts();
+      // 年度申报规划：进入时懒加载甘特图
+      if (target === 'page-planning') initPlanningGantt();
+    }
+
     navItems.forEach((item) => {
-      item.addEventListener('click', () => {
-        // 高亮当前菜单
-        navItems.forEach((i) => i.classList.remove('nav-active'));
-        item.classList.add('nav-active');
+      item.addEventListener('click', () => goToPage(item.dataset.target, item.dataset.title));
+    });
 
-        // 切换页面显示
-        const target = item.dataset.target;
-        pages.forEach((p) => {
-          p.classList.toggle('hidden', p.id !== target);
-        });
+    // 科创专家 → 专业工具卡片
+    document.querySelectorAll('.js-expert-tool').forEach((tool) => {
+      tool.addEventListener('click', () => {
+        goToPage(tool.dataset.target, tool.dataset.title);
+      });
+    });
 
-        // 更新面包屑
-        breadcrumbCurrent.textContent = item.dataset.title;
-
-        // 企业数字档案：进入时懒加载图表
-        if (target === 'page-archive') initArchiveCharts();
-        // 驾驶舱：进入时懒加载图表
-        if (target === 'page-dashboard') initDashboardCharts();
-        // 年度申报规划：进入时懒加载甘特图
-        if (target === 'page-planning') initPlanningGantt();
+    // 专业工具页 → 返回科创专家
+    document.querySelectorAll('.js-back-expert').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        goToPage('page-agent', '科创专家');
+        switchAgentView('matrix');
       });
     });
 
@@ -4700,10 +5076,9 @@
       });
     }
 
-    // 查看详情 → 跳转政策发现
+    // 查看详情 → 跳转政策发现（现已并入科创专家）
     document.getElementById('ai-view-detail').addEventListener('click', () => {
-      const nav = document.querySelector('.nav-item[data-target="page-policy"]');
-      if (nav) nav.click();
+      goToPage('page-policy', '政策发现');
     });
 
     // 一键立项申报 → 打开既有弹窗
@@ -5669,8 +6044,7 @@
     // 快捷入口：点击切换到对应页面
     document.querySelectorAll('.js-quick-nav').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const nav = document.querySelector('.nav-item[data-target="' + btn.dataset.target + '"]');
-        if (nav) nav.click();
+        goToPage(btn.dataset.target);
       });
     });
 
@@ -5968,6 +6342,7 @@
         title: cfg.title,
         intro: cfg.intro,
         tag: cfg.tag,
+        category: cfg.category,
         status: cfg.status,
         statusText: cfg.statusText,
         icon: cfg.icon,
@@ -5985,119 +6360,228 @@
       };
     }
 
+    const defaultSteps = [
+      { icon: 'database', label: '数据准备', detail: '调取并校验企业档案与外部数据' },
+      { icon: 'loader-2', label: '智能测算', detail: '运行专家模型与规则引擎' },
+      { icon: 'file-text', label: '报告生成', detail: '输出结论、建议与成果物' },
+    ];
+
     const AGENTS = [
       makeAgent({
-        id: 'policy',
-        title: '政策专家',
-        intro: '政策结构化解析与硬门槛校验，双向适配打分',
-        tag: '匹配·约2分钟',
+        id: 'archive',
+        title: '企业数字档案管家',
+        intro: '负责企业全量科创数据的归集、校验、冲突发现与证据链管理，维护企业数字档案主数据',
+        tag: '治理·约3分钟',
+        category: '档案治理',
         status: 'ok',
         statusText: '服务包内',
-        icon: 'target',
-        grad: 'from-indigo-500 to-violet-500',
-        runIntro: '解析最新政策条款，校验硬性门槛，对匹配度双向打分并归因排序。',
-        artifacts: ['政策匹配清单', '政策匹配看板', '政策匹配报告'],
-        dlDesc: ['匹配政策与适配打分', '匹配结果可视化', '匹配结论与申报建议'],
-        seq: 1102,
-        reportTitle: '政策匹配报告',
-        conclusion: '共匹配到 6 项适配政策，其中 2 项满足全部硬门槛，匹配度评分位居前列，建议优先跟进。',
-        steps: [
-          { icon: 'file-text', label: '政策结构化解析', detail: '解析政策条款与申报条件' },
-          { icon: 'shield-check', label: '硬门槛规则校验', detail: '校验资质与硬性指标' },
-          { icon: 'scale', label: '双向适配打分', detail: '企业与政策双向匹配评分' },
-          { icon: 'alert-circle', label: '不满足原因归因', detail: '定位不满足项并给出原因' },
-          { icon: 'list-ordered', label: '匹配结果排序筛选', detail: '按适配度排序输出清单' },
-        ],
-      }),
-      makeAgent({
-        id: 'writer',
-        title: '申报书撰写专家',
-        intro: '模板自动适配与章节生成，一键成稿并合规自检',
-        tag: '成稿·约5分钟',
-        status: 'warn',
-        statusText: '需补 2 项数据',
-        icon: 'pen-line',
-        grad: 'from-emerald-500 to-teal-500',
-        runIntro: '匹配申报模板，回填基础信息并生成项目章节，润色后完成合规自检。',
-        artifacts: ['申报书素材表', '申报书在线预览', '项目申报书'],
-        dlDesc: ['章节内容与要点', '成稿在线预览', '最终成稿'],
-        seq: 1103,
-        reportTitle: '项目申报书',
-        conclusion: '已按申报模板生成完整章节内容并回填基础信息，合规自检通过，可进入人工复核。',
-        steps: [
-          { icon: 'layout-template', label: '模板自动适配', detail: '匹配申报模板与章节结构' },
-          { icon: 'clipboard-list', label: '基础信息一键填充', detail: '回填企业档案基础数据' },
-          { icon: 'pen-line', label: '项目章节生成', detail: '按章节生成申报正文' },
-          { icon: 'sparkles', label: '内容润色优化', detail: '语言润色与表述优化' },
-          { icon: 'shield-check', label: '合规自检 & 格式规整', detail: '合规校验与格式统一' },
-        ],
+        icon: 'database',
+        grad: 'from-blue-500 to-cyan-500',
+        runIntro: '归集企业全量科创数据，校验一致性，发现冲突并维护证据链与主数据。',
+        artifacts: ['档案治理清单', '档案治理看板', '档案治理报告'],
+        dlDesc: ['数据归集与校验明细', '主数据质量可视化', '冲突发现与治理建议'],
+        seq: 1201,
+        reportTitle: '档案治理报告',
+        conclusion: '企业数字档案已完成全量数据归集与校验，发现 3 处数据冲突并给出证据链修复建议。',
+        steps: defaultSteps,
       }),
       makeAgent({
         id: 'checkup',
-        title: '科创体检专家',
-        intro: '科创指标量化评估与风险排查，输出体检报告',
+        title: '科创体检诊断专家',
+        intro: '五维创新能力量化评估、硬条件核验、风险排查，输出企业科创体检报告与评级',
         tag: '体检·约4分钟',
+        category: '能力评估',
         status: 'ok',
         statusText: '服务包内',
         icon: 'activity',
         grad: 'from-amber-500 to-orange-500',
-        runIntro: '量化评估科创指标，识别短板与申报风险，对标分析后生成体检报告。',
+        runIntro: '五维量化评估科创能力，核验硬条件，排查风险并输出体检报告与评级。',
         artifacts: ['科创体检评分表', '科创体检看板', '科创体检报告'],
         dlDesc: ['指标评分明细', '雷达图对标可视化', '体检结论与整改建议'],
-        seq: 1104,
+        seq: 1202,
         reportTitle: '科创体检报告',
         conclusion: '综合科创能力得分 86.5 分，高于同行业均值；知识产权与研发组织管理表现突出，财务指标仍有提升空间。',
-        steps: [
-          { icon: 'gauge', label: '科创指标量化评估', detail: '量化测算各维度得分' },
-          { icon: 'search', label: '短板弱项识别', detail: '定位薄弱维度' },
-          { icon: 'alert-triangle', label: '申报风险排查', detail: '排查申报合规风险' },
-          { icon: 'bar-chart-3', label: '指标对标分析', detail: '与同行业均值对标' },
-          { icon: 'file-text', label: '体检报告生成', detail: '输出体检报告' },
-        ],
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'policy',
+        title: '政策匹配专家',
+        intro: '政策结构化解析、双向适配打分、临期政策监控与精准推送',
+        tag: '匹配·约2分钟',
+        category: '政策服务',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'target',
+        grad: 'from-indigo-500 to-violet-500',
+        runIntro: '解析政策条款，双向适配打分，监控临期政策并精准推送。',
+        artifacts: ['政策匹配清单', '政策匹配看板', '政策匹配报告'],
+        dlDesc: ['匹配政策与适配打分', '匹配结果可视化', '匹配结论与申报建议'],
+        seq: 1203,
+        reportTitle: '政策匹配报告',
+        conclusion: '共匹配到 6 项适配政策，其中 2 项满足全部硬门槛，匹配度评分位居前列，建议优先跟进。',
+        steps: defaultSteps,
       }),
       makeAgent({
         id: 'planning',
-        title: '申报规划专家',
-        intro: '项目窗口期监控与分级培育，制定申报时序',
+        title: '梯度培育规划专家',
+        intro: '科小→高企→专精特新→小巨人进阶路径规划、任务时序排布、甘特图与路线图生成',
         tag: '规划·约3分钟',
+        category: '梯度培育',
         status: 'warn',
         statusText: '需补 1 项数据',
         icon: 'route',
         grad: 'from-violet-500 to-purple-500',
-        runIntro: '监控项目申报窗口，分级培育项目并按时间轴排期，生成申报规划。',
-        artifacts: ['申报时序排期表', '申报规划看板', '申报规划报告'],
-        dlDesc: ['项目窗口与排期', '甘特图可视化', '规划结论与建议'],
-        seq: 1105,
-        reportTitle: '申报规划报告',
-        conclusion: '已梳理 8 个可申报项目窗口并按成熟度分级，建议优先推进 3 个近期截止的高匹配项目。',
-        steps: [
-          { icon: 'calendar-clock', label: '项目窗口期监控', detail: '监控申报时间窗口' },
-          { icon: 'layers', label: '项目分级培育', detail: '按成熟度分级' },
-          { icon: 'route', label: '申报时序排期', detail: '制定申报时间表' },
-          { icon: 'file-text', label: '申报规划报告撰写', detail: '输出规划报告' },
-        ],
+        runIntro: '规划梯度进阶路径，排布任务时序并生成甘特图与路线图。',
+        artifacts: ['培育路径排期表', '梯度培育看板', '梯度培育报告'],
+        dlDesc: ['进阶路径与排期', '甘特图与路线图', '培育结论与建议'],
+        seq: 1204,
+        reportTitle: '梯度培育报告',
+        conclusion: '已按科小→高企→专精特新→小巨人梳理进阶路径并完成时序排布，建议优先推进近期截止的重点申报。',
+        steps: defaultSteps,
       }),
       makeAgent({
-        id: 'service',
-        title: '服务挖掘专家',
-        intro: '短板需求识别与服务线索匹配，分级推送',
-        tag: '挖掘·约3分钟',
+        id: 'gaoxin',
+        title: '高企认定申报专家',
+        intro: '高新技术企业认定全流程条件把握、材料组织、任务拆解与评审要点应对',
+        tag: '申报·约4分钟',
+        category: '资质申报',
+        status: 'warn',
+        statusText: '需补 2 项数据',
+        icon: 'award',
+        grad: 'from-emerald-500 to-teal-500',
+        runIntro: '把握高企认定全流程条件，组织材料、拆解任务并应对评审要点。',
+        artifacts: ['高企申报任务表', '高企认定看板', '高企认定申报方案'],
+        dlDesc: ['申报任务与条件', '进度可视化', '申报方案与要点'],
+        seq: 1205,
+        reportTitle: '高企认定申报方案',
+        conclusion: '已梳理高企认定全流程条件与任务拆解，材料组织基本齐备，重点补齐研发费用佐证后即可申报。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'srds',
+        title: '专精特新/小巨人培育专家',
+        intro: '专精特新及小巨人梯度条件把握、主导产品细分市场占有率论证、补短板建议',
+        tag: '培育·约4分钟',
+        category: '资质申报',
+        status: 'warn',
+        statusText: '需补 2 项数据',
+        icon: 'gem',
+        grad: 'from-teal-500 to-green-500',
+        runIntro: '把握专精特新及小巨人梯度条件，论证细分市场占有率并给出补短板建议。',
+        artifacts: ['专精特新培育清单', '小巨人培育看板', '梯度培育申报方案'],
+        dlDesc: ['梯度条件与差距', '培育进度可视化', '申报方案与建议'],
+        seq: 1206,
+        reportTitle: '专精特新培育方案',
+        conclusion: '已完成专精特新/小巨人梯度条件核验，主导产品细分市场占有率论证可行，建议补充 2 项发明专利后申报。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'finance',
+        title: '研发费用与加计扣除专家',
+        intro: '研发费用辅助账归集口径、高企口径与加计扣除口径差异、归集合规性审查',
+        tag: '测算·约3分钟',
+        category: '财税合规',
         status: 'ok',
         statusText: '服务包内',
-        icon: 'search',
-        grad: 'from-pink-500 to-rose-500',
-        runIntro: '识别企业短板需求，匹配科创服务线索并撰写挖掘报告，按优先级推送。',
-        artifacts: ['服务线索清单', '服务挖掘看板', '服务挖掘报告'],
-        dlDesc: ['匹配服务与需求线索', '线索可视化', '挖掘结论与推送建议'],
-        seq: 1106,
-        reportTitle: '服务挖掘报告',
-        conclusion: '识别出 3 项高优先级科创服务需求，匹配到 5 条可对接服务线索，建议按优先级分级推送。',
-        steps: [
-          { icon: 'search', label: '短板需求识别', detail: '识别企业短板与需求' },
-          { icon: 'link', label: '科创服务线索匹配', detail: '匹配可对接服务线索' },
-          { icon: 'file-text', label: '科创服务挖掘报告撰写', detail: '输出挖掘报告' },
-          { icon: 'send', label: '需求分级推送', detail: '按优先级分级推送' },
-        ],
+        icon: 'calculator',
+        grad: 'from-cyan-500 to-blue-500',
+        runIntro: '梳理研发费用辅助账归集口径，比对高企与加计扣除口径差异并审查合规性。',
+        artifacts: ['研发费用辅助账', '加计扣除看板', '财税合规审查报告'],
+        dlDesc: ['辅助账归集明细', '口径差异可视化', '合规审查结论'],
+        seq: 1207,
+        reportTitle: '研发费用与加计扣除报告',
+        conclusion: '已完成研发费用辅助账归集口径梳理，高企口径与加计扣除口径差异已标注，归集合规性审查通过。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'ip',
+        title: '知识产权布局与运营专家',
+        intro: 'IP资产盘点、发明专利占比分析、临期预警、PCT/许可转让布局建议',
+        tag: '盘点·约3分钟',
+        category: 'IP资产',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'copyright',
+        grad: 'from-purple-500 to-fuchsia-500',
+        runIntro: '盘点 IP 资产，分析发明专利占比，预警临期专利并给出布局建议。',
+        artifacts: ['IP资产盘点表', '知产布局看板', '知产布局与运营报告'],
+        dlDesc: ['资产盘点明细', '布局可视化', '运营结论与建议'],
+        seq: 1208,
+        reportTitle: '知产布局与运营报告',
+        conclusion: '已完成 IP 资产盘点与发明专利占比分析，发现 3 项临期专利，建议补充 PCT 布局并优化许可转让策略。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'writer',
+        title: '申报书撰写专家',
+        intro: '申报模板适配、章节自动生成、润色、合规自检、证据凭证挂接',
+        tag: '成稿·约5分钟',
+        category: '材料撰写',
+        status: 'warn',
+        statusText: '需补 2 项数据',
+        icon: 'pen-line',
+        grad: 'from-rose-500 to-pink-500',
+        runIntro: '适配申报模板，自动生成章节，润色并完成合规自检与证据挂接。',
+        artifacts: ['申报书素材表', '申报书在线预览', '项目申报书'],
+        dlDesc: ['章节内容与要点', '成稿在线预览', '最终成稿'],
+        seq: 1209,
+        reportTitle: '项目申报书',
+        conclusion: '已按申报模板生成完整章节内容并回填基础信息，合规自检通过，可进入人工复核。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'transfer',
+        title: '科技成果转化专家',
+        intro: '成果成熟度判定、转化路径设计、融资可行性分析、成果推介页生成',
+        tag: '转化·约3分钟',
+        category: '成果转化',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'rocket',
+        grad: 'from-orange-500 to-red-500',
+        runIntro: '判定成果成熟度，设计转化路径，分析融资可行性并生成推介页。',
+        artifacts: ['成果转化清单', '成果转化看板', '成果转化报告'],
+        dlDesc: ['成果与路径清单', '转化进度可视化', '转化结论与建议'],
+        seq: 1210,
+        reportTitle: '成果转化报告',
+        conclusion: '已完成成果成熟度判定与转化路径设计，融资可行性分析通过，建议优先推进 2 项高成熟度成果转化。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'platform',
+        title: '创新平台与人才专家',
+        intro: '技术中心/工程中心/博士后基地申报条件核查、高层次人才项目匹配',
+        tag: '核查·约3分钟',
+        category: '平台与人才',
+        status: 'warn',
+        statusText: '需补 1 项数据',
+        icon: 'users',
+        grad: 'from-sky-500 to-blue-500',
+        runIntro: '核查平台申报条件，匹配高层次人才项目并输出申报建议。',
+        artifacts: ['平台申报清单', '人才项目看板', '平台与人才申报报告'],
+        dlDesc: ['平台申报条件', '人才项目可视化', '申报结论与建议'],
+        seq: 1211,
+        reportTitle: '平台与人才申报报告',
+        conclusion: '已完成技术中心/工程中心/博士后基地申报条件核查，匹配到 3 项高层次人才项目，建议优先申报。',
+        steps: defaultSteps,
+      }),
+      makeAgent({
+        id: 'benchmark',
+        title: '同赛道对标专家',
+        intro: '标杆企业获证榜分析、本地区同赛道水平对标、申报时机建议',
+        tag: '对标·约3分钟',
+        category: '竞争情报',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'bar-chart-3',
+        grad: 'from-fuchsia-500 to-pink-500',
+        runIntro: '分析标杆企业获证榜，对标本地区同赛道水平并给出申报时机建议。',
+        artifacts: ['同赛道对标清单', '竞争情报看板', '对标分析报告'],
+        dlDesc: ['对标样本清单', '对标结果可视化', '对标结论与建议'],
+        seq: 1212,
+        reportTitle: '同赛道对标报告',
+        conclusion: '已完成标杆企业获证榜与本地区同赛道水平对标，建议把握近期申报窗口，优先申报高匹配项目。',
+        steps: defaultSteps,
       }),
     ];
 
@@ -6162,7 +6646,10 @@
             '<p class="mt-1.5 text-sm leading-relaxed text-gray-500">' + a.intro + '</p>' +
           '</div>' +
         '</div>' +
-        '<div class="mt-4"><span class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-600"><i data-lucide="clock" class="h-3.5 w-3.5"></i>' + a.tag + '</span></div>' +
+        '<div class="mt-4 flex flex-wrap items-center gap-2">' +
+          '<span class="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2.5 py-1 text-xs text-gray-600"><i data-lucide="clock" class="h-3.5 w-3.5"></i>' + a.tag + '</span>' +
+          '<span class="inline-flex items-center rounded-full bg-primary-light px-2.5 py-1 text-xs text-primary">' + a.category + '</span>' +
+        '</div>' +
         '<div class="mt-auto flex items-center justify-between border-t border-gray-100 pt-4">' +
           '<span class="flex items-center gap-1.5 text-sm ' + statusCls + '"><i data-lucide="' + statusIcon + '" class="h-4 w-4"></i>' + a.statusText + '</span>' +
           '<span class="text-sm text-gray-400 transition group-hover:text-primary">立即运行 →</span>' +
@@ -6235,81 +6722,164 @@
     }
 
     const REPORT_VERDICTS = {
-      policy: '建议跟进申报',
-      writer: '需补材料后提交',
+      archive: '建议治理补全',
       checkup: '建议整改提升',
+      policy: '建议跟进申报',
       planning: '建议按序申报',
-      service: '建议对接服务',
+      gaoxin: '建议补齐材料',
+      srds: '建议培育达标',
+      finance: '建议规整口径',
+      ip: '建议布局优化',
+      writer: '需补材料后提交',
+      transfer: '建议推进转化',
+      platform: '建议择机申报',
+      benchmark: '建议择期申报',
     };
 
     const REPORT_VERDICTS_OK = {
-      policy: '匹配，建议申报',
-      writer: '材料齐备，可提交',
+      archive: '数据完整',
       checkup: '体检达标',
+      policy: '匹配，建议申报',
       planning: '可按时序申报',
-      service: '需求已匹配',
+      gaoxin: '可申报',
+      srds: '可申报',
+      finance: '口径合规',
+      ip: '布局合理',
+      writer: '材料齐备，可提交',
+      transfer: '可转化',
+      platform: '可申报',
+      benchmark: '可申报',
     };
 
     const REPORT_TODOS_OK = {
-      policy: [{ text: '发起高匹配政策申报', action: '去发起' }],
-      writer: [{ text: '提交申报书至主管部门', action: '去提交' }],
+      archive: [{ text: '保持档案数据月度更新', action: '去关注' }],
       checkup: [{ text: '按季复检，持续跟踪指标变化', action: '去关注' }],
+      policy: [{ text: '发起高匹配政策申报', action: '去发起' }],
       planning: [{ text: '按排期推进重点申报', action: '去发起' }],
-      service: [{ text: '对接高优先级服务线索', action: '去对接' }],
+      gaoxin: [{ text: '提交高企认定申报材料', action: '去提交' }],
+      srds: [{ text: '提交专精特新申报材料', action: '去提交' }],
+      finance: [{ text: '完成研发费用加计扣除备案', action: '去发起' }],
+      ip: [{ text: '推进高价值发明专利布局', action: '去发起' }],
+      writer: [{ text: '提交申报书至主管部门', action: '去提交' }],
+      transfer: [{ text: '推进高成熟度成果转化签约', action: '去发起' }],
+      platform: [{ text: '提交平台/人才项目申报', action: '去提交' }],
+      benchmark: [{ text: '按对标结论推进重点申报', action: '去发起' }],
     };
 
     const REPORT_CONCLUSIONS_OK = {
-      policy: '企业档案数据完整，硬门槛全部满足，共匹配到 6 项高适配政策，建议优先申报。',
-      writer: '所需申报材料齐备，模板适配与内容生成均已通过合规自检，可提交。',
+      archive: '企业数字档案主数据完整，数据质量校验通过，可支撑全链路智能体调用。',
       checkup: '企业科创指标整体达标，知识产权与研发组织管理表现突出，无重大申报风险。',
+      policy: '企业档案数据完整，硬门槛全部满足，共匹配到 6 项高适配政策，建议优先申报。',
       planning: '项目信息完整，已按申报窗口与成熟度完成排期，可按计划推进申报。',
-      service: '企业需求清晰，已匹配到多条可对接服务线索，建议按优先级对接。',
+      gaoxin: '高企认定条件与材料已基本齐备，合规自检通过，可进入申报提交。',
+      srds: '专精特新/小巨人梯度条件满足，市场占有率论证可行，可进入申报提交。',
+      finance: '研发费用辅助账口径合规，高企与加计扣除口径差异已标注，可完成备案。',
+      ip: 'IP 资产结构合理，发明专利占比达标，临期预警已生成，布局建议可落地。',
+      writer: '所需申报材料齐备，模板适配与内容生成均已通过合规自检，可提交。',
+      transfer: '成果成熟度判定完成，转化路径清晰，融资可行性通过，可推进转化。',
+      platform: '平台与人才申报条件满足，已匹配到适配的高层次人才项目，可申报。',
+      benchmark: '同赛道对标分析完成，企业处于中上水平，建议把握近期申报窗口。',
     };
 
     const REPORT_SERVICES = {
-      policy: [
-        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
-        { name: '政策申报代理服务', tag: '申报代理', price: '￥3,000' },
-      ],
-      writer: [
-        { name: '申报材料专家辅导', tag: '专家1对1', price: '￥4,000' },
-        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
+      archive: [
+        { name: '企业数据治理服务', tag: '数据服务', price: '￥3,000' },
+        { name: '企业档案托管', tag: '全流程', price: '￥5,000' },
       ],
       checkup: [
         { name: '科创能力整改提升服务', tag: '专家辅导', price: '￥6,000' },
         { name: '知识产权布局规划', tag: '知产服务', price: '￥8,000' },
       ],
+      policy: [
+        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
+        { name: '政策申报代理服务', tag: '申报代理', price: '￥3,000' },
+      ],
       planning: [
         { name: '专精特新一对一辅导', tag: '专家1对1', price: '￥8,000' },
         { name: '年度申报规划托管', tag: '全流程', price: '￥10,000' },
       ],
-      service: [
-        { name: '发明专利快速预审代办', tag: '快速通道', price: '￥3,800' },
+      gaoxin: [
+        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
         { name: '高企认定审计服务', tag: '官方备案', price: '￥8,000' },
+      ],
+      srds: [
+        { name: '专精特新一对一辅导', tag: '专家1对1', price: '￥8,000' },
+        { name: '小巨人培育方案', tag: '梯度培育', price: '￥12,000' },
+      ],
+      finance: [
         { name: '研发费用加计扣除服务', tag: '财税合规', price: '￥2,000' },
+        { name: '研发辅助账归集服务', tag: '财税服务', price: '￥3,500' },
+      ],
+      ip: [
+        { name: '知识产权布局规划', tag: '知产服务', price: '￥8,000' },
+        { name: '发明专利快速预审代办', tag: '快速通道', price: '￥3,800' },
+      ],
+      writer: [
+        { name: '申报材料专家辅导', tag: '专家1对1', price: '￥4,000' },
+        { name: '高企认定全流程托管', tag: '全流程', price: '￥5,000' },
+      ],
+      transfer: [
+        { name: '成果转化对接服务', tag: '转化服务', price: '￥6,000' },
+        { name: '融资可行性分析', tag: '融资服务', price: '￥4,000' },
+      ],
+      platform: [
+        { name: '创新平台申报辅导', tag: '专家1对1', price: '￥7,000' },
+        { name: '高层次人才项目匹配', tag: '人才服务', price: '￥5,000' },
+      ],
+      benchmark: [
+        { name: '同赛道对标分析', tag: '情报服务', price: '￥4,000' },
+        { name: '申报时机咨询', tag: '咨询服务', price: '￥3,000' },
       ],
     };
 
     const REPORT_TODOS = {
-      policy: [
-        { text: '补充「高新技术企业认定」的研发费用占比佐证材料', action: '去补录' },
-        { text: '发起「高新技术企业认定」申报立项', action: '去发起' },
-      ],
-      writer: [
-        { text: '补充财务审计等申报材料', action: '去补录' },
-        { text: '人工复核申报书正文', action: '去复核' },
+      archive: [
+        { text: '补录缺失的企业基础信息', action: '去补录' },
+        { text: '修复发现的数据冲突', action: '去复核' },
       ],
       checkup: [
         { text: '整改短板弱项（财务指标）', action: '去整改' },
         { text: '补充申报材料并发起专家复核', action: '去发起' },
       ],
+      policy: [
+        { text: '补充「高新技术企业认定」的研发费用占比佐证材料', action: '去补录' },
+        { text: '发起「高新技术企业认定」申报立项', action: '去发起' },
+      ],
       planning: [
         { text: '确认申报时序排期', action: '去确认' },
         { text: '发起近期截止的重点申报', action: '去发起' },
       ],
-      service: [
-        { text: '对接高优先级服务线索', action: '去对接' },
-        { text: '将需求转成服务单', action: '去转单' },
+      gaoxin: [
+        { text: '补充研发费用占比佐证材料', action: '去补录' },
+        { text: '发起高企认定申报立项', action: '去发起' },
+      ],
+      srds: [
+        { text: '补充主导产品市场占有率证明', action: '去补录' },
+        { text: '发起专精特新申报立项', action: '去发起' },
+      ],
+      finance: [
+        { text: '规整研发费用辅助账口径', action: '去整改' },
+        { text: '补充加计扣除备查资料', action: '去补录' },
+      ],
+      ip: [
+        { text: '补充发明专利年费缴纳记录', action: '去补录' },
+        { text: '发起知识产权布局咨询', action: '去发起' },
+      ],
+      writer: [
+        { text: '补充财务审计等申报材料', action: '去补录' },
+        { text: '人工复核申报书正文', action: '去复核' },
+      ],
+      transfer: [
+        { text: '补充成果成熟度证明材料', action: '去补录' },
+        { text: '发起成果转化对接', action: '去发起' },
+      ],
+      platform: [
+        { text: '补充研发平台场地与设备证明', action: '去补录' },
+        { text: '发起平台申报立项', action: '去发起' },
+      ],
+      benchmark: [
+        { text: '补充同赛道对标样本数据', action: '去补录' },
+        { text: '确认申报时机与排期', action: '去确认' },
       ],
     };
 
@@ -6322,30 +6892,57 @@
     };
 
     const REPORT_SUGGESTIONS = {
-      policy: [
-        { text: '提升研发费用占营收比至 5% 以上（当前 3.0%）' },
-        { text: '布局高价值发明专利（当前 2 件，建议 5 件以上）' },
-        { text: '完善研发费用辅助账与工时记录规范' },
-      ],
-      writer: [
-        { text: '布局高价值发明专利，提升专利资产价值' },
-        { text: '提升营收复合增长率至 20% 以上' },
-        { text: '完善知识产权管理规范体系' },
+      archive: [
+        { text: '建立档案数据月度更新机制' },
+        { text: '完善证据链与数据血缘管理' },
       ],
       checkup: [
         { text: '提升研发费用占营收比，补齐研发投入短板' },
         { text: '布局高价值发明专利，优化专利结构' },
         { text: '提升营收复合增长率，增强成长性' },
       ],
+      policy: [
+        { text: '提升研发费用占营收比至 5% 以上（当前 3.0%）' },
+        { text: '布局高价值发明专利（当前 2 件，建议 5 件以上）' },
+        { text: '完善研发费用辅助账与工时记录规范' },
+      ],
       planning: [
         { text: '布局高价值发明专利，支撑后续申报' },
         { text: '提升营收复合增长率，增强成长性指标' },
         { text: '完善研发费用辅助账，夯实申报基础' },
       ],
-      service: [
+      gaoxin: [
+        { text: '提升研发费用占营收比' },
+        { text: '布局高价值发明专利' },
+      ],
+      srds: [
+        { text: '补充发明专利提升主导产品竞争力' },
+        { text: '提升细分市场占有率' },
+      ],
+      finance: [
+        { text: '统一研发费用归集口径' },
+        { text: '完善研发工时记录规范' },
+      ],
+      ip: [
+        { text: '提升发明专利占比' },
+        { text: '补充 PCT 国际布局' },
+      ],
+      writer: [
         { text: '布局高价值发明专利，提升专利资产价值' },
-        { text: '提升研发费用占营收比，增强研发投入强度' },
+        { text: '提升营收复合增长率至 20% 以上' },
         { text: '完善知识产权管理规范体系' },
+      ],
+      transfer: [
+        { text: '提升成果成熟度等级' },
+        { text: '完善转化激励机制' },
+      ],
+      platform: [
+        { text: '完善研发平台管理制度' },
+        { text: '引进高层次人才' },
+      ],
+      benchmark: [
+        { text: '对标标杆企业补齐短板' },
+        { text: '优化申报节奏与时机' },
       ],
     };
 
@@ -6577,7 +7174,7 @@
             '<div class="text-sm font-medium text-gray-800">' + name + '</div>' +
             '<div class="mt-1 text-lg font-semibold text-primary">' + price + '</div>' +
           '</div>' +
-          '<div class="text-sm leading-relaxed text-gray-600">下单后将生成服务单，可在「我的空间」的「我的订单」中查看，并由专属顾问跟进履约。</div>' +
+          '<div class="text-sm leading-relaxed text-gray-600">下单后将生成服务单，可在「服务与订单」的「我的订单」中查看，并由专属顾问跟进履约。</div>' +
         '</div>' +
         '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
           '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
@@ -6589,7 +7186,7 @@
     function confirmOrder() {
       const name = pendingOrder ? pendingOrder.name : '';
       closeAgentModal();
-      showToast('已为「' + name + '」生成服务单，可在「我的空间」的「我的订单」中查看', 'success');
+      showToast('已为「' + name + '」生成服务单，可在「服务与订单」的「我的订单」中查看', 'success');
     }
 
     let pendingInvoice = null;
@@ -6976,6 +7573,39 @@
 
     // 初始化矩阵
     renderAgentMatrix();
+
+    // ==================== 技能 ====================
+    // 分类筛选：从卡片分类标签中提取分类
+    document.querySelectorAll('#skill-grid > div').forEach((card) => {
+      const catTag = card.querySelector('.rounded-full.bg-gray-100');
+      if (catTag) card.dataset.skillCat = catTag.textContent.trim();
+    });
+    document.querySelectorAll('.skill-cat-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.skill-cat-chip').forEach((c) => {
+          c.className = 'skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary';
+        });
+        chip.className = 'skill-cat-chip rounded-full px-3 py-1 text-xs transition bg-primary text-white';
+        const cat = chip.dataset.cat;
+        document.querySelectorAll('#skill-grid > div').forEach((card) => {
+          const match = cat === '全部' || card.dataset.skillCat === cat;
+          card.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    // ==================== 科创培育工作 ====================
+    document.querySelectorAll('.cultivation-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.cultivation-tab').forEach((t) => t.classList.remove('cultivation-tab-active'));
+        tab.classList.add('cultivation-tab-active');
+        const view = tab.dataset.cultivation;
+        ['health', 'diagnosis', 'planning'].forEach((v) => {
+          const el = document.getElementById('cultivation-' + v);
+          if (el) el.classList.toggle('hidden', v !== view);
+        });
+      });
+    });
 
     // ==================== 成员与角色 ====================
     document.getElementById('invite-member-btn').addEventListener('click', () => {
@@ -7452,38 +8082,38 @@
       window.addEventListener('resize', () => chart.resize());
     }
 
-    // ==================== 服务商城（知识产权服务市场） ====================
+    // ==================== 服务商城（科创服务市场） ====================
     const MALL_CATS = [
       { key:'all',      name:'全部服务',   c:'47 117 235' },
-      { key:'商标服务',  name:'商标服务',   c:'47 117 235' },
-      { key:'专利服务',  name:'专利服务',   c:'23 166 190' },
-      { key:'版权服务',  name:'版权服务',   c:'112 85 224' },
-      { key:'知产交易',  name:'知产交易',   c:'40 166 111' },
-      { key:'维权诉讼',  name:'维权诉讼',   c:'221 82 121' },
-      { key:'贯标管理',  name:'贯标与管理', c:'235 142 50' },
-      { key:'涉外知产',  name:'涉外知产',   c:'23 150 173' },
+      { key:'专家报告',  name:'专家报告',   c:'108 98 229' },
+      { key:'申报服务',  name:'申报服务',   c:'52 126 233' },
+      { key:'填报服务',  name:'填报服务',   c:'26 166 190' },
+      { key:'财税服务',  name:'财税服务',   c:'238 145 59' },
+      { key:'知产服务',  name:'知产服务',   c:'223 93 141' },
+      { key:'辅导培育',  name:'辅导培育',   c:'139 92 246' },
     ];
 
     const MALL_PRODUCTS = [
-      { id:'IP-TM2026001', name:'商标注册申请', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'商标', desc:'1 个类别 10 个小项，近似检索＋材料撰写＋提交申报＋进度跟踪。', priceMain:'¥800', priceUnit:'/类起', priceNum:800, rating:4.9, sold:1286, hot:true },
-      { id:'IP-TM2026002', name:'商标驳回复审', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'复审', desc:'针对驳回通知撰写复审理由书，附证据材料，争取商标获准注册。', priceMain:'¥3,000', priceUnit:'起', priceNum:3000, rating:4.8, sold:238 },
-      { id:'IP-TM2026003', name:'商标续展 / 变更', cat:'商标服务', c1:'#347ee9', c2:'#24bad1', badge:'续展', desc:'到期续展、名义或地址变更、补发注册证，全流程代办。', priceMain:'¥1,500', priceUnit:'/件', priceNum:1500, rating:4.9, sold:412 },
-      { id:'IP-PT2026001', name:'发明专利申请代理', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'发明', desc:'技术交底书撰写、权利要求布局、答复审查意见，全程专业代理。', priceMain:'¥6,000', priceUnit:'起', priceNum:6000, rating:4.9, sold:365, hot:true },
-      { id:'IP-PT2026002', name:'实用新型专利申请', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'实用', desc:'适合结构类技术改进，授权周期短，材料撰写与申报全包。', priceMain:'¥3,000', priceUnit:'起', priceNum:3000, rating:4.8, sold:521 },
-      { id:'IP-PT2026003', name:'外观设计专利申请', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'外观', desc:'产品外观图制作与申报，保护产品造型、图案与色彩设计。', priceMain:'¥2,000', priceUnit:'起', priceNum:2000, rating:4.8, sold:297 },
-      { id:'IP-PT2026004', name:'专利检索与分析报告', cat:'专利服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'检索', desc:'查新检索、竞争对手专利监控、专利布局建议，出具分析报告。', priceMain:'¥5,000', priceUnit:'起', priceNum:5000, rating:4.9, sold:143 },
-      { id:'IP-CR2026001', name:'软件著作权登记', cat:'版权服务', c1:'#6c62e5', c2:'#9f87ed', badge:'软著', desc:'源代码与说明书整理、材料提交、加急通道，最快 1 个工作日受理。', priceMain:'¥1,200', priceUnit:'/件起', priceNum:1200, rating:4.9, sold:864, hot:true },
-      { id:'IP-CR2026002', name:'作品著作权登记', cat:'版权服务', c1:'#6c62e5', c2:'#9f87ed', badge:'版权', desc:'文字、美术、摄影、视听等作品登记，可用于维权与商业化授权。', priceMain:'¥800', priceUnit:'/件', priceNum:800, rating:4.8, sold:326 },
-      { id:'IP-TR2026001', name:'商标转让 / 过户', cat:'知产交易', c1:'#2aaa78', c2:'#6bc79a', badge:'转让', desc:'现成 R 标选购、转让协议起草、官方备案过户全程代办。', priceMain:'¥2,500', priceUnit:'起', priceNum:2500, rating:4.8, sold:189 },
-      { id:'IP-TR2026002', name:'专利转让与许可备案', cat:'知产交易', c1:'#2aaa78', c2:'#6bc79a', badge:'许可', desc:'专利价值评估、转让合同拟定、许可备案登记与年费代缴。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.7, sold:76 },
-      { id:'IP-EN2026001', name:'商标侵权诉讼代理', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'诉讼', desc:'侵权证据固定、律师函、行政投诉与民事诉讼全流程代理。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.9, sold:52 },
-      { id:'IP-EN2026002', name:'电商平台侵权投诉下架', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'投诉', desc:'主流电商平台投诉通道提交，侵权链接快速下架处理。', priceMain:'¥1,500', priceUnit:'/次起', priceNum:1500, rating:4.8, sold:274 },
-      { id:'IP-EN2026003', name:'专利侵权分析（FTO）', cat:'维权诉讼', c1:'#df5d8d', c2:'#ee91b4', badge:'FTO', desc:'产品上市前自由实施分析，识别侵权风险并出具规避建议。', priceMain:'¥8,000', priceUnit:'起', priceNum:8000, rating:4.9, sold:68, new:true },
-      { id:'IP-MG2026001', name:'知识产权贯标认证', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'贯标', desc:'GB/T 29490 体系搭建、文件编制、内审辅导与认证对接。', priceMain:'¥30,000', priceUnit:'起', priceNum:30000, rating:4.8, sold:47 },
-      { id:'IP-MG2026002', name:'知识产权年度托管', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'托管', desc:'年费监控、期限提醒、布局规划与年度知产盘点，一站式托管。', priceMain:'¥12,000', priceUnit:'/年起', priceNum:12000, rating:4.9, sold:132, hot:true },
-      { id:'IP-MG2026003', name:'高价值专利培育', cat:'贯标管理', c1:'#ee913b', c2:'#f1be4d', badge:'培育', desc:'围绕核心技术挖掘专利组合，提升授权率与专利资产价值。', priceMain:'方案定价', priceUnit:'', priceNum:null, rating:4.8, sold:39 },
-      { id:'IP-OV2026001', name:'马德里商标国际注册', cat:'涉外知产', c1:'#176bdc', c2:'#19b6bd', badge:'国际', desc:'单一申请覆盖多国，指定国选择、材料翻译与外所对接。', priceMain:'¥8,000', priceUnit:'起', priceNum:8000, rating:4.9, sold:64 },
-      { id:'IP-OV2026002', name:'PCT 国际专利申请', cat:'涉外知产', c1:'#176bdc', c2:'#19b6bd', badge:'PCT', desc:'国际阶段申请、检索报告答复与进入国家阶段规划。', priceMain:'¥25,000', priceUnit:'起', priceNum:25000, rating:4.9, sold:31, new:true },
+      { id:'KC-RPT-001', name:'科创体检诊断报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'体检', desc:'五维科创能力量化评估、硬条件核验与风险排查，输出评级与整改建议。', priceMain:'¥3,000', priceUnit:'/份', priceNum:3000, rating:4.9, sold:428, hot:true },
+      { id:'KC-RPT-002', name:'政策匹配报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'匹配', desc:'政策结构化解析与双向适配打分，输出可申报政策清单与申报建议。', priceMain:'¥1,500', priceUnit:'/份', priceNum:1500, rating:4.8, sold:356 },
+      { id:'KC-RPT-003', name:'同赛道对标报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'对标', desc:'标杆企业获证榜分析与本地区同赛道水平对标，输出定位与申报时机建议。', priceMain:'¥2,000', priceUnit:'/份', priceNum:2000, rating:4.7, sold:89, new:true },
+      { id:'KC-RPT-004', name:'梯度培育规划报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'规划', desc:'科小→高企→专精特新→小巨人进阶路径规划与任务时序排布。', priceMain:'¥2,500', priceUnit:'/份', priceNum:2500, rating:4.9, sold:210 },
+      { id:'KC-RPT-005', name:'成果转化可行性报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'转化', desc:'成果成熟度判定、转化路径设计与融资可行性分析。', priceMain:'¥3,500', priceUnit:'/份', priceNum:3500, rating:4.8, sold:64 },
+      { id:'KC-RPT-006', name:'研发费用合规审查报告', cat:'专家报告', c1:'#6c62e5', c2:'#9f87ed', badge:'财税', desc:'研发费用辅助账口径梳理，高企口径与加计扣除口径差异审查。', priceMain:'¥1,800', priceUnit:'/份', priceNum:1800, rating:4.8, sold:132 },
+      { id:'KC-APL-001', name:'高新技术企业认定申报', cat:'申报服务', c1:'#347ee9', c2:'#24bad1', badge:'高企', desc:'全流程条件把握、材料组织、任务拆解与评审要点应对。', priceMain:'¥8,000', priceUnit:'/年起', priceNum:8000, rating:4.9, sold:156, hot:true },
+      { id:'KC-APL-002', name:'专精特新中小企业申报', cat:'申报服务', c1:'#347ee9', c2:'#24bad1', badge:'专精', desc:'梯度条件核验、主导产品市场占有率论证与补短板建议。', priceMain:'¥6,000', priceUnit:'/年起', priceNum:6000, rating:4.8, sold:98 },
+      { id:'KC-APL-003', name:'专精特新小巨人培育申报', cat:'申报服务', c1:'#347ee9', c2:'#24bad1', badge:'小巨人', desc:'小巨人梯度条件把握、材料组织与申报全流程辅导。', priceMain:'¥12,000', priceUnit:'/年起', priceNum:12000, rating:4.9, sold:42 },
+      { id:'KC-APL-004', name:'科技型中小企业评价申报', cat:'申报服务', c1:'#347ee9', c2:'#24bad1', badge:'科小', desc:'入库评价材料填报与申报，快速完成科技型中小企业入库。', priceMain:'¥2,000', priceUnit:'/次', priceNum:2000, rating:4.8, sold:275 },
+      { id:'KC-FIL-001', name:'高企认定年报填报', cat:'填报服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'年报', desc:'高新技术企业年度发展情况报表填报与审核要点核对。', priceMain:'¥1,200', priceUnit:'/年', priceNum:1200, rating:4.8, sold:320, hot:true },
+      { id:'KC-FIL-002', name:'研发费用辅助账填报', cat:'填报服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'辅助账', desc:'按八大类归集研发费用，输出高企口径与加计扣除口径差异表。', priceMain:'¥2,000', priceUnit:'/年', priceNum:2000, rating:4.9, sold:268 },
+      { id:'KC-FIL-003', name:'科技统计报表填报', cat:'填报服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'统计', desc:'研发投入统计、火炬统计等报表填报与数据校验。', priceMain:'¥1,000', priceUnit:'/年', priceNum:1000, rating:4.7, sold:145 },
+      { id:'KC-FIL-004', name:'项目申报书填报', cat:'填报服务', c1:'#1aa6be', c2:'#5fd0e0', badge:'申报书', desc:'申报模板适配、章节内容填报与证据凭证挂接。', priceMain:'¥3,000', priceUnit:'/份', priceNum:3000, rating:4.8, sold:189 },
+      { id:'KC-FIN-001', name:'研发费用加计扣除服务', cat:'财税服务', c1:'#ee913b', c2:'#f1be4d', badge:'加计', desc:'加计扣除口径梳理、备查资料归集与备案申报。', priceMain:'¥2,000', priceUnit:'/年', priceNum:2000, rating:4.9, sold:210, hot:true },
+      { id:'KC-FIN-002', name:'高企认定审计报告', cat:'财税服务', c1:'#ee913b', c2:'#f1be4d', badge:'审计', desc:'官方备案会计师事务所出具专项审计报告。', priceMain:'¥8,000', priceUnit:'/份', priceNum:8000, rating:4.8, sold:96 },
+      { id:'KC-IP-001', name:'发明专利申请代理', cat:'知产服务', c1:'#df5d8d', c2:'#ee91b4', badge:'发明', desc:'技术交底书撰写、权利要求布局与审查意见答复。', priceMain:'¥6,000', priceUnit:'/件起', priceNum:6000, rating:4.9, sold:365 },
+      { id:'KC-IP-002', name:'知识产权布局规划', cat:'知产服务', c1:'#df5d8d', c2:'#ee91b4', badge:'知产', desc:'IP资产盘点、发明专利占比分析与临期预警。', priceMain:'¥8,000', priceUnit:'/次', priceNum:8000, rating:4.8, sold:87, new:true },
+      { id:'KC-MEN-001', name:'科创专家一对一辅导', cat:'辅导培育', c1:'#8b5cf6', c2:'#a78bfa', badge:'辅导', desc:'领域专家一对一诊断与答疑，针对性补齐申报短板。', priceMain:'¥1,000', priceUnit:'/小时', priceNum:1000, rating:4.9, sold:412, hot:true },
+      { id:'KC-MEN-002', name:'梯度培育年度托管', cat:'辅导培育', c1:'#8b5cf6', c2:'#a78bfa', badge:'托管', desc:'全年培育路径跟踪、任务提醒与申报窗口期监控。', priceMain:'¥15,000', priceUnit:'/年', priceNum:15000, rating:4.9, sold:53 },
     ];
 
     const mallState = { cat:'all', sort:'default', q:'', page:1, pageSize:6 };
@@ -7517,7 +8147,6 @@
       if (mallState.page > pages) mallState.page = pages;
       const start = (mallState.page - 1) * mallState.pageSize;
       const items = list.slice(start, start + mallState.pageSize);
-      document.getElementById('mall-count').innerHTML = '共 <b class="font-bold text-gray-800">' + total + '</b> 项服务';
       const listEl = document.getElementById('mall-service-list');
       const emptyEl = document.getElementById('mall-empty');
       if (!items.length) {
@@ -7541,7 +8170,7 @@
           '<div class="mt-3 flex items-center gap-3 text-xs text-gray-400"><span class="font-semibold text-amber-500">★ ' + p.rating + '</span><span class="h-3 w-px bg-gray-200"></span><span>' + p.sold + ' 家企业已采购</span></div>' +
           '<div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">' +
             '<div class="flex items-baseline gap-1"><span class="' + (isText ? 'text-sm' : 'text-lg') + ' font-bold text-red-500">' + p.priceMain + '</span><span class="text-xs text-gray-400">' + p.priceUnit + '</span></div>' +
-            '<div class="flex gap-2"><button class="rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-mall-detail="' + p.name + '">详情</button><button class="rounded-lg bg-primary px-2.5 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-mall-buy="' + p.name + '">立即咨询</button></div>' +
+            '<div class="flex gap-2"><button class="rounded-lg border border-gray-200 px-2.5 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-mall-detail="' + p.name + '">详情</button><button class="rounded-lg bg-primary px-2.5 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-mall-buy="' + p.name + '" data-mall-price="' + (p.priceMain + ' ' + p.priceUnit).trim() + '">下单</button></div>' +
           '</div>' +
         '</article>';
       }).join('');
@@ -7559,8 +8188,6 @@
 
     function mallReset() {
       mallState.cat = 'all'; mallState.q = ''; mallState.sort = 'default'; mallState.page = 1;
-      document.getElementById('mall-search').value = '';
-      document.querySelectorAll('#mall-sort-tabs .mall-sort-tab').forEach((b, i) => b.classList.toggle('active', i === 0));
       mallRenderCats(); mallRender();
     }
 
@@ -7568,28 +8195,47 @@
       const btn = e.target.closest('.mall-cat'); if (!btn) return;
       mallState.cat = btn.dataset.cat; mallState.page = 1; mallRenderCats(); mallRender();
     });
-    document.getElementById('mall-sort-tabs').addEventListener('click', e => {
-      const btn = e.target.closest('.mall-sort-tab'); if (!btn) return;
-      document.querySelectorAll('#mall-sort-tabs .mall-sort-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active'); mallState.sort = btn.dataset.sort; mallState.page = 1; mallRender();
-    });
-    let mallSearchTimer = null;
-    document.getElementById('mall-search').addEventListener('input', e => {
-      clearTimeout(mallSearchTimer);
-      mallSearchTimer = setTimeout(() => { mallState.q = e.target.value; mallState.page = 1; mallRender(); }, 220);
-    });
-    document.getElementById('mall-reset').addEventListener('click', mallReset);
     document.getElementById('mall-empty-reset').addEventListener('click', mallReset);
     document.getElementById('mall-pagination').addEventListener('click', e => {
       const btn = e.target.closest('.mall-page-btn'); if (!btn || btn.disabled) return;
       const p = Number(btn.dataset.page); if (!p || p === mallState.page) return;
       mallState.page = p; mallRender(); window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+    function openMallDetail(name) {
+      const p = MALL_PRODUCTS.find(function (x) { return x.name === name; });
+      if (!p) return;
+      const price = (p.priceMain + ' ' + p.priceUnit).trim();
+      openAgentModal(
+        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
+          '<h3 class="text-base font-semibold text-gray-900">服务详情</h3>' +
+          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
+        '</div>' +
+        '<div class="space-y-4 px-6 py-5">' +
+          '<div class="flex items-center gap-3">' +
+            '<div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white" style="background:linear-gradient(135deg,' + p.c1 + ',' + p.c2 + ')">' + p.badge + '</div>' +
+            '<div class="min-w-0"><div class="text-base font-semibold text-gray-800">' + p.name + '</div><div class="mt-1 text-xs text-gray-400">' + p.cat + ' · 编号 ' + p.id + ' · ★ ' + p.rating + '</div></div>' +
+          '</div>' +
+          '<div class="rounded-xl border border-gray-100 bg-gray-50 p-4">' +
+            '<div class="text-sm font-medium text-gray-800">服务内容</div>' +
+            '<p class="mt-1.5 text-sm leading-relaxed text-gray-600">' + p.desc + '</p>' +
+          '</div>' +
+          '<div class="flex items-center justify-between rounded-xl border border-gray-100 bg-gray-50 p-4">' +
+            '<div><div class="text-xs text-gray-400">价格</div><div class="mt-0.5 text-lg font-semibold text-primary">' + p.priceMain + ' <span class="text-xs font-normal text-gray-400">' + p.priceUnit + '</span></div></div>' +
+            '<div class="text-right"><div class="text-xs text-gray-400">已服务</div><div class="mt-0.5 text-sm font-medium text-gray-700">' + p.sold + ' 家企业</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
+          '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
+          '<button onclick="orderService(\'' + p.name + '\', \'' + price + '\')" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">立即下单</button>' +
+        '</div>'
+      );
+    }
+
     document.getElementById('mall-service-list').addEventListener('click', e => {
       const buy = e.target.closest('[data-mall-buy]');
-      if (buy) { showToast('已提交「' + buy.dataset.mallBuy + '」咨询，知产顾问将在 2 小时内联系您', 'success'); return; }
+      if (buy) { orderService(buy.dataset.mallBuy, buy.dataset.mallPrice || ''); return; }
       const detail = e.target.closest('[data-mall-detail]');
-      if (detail) { showToast('正在打开「' + detail.dataset.mallDetail + '」详情页…'); }
+      if (detail) { openMallDetail(detail.dataset.mallDetail); }
     });
 
     mallRenderCats();

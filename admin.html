@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>武汉科创 · 运营后台</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1677FF',
+            'primary-light': '#E8F1FF',
+            'primary-hover': '#0E62E0',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+        'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #1f2937;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 左侧菜单 */
+    .nav-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.625rem 0.875rem; border-radius: 0.5rem;
+      color: #4b5563; font-size: 0.875rem; cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease; user-select: none;
+    }
+    .nav-item:hover { background-color: #f3f4f6; color: #1f2937; }
+    .nav-item .nav-icon { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
+    .nav-item.nav-active { background-color: #e8f1ff; color: #1677ff; font-weight: 500; }
+    .nav-item.nav-active .nav-icon { color: #1677ff; }
+    .nav-group-label {
+      margin-bottom: 0.375rem; padding: 0 0.875rem;
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em;
+      color: #9ca3af; user-select: none;
+    }
+
+    /* 页面容器 */
+    .page { animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 滚动条 */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background-color: #d4d7dd; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background-color: #bfc3ca; }
+    ::-webkit-scrollbar-track { background-color: transparent; }
+
+    /* 表单控件 */
+    .input {
+      height: 36px; width: 100%; border-radius: 8px; border: 1px solid #e5e7eb;
+      padding: 0 12px; font-size: 14px; color: #374151; outline: none; background: #fff;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .input:focus { border-color: #1677ff; box-shadow: 0 0 0 2px rgba(22,119,255,0.15); }
+    textarea.input { height: auto; padding: 8px 12px; line-height: 1.6; resize: vertical; }
+    select.input { padding-right: 8px; cursor: pointer; }
+    .field-label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+    .field-label .req { color: #ef4444; margin-left: 2px; }
+
+    /* 按钮 */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      border-radius: 8px; font-size: 14px; padding: 0 14px; height: 36px; cursor: pointer;
+      transition: all 0.15s; border: 1px solid transparent; white-space: nowrap; background: transparent;
+    }
+    .btn-primary { background: #1677ff; color: #fff; }
+    .btn-primary:hover { background: #0e62e0; }
+    .btn-primary:disabled { background: #a5c8ff; cursor: not-allowed; }
+    .btn-ghost { border-color: #e5e7eb; color: #6b7280; background: #fff; }
+    .btn-ghost:hover { border-color: #1677ff; color: #1677ff; }
+    .btn-danger { background: #ef4444; color: #fff; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-soft { background: #e8f1ff; color: #1677ff; }
+    .btn-soft:hover { background: #d6e6ff; }
+    .btn-sm { height: 30px; padding: 0 12px; font-size: 13px; }
+    .btn-xs { height: 26px; padding: 0 10px; font-size: 12px; border-radius: 6px; }
+    .icon-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; border-radius: 8px; color: #6b7280; cursor: pointer;
+      transition: all 0.15s; border: none; background: transparent; flex-shrink: 0;
+    }
+    .icon-btn:hover { background: #f3f4f6; color: #1677ff; }
+    .link { color: #1677ff; cursor: pointer; }
+    .link:hover { text-decoration: underline; }
+
+    /* 徽章 */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 9px;
+      border-radius: 9999px; font-size: 12px; line-height: 1; white-space: nowrap; font-weight: 500;
+    }
+
+    /* 筛选标签 */
+    .tab-pill {
+      display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 14px;
+      border-radius: 8px; font-size: 13px; color: #6b7280; cursor: pointer;
+      border: 1px solid transparent; transition: all 0.15s; white-space: nowrap; user-select: none;
+    }
+    .tab-pill:hover { color: #374151; background: #f3f4f6; }
+    .tab-pill.active { background: #1677ff; color: #fff; }
+
+    /* 卡片 */
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+
+    /* 表格 */
+    .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .tbl thead th {
+      text-align: left; background: #f8fafc; color: #64748b; font-weight: 600;
+      padding: 10px 14px; border-bottom: 1px solid #e5e7eb; white-space: nowrap;
+    }
+    .tbl tbody td { padding: 12px 14px; border-bottom: 1px solid #f3f4f6; color: #374151; vertical-align: middle; }
+    .tbl tbody tr:hover { background: #fafbfc; }
+    .tbl tbody tr:last-child td { border-bottom: none; }
+
+    /* 弹窗 */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.4);
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .modal {
+      background: #fff; border-radius: 14px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      animation: pop 0.18s ease; max-height: 92vh; display: flex; flex-direction: column;
+      width: 100%; max-width: 640px;
+    }
+    @keyframes pop { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid #f3f4f6; flex-shrink: 0; }
+    .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+    .modal-foot {
+      display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+      padding: 14px 20px; border-top: 1px solid #f3f4f6; background: #fafbfc;
+      border-radius: 0 0 14px 14px; flex-shrink: 0;
+    }
+
+    /* 上传区 */
+    .dropzone {
+      border: 2px dashed #e5e7eb; border-radius: 10px; padding: 20px; text-align: center;
+      color: #9ca3af; cursor: pointer; transition: all 0.15s; background: #fafbfc;
+    }
+    .dropzone:hover { border-color: #1677ff; color: #1677ff; background: #f5f9ff; }
+
+    /* 开关 */
+    .switch { position: relative; width: 36px; height: 20px; border-radius: 999px; background: #e5e7eb; cursor: pointer; transition: background 0.15s; flex-shrink: 0; }
+    .switch.on { background: #1677ff; }
+    .switch::after {
+      content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+      border-radius: 50%; background: #fff; transition: left 0.15s; box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .switch.on::after { left: 18px; }
+
+    /* 描述列表 */
+    .dl { display: grid; grid-template-columns: 100px 1fr; row-gap: 12px; column-gap: 16px; font-size: 13px; }
+    .dl dt { color: #9ca3af; }
+    .dl dd { color: #374151; word-break: break-all; }
+
+    /* 维度列表项 */
+    .dim-item { padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background-color 0.15s; }
+    .dim-item:hover { background: #f9fafb; }
+    .dim-item.active { background: #e8f1ff; }
+    .dim-item.active .dim-item-name { color: #1677ff; font-weight: 500; }
+
+    /* 章节列表项 */
+    .tpl-chapter-item {
+      display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-radius: 8px;
+      cursor: pointer; font-size: 13px; color: #4b5563; transition: background-color 0.15s, color 0.15s;
+    }
+    .tpl-chapter-item:hover { background: #f3f4f6; }
+    .tpl-chapter-item.active { background: #e8f1ff; color: #1677ff; font-weight: 500; }
+  </style>
+</head>
+<body class="overflow-hidden">
+  <div class="flex h-screen w-screen min-w-[1280px]">
+
+    <!-- ==================== 左侧侧边栏 ==================== -->
+    <aside class="flex h-full w-60 flex-col border-r border-gray-200 bg-white">
+      <!-- Logo -->
+      <div class="flex h-16 items-center gap-3 border-b border-gray-100 px-5">
+        <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-blue-400 text-lg font-bold text-white shadow-sm">管</div>
+        <div class="leading-tight">
+          <div class="text-[15px] font-semibold text-gray-800">武汉科创平台</div>
+          <div class="text-[11px] text-gray-400">运营后台 · 配置中心</div>
+        </div>
+      </div>
+
+      <!-- 导航菜单 -->
+      <nav class="flex-1 overflow-y-auto px-3 py-4">
+        <div class="nav-group-label">运营中心</div>
+        <div class="space-y-1">
+          <div class="nav-item nav-active" data-target="page-registration" data-title="企业入驻审核">
+            <i data-lucide="building-2" class="nav-icon"></i><span>企业入驻审核</span>
+          </div>
+          <div class="nav-item" data-target="page-orders" data-title="用户订单">
+            <i data-lucide="clipboard-list" class="nav-icon"></i><span>用户订单</span>
+          </div>
+          <div class="nav-item" data-target="page-deliverables" data-title="订单交付物">
+            <i data-lucide="package-check" class="nav-icon"></i><span>订单交付物</span>
+          </div>
+          <div class="nav-item" data-target="page-invoices" data-title="发票管理">
+            <i data-lucide="receipt" class="nav-icon"></i><span>发票管理</span>
+          </div>
+        </div>
+
+        <div class="nav-group-label mt-6">配置中心</div>
+        <div class="space-y-1">
+          <div class="nav-item" data-target="page-products" data-title="服务商品维护">
+            <i data-lucide="shopping-bag" class="nav-icon"></i><span>服务商品维护</span>
+          </div>
+          <div class="nav-item" data-target="page-profile-fields" data-title="企业档案字段配置">
+            <i data-lucide="database" class="nav-icon"></i><span>企业档案字段配置</span>
+          </div>
+          <div class="nav-item" data-target="page-templates" data-title="AI申报书模板配置">
+            <i data-lucide="file-text" class="nav-icon"></i><span>AI申报书模板配置</span>
+          </div>
+        </div>
+      </nav>
+
+      <!-- 底部用户信息 -->
+      <div class="border-t border-gray-100 p-3">
+        <div class="flex items-center gap-2.5 rounded-lg px-2 py-2">
+          <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-blue-400 text-sm font-medium text-white">王</div>
+          <div class="min-w-0 flex-1 leading-tight">
+            <div class="truncate text-sm font-medium text-gray-800">王莉</div>
+            <div class="truncate text-[11px] text-gray-400">平台运营管理员</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== 右侧主体 ==================== -->
+    <div class="flex h-full flex-1 flex-col overflow-hidden">
+
+      <!-- 顶部 Header -->
+      <header class="flex h-11 flex-shrink-0 items-center justify-between border-b border-gray-200 bg-white px-6">
+        <div class="flex items-center gap-2 text-sm">
+          <i data-lucide="home" class="h-4 w-4 text-gray-400"></i>
+          <span class="text-gray-400">运营后台</span>
+          <i data-lucide="chevron-right" class="h-4 w-4 text-gray-300"></i>
+          <span id="breadcrumb-current" class="font-medium text-gray-800">企业入驻审核</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+            <input id="global-search" type="text" placeholder="搜索企业、订单、商品…"
+              class="h-9 w-72 rounded-lg border border-gray-200 bg-gray-50 pl-9 pr-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20" />
+          </div>
+          <button id="bell-btn" class="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-50 hover:text-gray-700">
+            <i data-lucide="bell" class="h-5 w-5"></i>
+            <span class="absolute right-2 top-2 h-2 w-2 rounded-full border-2 border-white bg-red-500"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 主内容区 -->
+      <main class="flex-1 overflow-y-auto bg-[#f5f7fa]">
+        <!-- ==================== 企业入驻审核 ==================== -->
+        <div id="page-registration" class="page p-6">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">企业入驻审核</h1>
+              <p class="mt-1 text-sm text-gray-500">核验企业主体与证明文件，处理入驻申请与重复主体</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="btn btn-ghost" onclick="showToast('已打开入驻字段配置（演示）')"><i data-lucide="settings-2" class="h-4 w-4"></i> 入驻配置</button>
+              <button class="btn btn-ghost" onclick="showToast('入驻申请已导出', 'success')"><i data-lucide="download" class="h-4 w-4"></i> 导出</button>
+            </div>
+          </div>
+
+          <!-- 统计 -->
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">待初审</span>
+                <i data-lucide="file-clock" class="h-5 w-5 text-primary"></i>
+              </div>
+              <div id="reg-stat-pending" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">待主体核验</span>
+                <i data-lucide="shield-check" class="h-5 w-5 text-violet-500"></i>
+              </div>
+              <div id="reg-stat-verify" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">待补正</span>
+                <i data-lucide="alert-circle" class="h-5 w-5 text-amber-500"></i>
+              </div>
+              <div id="reg-stat-fix" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-500">本月新增</span>
+                <i data-lucide="trending-up" class="h-5 w-5 text-green-500"></i>
+              </div>
+              <div id="reg-stat-month" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+          </div>
+
+          <!-- 筛选 -->
+          <div class="mt-5 flex items-center justify-between">
+            <div id="reg-status-tabs" class="flex items-center gap-1"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="reg-search" type="text" placeholder="搜索企业名称 / 信用代码 / 联系人" class="input pl-9" />
+            </div>
+          </div>
+
+          <!-- 表格 -->
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>申请编号</th><th>企业名称</th><th>统一社会信用代码</th><th>属地</th><th>联系人</th><th>申请时间</th><th>状态</th><th class="w-44">操作</th>
+                </tr>
+              </thead>
+              <tbody id="reg-tbody"></tbody>
+            </table>
+          </div>
+          <div id="reg-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的入驻申请</div>
+        </div>
+
+        <!-- 入驻详情弹窗 -->
+        <div id="reg-detail-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('reg-detail-modal')">
+          <div class="modal" style="max-width:720px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="building-2" class="h-5 w-5 text-primary"></i>
+                <h3 class="text-base font-semibold text-gray-900">入驻申请详情</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('reg-detail-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div id="reg-detail-content"></div>
+            </div>
+            <div class="modal-foot" id="reg-detail-actions"></div>
+          </div>
+        </div>
+
+        <!-- 退回原因弹窗 -->
+        <div id="reg-return-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('reg-return-modal')">
+          <div class="modal" style="max-width:480px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="rotate-ccw" class="h-5 w-5 text-amber-500"></i>
+                <h3 class="text-base font-semibold text-gray-900">退回申请</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('reg-return-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div id="reg-return-target" class="mb-3 rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-600"></div>
+              <label class="field-label">退回原因 <span class="req">*</span></label>
+              <textarea id="reg-return-reason" class="input" rows="4" placeholder="请填写退回原因，将通知企业补充或修改后重新提交"></textarea>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('reg-return-modal')">取消</button>
+              <button class="btn btn-danger" onclick="submitRegReturn()">确认退回</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 开通弹窗 -->
+        <div id="reg-open-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('reg-open-modal')">
+          <div class="modal" style="max-width:520px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="rocket" class="h-5 w-5 text-green-500"></i>
+                <h3 class="text-base font-semibold text-gray-900">主体核验通过 · 开通账号</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('reg-open-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div id="reg-open-target" class="mb-3 rounded-lg bg-gray-50 px-3 py-2 text-sm text-gray-600"></div>
+              <label class="field-label">指定商务经理 <span class="req">*</span></label>
+              <select id="reg-open-manager" class="input">
+                <option value="">请选择商务经理</option>
+                <option>张伟（商务一组）</option>
+                <option>李婷（商务二组）</option>
+                <option>赵强（商务三组）</option>
+                <option>孙丽（商务四组）</option>
+              </select>
+              <div class="mt-4"><label class="field-label">办理备注</label>
+                <textarea id="reg-open-note" class="input" rows="3" placeholder="选填：记录主体核验结论或注意事项"></textarea>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('reg-open-modal')">取消</button>
+              <button class="btn btn-primary" onclick="submitRegOpen()">确认开通</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 用户订单 ==================== -->
+        <div id="page-orders" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">用户订单</h1>
+              <p class="mt-1 text-sm text-gray-500">查看全部企业服务订单，跟进支付、交付与发票状态</p>
+            </div>
+            <button class="btn btn-ghost" onclick="showToast('订单数据已导出', 'success')"><i data-lucide="download" class="h-4 w-4"></i> 导出</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">全部订单</span><i data-lucide="clipboard-list" class="h-5 w-5 text-primary"></i></div>
+              <div id="ord-stat-all" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">待支付</span><i data-lucide="wallet" class="h-5 w-5 text-amber-500"></i></div>
+              <div id="ord-stat-unpaid" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">服务中</span><i data-lucide="loader" class="h-5 w-5 text-blue-500"></i></div>
+              <div id="ord-stat-serving" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">待交付</span><i data-lucide="package" class="h-5 w-5 text-violet-500"></i></div>
+              <div id="ord-stat-deliver" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between">
+            <div id="order-status-tabs" class="flex items-center gap-1"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="order-search" type="text" placeholder="搜索订单号 / 企业 / 商品" class="input pl-9" />
+            </div>
+          </div>
+
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>订单号</th><th>企业名称</th><th>商品 / 服务</th><th>金额</th><th>支付状态</th><th>订单状态</th><th>交付状态</th><th>下单时间</th><th class="w-24">操作</th>
+                </tr>
+              </thead>
+              <tbody id="order-tbody"></tbody>
+            </table>
+          </div>
+          <div id="order-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的订单</div>
+        </div>
+
+        <!-- 订单详情弹窗 -->
+        <div id="order-detail-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('order-detail-modal')">
+          <div class="modal" style="max-width:760px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="clipboard-list" class="h-5 w-5 text-primary"></i>
+                <h3 class="text-base font-semibold text-gray-900">订单详情</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('order-detail-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body"><div id="order-detail-content"></div></div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('order-detail-modal')">关闭</button>
+              <button class="btn btn-primary" onclick="closeModal('order-detail-modal'); navTo('page-deliverables')">前往交付</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 订单交付物 ==================== -->
+        <div id="page-deliverables" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">订单交付物</h1>
+              <p class="mt-1 text-sm text-gray-500">针对已支付订单，提交并管理服务交付成果</p>
+            </div>
+            <button class="btn btn-ghost" onclick="showToast('交付记录已导出', 'success')"><i data-lucide="download" class="h-4 w-4"></i> 导出</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">待交付</span><i data-lucide="package" class="h-5 w-5 text-amber-500"></i></div>
+              <div id="dlv-stat-pending" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">交付中</span><i data-lucide="loader" class="h-5 w-5 text-blue-500"></i></div>
+              <div id="dlv-stat-doing" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已交付</span><i data-lucide="package-check" class="h-5 w-5 text-green-500"></i></div>
+              <div id="dlv-stat-done" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已逾期</span><i data-lucide="alert-octagon" class="h-5 w-5 text-red-500"></i></div>
+              <div id="dlv-stat-overdue" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between">
+            <div id="dlv-status-tabs" class="flex items-center gap-1"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="dlv-search" type="text" placeholder="搜索订单号 / 企业 / 负责人" class="input pl-9" />
+            </div>
+          </div>
+
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>订单号</th><th>企业名称</th><th>商品 / 服务</th><th>交付进度</th><th>交付负责人</th><th>交付截止</th><th>状态</th><th class="w-32">操作</th>
+                </tr>
+              </thead>
+              <tbody id="dlv-tbody"></tbody>
+            </table>
+          </div>
+          <div id="dlv-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的交付任务</div>
+        </div>
+
+        <!-- 提交交付物弹窗 -->
+        <div id="deliver-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('deliver-modal')">
+          <div class="modal" style="max-width:720px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="package-check" class="h-5 w-5 text-primary"></i>
+                <h3 class="text-base font-semibold text-gray-900">提交交付物</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('deliver-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div id="deliver-content"></div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('deliver-modal')">取消</button>
+              <button id="deliver-submit-btn" class="btn btn-primary" onclick="submitDeliver()"><i data-lucide="check" class="h-4 w-4"></i> 确认提交交付物</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 发票管理 ==================== -->
+        <div id="page-invoices" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">发票管理</h1>
+              <p class="mt-1 text-sm text-gray-500">针对用户提交的开票申请，上传发票并跟踪开票进度</p>
+            </div>
+            <button class="btn btn-ghost" onclick="showToast('开票记录已导出', 'success')"><i data-lucide="download" class="h-4 w-4"></i> 导出</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">待开票</span><i data-lucide="receipt" class="h-5 w-5 text-amber-500"></i></div>
+              <div id="inv-stat-pending" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已开票</span><i data-lucide="file-check" class="h-5 w-5 text-blue-500"></i></div>
+              <div id="inv-stat-opened" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已上传</span><i data-lucide="cloud-upload" class="h-5 w-5 text-green-500"></i></div>
+              <div id="inv-stat-uploaded" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">本月开票金额</span><i data-lucide="trending-up" class="h-5 w-5 text-violet-500"></i></div>
+              <div id="inv-stat-amount" class="mt-2 text-2xl font-semibold text-gray-900">¥0</div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between">
+            <div id="inv-status-tabs" class="flex items-center gap-1"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="inv-search" type="text" placeholder="搜索发票编号 / 订单号 / 企业" class="input pl-9" />
+            </div>
+          </div>
+
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>发票编号</th><th>订单号</th><th>企业名称</th><th>类型</th><th>抬头</th><th>金额</th><th>申请时间</th><th>状态</th><th class="w-40">操作</th>
+                </tr>
+              </thead>
+              <tbody id="inv-tbody"></tbody>
+            </table>
+          </div>
+          <div id="inv-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的开票申请</div>
+        </div>
+
+        <!-- 上传发票弹窗 -->
+        <div id="invoice-upload-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('invoice-upload-modal')">
+          <div class="modal" style="max-width:560px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="receipt" class="h-5 w-5 text-primary"></i>
+                <h3 class="text-base font-semibold text-gray-900">上传发票</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('invoice-upload-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div id="invoice-upload-info" class="rounded-lg bg-gray-50 p-3 text-sm text-gray-600"></div>
+              <div class="mt-4"><label class="field-label">发票类型</label>
+                <select id="invoice-upload-type" class="input">
+                  <option>增值税普通发票（电子）</option>
+                  <option>增值税专用发票</option>
+                </select>
+              </div>
+              <div class="mt-4">
+                <label class="field-label">发票文件（PDF / 图片）</label>
+                <div id="invoice-dropzone" class="dropzone" onclick="document.getElementById('invoice-file-input').click()">
+                  <i data-lucide="upload-cloud" class="mx-auto h-8 w-8"></i>
+                  <div class="mt-2 text-sm">点击上传，或拖拽发票文件至此</div>
+                  <div class="mt-1 text-xs text-gray-400">支持 PDF、JPG、PNG，单个不超过 10MB</div>
+                </div>
+                <input id="invoice-file-input" type="file" class="hidden" accept=".pdf,.png,.jpg,.jpeg" />
+                <div id="invoice-file-progress" class="mt-3 hidden"></div>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('invoice-upload-modal')">取消</button>
+              <button id="invoice-upload-confirm" class="btn btn-primary" onclick="submitInvoiceUpload()"><i data-lucide="check" class="h-4 w-4"></i> 确认上传</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 服务商品维护 ==================== -->
+        <div id="page-products" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">服务商品维护</h1>
+              <p class="mt-1 text-sm text-gray-500">维护平台自营服务商品、价格与上下架状态</p>
+            </div>
+            <button class="btn btn-primary" onclick="openProductModal()"><i data-lucide="plus" class="h-4 w-4"></i> 新增商品</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">在售商品</span><i data-lucide="shopping-bag" class="h-5 w-5 text-green-500"></i></div>
+              <div id="prod-stat-on" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已下架</span><i data-lucide="archive" class="h-5 w-5 text-gray-400"></i></div>
+              <div id="prod-stat-off" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">草稿</span><i data-lucide="file-edit" class="h-5 w-5 text-amber-500"></i></div>
+              <div id="prod-stat-draft" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">服务分类</span><i data-lucide="tags" class="h-5 w-5 text-blue-500"></i></div>
+              <div id="prod-stat-cat" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between">
+            <div id="product-cat-chips" class="flex flex-wrap items-center gap-2"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="product-search" type="text" placeholder="搜索商品名称 / 标签" class="input pl-9" />
+            </div>
+          </div>
+
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>商品名称</th><th>分类</th><th>价格</th><th>交付周期</th><th>状态</th><th>排序</th><th>更新时间</th><th class="w-40">操作</th>
+                </tr>
+              </thead>
+              <tbody id="product-tbody"></tbody>
+            </table>
+          </div>
+          <div id="product-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的商品</div>
+        </div>
+
+        <!-- 商品编辑弹窗 -->
+        <div id="product-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('product-modal')">
+          <div class="modal" style="max-width:680px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="h-5 w-5 text-primary"></i>
+                <h3 id="product-modal-title" class="text-base font-semibold text-gray-900">新增商品</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('product-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="grid grid-cols-2 gap-4">
+                <div class="col-span-2"><label class="field-label">商品名称 <span class="req">*</span></label><input id="prod-f-name" class="input" placeholder="如：高新技术企业认定托管服务" /></div>
+                <div><label class="field-label">服务分类 <span class="req">*</span></label>
+                  <select id="prod-f-cat" class="input"></select>
+                </div>
+                <div><label class="field-label">交付周期</label><input id="prod-f-cycle" class="input" placeholder="如：15-20 个工作日" /></div>
+                <div><label class="field-label">销售价（元）<span class="req">*</span></label><input id="prod-f-price" type="number" class="input" placeholder="0" /></div>
+                <div><label class="field-label">划线价（元）</label><input id="prod-f-origin" type="number" class="input" placeholder="选填" /></div>
+                <div><label class="field-label">展示状态</label>
+                  <select id="prod-f-status" class="input">
+                    <option value="上架">上架</option><option value="下架">下架</option><option value="草稿">草稿</option>
+                  </select>
+                </div>
+                <div><label class="field-label">排序（数字越小越靠前）</label><input id="prod-f-sort" type="number" class="input" placeholder="10" /></div>
+                <div class="col-span-2"><label class="field-label">商品简介</label><textarea id="prod-f-desc" class="input" rows="2" placeholder="一句话介绍服务亮点"></textarea></div>
+                <div class="col-span-2"><label class="field-label">交付内容</label><textarea id="prod-f-content" class="input" rows="3" placeholder="逐项说明交付成果，如：申报书初稿、材料清单、评审意见…"></textarea></div>
+                <div class="col-span-2"><label class="field-label">适用条件 / 风险提示</label><textarea id="prod-f-applies" class="input" rows="2" placeholder="说明适用企业类型及注意事项"></textarea></div>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('product-modal')">取消</button>
+              <button class="btn btn-primary" onclick="saveProduct()">保存</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 企业档案字段配置 ==================== -->
+        <div id="page-profile-fields" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">企业档案字段配置</h1>
+              <p class="mt-1 text-sm text-gray-500">维护十三维度企业档案的维度、字段、必填级别与数据归属</p>
+            </div>
+            <button class="btn btn-primary" onclick="openDimModal()"><i data-lucide="plus" class="h-4 w-4"></i> 新增维度</button>
+          </div>
+
+          <div class="mt-5 flex gap-4">
+            <!-- 左侧维度列表 -->
+            <div class="card w-72 flex-shrink-0 self-start overflow-hidden">
+              <div class="flex items-center justify-between border-b border-gray-100 px-4 py-3">
+                <span class="text-sm font-semibold text-gray-800">档案维度</span>
+                <span id="dim-count" class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">0</span>
+              </div>
+              <div id="dim-list" class="max-h-[calc(100vh-320px)] overflow-y-auto p-2"></div>
+            </div>
+
+            <!-- 右侧字段配置 -->
+            <div class="card flex-1 overflow-hidden">
+              <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">
+                <div class="flex items-center gap-2">
+                  <i data-lucide="database" class="h-4 w-4 text-primary"></i>
+                  <span id="dim-detail-head" class="text-sm font-semibold text-gray-800">请选择维度</span>
+                </div>
+                <button id="field-add-btn" class="btn btn-soft btn-sm" onclick="openFieldModal()"><i data-lucide="plus" class="h-4 w-4"></i> 新增字段</button>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>字段名</th><th>字段类型</th><th>必填级别</th><th>数据归属</th><th>单位</th><th>状态</th><th class="w-44">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody id="field-tbody"></tbody>
+                </table>
+              </div>
+              <div id="field-empty" class="hidden p-16 text-center text-sm text-gray-400">请先在左侧选择一个维度</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 维度编辑弹窗 -->
+        <div id="dim-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('dim-modal')">
+          <div class="modal" style="max-width:480px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2"><i data-lucide="database" class="h-5 w-5 text-primary"></i><h3 id="dim-modal-title" class="text-base font-semibold text-gray-900">新增维度</h3></div>
+              <button class="icon-btn" onclick="closeModal('dim-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <label class="field-label">维度名称 <span class="req">*</span></label>
+              <input id="dim-f-name" class="input" placeholder="如：经营与财务" />
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div><label class="field-label">显示顺序</label><input id="dim-f-sort" type="number" class="input" placeholder="1" /></div>
+                <div><label class="field-label">启用状态</label>
+                  <select id="dim-f-status" class="input"><option value="启用">启用</option><option value="停用">停用</option></select>
+                </div>
+              </div>
+              <div class="mt-4"><label class="field-label">维度说明</label><textarea id="dim-f-desc" class="input" rows="2" placeholder="选填"></textarea></div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('dim-modal')">取消</button>
+              <button class="btn btn-primary" onclick="saveDim()">保存</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 字段编辑弹窗 -->
+        <div id="field-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('field-modal')">
+          <div class="modal" style="max-width:560px">
+            <div class="modal-head">
+              <div class="flex items-center gap-2"><i data-lucide="list" class="h-5 w-5 text-primary"></i><h3 id="field-modal-title" class="text-base font-semibold text-gray-900">新增字段</h3></div>
+              <button class="icon-btn" onclick="closeModal('field-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body">
+              <label class="field-label">字段名称 <span class="req">*</span></label>
+              <input id="fld-f-name" class="input" placeholder="如：近三年营业收入" />
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                <div><label class="field-label">字段类型</label>
+                  <select id="fld-f-type" class="input"><option>文本</option><option>数值</option><option>金额</option><option>日期</option><option>单选</option><option>多选</option><option>布尔</option><option>附件</option></select>
+                </div>
+                <div><label class="field-label">必填级别</label>
+                  <select id="fld-f-required" class="input"><option>必填</option><option>建议</option><option>可选</option></select>
+                </div>
+                <div><label class="field-label">数据归属</label>
+                  <select id="fld-f-source" class="input"><option>企业维护</option><option>平台维护</option><option>自动提取</option><option>公开同步</option></select>
+                </div>
+                <div><label class="field-label">单位</label><input id="fld-f-unit" class="input" placeholder="如：万元 / % / 人" /></div>
+              </div>
+              <div class="mt-4"><label class="field-label">数据口径说明</label><input id="fld-f-caliber" class="input" placeholder="如：以审计报告合并口径为准" /></div>
+              <div class="mt-4 flex items-center gap-6">
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input id="fld-f-allowzero" type="checkbox" class="h-4 w-4 rounded" /> 允许零值</label>
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input id="fld-f-allowunknown" type="checkbox" class="h-4 w-4 rounded" /> 允许未知</label>
+                <label class="flex items-center gap-2 text-sm text-gray-600"><input id="fld-f-enabled" type="checkbox" class="h-4 w-4 rounded" checked /> 启用</label>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn btn-ghost" onclick="closeModal('field-modal')">取消</button>
+              <button class="btn btn-primary" onclick="saveField()">保存</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== AI申报书模板配置 ==================== -->
+        <div id="page-templates" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">AI申报书模板配置</h1>
+              <p class="mt-1 text-sm text-gray-500">配置申报书章节、字段映射、字数限制与 AI 撰写提示词</p>
+            </div>
+            <button class="btn btn-primary" onclick="openTemplateModal()"><i data-lucide="plus" class="h-4 w-4"></i> 新增模板</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">模板总数</span><i data-lucide="file-text" class="h-5 w-5 text-primary"></i></div>
+              <div id="tpl-stat-all" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已启用</span><i data-lucide="check-circle" class="h-5 w-5 text-green-500"></i></div>
+              <div id="tpl-stat-on" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">章节总数</span><i data-lucide="list-tree" class="h-5 w-5 text-violet-500"></i></div>
+              <div id="tpl-stat-chapters" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">资质类型</span><i data-lucide="badge-check" class="h-5 w-5 text-amber-500"></i></div>
+              <div id="tpl-stat-type" class="mt-2 text-2xl font-semibold text-gray-900">0</div>
+            </div>
+          </div>
+
+          <div class="mt-5 flex items-center justify-between">
+            <div id="tpl-type-tabs" class="flex items-center gap-1"></div>
+            <div class="relative w-72">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"></i>
+              <input id="tpl-search" type="text" placeholder="搜索模板名称 / 年度" class="input pl-9" />
+            </div>
+          </div>
+
+          <div class="card mt-4 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>模板名称</th><th>申报年度</th><th>资质类型</th><th>版本</th><th>章节数</th><th>状态</th><th>更新时间</th><th class="w-44">操作</th>
+                </tr>
+              </thead>
+              <tbody id="tpl-tbody"></tbody>
+            </table>
+          </div>
+          <div id="tpl-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的模板</div>
+        </div>
+
+        <!-- 模板编辑器弹窗 -->
+        <div id="template-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('template-modal')">
+          <div class="modal" style="max-width:980px; height:82vh">
+            <div class="modal-head">
+              <div class="flex items-center gap-2">
+                <i data-lucide="file-text" class="h-5 w-5 text-primary"></i>
+                <h3 id="template-modal-title" class="text-base font-semibold text-gray-900">申报书模板配置</h3>
+              </div>
+              <button class="icon-btn" onclick="closeModal('template-modal')"><i data-lucide="x" class="h-4 w-4"></i></button>
+            </div>
+            <div class="modal-body p-0">
+              <!-- 模板基本信息 -->
+              <div class="grid grid-cols-4 gap-3 border-b border-gray-100 bg-gray-50 px-5 py-3">
+                <div><label class="field-label">模板名称</label><input id="tpl-f-name" class="input" /></div>
+                <div><label class="field-label">资质类型</label>
+                  <select id="tpl-f-type" class="input"><option>高新技术企业</option><option>专精特新中小企业</option><option>专精特新小巨人</option><option>知识产权示范企业</option><option>湖北省技术中心</option></select>
+                </div>
+                <div><label class="field-label">申报年度</label><input id="tpl-f-year" class="input" placeholder="2024" /></div>
+                <div><label class="field-label">版本</label><input id="tpl-f-version" class="input" placeholder="V1.0" /></div>
+              </div>
+              <div class="flex" style="height: calc(100% - 92px)">
+                <!-- 章节树 -->
+                <div class="w-64 flex-shrink-0 border-r border-gray-100">
+                  <div class="flex items-center justify-between border-b border-gray-100 px-4 py-2.5">
+                    <span class="text-xs font-semibold text-gray-500">章节目录</span>
+                    <button class="btn btn-soft btn-xs" onclick="addChapter()"><i data-lucide="plus" class="h-3.5 w-3.5"></i> 章节</button>
+                  </div>
+                  <div id="tpl-chapter-list" class="overflow-y-auto p-2" style="height: calc(100% - 41px)"></div>
+                </div>
+                <!-- 章节详情 -->
+                <div class="flex-1 overflow-y-auto p-5">
+                  <div id="tpl-chapter-detail"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <label class="mr-auto flex items-center gap-2 text-sm text-gray-600"><input id="tpl-f-enabled" type="checkbox" class="h-4 w-4 rounded" checked /> 启用模板</label>
+              <button class="btn btn-ghost" onclick="closeModal('template-modal')">取消</button>
+              <button class="btn btn-primary" onclick="saveTemplate()">保存模板</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // ==================== 通用工具 ====================
+    function showToast(message, type) {
+      const bg = { info: '#1f2937', success: '#16a34a', warning: '#f59e0b' }[type] || '#1f2937';
+      const toast = document.createElement('div');
+      toast.style.cssText =
+        'position:fixed;left:50%;top:24px;transform:translateX(-50%);background:' + bg +
+        ';color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:300;transition:opacity .3s;';
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(function () { toast.style.opacity = '0'; setTimeout(function () { toast.remove(); }, 300); }, 2200);
+    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+    function badge(status) {
+      const map = {
+        '待初审': ['#eff6ff', '#1677ff'], '待主体核验': ['#f5f3ff', '#7c3aed'],
+        '待补正': ['#fffbeb', '#d97706'], '已退回': ['#fef2f2', '#dc2626'],
+        '已开通': ['#f0fdf4', '#16a34a'], '待支付': ['#fffbeb', '#d97706'],
+        '已支付': ['#f0fdf4', '#16a34a'], '服务中': ['#eff6ff', '#1677ff'],
+        '已完成': ['#f0fdf4', '#16a34a'], '已取消': ['#f3f4f6', '#9ca3af'],
+        '待交付': ['#fffbeb', '#d97706'], '交付中': ['#eff6ff', '#1677ff'],
+        '已交付': ['#f0fdf4', '#16a34a'], '已逾期': ['#fef2f2', '#dc2626'],
+        '待开票': ['#fffbeb', '#d97706'], '已开票': ['#eff6ff', '#1677ff'],
+        '已上传': ['#f0fdf4', '#16a34a'], '上架': ['#f0fdf4', '#16a34a'],
+        '下架': ['#f3f4f6', '#9ca3af'], '草稿': ['#fffbeb', '#d97706'],
+        '待确认': ['#fff7ed', '#ea580c'], '启用': ['#f0fdf4', '#16a34a'],
+        '停用': ['#f3f4f6', '#9ca3af'], '必填': ['#fef2f2', '#dc2626'],
+        '建议': ['#fffbeb', '#d97706'], '可选': ['#f3f4f6', '#9ca3af'],
+      };
+      const c = map[status] || ['#f3f4f6', '#6b7280'];
+      return '<span class="badge" style="background:' + c[0] + ';color:' + c[1] + '">' + esc(status) + '</span>';
+    }
+
+    // ==================== 菜单切换 ====================
+    const navItems = document.querySelectorAll('.nav-item');
+    const pages = document.querySelectorAll('.page');
+    const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+    function navTo(target) {
+      const item = document.querySelector('.nav-item[data-target="' + target + '"]');
+      if (!item) return;
+      navItems.forEach(function (i) { i.classList.remove('nav-active'); });
+      item.classList.add('nav-active');
+      pages.forEach(function (p) { p.classList.toggle('hidden', p.id !== target); });
+      breadcrumbCurrent.textContent = item.dataset.title;
+      if (target === 'page-registration') renderReg();
+      if (target === 'page-orders') renderOrders();
+      if (target === 'page-deliverables') renderDlv();
+      if (target === 'page-invoices') renderInv();
+      if (target === 'page-products') renderProducts();
+      if (target === 'page-profile-fields') renderDims();
+      if (target === 'page-templates') renderTpl();
+      lucide.createIcons();
+    }
+    navItems.forEach(function (item) {
+      item.addEventListener('click', function () { navTo(item.dataset.target); });
+    });
+
+    // 顶栏全局搜索与铃铛
+    document.getElementById('global-search').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') showToast('全局搜索（演示）：' + (this.value || '请输入关键词'));
+    });
+    document.getElementById('bell-btn').addEventListener('click', function () {
+      showToast('您有 3 条待办提醒：1 项入驻待初审、2 项交付临期');
+    });
+
+    // ==================== 数据 ====================
+    // 入驻申请
+    let regData = [
+      { id: 'RZ-20241108-001', company: '武汉光谷智造科技有限公司', code: '91420100MA4K5A1B2C', region: '东湖高新区', contact: '李明', phone: '138****1234', relation: '企业管理员', date: '2024-11-08 09:20', status: '待初审', manager: '', files: ['营业执照.jpg', '法人身份证.jpg'] },
+      { id: 'RZ-20241108-002', company: '湖北汉江生物医药有限公司', code: '91420600MA4K5A2C3D', region: '汉阳区', contact: '王芳', phone: '139****5678', relation: '企业管理员', date: '2024-11-08 08:45', status: '待初审', manager: '', files: ['营业执照.jpg', '公司章程.pdf'] },
+      { id: 'RZ-20241107-003', company: '武汉云枢信息技术有限公司', code: '91420100MA4K5A3D4E', region: '东湖高新区', contact: '陈强', phone: '137****9012', relation: '企业成员', date: '2024-11-07 16:10', status: '待主体核验', manager: '', files: ['营业执照.jpg', '法人身份证.jpg', '授权委托书.pdf'] },
+      { id: 'RZ-20241107-004', company: '湖北绿能环保科技有限公司', code: '91420100MA4K5A4E5F', region: '武昌区', contact: '刘洋', phone: '136****3456', relation: '企业管理员', date: '2024-11-07 14:30', status: '待主体核验', manager: '', files: ['营业执照.jpg', '法人身份证.jpg'] },
+      { id: 'RZ-20241106-005', company: '武汉数联智能装备有限公司', code: '91420100MA4K5A5F6G', region: '东湖高新区', contact: '赵敏', phone: '135****7890', relation: '企业管理员', date: '2024-11-06 11:20', status: '待补正', manager: '', files: ['营业执照.jpg'] },
+      { id: 'RZ-20241105-006', company: '湖北智芯半导体有限公司', code: '91420100MA4K5A6G7H', region: '东湖高新区', contact: '孙浩', phone: '134****2345', relation: '企业管理员', date: '2024-11-05 10:05', status: '已退回', manager: '', files: ['营业执照.jpg', '法人身份证.jpg'] },
+      { id: 'RZ-20241104-007', company: '武汉瑞景新材料有限公司', code: '91420100MA4K5A7H8I', region: '洪山区', contact: '周杰', phone: '133****6789', relation: '企业管理员', date: '2024-11-04 15:40', status: '已开通', manager: '张伟', files: ['营业执照.jpg', '法人身份证.jpg'] },
+      { id: 'RZ-20241103-008', company: '湖北安捷检测技术有限公司', code: '91420600MA4K5A8I9J', region: '江汉区', contact: '吴静', phone: '132****0123', relation: '企业管理员', date: '2024-11-03 09:55', status: '已开通', manager: '李婷', files: ['营业执照.jpg', '法人身份证.jpg'] },
+      { id: 'RZ-20241102-009', company: '武汉星河数据科技有限公司', code: '91420100MA4K5A9J0K', region: '东湖高新区', contact: '郑凯', phone: '131****4567', relation: '企业成员', date: '2024-11-02 13:25', status: '已开通', manager: '张伟', files: ['营业执照.jpg', '授权委托书.pdf'] },
+      { id: 'RZ-20241101-010', company: '湖北凯创精密制造有限公司', code: '91420600MA4K5B0K1L', region: '汉阳区', contact: '冯磊', phone: '130****8901', relation: '企业管理员', date: '2024-11-01 17:15', status: '已退回', manager: '', files: ['营业执照.jpg'] },
+    ];
+
+    // 用户订单
+    let orderData = [
+      { id: 'DD-20241107-001', company: '武汉光谷智造科技有限公司', product: '高新技术企业认定托管服务', amount: 28000, pay: '已支付', status: '服务中', deliver: '待交付', date: '2024-11-07 15:30', manager: '张伟' },
+      { id: 'DD-20241107-002', company: '武汉云枢信息技术有限公司', product: '专利布局与挖掘服务', amount: 12000, pay: '已支付', status: '服务中', deliver: '交付中', date: '2024-11-07 11:20', manager: '李婷' },
+      { id: 'DD-20241106-003', company: '湖北绿能环保科技有限公司', product: '研发费用归集与审计辅导', amount: 9800, pay: '待支付', status: '待确认', deliver: '—', date: '2024-11-06 16:40', manager: '赵强' },
+      { id: 'DD-20241106-004', company: '武汉数联智能装备有限公司', product: '专精特新中小企业认定辅导', amount: 22000, pay: '已支付', status: '服务中', deliver: '待交付', date: '2024-11-06 10:05', manager: '张伟' },
+      { id: 'DD-20241105-005', company: '湖北智芯半导体有限公司', product: '科技成果评价服务', amount: 6800, pay: '已支付', status: '已完成', deliver: '已交付', date: '2024-11-05 14:15', manager: '孙丽' },
+      { id: 'DD-20241105-006', company: '武汉瑞景新材料有限公司', product: '知识产权贯标辅导', amount: 15000, pay: '已支付', status: '服务中', deliver: '交付中', date: '2024-11-05 09:30', manager: '李婷' },
+      { id: 'DD-20241104-007', company: '湖北安捷检测技术有限公司', product: '高新技术企业认定托管服务', amount: 28000, pay: '已支付', status: '已完成', deliver: '已交付', date: '2024-11-04 13:50', manager: '张伟' },
+      { id: 'DD-20241103-008', company: '武汉星河数据科技有限公司', product: '政策申报规划服务', amount: 5600, pay: '已支付', status: '已完成', deliver: '已交付', date: '2024-11-03 10:20', manager: '赵强' },
+      { id: 'DD-20241102-009', company: '湖北凯创精密制造有限公司', product: '研发费用归集与审计辅导', amount: 9800, pay: '已支付', status: '服务中', deliver: '待交付', date: '2024-11-02 16:00', manager: '孙丽' },
+      { id: 'DD-20241101-010', company: '武汉光谷智造科技有限公司', product: '专家评审意见服务', amount: 3980, pay: '已支付', status: '已取消', deliver: '—', date: '2024-11-01 11:10', manager: '张伟' },
+    ];
+
+    // 订单交付物
+    let dlvData = [
+      { id: 'DD-20241107-001', company: '武汉光谷智造科技有限公司', product: '高新技术企业认定托管服务', total: 6, done: 2, manager: '王老师（咨询）', due: '2024-11-20', status: '交付中',
+        items: [ { name: '申报书初稿', done: true, file: '高企申报书初稿.docx' }, { name: '材料清单', done: true, file: '申报材料清单.xlsx' }, { name: '审计报告意见', done: false }, { name: '知识产权证明材料', done: false }, { name: '研发项目归集表', done: false }, { name: '专家评审意见', done: false } ] },
+      { id: 'DD-20241107-002', company: '武汉云枢信息技术有限公司', product: '专利布局与挖掘服务', total: 4, done: 1, manager: '赵老师（知产）', due: '2024-11-25', status: '交付中',
+        items: [ { name: '专利检索分析报告', done: true, file: '专利检索分析报告.pdf' }, { name: '专利布局方案', done: false }, { name: '技术交底书模板', done: false }, { name: '申请文件初稿', done: false } ] },
+      { id: 'DD-20241106-004', company: '武汉数联智能装备有限公司', product: '专精特新中小企业认定辅导', total: 5, done: 0, manager: '王老师（咨询）', due: '2024-11-28', status: '待交付',
+        items: [ { name: '申报书初稿', done: false }, { name: '佐证材料清单', done: false }, { name: '财务指标核算表', done: false }, { name: '数字化水平说明', done: false }, { name: '材料封包', done: false } ] },
+      { id: 'DD-20241105-006', company: '武汉瑞景新材料有限公司', product: '知识产权贯标辅导', total: 4, done: 2, manager: '李老师（知产）', due: '2024-11-30', status: '交付中',
+        items: [ { name: '贯标诊断报告', done: true, file: '贯标诊断报告.pdf' }, { name: '体系文件包', done: true, file: '知识产权管理体系文件.zip' }, { name: '内审与管理评审记录', done: false }, { name: '认证申请材料', done: false } ] },
+      { id: 'DD-20241102-009', company: '湖北凯创精密制造有限公司', product: '研发费用归集与审计辅导', total: 3, done: 0, manager: '孙老师（财税）', due: '2024-11-18', status: '已逾期',
+        items: [ { name: '研发费用辅助账', done: false }, { name: '费用归集说明', done: false }, { name: '审计对接材料', done: false } ] },
+      { id: 'DD-20241105-005', company: '湖北智芯半导体有限公司', product: '科技成果评价服务', total: 2, done: 2, manager: '赵老师（咨询）', due: '2024-11-15', status: '已交付',
+        items: [ { name: '科技成果评价报告', done: true, file: '科技成果评价报告.pdf' }, { name: '评价证书', done: true, file: '评价证书.pdf' } ] },
+      { id: 'DD-20241104-007', company: '湖北安捷检测技术有限公司', product: '高新技术企业认定托管服务', total: 6, done: 6, manager: '王老师（咨询）', due: '2024-11-14', status: '已交付',
+        items: [ { name: '申报书终稿', done: true, file: '高企申报书终稿.docx' }, { name: '材料封包', done: true, file: '申报材料封包.zip' }, { name: '审计报告', done: true, file: '审计报告.pdf' }, { name: '知识产权证明', done: true }, { name: '研发项目归集表', done: true }, { name: '专家评审意见', done: true, file: '专家评审意见.pdf' } ] },
+    ];
+
+    // 发票管理
+    let invData = [
+      { id: 'FP-20241108-001', order: 'DD-20241107-001', company: '武汉光谷智造科技有限公司', type: '增值税普通发票', title: '武汉光谷智造科技有限公司', tax: '91420100MA4K5A1B2C', amount: 28000, date: '2024-11-08 10:00', status: '待开票' },
+      { id: 'FP-20241108-002', order: 'DD-20241107-002', company: '武汉云枢信息技术有限公司', type: '增值税专用发票', title: '武汉云枢信息技术有限公司', tax: '91420100MA4K5A3D4E', amount: 12000, date: '2024-11-08 09:30', status: '待开票' },
+      { id: 'FP-20241107-003', order: 'DD-20241106-004', company: '武汉数联智能装备有限公司', type: '增值税普通发票', title: '武汉数联智能装备有限公司', tax: '91420100MA4K5A5F6G', amount: 22000, date: '2024-11-07 14:20', status: '已开票' },
+      { id: 'FP-20241106-004', order: 'DD-20241105-006', company: '武汉瑞景新材料有限公司', type: '增值税专用发票', title: '武汉瑞景新材料有限公司', tax: '91420100MA4K5A7H8I', amount: 15000, date: '2024-11-06 16:40', status: '已开票' },
+      { id: 'FP-20241105-005', order: 'DD-20241105-005', company: '湖北智芯半导体有限公司', type: '增值税普通发票', title: '湖北智芯半导体有限公司', tax: '91420100MA4K5A6G7H', amount: 6800, date: '2024-11-05 11:10', status: '已上传' },
+      { id: 'FP-20241104-006', order: 'DD-20241104-007', company: '湖北安捷检测技术有限公司', type: '增值税普通发票', title: '湖北安捷检测技术有限公司', tax: '91420600MA4K5A8I9J', amount: 28000, date: '2024-11-04 15:00', status: '已上传' },
+      { id: 'FP-20241103-007', order: 'DD-20241103-008', company: '武汉星河数据科技有限公司', type: '增值税普通发票', title: '武汉星河数据科技有限公司', tax: '91420100MA4K5A9J0K', amount: 5600, date: '2024-11-03 10:30', status: '已上传' },
+    ];
+
+    // 服务商品
+    const prodCats = ['资质申报', '知识产权', '财税审计', '成果转化', '政策咨询'];
+    let prodData = [
+      { id: 1, name: '高新技术企业认定托管服务', cat: '资质申报', price: 28000, origin: 32000, cycle: '15-20 个工作日', status: '上架', sort: 1, update: '2024-11-01', desc: '一站式高企认定托管，从材料到报送全程代办', content: '申报书编制、材料清单、审计对接、专家预审、正式报送', applies: '适用于注册满一年、拥有知识产权的科技型企业' },
+      { id: 2, name: '专精特新中小企业认定辅导', cat: '资质申报', price: 22000, origin: 26000, cycle: '20-30 个工作日', status: '上架', sort: 2, update: '2024-11-01', desc: '专精特新中小企业认定全流程辅导', content: '条件诊断、申报书编制、佐证材料整理、报送指导', applies: '适用于省级创新型中小企业及培育库企业' },
+      { id: 3, name: '专利布局与挖掘服务', cat: '知识产权', price: 12000, origin: 0, cycle: '10-15 个工作日', status: '上架', sort: 3, update: '2024-10-28', desc: '围绕核心技术开展专利挖掘与布局', content: '专利检索、技术挖掘、布局方案、申请文件初稿', applies: '适用于有持续研发投入的科技企业' },
+      { id: 4, name: '研发费用归集与审计辅导', cat: '财税审计', price: 9800, origin: 0, cycle: '7-10 个工作日', status: '上架', sort: 4, update: '2024-10-25', desc: '规范研发费用归集口径，辅导审计', content: '辅助账建立、费用归集、加计扣除、审计对接', applies: '适用于有研发支出的制造与软件企业' },
+      { id: 5, name: '知识产权贯标辅导', cat: '知识产权', price: 15000, origin: 18000, cycle: '30-45 个工作日', status: '上架', sort: 5, update: '2024-10-22', desc: '企业知识产权管理体系贯标辅导', content: '体系诊断、文件编制、内审管理评审、认证对接', applies: '适用于拟建立知识产权管理体系的企业' },
+      { id: 6, name: '科技成果评价服务', cat: '成果转化', price: 6800, origin: 0, cycle: '5-8 个工作日', status: '上架', sort: 6, update: '2024-10-20', desc: '科技成果第三方评价与鉴定', content: '材料审核、专家评审、评价报告、证书出具', applies: '适用于有技术成果需评价鉴定的企业' },
+      { id: 7, name: '政策申报规划服务', cat: '政策咨询', price: 5600, origin: 0, cycle: '3-5 个工作日', status: '上架', sort: 7, update: '2024-10-18', desc: '年度政策申报路线图与排期规划', content: '政策匹配、申报时序、培育方案、资源配置建议', applies: '适用于计划申报多项资质的企业' },
+      { id: 8, name: '专家评审意见服务', cat: '资质申报', price: 3980, origin: 0, cycle: '3 个工作日', status: '下架', sort: 8, update: '2024-10-15', desc: '资深评审专家出具申报书评审意见', content: '申报书评审、风险提示、修改建议', applies: '适用于自主申报企业' },
+      { id: 9, name: '技术合同登记服务', cat: '成果转化', price: 2000, origin: 0, cycle: '2-3 个工作日', status: '草稿', sort: 9, update: '2024-11-07', desc: '技术合同认定登记代办', content: '合同审核、认定登记、免税备案', applies: '适用于签订技术合同的企业' },
+    ];
+
+    // 企业档案维度
+    let dimData = [
+      { id: 1, name: '基本信息', sort: 1, status: '启用', desc: '工商主体与注册信息', fields: [
+        { id: 1, name: '企业名称', type: '文本', required: '必填', source: '企业维护', unit: '', caliber: '以营业执照为准', zero: false, unknown: false, enabled: true },
+        { id: 2, name: '统一社会信用代码', type: '文本', required: '必填', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+        { id: 3, name: '注册地', type: '单选', required: '必填', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+        { id: 4, name: '成立日期', type: '日期', required: '必填', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+        { id: 5, name: '注册资本', type: '金额', required: '建议', source: '企业维护', unit: '万元', caliber: '', zero: false, unknown: false, enabled: true },
+      ] },
+      { id: 2, name: '经营与财务', sort: 2, status: '启用', desc: '营收、利润、研发费用等财务指标', fields: [
+        { id: 1, name: '近三年营业收入', type: '金额', required: '必填', source: '企业维护', unit: '万元', caliber: '以审计报告合并口径为准', zero: true, unknown: false, enabled: true },
+        { id: 2, name: '研发费用占比', type: '数值', required: '必填', source: '企业维护', unit: '%', caliber: '研发费用/营业收入', zero: true, unknown: false, enabled: true },
+        { id: 3, name: '净利润', type: '金额', required: '建议', source: '企业维护', unit: '万元', caliber: '', zero: true, unknown: false, enabled: true },
+        { id: 4, name: '总资产', type: '金额', required: '可选', source: '自动提取', unit: '万元', caliber: '', zero: false, unknown: true, enabled: true },
+      ] },
+      { id: 3, name: '知识产权', sort: 3, status: '启用', desc: '专利、软著、商标等', fields: [
+        { id: 1, name: '发明专利数量', type: '数值', required: '必填', source: '自动提取', unit: '件', caliber: '已授权有效', zero: true, unknown: false, enabled: true },
+        { id: 2, name: '实用新型数量', type: '数值', required: '建议', source: '自动提取', unit: '件', caliber: '', zero: true, unknown: false, enabled: true },
+        { id: 3, name: '软件著作权数量', type: '数值', required: '建议', source: '自动提取', unit: '件', caliber: '', zero: true, unknown: false, enabled: true },
+      ] },
+      { id: 4, name: '研发投入', sort: 4, status: '启用', desc: '研发立项、投入与机构', fields: [
+        { id: 1, name: '研发项目数量', type: '数值', required: '建议', source: '企业维护', unit: '个', caliber: '', zero: true, unknown: false, enabled: true },
+        { id: 2, name: '是否设立研发机构', type: '布尔', required: '建议', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+      ] },
+      { id: 5, name: '研发团队', sort: 5, status: '启用', desc: '研发人员结构与占比', fields: [
+        { id: 1, name: '研发人员数量', type: '数值', required: '必填', source: '企业维护', unit: '人', caliber: '', zero: true, unknown: false, enabled: true },
+        { id: 2, name: '研发人员占比', type: '数值', required: '建议', source: '企业维护', unit: '%', caliber: '', zero: true, unknown: false, enabled: true },
+      ] },
+      { id: 6, name: '成果转化', sort: 6, status: '启用', desc: '科技成果转化情况', fields: [
+        { id: 1, name: '近三年成果转化数量', type: '数值', required: '建议', source: '企业维护', unit: '项', caliber: '', zero: true, unknown: false, enabled: true },
+      ] },
+      { id: 7, name: '产学研合作', sort: 7, status: '启用', desc: '高校院所合作', fields: [
+        { id: 1, name: '产学研合作单位', type: '文本', required: '可选', source: '企业维护', unit: '', caliber: '', zero: false, unknown: true, enabled: true },
+      ] },
+      { id: 8, name: '资质荣誉', sort: 8, status: '启用', desc: '已获资质与荣誉', fields: [
+        { id: 1, name: '已获资质名称', type: '多选', required: '建议', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+      ] },
+      { id: 9, name: '组织人才', sort: 9, status: '启用', desc: '人才构成', fields: [
+        { id: 1, name: '博士人数', type: '数值', required: '可选', source: '企业维护', unit: '人', caliber: '', zero: true, unknown: false, enabled: true },
+        { id: 2, name: '硕士人数', type: '数值', required: '可选', source: '企业维护', unit: '人', caliber: '', zero: true, unknown: false, enabled: true },
+      ] },
+      { id: 10, name: '产品与技术', sort: 10, status: '启用', desc: '核心产品与关键技术', fields: [
+        { id: 1, name: '核心产品名称', type: '文本', required: '建议', source: '企业维护', unit: '', caliber: '', zero: false, unknown: false, enabled: true },
+      ] },
+      { id: 11, name: '标准与认证', sort: 11, status: '启用', desc: '标准制修订与体系认证', fields: [
+        { id: 1, name: '参与标准数量', type: '数值', required: '可选', source: '企业维护', unit: '项', caliber: '', zero: true, unknown: false, enabled: true },
+      ] },
+      { id: 12, name: '投融资', sort: 12, status: '停用', desc: '融资与资本情况', fields: [
+        { id: 1, name: '累计融资额', type: '金额', required: '可选', source: '企业维护', unit: '万元', caliber: '', zero: false, unknown: true, enabled: false },
+      ] },
+      { id: 13, name: '历史申报', sort: 13, status: '启用', desc: '历史项目申报记录', fields: [
+        { id: 1, name: '历史申报项目', type: '多选', required: '可选', source: '公开同步', unit: '', caliber: '', zero: false, unknown: true, enabled: true },
+      ] },
+    ];
+
+    // AI申报书模板
+    let tplData = [
+      { id: 1, name: '高新技术企业认定申报书模板', type: '高新技术企业', year: '2024', version: 'V2.1', status: '启用', update: '2024-10-28', chapters: [
+        { id: 1, name: '第一章 企业基本情况', min: 800, max: 1500, dim: '基本信息', prompt: '结合企业档案中的基本信息与经营财务数据，客观描述企业成立时间、注册地、主营业务、股权结构等。' },
+        { id: 2, name: '第二章 知识产权情况', min: 500, max: 1200, dim: '知识产权', prompt: '列举核心知识产权，说明权属与关联产品，突出技术先进性。' },
+        { id: 3, name: '第三章 研发活动与投入', min: 800, max: 1800, dim: '研发投入', prompt: '描述研发立项、组织管理、投入强度与主要研发成果。' },
+        { id: 4, name: '第四章 科技成果转化', min: 600, max: 1500, dim: '成果转化', prompt: '说明成果转化数量、方式与经济效益。' },
+        { id: 5, name: '第五章 研发组织管理水平', min: 600, max: 1200, dim: '研发团队', prompt: '描述研发机构、制度与人才激励。' },
+        { id: 6, name: '第六章 财务成长性', min: 500, max: 1000, dim: '经营与财务', prompt: '依据审计报告描述营收与净资产增长情况。' },
+      ] },
+      { id: 2, name: '专精特新中小企业申报书模板', type: '专精特新中小企业', year: '2024', version: 'V1.3', status: '启用', update: '2024-10-20', chapters: [
+        { id: 1, name: '第一章 企业概况', min: 500, max: 1000, dim: '基本信息', prompt: '概述企业基本情况与所属领域。' },
+        { id: 2, name: '第二章 专业化程度', min: 600, max: 1200, dim: '产品与技术', prompt: '说明细分市场专注度与行业地位。' },
+        { id: 3, name: '第三章 精细化能力', min: 600, max: 1200, dim: '经营与财务', prompt: '描述管理效率、质量体系与经营指标。' },
+        { id: 4, name: '第四章 特色化与创新能力', min: 700, max: 1500, dim: '知识产权', prompt: '突出特色化优势与创新投入产出。' },
+      ] },
+      { id: 3, name: '专精特新小巨人申报书模板', type: '专精特新小巨人', year: '2024', version: 'V1.0', status: '停用', update: '2024-09-30', chapters: [
+        { id: 1, name: '第一章 企业基本情况', min: 800, max: 1500, dim: '基本信息', prompt: '概述企业基本情况。' },
+        { id: 2, name: '第二章 产业链关键环节', min: 600, max: 1200, dim: '产品与技术', prompt: '说明在产业链中的关键作用。' },
+        { id: 3, name: '第三章 创新能力', min: 700, max: 1500, dim: '知识产权', prompt: '描述创新能力与核心技术。' },
+      ] },
+    ];
+
+    // ==================== 通用：标签渲染 ====================
+    function renderTabs(el, tabs, active) {
+      el.innerHTML = tabs.map(function (t) {
+        return '<span class="tab-pill' + (t === active ? ' active' : '') + '" data-val="' + esc(t) + '">' + esc(t) + '</span>';
+      }).join('');
+    }
+
+    // ==================== 企业入驻审核 ====================
+    let regStatus = '全部', regQuery = '';
+    function renderRegTabs() { renderTabs(document.getElementById('reg-status-tabs'), ['全部', '待初审', '待主体核验', '待补正', '已退回', '已开通'], regStatus); }
+    function regFiltered() {
+      return regData.filter(function (r) {
+        const hitStatus = regStatus === '全部' || r.status === regStatus;
+        const q = regQuery.trim().toLowerCase();
+        const hitQ = !q || (r.company + r.code + r.contact).toLowerCase().indexOf(q) >= 0;
+        return hitStatus && hitQ;
+      });
+    }
+    function renderReg() {
+      const list = regFiltered();
+      document.getElementById('reg-stat-pending').textContent = regData.filter(function (r) { return r.status === '待初审'; }).length;
+      document.getElementById('reg-stat-verify').textContent = regData.filter(function (r) { return r.status === '待主体核验'; }).length;
+      document.getElementById('reg-stat-fix').textContent = regData.filter(function (r) { return r.status === '待补正'; }).length;
+      document.getElementById('reg-stat-month').textContent = regData.filter(function (r) { return r.date.indexOf('2024-11') === 0; }).length;
+      document.getElementById('reg-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('reg-tbody').innerHTML = list.map(function (r) {
+        let actions = '<button class="link text-[13px]" onclick="openRegDetail(\'' + r.id + '\')">查看</button>';
+        if (r.status === '待初审') actions += '<button class="btn btn-soft btn-xs ml-2" onclick="regApprove(\'' + r.id + '\')">通过初审</button>';
+        if (r.status === '待主体核验') actions += '<button class="btn btn-primary btn-xs ml-2" onclick="regOpen(\'' + r.id + '\')">开通</button>';
+        if (r.status === '待初审' || r.status === '待主体核验') actions += '<button class="btn btn-ghost btn-xs ml-2" onclick="regReturn(\'' + r.id + '\')">退回</button>';
+        if (r.status === '待补正') actions += '<button class="btn btn-ghost btn-xs ml-2" onclick="showToast(\'已提醒企业尽快补正并重新提交\', \'success\')">提醒补正</button>';
+        return '<tr>' +
+          '<td class="font-medium text-gray-800">' + esc(r.id) + '</td>' +
+          '<td>' + esc(r.company) + '</td>' +
+          '<td class="font-mono text-xs text-gray-500">' + esc(r.code) + '</td>' +
+          '<td>' + esc(r.region) + '</td>' +
+          '<td>' + esc(r.contact) + ' · ' + esc(r.relation) + '</td>' +
+          '<td class="text-gray-500">' + esc(r.date) + '</td>' +
+          '<td>' + badge(r.status) + '</td>' +
+          '<td>' + actions + '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    let currentRegId = null;
+    function openRegDetail(id) {
+      currentRegId = id;
+      const r = regData.find(function (x) { return x.id === id; });
+      document.getElementById('reg-detail-content').innerHTML =
+        '<div class="mb-4 flex items-center gap-3">' +
+          '<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="building-2" class="h-5 w-5"></i></div>' +
+          '<div><div class="text-base font-semibold text-gray-900">' + esc(r.company) + '</div><div class="text-xs text-gray-400">' + esc(r.id) + '</div></div>' +
+          '<div class="ml-auto">' + badge(r.status) + '</div>' +
+        '</div>' +
+        '<dl class="dl">' +
+          '<dt>统一社会信用代码</dt><dd>' + esc(r.code) + '</dd>' +
+          '<dt>属地</dt><dd>' + esc(r.region) + '</dd>' +
+          '<dt>联系人</dt><dd>' + esc(r.contact) + ' · ' + esc(r.phone) + '</dd>' +
+          '<dt>申请关系</dt><dd>' + esc(r.relation) + '</dd>' +
+          '<dt>申请时间</dt><dd>' + esc(r.date) + '</dd>' +
+          '<dt>商务经理</dt><dd>' + (r.manager ? esc(r.manager) : '<span class="text-gray-400">未指定</span>') + '</dd>' +
+        '</dl>' +
+        '<div class="mt-4"><div class="field-label">证明文件</div><div class="space-y-2">' +
+          r.files.map(function (f) { return '<div class="flex items-center gap-3 rounded-lg border border-gray-100 px-3 py-2"><div class="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-50"><i data-lucide="file-text" class="h-4 w-4 text-primary"></i></div><span class="flex-1 text-sm text-gray-700">' + esc(f) + '</span><button class="link text-xs" onclick="showToast(\'预览演示：' + esc(f) + '\')">预览</button></div>'; }).join('') +
+        '</div></div>';
+      const act = document.getElementById('reg-detail-actions');
+      let html = '<button class="btn btn-ghost" onclick="closeModal(\'reg-detail-modal\')">关闭</button>';
+      if (r.status === '待初审') html += '<button class="btn btn-ghost" onclick="regReturn(\'' + r.id + '\')">退回</button><button class="btn btn-primary" onclick="regApprove(\'' + r.id + '\')">通过初审</button>';
+      if (r.status === '待主体核验') html += '<button class="btn btn-ghost" onclick="regReturn(\'' + r.id + '\')">退回</button><button class="btn btn-primary" onclick="regOpen(\'' + r.id + '\')">主体核验通过 · 开通</button>';
+      if (r.status === '待补正') html += '<button class="btn btn-ghost" onclick="showToast(\'已提醒企业补正\', \'success\')">提醒补正</button>';
+      act.innerHTML = html;
+      openModal('reg-detail-modal');
+      lucide.createIcons();
+    }
+    function regApprove(id) {
+      const r = regData.find(function (x) { return x.id === id; });
+      r.status = '待主体核验';
+      closeModal('reg-detail-modal');
+      showToast('已通过初审，进入主体核验', 'success');
+      renderReg();
+    }
+    function regReturn(id) {
+      currentRegId = id;
+      const r = regData.find(function (x) { return x.id === id; });
+      document.getElementById('reg-return-target').textContent = r.company + '（' + r.id + '）';
+      document.getElementById('reg-return-reason').value = '';
+      closeModal('reg-detail-modal');
+      openModal('reg-return-modal');
+    }
+    function submitRegReturn() {
+      const reason = document.getElementById('reg-return-reason').value.trim();
+      if (!reason) { showToast('请填写退回原因', 'warning'); return; }
+      const r = regData.find(function (x) { return x.id === currentRegId; });
+      r.status = '已退回';
+      closeModal('reg-return-modal');
+      showToast('已退回申请并通知企业：' + reason, 'success');
+      renderReg();
+    }
+    function regOpen(id) {
+      currentRegId = id;
+      const r = regData.find(function (x) { return x.id === id; });
+      document.getElementById('reg-open-target').textContent = r.company + '（' + r.id + '）';
+      document.getElementById('reg-open-manager').value = '';
+      document.getElementById('reg-open-note').value = '';
+      closeModal('reg-detail-modal');
+      openModal('reg-open-modal');
+    }
+    function submitRegOpen() {
+      const manager = document.getElementById('reg-open-manager').value;
+      if (!manager) { showToast('请指定商务经理', 'warning'); return; }
+      const r = regData.find(function (x) { return x.id === currentRegId; });
+      r.status = '已开通'; r.manager = manager;
+      closeModal('reg-open-modal');
+      showToast('主体核验通过，账号已开通并指派 ' + manager, 'success');
+      renderReg();
+    }
+    document.getElementById('reg-status-tabs').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      regStatus = t.dataset.val; renderRegTabs(); renderReg();
+    });
+    document.getElementById('reg-search').addEventListener('input', function (e) { regQuery = e.target.value; renderReg(); });
+
+    // ==================== 用户订单 ====================
+    let orderStatus = '全部', orderQuery = '';
+    function renderOrderTabs() { renderTabs(document.getElementById('order-status-tabs'), ['全部', '待支付', '待确认', '服务中', '已完成', '已取消'], orderStatus); }
+    function orderFiltered() {
+      return orderData.filter(function (o) {
+        const hitStatus = orderStatus === '全部' ? true : (orderStatus === '待支付' ? o.pay === '待支付' : o.status === orderStatus);
+        const q = orderQuery.trim().toLowerCase();
+        const hitQ = !q || (o.id + o.company + o.product).toLowerCase().indexOf(q) >= 0;
+        return hitStatus && hitQ;
+      });
+    }
+    function renderOrders() {
+      const list = orderFiltered();
+      document.getElementById('ord-stat-all').textContent = orderData.length;
+      document.getElementById('ord-stat-unpaid').textContent = orderData.filter(function (o) { return o.pay === '待支付'; }).length;
+      document.getElementById('ord-stat-serving').textContent = orderData.filter(function (o) { return o.status === '服务中'; }).length;
+      document.getElementById('ord-stat-deliver').textContent = orderData.filter(function (o) { return o.deliver === '待交付'; }).length;
+      document.getElementById('order-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('order-tbody').innerHTML = list.map(function (o) {
+        return '<tr>' +
+          '<td class="font-medium text-gray-800">' + esc(o.id) + '</td>' +
+          '<td>' + esc(o.company) + '</td>' +
+          '<td>' + esc(o.product) + '</td>' +
+          '<td class="font-semibold text-gray-900">¥' + o.amount.toLocaleString() + '</td>' +
+          '<td>' + badge(o.pay) + '</td>' +
+          '<td>' + badge(o.status) + '</td>' +
+          '<td>' + (o.deliver === '—' ? '<span class="text-gray-400">—</span>' : badge(o.deliver)) + '</td>' +
+          '<td class="text-gray-500">' + esc(o.date) + '</td>' +
+          '<td><button class="link text-[13px]" onclick="openOrderDetail(\'' + o.id + '\')">查看</button></td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    function openOrderDetail(id) {
+      const o = orderData.find(function (x) { return x.id === id; });
+      document.getElementById('order-detail-content').innerHTML =
+        '<div class="mb-4 flex items-center gap-3">' +
+          '<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-light text-primary"><i data-lucide="clipboard-list" class="h-5 w-5"></i></div>' +
+          '<div><div class="text-base font-semibold text-gray-900">' + esc(o.product) + '</div><div class="text-xs text-gray-400">' + esc(o.id) + ' · ' + esc(o.date) + '</div></div>' +
+          '<div class="ml-auto text-2xl font-bold text-primary">¥' + o.amount.toLocaleString() + '</div>' +
+        '</div>' +
+        '<dl class="dl">' +
+          '<dt>企业名称</dt><dd>' + esc(o.company) + '</dd>' +
+          '<dt>支付状态</dt><dd>' + badge(o.pay) + '</dd>' +
+          '<dt>订单状态</dt><dd>' + badge(o.status) + '</dd>' +
+          '<dt>交付状态</dt><dd>' + (o.deliver === '—' ? '<span class="text-gray-400">—</span>' : badge(o.deliver)) + '</dd>' +
+          '<dt>商务经理</dt><dd>' + esc(o.manager) + '</dd>' +
+        '</dl>' +
+        '<div class="mt-4"><div class="field-label">办理进度</div>' +
+          '<div class="space-y-2">' +
+            '<div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 rounded-full bg-green-500"></span><span class="text-gray-700">提交订单</span><span class="ml-auto text-xs text-gray-400">' + esc(o.date) + '</span></div>' +
+            (o.pay === '已支付' ? '<div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 rounded-full bg-green-500"></span><span class="text-gray-700">支付完成</span><span class="ml-auto text-xs text-gray-400">' + esc(o.date) + '</span></div>' : '<div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 rounded-full bg-amber-500"></span><span class="text-gray-700">等待支付</span><span class="ml-auto text-xs text-amber-500">待处理</span></div>') +
+            (o.deliver !== '—' ? (o.deliver === '已交付' ? '<div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 rounded-full bg-green-500"></span><span class="text-gray-700">交付完成</span></div>' : '<div class="flex items-center gap-2 text-sm"><span class="h-2 w-2 rounded-full bg-amber-500"></span><span class="text-gray-700">服务交付中</span></div>') : '') +
+          '</div></div>';
+      openModal('order-detail-modal');
+      lucide.createIcons();
+    }
+    document.getElementById('order-status-tabs').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      orderStatus = t.dataset.val; renderOrderTabs(); renderOrders();
+    });
+    document.getElementById('order-search').addEventListener('input', function (e) { orderQuery = e.target.value; renderOrders(); });
+
+    // ==================== 订单交付物 ====================
+    let dlvStatus = '全部', dlvQuery = '';
+    function renderDlvTabs() { renderTabs(document.getElementById('dlv-status-tabs'), ['全部', '待交付', '交付中', '已交付', '已逾期'], dlvStatus); }
+    function dlvFiltered() {
+      return dlvData.filter(function (d) {
+        const hitStatus = dlvStatus === '全部' || d.status === dlvStatus;
+        const q = dlvQuery.trim().toLowerCase();
+        const hitQ = !q || (d.id + d.company + d.manager).toLowerCase().indexOf(q) >= 0;
+        return hitStatus && hitQ;
+      });
+    }
+    function renderDlv() {
+      const list = dlvFiltered();
+      document.getElementById('dlv-stat-pending').textContent = dlvData.filter(function (d) { return d.status === '待交付'; }).length;
+      document.getElementById('dlv-stat-doing').textContent = dlvData.filter(function (d) { return d.status === '交付中'; }).length;
+      document.getElementById('dlv-stat-done').textContent = dlvData.filter(function (d) { return d.status === '已交付'; }).length;
+      document.getElementById('dlv-stat-overdue').textContent = dlvData.filter(function (d) { return d.status === '已逾期'; }).length;
+      document.getElementById('dlv-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('dlv-tbody').innerHTML = list.map(function (d) {
+        const pct = d.total ? Math.round(d.done / d.total * 100) : 0;
+        const canSubmit = d.status === '待交付' || d.status === '交付中' || d.status === '已逾期';
+        return '<tr>' +
+          '<td class="font-medium text-gray-800">' + esc(d.id) + '</td>' +
+          '<td>' + esc(d.company) + '</td>' +
+          '<td>' + esc(d.product) + '</td>' +
+          '<td><div class="flex items-center gap-2"><div class="h-1.5 w-24 overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:' + pct + '%"></div></div><span class="text-xs text-gray-500">' + d.done + '/' + d.total + '</span></div></td>' +
+          '<td>' + esc(d.manager) + '</td>' +
+          '<td class="text-gray-500">' + esc(d.due) + '</td>' +
+          '<td>' + badge(d.status) + '</td>' +
+          '<td>' + (canSubmit ? '<button class="btn btn-soft btn-xs" onclick="openDeliverModal(\'' + d.id + '\')">提交交付物</button>' : '<button class="btn btn-ghost btn-xs" onclick="openDeliverModal(\'' + d.id + '\')">查看</button>') + '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    let currentDlvId = null;
+    function openDeliverModal(id) {
+      currentDlvId = id;
+      renderDeliverContent();
+      openModal('deliver-modal');
+    }
+    function renderDeliverContent() {
+      const d = dlvData.find(function (x) { return x.id === currentDlvId; });
+      document.getElementById('deliver-content').innerHTML =
+        '<div class="mb-4 flex items-center gap-3 rounded-lg bg-gray-50 px-3 py-3">' +
+          '<div class="flex-1"><div class="text-sm font-semibold text-gray-800">' + esc(d.product) + '</div><div class="mt-0.5 text-xs text-gray-500">' + esc(d.company) + ' · ' + esc(d.id) + ' · 交付截止 ' + esc(d.due) + '</div></div>' +
+          '<div class="text-right"><div class="text-xs text-gray-400">交付进度</div><div class="text-sm font-semibold text-gray-800">' + d.done + '/' + d.total + '</div></div>' +
+        '</div>' +
+        '<div class="space-y-2">' + d.items.map(function (it, idx) {
+          return '<div class="flex items-center gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
+            '<input type="checkbox" class="dlv-item-check h-4 w-4 rounded" data-idx="' + idx + '"' + (it.done ? ' checked' : '') + '>' +
+            '<div class="min-w-0 flex-1"><div class="truncate text-sm ' + (it.done ? 'text-gray-400 line-through' : 'text-gray-700') + '">' + esc(it.name) + '</div>' +
+            (it.file ? '<div class="mt-0.5 flex items-center gap-1 text-xs text-green-600"><i data-lucide="file-check" class="h-3.5 w-3.5"></i>' + esc(it.file) + '</div>' : '') + '</div>' +
+            (it.done && !it.file ? '<span class="text-xs text-green-600">已完成</span>' : '') +
+            '<button class="btn btn-ghost btn-xs" onclick="simulateItemUpload(' + idx + ', this)">' + (it.file ? '重新上传' : '上传文件') + '</button>' +
+          '</div>';
+        }).join('') + '</div>';
+      lucide.createIcons();
+    }
+    function simulateItemUpload(idx, btn) {
+      const d = dlvData.find(function (x) { return x.id === currentDlvId; });
+      const it = d.items[idx];
+      const oldHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<i data-lucide="loader-2" class="h-3.5 w-3.5 animate-spin"></i> 上传中';
+      lucide.createIcons();
+      let p = 0;
+      const timer = setInterval(function () {
+        p += 20;
+        if (p >= 100) {
+          clearInterval(timer);
+          it.file = it.name + '（模拟文件）.pdf';
+          it.done = true;
+          d.done = d.items.filter(function (x) { return x.done; }).length;
+          if (d.done === d.total && d.status !== '已交付') { d.status = '交付中'; }
+          showToast('「' + it.name + '」上传成功', 'success');
+          renderDeliverContent();
+          renderDlv();
+        }
+      }, 150);
+    }
+    function submitDeliver() {
+      const d = dlvData.find(function (x) { return x.id === currentDlvId; });
+      const undone = d.items.filter(function (x) { return !x.done; });
+      if (undone.length) { showToast('仍有 ' + undone.length + ' 项交付物未完成，请确认后提交', 'warning'); return; }
+      d.status = '已交付';
+      const od = orderData.find(function (o) { return o.id === d.id; });
+      if (od) { od.deliver = '已交付'; if (od.status === '服务中') od.status = '已完成'; }
+      closeModal('deliver-modal');
+      showToast('交付物已提交，企业将收到验收通知', 'success');
+      renderDlv(); renderOrders();
+    }
+    document.getElementById('dlv-status-tabs').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      dlvStatus = t.dataset.val; renderDlvTabs(); renderDlv();
+    });
+    document.getElementById('dlv-search').addEventListener('input', function (e) { dlvQuery = e.target.value; renderDlv(); });
+    document.getElementById('deliver-content').addEventListener('change', function (e) {
+      if (!e.target.classList.contains('dlv-item-check')) return;
+      const d = dlvData.find(function (x) { return x.id === currentDlvId; });
+      const idx = Number(e.target.dataset.idx);
+      d.items[idx].done = e.target.checked;
+      d.done = d.items.filter(function (x) { return x.done; }).length;
+      if (d.done === d.total && d.status !== '已交付') d.status = '交付中';
+      if (d.done < d.total && d.status === '交付中') d.status = d.items.some(function (x) { return x.done; }) ? '交付中' : '待交付';
+      renderDeliverContent(); renderDlv();
+    });
+
+    // ==================== 发票管理 ====================
+    let invStatus = '全部', invQuery = '';
+    function renderInvTabs() { renderTabs(document.getElementById('inv-status-tabs'), ['全部', '待开票', '已开票', '已上传'], invStatus); }
+    function invFiltered() {
+      return invData.filter(function (i) {
+        const hitStatus = invStatus === '全部' || i.status === invStatus;
+        const q = invQuery.trim().toLowerCase();
+        const hitQ = !q || (i.id + i.order + i.company).toLowerCase().indexOf(q) >= 0;
+        return hitStatus && hitQ;
+      });
+    }
+    function renderInv() {
+      const list = invFiltered();
+      document.getElementById('inv-stat-pending').textContent = invData.filter(function (i) { return i.status === '待开票'; }).length;
+      document.getElementById('inv-stat-opened').textContent = invData.filter(function (i) { return i.status === '已开票'; }).length;
+      document.getElementById('inv-stat-uploaded').textContent = invData.filter(function (i) { return i.status === '已上传'; }).length;
+      const amt = invData.filter(function (i) { return i.status === '已上传'; }).reduce(function (s, i) { return s + i.amount; }, 0);
+      document.getElementById('inv-stat-amount').textContent = '¥' + amt.toLocaleString();
+      document.getElementById('inv-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('inv-tbody').innerHTML = list.map(function (i) {
+        let actions = '<button class="link text-[13px]" onclick="openInvoiceDetail(\'' + i.id + '\')">查看</button>';
+        if (i.status === '待开票') actions += '<button class="btn btn-soft btn-xs ml-2" onclick="openInvoiceUpload(\'' + i.id + '\')">上传发票</button>';
+        if (i.status === '已开票') actions += '<button class="btn btn-primary btn-xs ml-2" onclick="openInvoiceUpload(\'' + i.id + '\')">上传发票</button>';
+        return '<tr>' +
+          '<td class="font-medium text-gray-800">' + esc(i.id) + '</td>' +
+          '<td>' + esc(i.order) + '</td>' +
+          '<td>' + esc(i.company) + '</td>' +
+          '<td>' + esc(i.type) + '</td>' +
+          '<td>' + esc(i.title) + '</td>' +
+          '<td class="font-semibold text-gray-900">¥' + i.amount.toLocaleString() + '</td>' +
+          '<td class="text-gray-500">' + esc(i.date) + '</td>' +
+          '<td>' + badge(i.status) + '</td>' +
+          '<td>' + actions + '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    let currentInvId = null;
+    function openInvoiceDetail(id) {
+      const i = invData.find(function (x) { return x.id === id; });
+      document.getElementById('invoice-upload-info').innerHTML =
+        '<div class="flex items-center justify-between"><span class="text-gray-500">' + esc(i.id) + '</span>' + badge(i.status) + '</div>' +
+        '<div class="mt-2 font-semibold text-gray-800">' + esc(i.title) + '</div>' +
+        '<div class="mt-1 text-xs text-gray-500">税号：' + esc(i.tax) + ' · 订单 ' + esc(i.order) + '</div>' +
+        '<div class="mt-2 text-lg font-bold text-primary">¥' + i.amount.toLocaleString() + '</div>';
+      openModal('invoice-upload-modal');
+      lucide.createIcons();
+    }
+    function openInvoiceUpload(id) {
+      currentInvId = id;
+      const i = invData.find(function (x) { return x.id === id; });
+      document.getElementById('invoice-upload-info').innerHTML =
+        '<div class="flex items-center justify-between"><span class="text-gray-500">' + esc(i.id) + '</span>' + badge(i.status) + '</div>' +
+        '<div class="mt-2 font-semibold text-gray-800">' + esc(i.title) + '</div>' +
+        '<div class="mt-1 text-xs text-gray-500">税号：' + esc(i.tax) + ' · 订单 ' + esc(i.order) + '</div>' +
+        '<div class="mt-2 text-lg font-bold text-primary">¥' + i.amount.toLocaleString() + '</div>';
+      document.getElementById('invoice-upload-type').value = i.type.indexOf('专用') >= 0 ? '增值税专用发票' : '增值税普通发票（电子）';
+      document.getElementById('invoice-file-progress').classList.add('hidden');
+      document.getElementById('invoice-file-progress').innerHTML = '';
+      document.getElementById('invoice-dropzone').classList.remove('hidden');
+      openModal('invoice-upload-modal');
+      lucide.createIcons();
+    }
+    document.getElementById('invoice-file-input').addEventListener('change', function (e) {
+      if (!e.target.files.length) return;
+      const name = e.target.files[0].name;
+      const dz = document.getElementById('invoice-dropzone');
+      dz.classList.add('hidden');
+      const prog = document.getElementById('invoice-file-progress');
+      prog.classList.remove('hidden');
+      prog.innerHTML = '<div class="flex items-center gap-3 rounded-lg border border-gray-100 px-3 py-2.5"><div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-light"><i data-lucide="file-text" class="h-4 w-4 text-primary"></i></div><div class="min-w-0 flex-1"><div class="truncate text-sm text-gray-700">' + esc(name) + '</div><div class="mt-1 h-1.5 w-full overflow-hidden rounded-full bg-gray-100"><div id="inv-progress-bar" class="h-full rounded-full bg-primary" style="width:0%"></div></div></div><span class="text-xs text-gray-400">0%</span></div>';
+      lucide.createIcons();
+      let p = 0;
+      const timer = setInterval(function () {
+        p += 20;
+        const bar = document.getElementById('inv-progress-bar');
+        if (bar) bar.style.width = p + '%';
+        prog.querySelector('span').textContent = p + '%';
+        if (p >= 100) {
+          clearInterval(timer);
+          prog.querySelector('span').textContent = '100%';
+          showToast('发票文件「' + name + '」上传完成', 'success');
+        }
+      }, 120);
+      e.target.value = '';
+    });
+    function submitInvoiceUpload() {
+      const i = invData.find(function (x) { return x.id === currentInvId; });
+      if (!i) return;
+      i.status = '已上传';
+      closeModal('invoice-upload-modal');
+      showToast('发票已上传并标记为已发送', 'success');
+      renderInv();
+    }
+    document.getElementById('inv-status-tabs').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      invStatus = t.dataset.val; renderInvTabs(); renderInv();
+    });
+    document.getElementById('inv-search').addEventListener('input', function (e) { invQuery = e.target.value; renderInv(); });
+
+    // ==================== 服务商品维护 ====================
+    let prodCat = '全部', prodQuery = '';
+    function renderProductCats() {
+      const el = document.getElementById('product-cat-chips');
+      el.innerHTML = ['全部'].concat(prodCats).map(function (c) {
+        return '<span class="tab-pill' + (prodCat === c ? ' active' : '') + '" data-val="' + esc(c) + '">' + esc(c) + '</span>';
+      }).join('');
+    }
+    function prodFiltered() {
+      return prodData.filter(function (p) {
+        const hitCat = prodCat === '全部' || p.cat === prodCat;
+        const q = prodQuery.trim().toLowerCase();
+        const hitQ = !q || (p.name + p.desc).toLowerCase().indexOf(q) >= 0;
+        return hitCat && hitQ;
+      });
+    }
+    function renderProducts() {
+      const list = prodFiltered();
+      document.getElementById('prod-stat-on').textContent = prodData.filter(function (p) { return p.status === '上架'; }).length;
+      document.getElementById('prod-stat-off').textContent = prodData.filter(function (p) { return p.status === '下架'; }).length;
+      document.getElementById('prod-stat-draft').textContent = prodData.filter(function (p) { return p.status === '草稿'; }).length;
+      document.getElementById('prod-stat-cat').textContent = prodCats.length;
+      document.getElementById('product-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('product-tbody').innerHTML = list.map(function (p) {
+        return '<tr>' +
+          '<td><div class="flex items-center gap-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary"><i data-lucide="shopping-bag" class="h-4 w-4"></i></div><div><div class="font-medium text-gray-800">' + esc(p.name) + '</div><div class="mt-0.5 max-w-[260px] truncate text-xs text-gray-400">' + esc(p.desc) + '</div></div></div></td>' +
+          '<td>' + esc(p.cat) + '</td>' +
+          '<td><div class="font-semibold text-gray-900">¥' + p.price.toLocaleString() + '</div>' + (p.origin ? '<div class="text-xs text-gray-400 line-through">¥' + p.origin.toLocaleString() + '</div>' : '') + '</td>' +
+          '<td class="text-gray-500">' + esc(p.cycle) + '</td>' +
+          '<td>' + badge(p.status) + '</td>' +
+          '<td class="text-gray-500">' + p.sort + '</td>' +
+          '<td class="text-gray-500">' + esc(p.update) + '</td>' +
+          '<td>' +
+            '<button class="link text-[13px]" onclick="openProductModal(' + p.id + ')">编辑</button>' +
+            '<button class="link text-[13px] ml-2" onclick="toggleProduct(' + p.id + ')">' + (p.status === '上架' ? '下架' : '上架') + '</button>' +
+            '<button class="link text-[13px] ml-2 text-red-500" onclick="deleteProduct(' + p.id + ')">删除</button>' +
+          '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    let editingProdId = null;
+    function openProductModal(id) {
+      editingProdId = id || null;
+      const p = id ? prodData.find(function (x) { return x.id === id; }) : null;
+      document.getElementById('product-modal-title').textContent = p ? '编辑商品' : '新增商品';
+      const catSel = document.getElementById('prod-f-cat');
+      catSel.innerHTML = prodCats.map(function (c) { return '<option>' + c + '</option>'; }).join('');
+      document.getElementById('prod-f-name').value = p ? p.name : '';
+      document.getElementById('prod-f-cat').value = p ? p.cat : prodCats[0];
+      document.getElementById('prod-f-cycle').value = p ? p.cycle : '';
+      document.getElementById('prod-f-price').value = p ? p.price : '';
+      document.getElementById('prod-f-origin').value = p ? (p.origin || '') : '';
+      document.getElementById('prod-f-status').value = p ? p.status : '上架';
+      document.getElementById('prod-f-sort').value = p ? p.sort : (prodData.length + 1);
+      document.getElementById('prod-f-desc').value = p ? p.desc : '';
+      document.getElementById('prod-f-content').value = p ? p.content : '';
+      document.getElementById('prod-f-applies').value = p ? p.applies : '';
+      openModal('product-modal');
+    }
+    function saveProduct() {
+      const name = document.getElementById('prod-f-name').value.trim();
+      const price = Number(document.getElementById('prod-f-price').value);
+      if (!name) { showToast('请填写商品名称', 'warning'); return; }
+      if (!price) { showToast('请填写销售价', 'warning'); return; }
+      const data = {
+        name: name, cat: document.getElementById('prod-f-cat').value,
+        price: price, origin: Number(document.getElementById('prod-f-origin').value) || 0,
+        cycle: document.getElementById('prod-f-cycle').value.trim() || '—',
+        status: document.getElementById('prod-f-status').value,
+        sort: Number(document.getElementById('prod-f-sort').value) || 10,
+        desc: document.getElementById('prod-f-desc').value.trim(),
+        content: document.getElementById('prod-f-content').value.trim(),
+        applies: document.getElementById('prod-f-applies').value.trim(),
+      };
+      if (editingProdId) {
+        const p = prodData.find(function (x) { return x.id === editingProdId; });
+        Object.assign(p, data); p.update = '2024-11-08';
+        showToast('商品已更新', 'success');
+      } else {
+        prodData.unshift(Object.assign({ id: Date.now(), update: '2024-11-08' }, data));
+        showToast('商品已创建', 'success');
+      }
+      closeModal('product-modal');
+      renderProducts();
+    }
+    function toggleProduct(id) {
+      const p = prodData.find(function (x) { return x.id === id; });
+      p.status = p.status === '上架' ? '下架' : '上架';
+      showToast('「' + p.name + '」已' + p.status, 'success');
+      renderProducts();
+    }
+    function deleteProduct(id) {
+      const p = prodData.find(function (x) { return x.id === id; });
+      if (!confirm('确认删除商品「' + p.name + '」？')) return;
+      prodData = prodData.filter(function (x) { return x.id !== id; });
+      showToast('商品已删除', 'success');
+      renderProducts();
+    }
+    document.getElementById('product-cat-chips').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      prodCat = t.dataset.val; renderProductCats(); renderProducts();
+    });
+    document.getElementById('product-search').addEventListener('input', function (e) { prodQuery = e.target.value; renderProducts(); });
+
+    // ==================== 企业档案字段配置 ====================
+    let currentDimId = 1;
+    function renderDims() {
+      document.getElementById('dim-count').textContent = dimData.length;
+      document.getElementById('dim-list').innerHTML = dimData.slice().sort(function (a, b) { return a.sort - b.sort; }).map(function (d, i, arr) {
+        return '<div class="dim-item ' + (d.id === currentDimId ? 'active' : '') + '" data-id="' + d.id + '">' +
+          '<div class="flex items-center gap-2">' +
+            '<i data-lucide="' + (d.id === currentDimId ? 'folder-open' : 'folder') + '" class="h-4 w-4 flex-shrink-0"></i>' +
+            '<span class="dim-item-name min-w-0 flex-1 truncate text-sm">' + esc(d.name) + '</span>' +
+            '<span class="text-[11px] text-gray-400">' + d.fields.length + '项</span>' +
+          '</div>' +
+          '<div class="mt-2 flex items-center gap-1.5">' +
+            '<button class="icon-btn h-7 w-7" onclick="moveDim(' + d.id + ', -1)" title="上移"><i data-lucide="arrow-up" class="h-3.5 w-3.5"></i></button>' +
+            '<button class="icon-btn h-7 w-7" onclick="moveDim(' + d.id + ', 1)" title="下移"><i data-lucide="arrow-down" class="h-3.5 w-3.5"></i></button>' +
+            '<div class="switch ml-auto ' + (d.status === '启用' ? 'on' : '') + '" onclick="toggleDim(' + d.id + ')" title="启用/停用"></div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      renderFields();
+      lucide.createIcons();
+    }
+    function renderFields() {
+      const d = dimData.find(function (x) { return x.id === currentDimId; });
+      if (!d) { document.getElementById('field-empty').classList.remove('hidden'); document.getElementById('field-tbody').innerHTML = ''; return; }
+      document.getElementById('field-empty').classList.add('hidden');
+      document.getElementById('dim-detail-head').textContent = d.name + ' · ' + d.desc;
+      document.getElementById('field-tbody').innerHTML = d.fields.map(function (f, i, arr) {
+        return '<tr>' +
+          '<td class="font-medium text-gray-800">' + esc(f.name) + '</td>' +
+          '<td>' + esc(f.type) + '</td>' +
+          '<td>' + badge(f.required) + '</td>' +
+          '<td>' + esc(f.source) + '</td>' +
+          '<td>' + (f.unit ? esc(f.unit) : '<span class="text-gray-300">—</span>') + '</td>' +
+          '<td>' + badge(f.enabled ? '启用' : '停用') + '</td>' +
+          '<td>' +
+            '<button class="link text-[13px]" onclick="openFieldModal(' + f.id + ')">编辑</button>' +
+            '<button class="link text-[13px] ml-2" onclick="moveField(' + f.id + ', -1)">上移</button>' +
+            '<button class="link text-[13px] ml-2" onclick="moveField(' + f.id + ', 1)">下移</button>' +
+            '<button class="link text-[13px] ml-2 text-red-500" onclick="deleteField(' + f.id + ')">删除</button>' +
+          '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    function toggleDim(id) {
+      const d = dimData.find(function (x) { return x.id === id; });
+      d.status = d.status === '启用' ? '停用' : '启用';
+      renderDims();
+    }
+    function moveDim(id, dir) {
+      const arr = dimData.slice().sort(function (a, b) { return a.sort - b.sort; });
+      const idx = arr.findIndex(function (x) { return x.id === id; });
+      const t = idx + dir;
+      if (t < 0 || t >= arr.length) return;
+      const tmp = arr[idx].sort; arr[idx].sort = arr[t].sort; arr[t].sort = tmp;
+      renderDims();
+    }
+    let editingDimId = null;
+    function openDimModal(id) {
+      editingDimId = id || null;
+      const d = id ? dimData.find(function (x) { return x.id === id; }) : null;
+      document.getElementById('dim-modal-title').textContent = d ? '编辑维度' : '新增维度';
+      document.getElementById('dim-f-name').value = d ? d.name : '';
+      document.getElementById('dim-f-sort').value = d ? d.sort : (dimData.length + 1);
+      document.getElementById('dim-f-status').value = d ? d.status : '启用';
+      document.getElementById('dim-f-desc').value = d ? d.desc : '';
+      openModal('dim-modal');
+    }
+    function saveDim() {
+      const name = document.getElementById('dim-f-name').value.trim();
+      if (!name) { showToast('请填写维度名称', 'warning'); return; }
+      if (editingDimId) {
+        const d = dimData.find(function (x) { return x.id === editingDimId; });
+        d.name = name; d.sort = Number(document.getElementById('dim-f-sort').value) || d.sort;
+        d.status = document.getElementById('dim-f-status').value; d.desc = document.getElementById('dim-f-desc').value.trim();
+        showToast('维度已更新', 'success');
+      } else {
+        dimData.push({ id: Date.now(), name: name, sort: Number(document.getElementById('dim-f-sort').value) || dimData.length + 1, status: document.getElementById('dim-f-status').value, desc: document.getElementById('dim-f-desc').value.trim(), fields: [] });
+        showToast('维度已新增', 'success');
+      }
+      closeModal('dim-modal');
+      renderDims();
+    }
+    let editingFieldId = null;
+    function openFieldModal(id) {
+      editingFieldId = id || null;
+      const d = dimData.find(function (x) { return x.id === currentDimId; });
+      const f = id ? d.fields.find(function (x) { return x.id === id; }) : null;
+      document.getElementById('field-modal-title').textContent = f ? '编辑字段' : '新增字段';
+      document.getElementById('fld-f-name').value = f ? f.name : '';
+      document.getElementById('fld-f-type').value = f ? f.type : '文本';
+      document.getElementById('fld-f-required').value = f ? f.required : '建议';
+      document.getElementById('fld-f-source').value = f ? f.source : '企业维护';
+      document.getElementById('fld-f-unit').value = f ? f.unit : '';
+      document.getElementById('fld-f-caliber').value = f ? f.caliber : '';
+      document.getElementById('fld-f-allowzero').checked = f ? f.zero : false;
+      document.getElementById('fld-f-allowunknown').checked = f ? f.unknown : false;
+      document.getElementById('fld-f-enabled').checked = f ? f.enabled : true;
+      openModal('field-modal');
+    }
+    function saveField() {
+      const name = document.getElementById('fld-f-name').value.trim();
+      if (!name) { showToast('请填写字段名称', 'warning'); return; }
+      const d = dimData.find(function (x) { return x.id === currentDimId; });
+      const data = {
+        name: name, type: document.getElementById('fld-f-type').value,
+        required: document.getElementById('fld-f-required').value,
+        source: document.getElementById('fld-f-source').value,
+        unit: document.getElementById('fld-f-unit').value.trim(),
+        caliber: document.getElementById('fld-f-caliber').value.trim(),
+        zero: document.getElementById('fld-f-allowzero').checked,
+        unknown: document.getElementById('fld-f-allowunknown').checked,
+        enabled: document.getElementById('fld-f-enabled').checked,
+      };
+      if (editingFieldId) {
+        const f = d.fields.find(function (x) { return x.id === editingFieldId; });
+        Object.assign(f, data);
+        showToast('字段已更新', 'success');
+      } else {
+        d.fields.push(Object.assign({ id: Date.now() }, data));
+        showToast('字段已新增', 'success');
+      }
+      closeModal('field-modal');
+      renderFields();
+    }
+    function deleteField(id) {
+      const d = dimData.find(function (x) { return x.id === currentDimId; });
+      const f = d.fields.find(function (x) { return x.id === id; });
+      if (!confirm('确认删除字段「' + f.name + '」？')) return;
+      d.fields = d.fields.filter(function (x) { return x.id !== id; });
+      renderFields();
+    }
+    function moveField(id, dir) {
+      const d = dimData.find(function (x) { return x.id === currentDimId; });
+      const idx = d.fields.findIndex(function (x) { return x.id === id; });
+      const t = idx + dir;
+      if (t < 0 || t >= d.fields.length) return;
+      const tmp = d.fields[idx]; d.fields[idx] = d.fields[t]; d.fields[t] = tmp;
+      renderFields();
+    }
+    document.getElementById('dim-list').addEventListener('click', function (e) {
+      const item = e.target.closest('.dim-item'); if (!item || e.target.closest('.switch, .icon-btn')) return;
+      currentDimId = Number(item.dataset.id);
+      renderDims();
+    });
+
+    // ==================== AI申报书模板配置 ====================
+    let tplType = '全部', tplQuery = '';
+    function renderTplTabs() { renderTabs(document.getElementById('tpl-type-tabs'), ['全部', '高新技术企业', '专精特新中小企业', '专精特新小巨人'], tplType); }
+    function tplFiltered() {
+      return tplData.filter(function (t) {
+        const hitType = tplType === '全部' || t.type === tplType;
+        const q = tplQuery.trim().toLowerCase();
+        const hitQ = !q || (t.name + t.year).toLowerCase().indexOf(q) >= 0;
+        return hitType && hitQ;
+      });
+    }
+    function renderTpl() {
+      const list = tplFiltered();
+      document.getElementById('tpl-stat-all').textContent = tplData.length;
+      document.getElementById('tpl-stat-on').textContent = tplData.filter(function (t) { return t.status === '启用'; }).length;
+      document.getElementById('tpl-stat-chapters').textContent = tplData.reduce(function (s, t) { return s + t.chapters.length; }, 0);
+      document.getElementById('tpl-stat-type').textContent = new Set(tplData.map(function (t) { return t.type; })).size;
+      document.getElementById('tpl-empty').classList.toggle('hidden', list.length > 0);
+      document.getElementById('tpl-tbody').innerHTML = list.map(function (t) {
+        return '<tr>' +
+          '<td><div class="flex items-center gap-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary"><i data-lucide="file-text" class="h-4 w-4"></i></div><div><div class="font-medium text-gray-800">' + esc(t.name) + '</div><div class="mt-0.5 text-xs text-gray-400">' + esc(t.version) + '</div></div></div></td>' +
+          '<td>' + esc(t.year) + '</td>' +
+          '<td>' + esc(t.type) + '</td>' +
+          '<td class="text-gray-500">' + esc(t.version) + '</td>' +
+          '<td class="text-gray-500">' + t.chapters.length + ' 章</td>' +
+          '<td>' + badge(t.status) + '</td>' +
+          '<td class="text-gray-500">' + esc(t.update) + '</td>' +
+          '<td>' +
+            '<button class="link text-[13px]" onclick="openTemplateModal(' + t.id + ')">编辑</button>' +
+            '<button class="link text-[13px] ml-2" onclick="toggleTemplate(' + t.id + ')">' + (t.status === '启用' ? '停用' : '启用') + '</button>' +
+            '<button class="link text-[13px] ml-2 text-red-500" onclick="deleteTemplate(' + t.id + ')">删除</button>' +
+          '</td>' +
+          '</tr>';
+      }).join('');
+      lucide.createIcons();
+    }
+    let editingTplId = null, currentChapterId = null;
+    function openTemplateModal(id) {
+      editingTplId = id || null;
+      if (!id) window._draftTpl = null;
+      const t = id ? tplData.find(function (x) { return x.id === id; }) : { name: '', type: '高新技术企业', year: '2024', version: 'V1.0', status: '启用', chapters: [] };
+      document.getElementById('template-modal-title').textContent = id ? '编辑模板' : '新增模板';
+      document.getElementById('tpl-f-name').value = t.name;
+      document.getElementById('tpl-f-type').value = t.type;
+      document.getElementById('tpl-f-year').value = t.year;
+      document.getElementById('tpl-f-version').value = t.version;
+      document.getElementById('tpl-f-enabled').checked = t.status === '启用';
+      if (t.chapters.length) { currentChapterId = t.chapters[0].id; } else { currentChapterId = null; }
+      renderTplChapters();
+      renderTplChapterDetail();
+      openModal('template-modal');
+    }
+    function renderTplChapters() {
+      const t = currentTemplate();
+      document.getElementById('tpl-chapter-list').innerHTML = t.chapters.map(function (c) {
+        return '<div class="tpl-chapter-item ' + (c.id === currentChapterId ? 'active' : '') + '" data-id="' + c.id + '">' +
+          '<span class="min-w-0 flex-1 truncate text-sm">' + esc(c.name) + '</span>' +
+          '<span class="text-[11px] text-gray-400">' + (c.min || 0) + '-' + (c.max || 0) + '</span>' +
+        '</div>';
+      }).join('');
+      lucide.createIcons();
+    }
+    function renderTplChapterDetail() {
+      const t = currentTemplate();
+      const c = t.chapters.find(function (x) { return x.id === currentChapterId; });
+      const el = document.getElementById('tpl-chapter-detail');
+      if (!c) { el.innerHTML = '<div class="flex h-full flex-col items-center justify-center py-20 text-gray-400"><i data-lucide="list-tree" class="h-10 w-10"></i><div class="mt-3 text-sm">暂无章节，点击左上角「+ 章节」添加</div></div>'; lucide.createIcons(); return; }
+      el.innerHTML =
+        '<h4 class="text-sm font-semibold text-gray-800">章节配置</h4>' +
+        '<div class="mt-4 grid grid-cols-3 gap-4">' +
+          '<div class="col-span-3"><label class="field-label">章节名称</label><input id="ch-f-name" class="input" value="' + esc(c.name) + '" /></div>' +
+          '<div><label class="field-label">字数下限</label><input id="ch-f-min" type="number" class="input" value="' + (c.min || '') + '" /></div>' +
+          '<div><label class="field-label">字数上限</label><input id="ch-f-max" type="number" class="input" value="' + (c.max || '') + '" /></div>' +
+          '<div><label class="field-label">关联档案维度</label><select id="ch-f-dim" class="input">' +
+            dimData.map(function (d) { return '<option value="' + esc(d.name) + '"' + (d.name === c.dim ? ' selected' : '') + '>' + esc(d.name) + '</option>'; }).join('') +
+          '</select></div>' +
+        '</div>' +
+        '<div class="mt-4"><label class="field-label">AI 撰写提示词</label><textarea id="ch-f-prompt" class="input" rows="4" placeholder="指导 AI 如何结合企业档案撰写本章内容…">' + esc(c.prompt) + '</textarea></div>' +
+        '<div class="mt-5 flex items-center gap-2">' +
+          '<button class="btn btn-primary btn-sm" onclick="saveChapter()"><i data-lucide="save" class="h-4 w-4"></i> 保存本章</button>' +
+          '<button class="btn btn-ghost btn-sm" onclick="deleteChapter(' + c.id + ')"><i data-lucide="trash-2" class="h-4 w-4"></i> 删除本章</button>' +
+        '</div>';
+      lucide.createIcons();
+    }
+    function currentTemplate() {
+      return editingTplId ? tplData.find(function (x) { return x.id === editingTplId; }) : (window._draftTpl || (window._draftTpl = { name: '', type: '高新技术企业', year: '2024', version: 'V1.0', status: '启用', chapters: [] }));
+    }
+    function addChapter() {
+      const t = currentTemplate();
+      const c = { id: Date.now(), name: '第' + (t.chapters.length + 1) + '章 新章节', min: 500, max: 1000, dim: '基本信息', prompt: '' };
+      t.chapters.push(c);
+      currentChapterId = c.id;
+      renderTplChapters(); renderTplChapterDetail();
+    }
+    function saveChapter() {
+      const t = currentTemplate();
+      const c = t.chapters.find(function (x) { return x.id === currentChapterId; });
+      if (!c) return;
+      c.name = document.getElementById('ch-f-name').value.trim() || c.name;
+      c.min = Number(document.getElementById('ch-f-min').value) || 0;
+      c.max = Number(document.getElementById('ch-f-max').value) || 0;
+      c.dim = document.getElementById('ch-f-dim').value;
+      c.prompt = document.getElementById('ch-f-prompt').value.trim();
+      showToast('章节「' + c.name + '」已保存', 'success');
+      renderTplChapters();
+    }
+    function deleteChapter(id) {
+      const t = currentTemplate();
+      if (!confirm('确认删除该章节？')) return;
+      t.chapters = t.chapters.filter(function (x) { return x.id !== id; });
+      currentChapterId = t.chapters.length ? t.chapters[0].id : null;
+      renderTplChapters(); renderTplChapterDetail();
+    }
+    function saveTemplate() {
+      const name = document.getElementById('tpl-f-name').value.trim();
+      if (!name) { showToast('请填写模板名称', 'warning'); return; }
+      const t = currentTemplate();
+      t.name = name; t.type = document.getElementById('tpl-f-type').value;
+      t.year = document.getElementById('tpl-f-year').value.trim();
+      t.version = document.getElementById('tpl-f-version').value.trim();
+      t.status = document.getElementById('tpl-f-enabled').checked ? '启用' : '停用';
+      if (!editingTplId) {
+        tplData.unshift(Object.assign({ id: Date.now(), update: '2024-11-08' }, t));
+        window._draftTpl = null;
+      } else {
+        t.update = '2024-11-08';
+      }
+      closeModal('template-modal');
+      showToast('模板已保存', 'success');
+      renderTpl();
+    }
+    function toggleTemplate(id) {
+      const t = tplData.find(function (x) { return x.id === id; });
+      t.status = t.status === '启用' ? '停用' : '启用';
+      showToast('「' + t.name + '」已' + t.status, 'success');
+      renderTpl();
+    }
+    function deleteTemplate(id) {
+      const t = tplData.find(function (x) { return x.id === id; });
+      if (!confirm('确认删除模板「' + t.name + '」？')) return;
+      tplData = tplData.filter(function (x) { return x.id !== id; });
+      showToast('模板已删除', 'success');
+      renderTpl();
+    }
+    document.getElementById('tpl-chapter-list').addEventListener('click', function (e) {
+      const item = e.target.closest('.tpl-chapter-item'); if (!item) return;
+      currentChapterId = Number(item.dataset.id);
+      renderTplChapters(); renderTplChapterDetail();
+    });
+    document.getElementById('tpl-type-tabs').addEventListener('click', function (e) {
+      const t = e.target.closest('.tab-pill'); if (!t) return;
+      tplType = t.dataset.val; renderTplTabs(); renderTpl();
+    });
+    document.getElementById('tpl-search').addEventListener('input', function (e) { tplQuery = e.target.value; renderTpl(); });
+
+    // ==================== 初始化 ====================
+    renderRegTabs(); renderReg();
+    renderOrderTabs(); renderOrders();
+    renderDlvTabs(); renderDlv();
+    renderInvTabs(); renderInv();
+    renderProductCats(); renderProducts();
+    renderDims();
+    renderTplTabs(); renderTpl();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
