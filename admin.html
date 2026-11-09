@@ -216,6 +216,9 @@
           <div class="nav-item" data-target="page-invoices" data-title="发票管理">
             <i data-lucide="receipt" class="nav-icon"></i><span>发票管理</span>
           </div>
+          <div class="nav-item" data-target="page-consultations" data-title="客户咨询">
+            <i data-lucide="messages-square" class="nav-icon"></i><span>客户咨询</span>
+          </div>
         </div>
 
         <div class="nav-group-label mt-6">配置中心</div>
@@ -228,6 +231,12 @@
           </div>
           <div class="nav-item" data-target="page-templates" data-title="AI申报书模板配置">
             <i data-lucide="file-text" class="nav-icon"></i><span>AI申报书模板配置</span>
+          </div>
+          <div class="nav-item" data-target="page-skills" data-title="技能管理">
+            <i data-lucide="sparkles" class="nav-icon"></i><span>技能管理</span>
+          </div>
+          <div class="nav-item" data-target="page-connectors" data-title="连接器管理">
+            <i data-lucide="plug" class="nav-icon"></i><span>连接器管理</span>
           </div>
         </div>
       </nav>
@@ -596,6 +605,52 @@
           <div id="inv-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的开票申请</div>
         </div>
 
+        <!-- ==================== 客户咨询 ==================== -->
+        <div id="page-consultations" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">客户咨询</h1>
+              <p class="mt-1 text-sm text-gray-500">承接前台智能客服转人工生成的客户咨询工单，及时响应处理</p>
+            </div>
+            <button class="btn btn-ghost" onclick="showToast('咨询记录已导出', 'success')"><i data-lucide="download" class="h-4 w-4"></i> 导出</button>
+          </div>
+
+          <div class="mt-5 grid grid-cols-4 gap-4">
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">待处理</span><i data-lucide="clock" class="h-5 w-5 text-amber-500"></i></div>
+              <div class="mt-2 text-2xl font-semibold text-gray-900">3</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">处理中</span><i data-lucide="loader-2" class="h-5 w-5 text-blue-500"></i></div>
+              <div class="mt-2 text-2xl font-semibold text-gray-900">2</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">已完结</span><i data-lucide="check-circle" class="h-5 w-5 text-green-500"></i></div>
+              <div class="mt-2 text-2xl font-semibold text-gray-900">12</div>
+            </div>
+            <div class="card p-5">
+              <div class="flex items-center justify-between"><span class="text-sm text-gray-500">平均响应</span><i data-lucide="timer" class="h-5 w-5 text-violet-500"></i></div>
+              <div class="mt-2 text-2xl font-semibold text-gray-900">8分钟</div>
+            </div>
+          </div>
+
+          <div class="card mt-5 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr><th>工单号</th><th>咨询类型</th><th>问题描述</th><th>客户</th><th>提交时间</th><th>状态</th><th class="w-44">操作</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>TICKET-1028</td><td>业务咨询</td><td>如何申报高新技术企业？</td><td>武汉汉企业科技有限公司</td><td>2024-11-06 10:30</td><td><span class="badge" style="background:#fffbeb;color:#d97706">待处理</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">处理</a>　<a class="link" href="javascript:;" onclick="showToast('已完结', 'success')">完结</a></td></tr>
+                <tr><td>TICKET-1027</td><td>系统报错</td><td>体检报告无法下载</td><td>张伟</td><td>2024-11-06 09:15</td><td><span class="badge" style="background:#eff6ff;color:#2563eb">处理中</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">处理</a>　<a class="link" href="javascript:;" onclick="showToast('已完结', 'success')">完结</a></td></tr>
+                <tr><td>TICKET-1026</td><td>申报辅导</td><td>研发费用辅助账如何归集？</td><td>武汉光谷信息科技有限公司</td><td>2024-11-05 16:40</td><td><span class="badge" style="background:#fffbeb;color:#d97706">待处理</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">处理</a>　<a class="link" href="javascript:;" onclick="showToast('已完结', 'success')">完结</a></td></tr>
+                <tr><td>TICKET-1025</td><td>业务咨询</td><td>专精特新申报条件是什么？</td><td>武汉智能装备研究院有限公司</td><td>2024-11-05 14:20</td><td><span class="badge" style="background:#eff6ff;color:#2563eb">处理中</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">处理</a>　<a class="link" href="javascript:;" onclick="showToast('已完结', 'success')">完结</a></td></tr>
+                <tr><td>TICKET-1024</td><td>系统报错</td><td>发票信息无法保存</td><td>张伟</td><td>2024-11-04 11:05</td><td><span class="badge" style="background:#fffbeb;color:#d97706">待处理</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">处理</a>　<a class="link" href="javascript:;" onclick="showToast('已完结', 'success')">完结</a></td></tr>
+                <tr><td>TICKET-1023</td><td>申报辅导</td><td>高企认定审计报告找谁出具？</td><td>武汉汉企业科技有限公司</td><td>2024-11-03 15:30</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已完结</span></td><td><a class="link" href="javascript:;" onclick="showToast('打开咨询详情（演示）')">详情</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <!-- 上传发票弹窗 -->
         <div id="invoice-upload-modal" class="modal-overlay hidden" onclick="if(event.target===this)closeModal('invoice-upload-modal')">
           <div class="modal" style="max-width:560px">
@@ -872,6 +927,72 @@
             </table>
           </div>
           <div id="tpl-empty" class="card mt-4 hidden p-16 text-center text-sm text-gray-400">暂无符合条件的模板</div>
+        </div>
+
+        <!-- ==================== 技能管理 ==================== -->
+        <div id="page-skills" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">技能管理</h1>
+              <p class="mt-1 text-sm text-gray-500">维护科创专家可调用的技能，一次定义、反复执行</p>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('新建技能（演示）', 'success')"><i data-lucide="plus" class="h-4 w-4"></i> 新建技能</button>
+          </div>
+
+          <div class="card mt-5 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr><th>技能名称</th><th>分类</th><th>被调用专家</th><th>状态</th><th class="w-40">操作</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>多源文档结构化抽取</td><td>文档解析</td><td>档案管家、体检专家、研发费用专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>数据冲突检测与档案校验</td><td>数据治理</td><td>档案管家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>五维科创能力雷达测评</td><td>评估诊断</td><td>体检诊断专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>硬门槛条件核验</td><td>规则校验</td><td>高企专家、专精特新专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>政策结构化解析与门槛抽取</td><td>政策工程</td><td>政策匹配专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>双向匹配度打分</td><td>匹配计算</td><td>政策匹配专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>研发费用辅助账归集</td><td>财税处理</td><td>研发费用专家、高企专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>梯度差距分析</td><td>差距诊断</td><td>培育专家、专精特新专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>培育路线图与甘特图生成</td><td>规划编排</td><td>梯度培育专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>申报书章节生成与合规自检</td><td>文本生成</td><td>申报书专家、高企专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>知识产权资产盘点与价值评估</td><td>IP分析</td><td>IP布局专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>临期资质预警监控</td><td>监控提醒</td><td>档案管家、IP专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>同赛道对标分析</td><td>对标研究</td><td>对标专家、体检专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>成果转化证据链梳理</td><td>证据组织</td><td>成果转化专家、IP专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>融资可行性分析</td><td>融资分析</td><td>成果转化专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+                <tr><td>申报窗口期监控与提醒</td><td>监控提醒</td><td>政策匹配专家</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">启用</span></td><td><a class="link" href="javascript:;" onclick="showToast('编辑技能（演示）')">编辑</a>　<a class="link" href="javascript:;" onclick="showToast('已停用', 'success')">停用</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ==================== 连接器管理 ==================== -->
+        <div id="page-connectors" class="page p-6 hidden">
+          <div class="flex items-start justify-between">
+            <div>
+              <h1 class="text-xl font-semibold text-gray-900">连接器管理</h1>
+              <p class="mt-1 text-sm text-gray-500">管理外部数据源与业务系统的接入授权</p>
+            </div>
+            <button class="btn btn-primary" onclick="showToast('添加连接器（演示）', 'success')"><i data-lucide="plus" class="h-4 w-4"></i> 添加连接器</button>
+          </div>
+
+          <div class="card mt-5 overflow-hidden">
+            <table class="tbl">
+              <thead>
+                <tr><th>连接器名称</th><th>数据来源</th><th>覆盖字段</th><th>状态</th><th class="w-40">操作</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>工商数据接口</td><td>天眼查</td><td>企业基础信息、股权结构、对外投资、行政处罚</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已断开连接', 'success')">断开</a></td></tr>
+                <tr><td>税务/财报接口</td><td>税务局授权</td><td>近三年营收、净利润、纳税信用等级</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已断开连接', 'success')">断开</a></td></tr>
+                <tr><td>政策文件库</td><td>科技部/省科技厅</td><td>高企/专精特新/重点研发计划等政策原文</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已断开连接', 'success')">断开</a></td></tr>
+                <tr><td>专利数据库</td><td>incoPat</td><td>发明专利、实用新型、软著、PCT 全量检索</td><td><span class="badge" style="background:#fffbeb;color:#d97706">未连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已发起授权', 'success')">去授权</a></td></tr>
+                <tr><td>科技项目申报系统</td><td>湖北政务服务网</td><td>申报状态回写、材料提交、评审进度</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已断开连接', 'success')">断开</a></td></tr>
+                <tr><td>银行/征信接口</td><td>合作银行</td><td>融资可行性分析所需征信与授信数据</td><td><span class="badge" style="background:#fffbeb;color:#d97706">未连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已发起授权', 'success')">去授权</a></td></tr>
+                <tr><td>社保/人员接口</td><td>人社局授权</td><td>科技人员名单、社保缴纳、学历结构</td><td><span class="badge" style="background:#f0fdf4;color:#16a34a">已连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已断开连接', 'success')">断开</a></td></tr>
+                <tr><td>招投标/合同数据</td><td>公开招投标平台</td><td>中标合同、销售合同、客户集中度</td><td><span class="badge" style="background:#fffbeb;color:#d97706">未连接</span></td><td><a class="link" href="javascript:;" onclick="showToast('配置连接器（演示）')">配置</a>　<a class="link" href="javascript:;" onclick="showToast('已发起授权', 'success')">去授权</a></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- 模板编辑器弹窗 -->

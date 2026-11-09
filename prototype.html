@@ -720,14 +720,6 @@
             <i data-lucide="bot" class="nav-icon"></i>
             <span>科创专家</span>
           </div>
-          <div class="nav-item" data-target="page-skills" data-title="技能">
-            <i data-lucide="sparkles" class="nav-icon"></i>
-            <span>技能</span>
-          </div>
-          <div class="nav-item" data-target="page-connector" data-title="连接器">
-            <i data-lucide="plug" class="nav-icon"></i>
-            <span>连接器</span>
-          </div>
         </div>
 
         <!-- 服务与订单 -->
@@ -748,6 +740,15 @@
           <div class="nav-item" data-target="page-project" data-title="项目与申报">
             <i data-lucide="briefcase" class="nav-icon"></i>
             <span>项目与申报</span>
+          </div>
+        </div>
+
+        <!-- 消息中心 -->
+        <div class="mt-6 space-y-1">
+          <div class="nav-item" data-drawer="message">
+            <i data-lucide="bell" class="nav-icon"></i>
+            <span>消息中心</span>
+            <span class="ml-auto h-2 w-2 rounded-full bg-red-500"></span>
           </div>
         </div>
       </nav>
@@ -823,12 +824,6 @@
               class="h-9 w-72 rounded-lg border border-gray-200 bg-gray-50 pl-9 pr-3 text-sm text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20"
             />
           </div>
-
-          <!-- 消息中心铃铛（带红点） -->
-          <button id="bell-btn" class="relative flex h-9 w-9 items-center justify-center rounded-lg text-gray-500 transition hover:bg-gray-50 hover:text-gray-700">
-            <i data-lucide="bell" class="h-5 w-5"></i>
-            <span class="absolute right-2 top-2 h-2 w-2 rounded-full border-2 border-white bg-red-500"></span>
-          </button>
 
         </div>
       </header>
@@ -1053,7 +1048,7 @@
                       <button class="js-quick-action flex h-5 w-5 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-400 shadow-sm transition hover:text-primary" title="编辑"><i data-lucide="pencil" class="h-3 w-3"></i></button>
                     </div>
                   </div>
-                  <div class="js-quick-nav group relative flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 transition hover:border-primary/30 hover:shadow-sm" data-target="page-health">
+                  <div class="js-quick-nav group relative flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2 transition hover:border-primary/30 hover:shadow-sm" data-target="page-cultivation">
                     <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-green-50">
                       <i data-lucide="activity" class="h-4 w-4 text-green-600"></i>
                     </div>
@@ -1231,40 +1226,476 @@
         <div id="page-cultivation" class="page hidden">
           <div class="mb-5">
             <h1 class="text-xl font-bold text-gray-900">科创培育工作</h1>
-            <p class="mt-1 text-sm text-gray-400">体检 → 诊断 → 规划，一站式科创培育工作流</p>
+            <p class="mt-1 text-sm text-gray-400">体检 → 科创培育规划，一站式科创培育工作流</p>
           </div>
 
           <!-- Tab -->
           <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
             <button class="cultivation-tab cultivation-tab-active" data-cultivation="health">体检</button>
-            <button class="cultivation-tab" data-cultivation="diagnosis">诊断</button>
-            <button class="cultivation-tab" data-cultivation="planning">规划</button>
+            <button class="cultivation-tab" data-cultivation="planning">科创培育规划</button>
           </div>
 
           <!-- 体检 -->
           <div id="cultivation-health" class="cultivation-view">
-            <div class="rounded-2xl border border-gray-200 bg-white p-6">
-              <div class="text-base font-semibold text-gray-800">体检</div>
-              <p class="mt-2 text-sm leading-relaxed text-gray-500">对企业科创能力进行五维量化体检，核验硬性条件、排查申报风险，输出体检报告与评级。</p>
-              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
-            </div>
-          </div>
+            <!-- P1 工作台 -->
+            <div id="health-home" class="health-view">
+              <!-- 新建体检（置顶） -->
+              <div class="rounded-lg bg-white p-6 shadow-sm">
+                <div class="mb-3 text-base font-semibold text-gray-800">新建体检</div>
+                <div class="mb-2 text-sm text-gray-600">① 选择申报项目（可多选）</div>
+                <div class="grid grid-cols-2 gap-3" id="health-proj-grid"></div>
+                <div class="mt-6 flex justify-end">
+                  <button class="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">开始体检 →</button>
+                </div>
+              </div>
 
-          <!-- 诊断 -->
-          <div id="cultivation-diagnosis" class="cultivation-view hidden">
-            <div class="rounded-2xl border border-gray-200 bg-white p-6">
-              <div class="text-base font-semibold text-gray-800">诊断</div>
-              <p class="mt-2 text-sm leading-relaxed text-gray-500">基于体检结果定位短板弱项与差距清单，明确补短板方向与优先级。</p>
-              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
+              <div class="mt-4 rounded-lg bg-amber-50 p-4" style="border:1px solid #FFE7A6">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2"><i data-lucide="alert-triangle" class="h-4 w-4 text-amber-500"></i><span class="text-sm font-medium text-amber-700">上次体检未完成</span><span class="text-sm text-gray-500">智能体已调取企业档案，可继续评估</span></div>
+                  <button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">继续体检</button>
+                </div>
+              </div>
+
+              <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-sm font-semibold text-gray-800">体检任务</div>
+                <table class="w-full text-sm">
+                  <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">体检单号</th><th class="px-3 py-2.5 font-medium">企业名称</th><th class="px-3 py-2.5 font-medium">申报项目</th><th class="px-3 py-2.5 font-medium">体检进度</th><th class="px-3 py-2.5 font-medium">等级</th><th class="px-3 py-2.5 font-medium">状态</th><th class="px-3 py-2.5 font-medium">更新时间</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead>
+                  <tbody>
+                    <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1102</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">高新技术企业认定</td><td class="px-3 py-2.5">5/8</td><td class="px-3 py-2.5"><span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span></td><td class="px-3 py-2.5">进行中</td><td class="px-3 py-2.5 text-gray-500">2024-11-05</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('wizard')">继续填报</a>　<a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                    <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1088</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">专精特新中小企业</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5"><span class="g-b rounded px-1.5 py-0.5 text-xs">B 达标</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-10-28</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                    <tr><td class="px-3 py-2.5">JC-2024-1041</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">科技型中小企业评价</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5"><span class="g-a rounded px-1.5 py-0.5 text-xs">A 卓越</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-09-15</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+
+            <!-- P5 评估进度 -->
+            <div id="health-progress" class="health-view hidden">
+              <div class="mx-auto max-w-md rounded-lg bg-white p-8 text-center shadow-sm">
+                <div class="flex justify-center"><div class="health-ring" id="health-eval-ring"></div></div>
+                <div class="mt-4 text-base font-semibold text-gray-800">正在评估</div>
+                <div id="health-eval-tasks" class="mx-auto mt-4 max-w-xs text-left"></div>
+                <div class="mt-4 text-sm text-gray-400">预计还需 30 秒，可离开此页</div>
+                <button id="health-btn-view" class="mt-5 hidden rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="switchHealth('result')">查看体检结果 →</button>
+              </div>
+            </div>
+
+            <!-- P6 体检结果 -->
+            <div id="health-result" class="health-view hidden">
+              <div class="mb-4 flex items-center justify-between rounded-lg border border-primary/20 bg-primary-light/40 px-5 py-4">
+                <div class="min-w-0">
+                  <div class="text-sm font-semibold text-gray-800">专家版体检结果</div>
+                  <div class="mt-0.5 text-xs text-gray-500">由科创专家一对一深度诊断，输出更详尽的整改方案与申报建议</div>
+                </div>
+                <button onclick="orderService('专家版体检服务', '¥3,000')" class="ml-4 flex-shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">查看专家版体检结果</button>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4" style="grid-template-columns:1fr 400px">
+                <div class="rounded-lg bg-white p-5 shadow-sm">
+                  <div class="mb-3 text-sm font-semibold text-gray-800">企业档案</div>
+                  <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                    <div>企业名称：<b>武汉汉企业科技有限公司</b></div><div>信用代码：91420100MA4K*****</div>
+                    <div>成立时间：2015-06-18</div><div>技术领域：人工智能</div>
+                    <div>申报项目：高新技术企业认定</div><div>体检单号：JC-2024-1102</div>
+                    <div>日期：2024-11-06</div><div>机构：武汉科创平台</div>
+                    <div>顾问：张伟</div><div>资质：<span class="g-b rounded px-1.5 py-0.5 text-xs">高新技术企业</span></div>
+                  </div>
+                </div>
+                <div class="rounded-lg bg-white p-5 shadow-sm">
+                  <div class="mb-3 text-sm font-semibold text-gray-800">总分</div>
+                  <div class="flex items-center gap-5">
+                    <div class="health-ring" id="health-total-ring"></div>
+                    <div class="text-sm text-gray-600">等级：<span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span><div class="mt-2">达标 12/26　不达标 5　一票否决 2</div><div class="mt-1 text-xs text-gray-400">行业百分位：前 38%</div></div>
+                  </div>
+                  <div class="mt-3"><div class="text-xs text-gray-400">达标线 80</div><div class="relative mt-1 h-1.5 w-full rounded-full bg-gray-100"><div class="h-1.5 rounded-full" style="width:72.5%;background:#FF7D00"></div><div class="absolute top-[-3px]" style="left:80%;height:12px;width:2px;background:#00B42A"></div></div></div>
+                </div>
+              </div>
+
+              <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">六维度量化打分</span></div>
+                <div class="flex items-center gap-6">
+                  <div class="flex-shrink-0" id="health-radar"></div>
+                  <div class="flex-1">
+                    <div class="text-xs text-gray-500"><span class="mr-1 inline-block h-3 w-3 rounded-sm" style="background:#1677ff"></span>企业实际　<span class="mr-1 ml-3 inline-block h-0 w-3 border-t-2 border-dashed" style="border-color:#FF7D00"></span>申报标准　<span class="mr-1 ml-3 inline-block h-3 w-3 rounded-sm" style="background:rgba(245,63,63,.15)"></span>差距区域</div>
+                    <div id="health-dim-cards" class="mt-3 grid grid-cols-2 gap-3"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-base font-semibold text-gray-800">差距问题汇总</div>
+                <div class="health-d-card mb-4 rounded-md p-3"><b style="color:#F53F3F">⚠ 检出 2 项一票否决红线</b></div>
+                <div id="health-veto"></div>
+                <div class="mb-2 mt-4 text-sm font-semibold text-gray-800">差距问题清单</div>
+                <div id="health-problems" class="space-y-2"></div>
+              </div>
+
+              <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-base font-semibold text-gray-800">结论与建议</div>
+                <div class="text-sm font-semibold text-gray-800">体检结论</div>
+                <div class="mt-2 grid grid-cols-4 gap-3" id="health-concl"></div>
+                <div class="mt-4 text-sm font-semibold text-gray-800">推荐整改服务方案</div>
+                <div class="health-svc mt-3 rounded-lg p-4">
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="rounded-lg bg-white p-4"><b>单项自选</b><div class="mt-1 text-xs text-gray-400">覆盖 1 项问题</div><div class="mt-2 text-lg font-bold text-gray-800">￥2,000<span class="text-xs font-normal text-gray-400"> 起</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
+                    <div class="rounded-lg border-2 bg-white p-4" style="border-color:#722ED1"><div class="flex items-center"><b>达标加速包</b><span class="ml-2 rounded px-1.5 py-0.5 text-xs text-white" style="background:#FFB400">★ 推荐</span></div><div class="mt-1 text-xs text-gray-400">覆盖 5 项 · 预计补齐至 B 级</div><div class="mt-2 text-lg font-bold text-gray-800">￥9,800<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥13,500</span></div><button class="mt-2 rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthService()">查看方案详情</button></div>
+                    <div class="rounded-lg bg-white p-4"><b>全托管</b><div class="mt-1 text-xs text-gray-400">覆盖全部 · 全程代办</div><div class="mt-2 text-lg font-bold text-gray-800">￥28,000<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥32,000</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
+                  </div>
+                  <div class="mt-3 text-xs text-gray-400">增值服务 · 不影响体检评分与结论</div>
+                </div>
+              </div>
+
+              <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
+                <div class="mb-3 text-base font-semibold text-gray-800">风险专项提示</div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>申报窗口期风险</b><span class="g-d rounded px-1.5 py-0.5 text-xs">高</span></div><div class="mt-2 text-sm text-gray-500">高企申报窗口即将关闭，时间紧张。</div></div>
+                  <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>政策变动风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">研发费用加计扣除口径或有调整。</div></div>
+                  <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>数据合规风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">申报数据需与审计报告一致。</div></div>
+                  <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>知识产权权属风险</b><span class="g-b rounded px-1.5 py-0.5 text-xs">低</span></div><div class="mt-2 text-sm text-gray-500">部分专利为共同申请，权属需确认。</div></div>
+                </div>
+              </div>
+
+              <div id="health-service-entry" class="health-svc mt-4 rounded-lg p-4">
+                <div class="flex items-center justify-between"><b style="color:#722ED1">整改服务入口</b><span class="rounded px-1.5 py-0.5 text-xs" style="background:#FFF7E0;color:#FFB400">增值服务 · 不影响体检评分与结论</span></div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">一键委托整改</button>
+                  <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看全部科创服务 →</button>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- 规划 -->
           <div id="cultivation-planning" class="cultivation-view hidden">
-            <div class="rounded-2xl border border-gray-200 bg-white p-6">
-              <div class="text-base font-semibold text-gray-800">规划</div>
-              <p class="mt-2 text-sm leading-relaxed text-gray-500">生成科小→高企→专精特新→小巨人梯度培育路线图与任务时序排布。</p>
-              <div class="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-xs text-gray-400">该环节功能建设中 · 敬请期待</div>
+            <!-- 一、顶部：进阶阶梯图 + 路线图 -->
+            <div class="mb-5 grid grid-cols-3 gap-4">
+              <div class="col-span-2 rounded-lg bg-white p-6 shadow-sm">
+                <div class="mb-5 flex items-center">
+                  <h3 class="text-sm font-medium text-gray-800">企业科创培育进阶路径</h3>
+                  <span class="ml-auto rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">当前：高新技术企业（重新认定中）</span>
+                </div>
+                <div class="ladder">
+                  <div class="lg-step done">
+                    <div class="lg-card">
+                      <div class="lg-nm">科技型中小企业</div>
+                      <div class="lg-st">已完成 · 2022 年</div>
+                      <div class="lg-gap">入库编号 2022420100xxxx</div>
+                    </div>
+                  </div>
+                  <div class="lg-step now">
+                    <div class="lg-card">
+                      <div class="lg-nm">高新技术企业</div>
+                      <div class="lg-st">当前阶段 · 证书已逾期</div>
+                      <div class="lg-gap">重新认定进行中，任务 8/15</div>
+                    </div>
+                  </div>
+                  <div class="lg-step">
+                    <div class="lg-card">
+                      <div class="lg-nm">专精特新中小企业</div>
+                      <div class="lg-st">2027 目标</div>
+                      <div class="lg-gap">达成差距：缺 2 项发明专利</div>
+                    </div>
+                  </div>
+                  <div class="lg-step">
+                    <div class="lg-card">
+                      <div class="lg-nm">专精特新「小巨人」</div>
+                      <div class="lg-st">2028 目标</div>
+                      <div class="lg-gap">达成差距：细分市场占有率证明</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rounded-lg bg-white p-5 shadow-sm">
+                <div class="text-sm font-medium text-gray-800">2024-2026 科创培育路线图</div>
+                <div class="mt-4 space-y-2.5">
+                  <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
+                    <span class="text-xs text-gray-500">预计可申报项目</span>
+                    <span class="text-lg font-semibold text-gray-800">12<span class="text-xs font-normal text-gray-400"> 个</span></span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
+                    <span class="text-xs text-gray-500">预计可获补贴</span>
+                    <span class="text-lg font-semibold text-gray-800">￥350万</span>
+                  </div>
+                  <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
+                    <span class="text-xs text-gray-500">能力提升建议</span>
+                    <span class="text-lg font-semibold text-gray-800">3<span class="text-xs font-normal text-gray-400"> 项</span></span>
+                  </div>
+                </div>
+                <div class="mt-4 flex flex-col gap-2">
+                  <button id="btn-gen-report" class="flex items-center justify-center gap-1.5 rounded-lg bg-primary py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
+                    <i data-lucide="sparkles" class="h-4 w-4"></i> AI 生成培育规划报告
+                  </button>
+                  <button id="btn-download-gantt" class="flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 py-2.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
+                    <i data-lucide="download" class="h-4 w-4"></i> 下载甘特图
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 二、申报时间轴与甘特图 -->
+            <div class="mb-5 rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-medium text-gray-800">申报时间轴与甘特图</span>
+                  <div class="inline-flex items-center gap-1 rounded-lg border border-gray-200 p-1">
+                    <button data-gantt-tab="year" class="gantt-tab gantt-tab-active">年度申报</button>
+                    <button data-gantt-tab="month" class="gantt-tab">月度待办</button>
+                  </div>
+                </div>
+                <div id="gantt-legend" class="flex flex-wrap items-center gap-3 text-xs text-gray-500">
+                  <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-primary"></span>进行中</span>
+                  <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-amber-400"></span>筹备中</span>
+                  <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-violet-400"></span>规划中</span>
+                  <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-gray-300"></span>未开始</span>
+                </div>
+              </div>
+
+              <!-- 年度申报甘特图 -->
+              <div id="gantt-year">
+              <!-- 月份轴 -->
+              <div class="flex items-center pb-2 text-xs text-gray-400">
+                <div class="w-44 flex-shrink-0 pr-3">申报事项</div>
+                <div class="flex flex-1 justify-between">
+                  <span class="font-medium text-red-500">11月▽</span>
+                  <span>12月</span><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span>
+                </div>
+                <div class="w-16 flex-shrink-0 text-right">状态</div>
+              </div>
+
+              <!-- 甘特行 -->
+              <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
+                <div class="flex items-center">
+                  <div class="w-44 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">高企重新认定</div>
+                    <div class="text-xs text-gray-400">截止 2024-11-30 · 剩 24 天</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:8.33%" title="2024-11 申报窗口"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-44 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定</div>
+                    <div class="text-xs text-gray-400">截止 2024-11-16 · 剩 10 天</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:5.5%" title="2024-11 申报窗口"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-44 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">湖北省重点研发计划</div>
+                    <div class="text-xs text-gray-400">截止 2024-12-05 · 材料准备中</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-1 rounded-full bg-amber-400" style="left:0%; width:13%" title="2024-11 ~ 12 筹备窗口"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">筹备中</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-44 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">专精特新中小企业培育</div>
+                    <div class="text-xs text-gray-400">目标 2025-03 · 缺 2 项发明专利</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-1 rounded-full bg-violet-400" style="left:16.67%; width:16.67%" title="2025-01 ~ 03 培育窗口"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-violet-600">规划中</div>
+                </div>
+
+                <div class="flex items-center">
+                  <div class="w-44 flex-shrink-0 pr-3">
+                    <div class="truncate text-sm text-gray-800">海外专利布局</div>
+                    <div class="text-xs text-gray-400">目标 2025-06 · PCT 申请</div>
+                  </div>
+                  <div class="relative h-6 flex-1 rounded bg-gray-50">
+                    <div class="absolute inset-y-1 rounded-full bg-gray-300" style="left:33.33%; width:25%" title="2025-03 ~ 06 布局窗口"></div>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">未开始</div>
+                </div>
+              </div>
+
+              <!-- 图注 + 关键节点 -->
+              <div class="mt-4 border-t border-gray-100 pt-3">
+                <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
+                  <span class="flex items-center gap-1"><span class="h-3 w-0.5 bg-red-500"></span>今天 2024-11（红色▽标记）</span>
+                  <span>时间范围：2024-11 ~ 2025-10</span>
+                </div>
+                <div class="mt-2 flex flex-wrap gap-2">
+                  <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-16 瞪羚企业认定截止</span>
+                  <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-30 高企认定截止</span>
+                  <span class="rounded-md bg-amber-50 px-2 py-1 text-[11px] text-amber-600">12-05 重点研发计划截止</span>
+                  <span class="rounded-md bg-violet-50 px-2 py-1 text-[11px] text-violet-600">2025-03 专精特新培育目标</span>
+                </div>
+              </div>
+              </div>
+
+              <!-- 月度待办甘特图 -->
+              <div id="gantt-month" class="hidden">
+                <div class="mb-3 flex items-center justify-between text-xs text-gray-500">
+                  <span class="text-sm font-medium text-gray-700">2024 年 11 月 · 待办事项甘特</span>
+                  <div class="flex items-center gap-3">
+                    <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-red-500"></span>今日/紧急</span>
+                    <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-amber-400"></span>3 天内</span>
+                    <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-gray-300"></span>本月待办</span>
+                  </div>
+                </div>
+
+                <!-- 日轴 -->
+                <div class="flex items-center pb-2 text-xs text-gray-400">
+                  <div class="w-48 flex-shrink-0 pr-3">待办事项</div>
+                  <div class="flex flex-1 justify-between">
+                    <span>1日</span><span>5日</span><span>10日</span><span>15日</span><span>20日</span><span>25日</span><span>30日</span>
+                  </div>
+                  <div class="w-16 flex-shrink-0 text-right">截止</div>
+                </div>
+
+                <!-- 行 -->
+                <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">确认申报时序排期</div>
+                      <div class="text-xs text-gray-400">申报规划 · 立项任务</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:20%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-06</div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">补充财务审计材料</div>
+                      <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:30%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-09</div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">完善知识产权权属信息</div>
+                      <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:40%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-12</div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定截止</div>
+                      <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:53%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-16</div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">对接高优先级服务线索</div>
+                      <div class="text-xs text-gray-400">服务挖掘 · 待处理</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-gray-300" style="left:66.5%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">11-20</div>
+                  </div>
+
+                  <div class="flex items-center">
+                    <div class="w-48 flex-shrink-0 pr-3">
+                      <div class="truncate text-sm text-gray-800">高企认定申报截止</div>
+                      <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
+                    </div>
+                    <div class="relative h-6 flex-1 rounded bg-gray-50">
+                      <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:98%"></div>
+                    </div>
+                    <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-30</div>
+                  </div>
+                </div>
+
+                <div class="mt-3 border-t border-gray-100 pt-2 text-xs text-gray-400">
+                  竖线位置为该待办事项的截止日期（今天 11-06），红色=今日/紧急、黄色=3天内、灰色=本月待办。
+                </div>
+              </div>
+            </div>
+
+            <!-- 三、分层培育看板 -->
+            <div class="rounded-lg bg-white p-5 shadow-sm">
+              <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 p-1">
+                <button data-plan-tab="now" class="plan-tab plan-tab-active">即刻申报（3个月内）</button>
+                <button data-plan-tab="short" class="plan-tab">短期培育（3-6个月）</button>
+                <button data-plan-tab="long" class="plan-tab">中长期储备（6个月以上）</button>
+              </div>
+
+              <div id="plan-tab-now" class="space-y-3">
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light"><i data-lucide="award" class="h-4 w-4 text-primary"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">2024年高新技术企业认定（第二批）</div>
+                    <div class="text-xs text-gray-400">剩 12 天 · 匹配度 87% · 最高 30 万元</div>
+                  </div>
+                  <button class="js-plan-apply flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-policy="2024年高新技术企业认定（第二批）">立即立项</button>
+                </div>
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-amber-50"><i data-lucide="rocket" class="h-4 w-4 text-amber-500"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">东湖高新区瞪羚企业认定</div>
+                    <div class="text-xs text-gray-400">剩 5 天 · 匹配度 78% · 最高 100 万元</div>
+                  </div>
+                  <button class="js-plan-apply flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-policy="东湖高新区瞪羚企业认定">立即立项</button>
+                </div>
+              </div>
+
+              <div id="plan-tab-short" class="hidden space-y-3">
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="gem" class="h-4 w-4 text-violet-600"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">专精特新中小企业认定</div>
+                    <div class="text-xs text-amber-600">研发费用占比仅 3%，建议补齐至 4% 后申报</div>
+                  </div>
+                  <button class="js-join-plan flex-shrink-0 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">加入培育计划</button>
+                </div>
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light"><i data-lucide="building-2" class="h-4 w-4 text-primary"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">省级企业技术中心</div>
+                    <div class="text-xs text-amber-600">缺 1 项发明专利，建议布局后申报</div>
+                  </div>
+                  <button class="js-join-plan flex-shrink-0 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">加入培育计划</button>
+                </div>
+              </div>
+
+              <div id="plan-tab-long" class="hidden space-y-3">
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-50"><i data-lucide="globe" class="h-4 w-4 text-cyan-600"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">海外专利布局</div>
+                    <div class="text-xs text-gray-400">建议 2025 年启动，布局 PCT 国际申请</div>
+                  </div>
+                  <span class="flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">跨年度</span>
+                </div>
+                <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
+                  <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="trophy" class="h-4 w-4 text-violet-600"></i></div>
+                  <div class="min-w-0 flex-1">
+                    <div class="text-sm font-medium text-gray-800">专精特新“小巨人”</div>
+                    <div class="text-xs text-gray-400">建议 2026 年申报，需跨年度培育</div>
+                  </div>
+                  <span class="flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">跨年度</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1556,7 +1987,7 @@
                     <div class="flex items-center justify-between text-sm"><span class="text-gray-600">已截止</span><span class="font-semibold text-gray-400">45</span></div>
                   </div>
                 </div>
-                <div class="js-quick-nav cursor-pointer rounded-lg bg-gray-50 p-3 transition hover:bg-primary-light/40" data-target="page-health">
+                <div class="js-quick-nav cursor-pointer rounded-lg bg-gray-50 p-3 transition hover:bg-primary-light/40" data-target="page-cultivation">
                   <div class="mb-2 text-xs text-gray-500">测评类型</div>
                   <div class="space-y-2">
                     <div class="flex items-center justify-between rounded-md bg-white px-3 py-2 text-sm text-gray-700 shadow-sm">
@@ -1943,167 +2374,6 @@
           </div>
         </div>
 
-        <!-- 科创体检 -->
-        <div id="page-health" class="page hidden">
-          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
-            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
-          </button>
-          <!-- 子导航 -->
-          <div class="mb-4 flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1" style="width:fit-content">
-            <button class="health-tab health-tab-active" data-health="home">工作台</button>
-            <button class="health-tab" data-health="orders">我的服务</button>
-          </div>
-
-          <!-- P1 工作台 -->
-          <div id="health-home" class="health-view">
-            <!-- 新建体检（置顶） -->
-            <div class="rounded-lg bg-white p-6 shadow-sm">
-              <div class="mb-3 text-base font-semibold text-gray-800">新建体检</div>
-              <div class="mb-2 text-sm text-gray-600">① 选择申报项目（可多选）</div>
-              <div class="grid grid-cols-2 gap-3" id="health-proj-grid"></div>
-              <div class="mt-6 flex justify-end">
-                <button class="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">开始体检 →</button>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-amber-50 p-4" style="border:1px solid #FFE7A6">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2"><i data-lucide="alert-triangle" class="h-4 w-4 text-amber-500"></i><span class="text-sm font-medium text-amber-700">上次体检未完成</span><span class="text-sm text-gray-500">智能体已调取企业档案，可继续评估</span></div>
-                <button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthRunEval()">继续体检</button>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-sm font-semibold text-gray-800">体检任务</div>
-              <table class="w-full text-sm">
-                <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">体检单号</th><th class="px-3 py-2.5 font-medium">企业名称</th><th class="px-3 py-2.5 font-medium">申报项目</th><th class="px-3 py-2.5 font-medium">体检进度</th><th class="px-3 py-2.5 font-medium">当前得分</th><th class="px-3 py-2.5 font-medium">等级</th><th class="px-3 py-2.5 font-medium">状态</th><th class="px-3 py-2.5 font-medium">更新时间</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead>
-                <tbody>
-                  <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1102</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">高新技术企业认定</td><td class="px-3 py-2.5">5/8</td><td class="px-3 py-2.5">68.0</td><td class="px-3 py-2.5"><span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span></td><td class="px-3 py-2.5">进行中</td><td class="px-3 py-2.5 text-gray-500">2024-11-05</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('wizard')">继续填报</a>　<a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
-                  <tr class="border-b border-gray-100"><td class="px-3 py-2.5">JC-2024-1088</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">专精特新中小企业</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5">82.5</td><td class="px-3 py-2.5"><span class="g-b rounded px-1.5 py-0.5 text-xs">B 达标</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-10-28</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
-                  <tr><td class="px-3 py-2.5">JC-2024-1041</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">科技型中小企业评价</td><td class="px-3 py-2.5">8/8</td><td class="px-3 py-2.5">91.0</td><td class="px-3 py-2.5"><span class="g-a rounded px-1.5 py-0.5 text-xs">A 卓越</span></td><td class="px-3 py-2.5">已完成</td><td class="px-3 py-2.5 text-gray-500">2024-09-15</td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth('result')">查看报告</a></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- P5 评估进度 -->
-          <div id="health-progress" class="health-view hidden">
-            <div class="mx-auto max-w-md rounded-lg bg-white p-8 text-center shadow-sm">
-              <div class="flex justify-center"><div class="health-ring" id="health-eval-ring"></div></div>
-              <div class="mt-4 text-base font-semibold text-gray-800">正在评估</div>
-              <div id="health-eval-tasks" class="mx-auto mt-4 max-w-xs text-left"></div>
-              <div class="mt-4 text-sm text-gray-400">预计还需 30 秒，可离开此页</div>
-              <button id="health-btn-view" class="mt-5 hidden rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="switchHealth('result')">查看体检结果 →</button>
-            </div>
-          </div>
-
-          <!-- P6 体检结果 -->
-          <div id="health-result" class="health-view hidden">
-            <div class="grid grid-cols-2 gap-4" style="grid-template-columns:1fr 400px">
-              <div class="rounded-lg bg-white p-5 shadow-sm">
-                <div class="mb-3 text-sm font-semibold text-gray-800">企业档案</div>
-                <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                  <div>企业名称：<b>武汉汉企业科技有限公司</b></div><div>信用代码：91420100MA4K*****</div>
-                  <div>成立时间：2015-06-18</div><div>技术领域：人工智能</div>
-                  <div>申报项目：高新技术企业认定</div><div>体检单号：JC-2024-1102</div>
-                  <div>日期：2024-11-06</div><div>机构：武汉科创平台</div>
-                  <div>顾问：张伟</div><div>资质：<span class="g-b rounded px-1.5 py-0.5 text-xs">高新技术企业</span></div>
-                </div>
-              </div>
-              <div class="rounded-lg bg-white p-5 shadow-sm">
-                <div class="mb-3 text-sm font-semibold text-gray-800">总分</div>
-                <div class="flex items-center gap-5">
-                  <div class="health-ring" id="health-total-ring"></div>
-                  <div class="text-sm text-gray-600">等级：<span class="g-c rounded px-1.5 py-0.5 text-xs">C 待提升</span><div class="mt-2">达标 12/26　不达标 5　一票否决 2</div><div class="mt-1 text-xs text-gray-400">行业百分位：前 38%</div></div>
-                </div>
-                <div class="mt-3"><div class="text-xs text-gray-400">达标线 80</div><div class="relative mt-1 h-1.5 w-full rounded-full bg-gray-100"><div class="h-1.5 rounded-full" style="width:72.5%;background:#FF7D00"></div><div class="absolute top-[-3px]" style="left:80%;height:12px;width:2px;background:#00B42A"></div></div></div>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">六维度量化打分</span></div>
-              <div class="flex items-center gap-6">
-                <div class="flex-shrink-0" id="health-radar"></div>
-                <div class="flex-1">
-                  <div class="text-xs text-gray-500"><span class="mr-1 inline-block h-3 w-3 rounded-sm" style="background:#1677ff"></span>企业实际　<span class="mr-1 ml-3 inline-block h-0 w-3 border-t-2 border-dashed" style="border-color:#FF7D00"></span>申报标准　<span class="mr-1 ml-3 inline-block h-3 w-3 rounded-sm" style="background:rgba(245,63,63,.15)"></span>差距区域</div>
-                  <div id="health-dim-cards" class="mt-3 grid grid-cols-2 gap-3"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-base font-semibold text-gray-800">差距问题汇总</div>
-              <div class="health-d-card mb-4 rounded-md p-3"><b style="color:#F53F3F">⚠ 检出 2 项一票否决红线</b></div>
-              <div id="health-veto"></div>
-              <div class="mb-2 mt-4 text-sm font-semibold text-gray-800">差距问题清单</div>
-              <div id="health-problems" class="space-y-2"></div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-base font-semibold text-gray-800">结论与建议</div>
-              <div class="text-sm font-semibold text-gray-800">体检结论</div>
-              <div class="mt-2 grid grid-cols-4 gap-3" id="health-concl"></div>
-              <div class="mt-4 text-sm font-semibold text-gray-800">推荐整改服务方案</div>
-              <div class="health-svc mt-3 rounded-lg p-4">
-                <div class="grid grid-cols-3 gap-3">
-                  <div class="rounded-lg bg-white p-4"><b>单项自选</b><div class="mt-1 text-xs text-gray-400">覆盖 1 项问题</div><div class="mt-2 text-lg font-bold text-gray-800">￥2,000<span class="text-xs font-normal text-gray-400"> 起</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
-                  <div class="rounded-lg border-2 bg-white p-4" style="border-color:#722ED1"><div class="flex items-center"><b>达标加速包</b><span class="ml-2 rounded px-1.5 py-0.5 text-xs text-white" style="background:#FFB400">★ 推荐</span></div><div class="mt-1 text-xs text-gray-400">覆盖 5 项 · 预计补齐至 B 级</div><div class="mt-2 text-lg font-bold text-gray-800">￥9,800<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥13,500</span></div><button class="mt-2 rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthService()">查看方案详情</button></div>
-                  <div class="rounded-lg bg-white p-4"><b>全托管</b><div class="mt-1 text-xs text-gray-400">覆盖全部 · 全程代办</div><div class="mt-2 text-lg font-bold text-gray-800">￥28,000<span class="ml-1 text-xs font-normal text-gray-400 line-through">￥32,000</span></div><button class="mt-2 rounded-md border border-primary px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看方案详情</button></div>
-                </div>
-                <div class="mt-3 text-xs text-gray-400">增值服务 · 不影响体检评分与结论</div>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-base font-semibold text-gray-800">风险专项提示</div>
-              <div class="grid grid-cols-2 gap-3">
-                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>申报窗口期风险</b><span class="g-d rounded px-1.5 py-0.5 text-xs">高</span></div><div class="mt-2 text-sm text-gray-500">高企申报窗口即将关闭，时间紧张。</div></div>
-                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>政策变动风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">研发费用加计扣除口径或有调整。</div></div>
-                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>数据合规风险</b><span class="g-c rounded px-1.5 py-0.5 text-xs">中</span></div><div class="mt-2 text-sm text-gray-500">申报数据需与审计报告一致。</div></div>
-                <div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>知识产权权属风险</b><span class="g-b rounded px-1.5 py-0.5 text-xs">低</span></div><div class="mt-2 text-sm text-gray-500">部分专利为共同申请，权属需确认。</div></div>
-              </div>
-            </div>
-
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">归档签字区</span><div class="flex gap-2"><button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">导出完整报告 PDF</button><button class="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">导出精简版</button></div></div>
-              <table class="w-full text-sm"><thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2 font-medium">姓名</th><th class="px-3 py-2 font-medium">电话</th><th class="px-3 py-2 font-medium">单位</th><th class="px-3 py-2 font-medium">电子签名</th><th class="px-3 py-2 font-medium">日期</th></tr></thead><tbody><tr><td class="px-3 py-2.5">张伟</td><td class="px-3 py-2.5">138****1234</td><td class="px-3 py-2.5">武汉汉企业科技有限公司</td><td class="px-3 py-2.5">张伟（已签）</td><td class="px-3 py-2.5">2024-11-06</td></tr></tbody></table>
-            </div>
-
-            <div id="health-service-entry" class="health-svc mt-4 rounded-lg p-4">
-              <div class="flex items-center justify-between"><b style="color:#722ED1">整改服务入口</b><span class="rounded px-1.5 py-0.5 text-xs" style="background:#FFF7E0;color:#FFB400">增值服务 · 不影响体检评分与结论</span></div>
-              <div class="mt-3 flex flex-wrap gap-2">
-                <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">一键委托整改</button>
-                <button class="rounded-md border border-primary px-4 py-1.5 text-sm text-primary transition hover:bg-primary-light" onclick="openHealthService()">查看全部科创服务 →</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- P9 订单列表 -->
-          <div id="health-orders" class="health-view hidden">
-            <div class="rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-base font-semibold text-gray-800">我的服务</div>
-              <div class="mb-3 flex flex-wrap gap-2" id="health-order-tabs"></div>
-              <table class="w-full text-sm"><thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">订单号</th><th class="px-3 py-2.5 font-medium">服务名称</th><th class="px-3 py-2.5 font-medium">关联体检单</th><th class="px-3 py-2.5 font-medium">金额</th><th class="px-3 py-2.5 font-medium">下单时间</th><th class="px-3 py-2.5 font-medium">状态</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead><tbody id="health-order-list"></tbody></table>
-            </div>
-          </div>
-
-          <!-- P10 服务进度详情 -->
-          <div id="health-order-detail" class="health-view hidden">
-            <div class="rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 flex items-center justify-between"><span class="text-base font-semibold text-gray-800">订单进度详情</span><button class="rounded-lg border border-gray-200 px-3 py-1.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary" onclick="switchHealth('orders')">返回列表</button></div>
-              <div class="grid grid-cols-2 gap-2 text-sm"><div>订单号：<b>FW-2024-1106-01</b></div><div>服务名称：<b>研发费用归集整改服务</b></div><div>关联体检单：JC-2024-1102</div><div>金额：￥2,000</div></div>
-            </div>
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-sm font-semibold text-gray-800">状态时间轴</div>
-              <div class="flex" id="health-order-timeline"></div>
-            </div>
-            <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="mb-3 text-sm font-semibold text-gray-800">关联问题</div>
-              <div class="flex items-center justify-between"><span class="text-sm text-gray-600">研发费用占营收比低于标准</span><span class="g-c rounded px-1.5 py-0.5 text-xs">已整改待复检</span><button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">发起复检</button></div>
-            </div>
-          </div>
-        </div>
-
         <!-- 政策发现 -->
         <div id="page-policy" class="page hidden">
           <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
@@ -2126,45 +2396,75 @@
             </div>
           </div>
 
-          <!-- 顶部汇总卡片 -->
-          <div class="mb-5 grid grid-cols-3 gap-4">
-            <div class="flex items-center gap-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light">
-                <i data-lucide="target" class="h-6 w-6 text-primary"></i>
-              </div>
-              <div>
-                <div class="text-sm text-gray-500">匹配政策</div>
-                <div class="mt-1 text-2xl font-semibold text-gray-800">128</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-green-50">
-                <i data-lucide="banknote" class="h-6 w-6 text-green-600"></i>
-              </div>
-              <div>
-                <div class="text-sm text-gray-500">可申领总金额</div>
-                <div class="mt-1 text-2xl font-semibold text-gray-800">￥2,500,000</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-red-50">
-                <i data-lucide="alarm-clock" class="h-6 w-6 text-red-500"></i>
-              </div>
-              <div>
-                <div class="text-sm text-gray-500">临期政策</div>
-                <div class="mt-1 text-2xl font-semibold text-gray-800">3</div>
-              </div>
-            </div>
-          </div>
-
           <!-- Tab 切换 -->
           <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
-            <button data-policy-tab="opportunity" class="policy-tab policy-tab-active">政策机会（申报期内）</button>
+            <button data-policy-tab="all" class="policy-tab policy-tab-active">全部政策</button>
+            <button data-policy-tab="opportunity" class="policy-tab">政策机会（申报期内）</button>
             <button data-policy-tab="calculator" class="policy-tab">政策计算器（不限期内）</button>
           </div>
 
+          <!-- 全部政策 -->
+          <div id="policy-tab-all">
+            <div class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
+              <table class="w-full text-sm">
+                <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-3 font-medium">政策名称</th><th class="px-5 py-3 font-medium">主管部门</th><th class="px-5 py-3 font-medium">申报截止</th><th class="px-5 py-3 font-medium">状态</th><th class="px-5 py-3 font-medium">操作</th></tr></thead>
+                <tbody class="divide-y divide-gray-100">
+                  <tr data-policy="2026年湖北省专精特新中小企业认定" data-match="92">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年湖北省专精特新中小企业认定</td>
+                    <td class="px-5 py-3.5 text-gray-600">湖北省经济和信息化厅</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-11-20</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
+                  </tr>
+                  <tr data-policy="2026年高新技术企业认定（第二批）" data-match="87">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年高新技术企业认定（第二批）</td>
+                    <td class="px-5 py-3.5 text-gray-600">湖北省科学技术厅</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-11-30</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
+                  </tr>
+                  <tr data-policy="东湖高新区瞪羚企业认定" data-match="78">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">东湖高新区瞪羚企业认定</td>
+                    <td class="px-5 py-3.5 text-gray-600">东湖高新区管委会</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-11-22</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
+                  </tr>
+                  <tr data-policy="武汉市科技型中小企业入库评价" data-match="65">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">武汉市科技型中小企业入库评价</td>
+                    <td class="px-5 py-3.5 text-gray-600">武汉市科学技术局</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-12-08</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
+                  </tr>
+                  <tr data-policy="2026年湖北省重点研发计划项目" data-match="54">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年湖北省重点研发计划项目</td>
+                    <td class="px-5 py-3.5 text-gray-600">湖北省科学技术厅</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-12-01</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-600">即将开始</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
+                  </tr>
+                  <tr data-policy="2026年武汉市人工智能创新专项" data-match="61">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年武汉市人工智能创新专项</td>
+                    <td class="px-5 py-3.5 text-gray-600">武汉市科学技术局</td>
+                    <td class="px-5 py-3.5 text-gray-500">2026-12-15</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-600">即将开始</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
+                  </tr>
+                  <tr data-policy="2025年湖北省专精特新中小企业认定" data-match="88">
+                    <td class="px-5 py-3.5 font-medium text-gray-800">2025年湖北省专精特新中小企业认定</td>
+                    <td class="px-5 py-3.5 text-gray-600">湖北省经济和信息化厅</td>
+                    <td class="px-5 py-3.5 text-gray-500">2025-08-31</td>
+                    <td class="px-5 py-3.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">已截止</span></td>
+                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <!-- 政策机会 -->
-          <div id="policy-tab-opportunity">
+          <div id="policy-tab-opportunity" class="hidden">
             <!-- 排序 -->
             <!-- 政策卡片（2 列） -->
             <div class="grid grid-cols-2 gap-4" id="policy-card-grid">
@@ -2383,6 +2683,7 @@
                       <div class="min-w-0"><div class="text-sm font-medium text-gray-800">高企认定审计服务</div><div class="text-xs text-gray-400">研发费用专项审计</div></div>
                       <div class="flex flex-shrink-0 items-center gap-2">
                         <span class="text-sm font-semibold text-red-500">¥8,000</span>
+                        <button onclick="openMallDetail('高企认定审计服务')" class="rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
                         <button class="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="orderService('高企认定审计服务', '¥8,000')">下单</button>
                       </div>
                     </div>
@@ -2390,6 +2691,7 @@
                       <div class="min-w-0"><div class="text-sm font-medium text-gray-800">发明专利快速预审代办</div><div class="text-xs text-gray-400">查新检索 + 撰写 + 预审</div></div>
                       <div class="flex flex-shrink-0 items-center gap-2">
                         <span class="text-sm font-semibold text-red-500">¥5,000</span>
+                        <button onclick="openMallDetail('发明专利快速预审代办')" class="rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
                         <button class="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="orderService('发明专利快速预审代办', '¥5,000')">下单</button>
                       </div>
                     </div>
@@ -2397,6 +2699,7 @@
                       <div class="min-w-0"><div class="text-sm font-medium text-gray-800">知识产权贯标认证</div><div class="text-xs text-gray-400">GB/T 29490 体系搭建</div></div>
                       <div class="flex flex-shrink-0 items-center gap-2">
                         <span class="text-sm font-semibold text-red-500">¥30,000</span>
+                        <button onclick="openMallDetail('知识产权贯标认证')" class="rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
                         <button class="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="orderService('知识产权贯标认证', '¥30,000')">下单</button>
                       </div>
                     </div>
@@ -2422,342 +2725,6 @@
                     <i data-lucide="external-link" class="h-3.5 w-3.5"></i> 前往官方申报网站
                   </button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 年度申报规划 -->
-        <div id="page-planning" class="page hidden">
-          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
-            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
-          </button>
-          <!-- 一、顶部：进阶阶梯图 + 路线图 -->
-          <div class="mb-5 grid grid-cols-3 gap-4">
-            <div class="col-span-2 rounded-lg bg-white p-6 shadow-sm">
-              <div class="mb-5 flex items-center">
-                <h3 class="text-sm font-medium text-gray-800">企业科创培育进阶路径</h3>
-                <span class="ml-auto rounded-full bg-primary-light px-3 py-1 text-xs font-medium text-primary">当前：高新技术企业（重新认定中）</span>
-              </div>
-              <div class="ladder">
-                <div class="lg-step done">
-                  <div class="lg-card">
-                    <div class="lg-nm">科技型中小企业</div>
-                    <div class="lg-st">已完成 · 2022 年</div>
-                    <div class="lg-gap">入库编号 2022420100xxxx</div>
-                  </div>
-                </div>
-                <div class="lg-step now">
-                  <div class="lg-card">
-                    <div class="lg-nm">高新技术企业</div>
-                    <div class="lg-st">当前阶段 · 证书已逾期</div>
-                    <div class="lg-gap">重新认定进行中，任务 8/15</div>
-                  </div>
-                </div>
-                <div class="lg-step">
-                  <div class="lg-card">
-                    <div class="lg-nm">专精特新中小企业</div>
-                    <div class="lg-st">2027 目标</div>
-                    <div class="lg-gap">达成差距：缺 2 项发明专利</div>
-                  </div>
-                </div>
-                <div class="lg-step">
-                  <div class="lg-card">
-                    <div class="lg-nm">专精特新「小巨人」</div>
-                    <div class="lg-st">2028 目标</div>
-                    <div class="lg-gap">达成差距：细分市场占有率证明</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="rounded-lg bg-white p-5 shadow-sm">
-              <div class="text-sm font-medium text-gray-800">2024-2026 科创培育路线图</div>
-              <div class="mt-4 space-y-2.5">
-                <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
-                  <span class="text-xs text-gray-500">预计可申报项目</span>
-                  <span class="text-lg font-semibold text-gray-800">12<span class="text-xs font-normal text-gray-400"> 个</span></span>
-                </div>
-                <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
-                  <span class="text-xs text-gray-500">预计可获补贴</span>
-                  <span class="text-lg font-semibold text-gray-800">￥350万</span>
-                </div>
-                <div class="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2.5">
-                  <span class="text-xs text-gray-500">能力提升建议</span>
-                  <span class="text-lg font-semibold text-gray-800">3<span class="text-xs font-normal text-gray-400"> 项</span></span>
-                </div>
-              </div>
-              <div class="mt-4 flex flex-col gap-2">
-                <button id="btn-gen-report" class="flex items-center justify-center gap-1.5 rounded-lg bg-primary py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-                  <i data-lucide="sparkles" class="h-4 w-4"></i> AI 生成培育规划报告
-                </button>
-                <button id="btn-download-gantt" class="flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 py-2.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="download" class="h-4 w-4"></i> 下载甘特图
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 二、申报时间轴与甘特图 -->
-          <div class="mb-5 rounded-lg bg-white p-5 shadow-sm">
-            <div class="mb-4 flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <span class="text-sm font-medium text-gray-800">申报时间轴与甘特图</span>
-                <div class="inline-flex items-center gap-1 rounded-lg border border-gray-200 p-1">
-                  <button data-gantt-tab="year" class="gantt-tab gantt-tab-active">年度申报</button>
-                  <button data-gantt-tab="month" class="gantt-tab">月度待办</button>
-                </div>
-              </div>
-              <div id="gantt-legend" class="flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-primary"></span>进行中</span>
-                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-amber-400"></span>筹备中</span>
-                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-violet-400"></span>规划中</span>
-                <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-sm bg-gray-300"></span>未开始</span>
-              </div>
-            </div>
-
-            <!-- 年度申报甘特图 -->
-            <div id="gantt-year">
-            <!-- 月份轴 -->
-            <div class="flex items-center pb-2 text-xs text-gray-400">
-              <div class="w-44 flex-shrink-0 pr-3">申报事项</div>
-              <div class="flex flex-1 justify-between">
-                <span class="font-medium text-red-500">11月▽</span>
-                <span>12月</span><span>1月</span><span>2月</span><span>3月</span><span>4月</span><span>5月</span><span>6月</span><span>7月</span><span>8月</span><span>9月</span><span>10月</span>
-              </div>
-              <div class="w-16 flex-shrink-0 text-right">状态</div>
-            </div>
-
-            <!-- 甘特行 -->
-            <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
-              <div class="flex items-center">
-                <div class="w-44 flex-shrink-0 pr-3">
-                  <div class="truncate text-sm text-gray-800">高企重新认定</div>
-                  <div class="text-xs text-gray-400">截止 2024-11-30 · 剩 24 天</div>
-                </div>
-                <div class="relative h-6 flex-1 rounded bg-gray-50">
-                  <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:8.33%" title="2024-11 申报窗口"></div>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="w-44 flex-shrink-0 pr-3">
-                  <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定</div>
-                  <div class="text-xs text-gray-400">截止 2024-11-16 · 剩 10 天</div>
-                </div>
-                <div class="relative h-6 flex-1 rounded bg-gray-50">
-                  <div class="absolute inset-y-1 rounded-full bg-primary" style="left:0%; width:5.5%" title="2024-11 申报窗口"></div>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-primary">进行中</div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="w-44 flex-shrink-0 pr-3">
-                  <div class="truncate text-sm text-gray-800">湖北省重点研发计划</div>
-                  <div class="text-xs text-gray-400">截止 2024-12-05 · 材料准备中</div>
-                </div>
-                <div class="relative h-6 flex-1 rounded bg-gray-50">
-                  <div class="absolute inset-y-1 rounded-full bg-amber-400" style="left:0%; width:13%" title="2024-11 ~ 12 筹备窗口"></div>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">筹备中</div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="w-44 flex-shrink-0 pr-3">
-                  <div class="truncate text-sm text-gray-800">专精特新中小企业培育</div>
-                  <div class="text-xs text-gray-400">目标 2025-03 · 缺 2 项发明专利</div>
-                </div>
-                <div class="relative h-6 flex-1 rounded bg-gray-50">
-                  <div class="absolute inset-y-1 rounded-full bg-violet-400" style="left:16.67%; width:16.67%" title="2025-01 ~ 03 培育窗口"></div>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-violet-600">规划中</div>
-              </div>
-
-              <div class="flex items-center">
-                <div class="w-44 flex-shrink-0 pr-3">
-                  <div class="truncate text-sm text-gray-800">海外专利布局</div>
-                  <div class="text-xs text-gray-400">目标 2025-06 · PCT 申请</div>
-                </div>
-                <div class="relative h-6 flex-1 rounded bg-gray-50">
-                  <div class="absolute inset-y-1 rounded-full bg-gray-300" style="left:33.33%; width:25%" title="2025-03 ~ 06 布局窗口"></div>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">未开始</div>
-              </div>
-            </div>
-
-            <!-- 图注 + 关键节点 -->
-            <div class="mt-4 border-t border-gray-100 pt-3">
-              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500">
-                <span class="flex items-center gap-1"><span class="h-3 w-0.5 bg-red-500"></span>今天 2024-11（红色▽标记）</span>
-                <span>时间范围：2024-11 ~ 2025-10</span>
-              </div>
-              <div class="mt-2 flex flex-wrap gap-2">
-                <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-16 瞪羚企业认定截止</span>
-                <span class="rounded-md bg-red-50 px-2 py-1 text-[11px] text-red-600">11-30 高企认定截止</span>
-                <span class="rounded-md bg-amber-50 px-2 py-1 text-[11px] text-amber-600">12-05 重点研发计划截止</span>
-                <span class="rounded-md bg-violet-50 px-2 py-1 text-[11px] text-violet-600">2025-03 专精特新培育目标</span>
-              </div>
-            </div>
-            </div>
-
-            <!-- 月度待办甘特图 -->
-            <div id="gantt-month" class="hidden">
-              <div class="mb-3 flex items-center justify-between text-xs text-gray-500">
-                <span class="text-sm font-medium text-gray-700">2024 年 11 月 · 待办事项甘特</span>
-                <div class="flex items-center gap-3">
-                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-red-500"></span>今日/紧急</span>
-                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-amber-400"></span>3 天内</span>
-                  <span class="flex items-center gap-1"><span class="h-2 w-2 rounded-full bg-gray-300"></span>本月待办</span>
-                </div>
-              </div>
-
-              <!-- 日轴 -->
-              <div class="flex items-center pb-2 text-xs text-gray-400">
-                <div class="w-48 flex-shrink-0 pr-3">待办事项</div>
-                <div class="flex flex-1 justify-between">
-                  <span>1日</span><span>5日</span><span>10日</span><span>15日</span><span>20日</span><span>25日</span><span>30日</span>
-                </div>
-                <div class="w-16 flex-shrink-0 text-right">截止</div>
-              </div>
-
-              <!-- 行 -->
-              <div class="mt-2 space-y-3 border-t border-gray-100 pt-3">
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">确认申报时序排期</div>
-                    <div class="text-xs text-gray-400">申报规划 · 立项任务</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:20%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-06</div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">补充财务审计材料</div>
-                    <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:30%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-09</div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">完善知识产权权属信息</div>
-                    <div class="text-xs text-gray-400">高企认定 · 立项任务</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:40%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-12</div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">东湖瞪羚企业认定截止</div>
-                    <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-amber-400" style="left:53%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-amber-600">11-16</div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">对接高优先级服务线索</div>
-                    <div class="text-xs text-gray-400">服务挖掘 · 待处理</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-gray-300" style="left:66.5%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-gray-500">11-20</div>
-                </div>
-
-                <div class="flex items-center">
-                  <div class="w-48 flex-shrink-0 pr-3">
-                    <div class="truncate text-sm text-gray-800">高企认定申报截止</div>
-                    <div class="text-xs text-gray-400">申报任务 · 申报窗口</div>
-                  </div>
-                  <div class="relative h-6 flex-1 rounded bg-gray-50">
-                    <div class="absolute inset-y-0 w-1 rounded-full bg-red-500" style="left:98%"></div>
-                  </div>
-                  <div class="w-16 flex-shrink-0 text-right text-xs font-medium text-red-500">11-30</div>
-                </div>
-              </div>
-
-              <div class="mt-3 border-t border-gray-100 pt-2 text-xs text-gray-400">
-                竖线位置为该待办事项的截止日期（今天 11-06），红色=今日/紧急、黄色=3天内、灰色=本月待办。
-              </div>
-            </div>
-          </div>
-
-          <!-- 三、分层培育看板 -->
-          <div class="rounded-lg bg-white p-5 shadow-sm">
-            <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 p-1">
-              <button data-plan-tab="now" class="plan-tab plan-tab-active">即刻申报（3个月内）</button>
-              <button data-plan-tab="short" class="plan-tab">短期培育（3-6个月）</button>
-              <button data-plan-tab="long" class="plan-tab">中长期储备（6个月以上）</button>
-            </div>
-
-            <div id="plan-tab-now" class="space-y-3">
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light"><i data-lucide="award" class="h-4 w-4 text-primary"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">2024年高新技术企业认定（第二批）</div>
-                  <div class="text-xs text-gray-400">剩 12 天 · 匹配度 87% · 最高 30 万元</div>
-                </div>
-                <button class="js-plan-apply flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-policy="2024年高新技术企业认定（第二批）">立即立项</button>
-              </div>
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-amber-50"><i data-lucide="rocket" class="h-4 w-4 text-amber-500"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">东湖高新区瞪羚企业认定</div>
-                  <div class="text-xs text-gray-400">剩 5 天 · 匹配度 78% · 最高 100 万元</div>
-                </div>
-                <button class="js-plan-apply flex-shrink-0 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" data-policy="东湖高新区瞪羚企业认定">立即立项</button>
-              </div>
-            </div>
-
-            <div id="plan-tab-short" class="hidden space-y-3">
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="gem" class="h-4 w-4 text-violet-600"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">专精特新中小企业认定</div>
-                  <div class="text-xs text-amber-600">研发费用占比仅 3%，建议补齐至 4% 后申报</div>
-                </div>
-                <button class="js-join-plan flex-shrink-0 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">加入培育计划</button>
-              </div>
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light"><i data-lucide="building-2" class="h-4 w-4 text-primary"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">省级企业技术中心</div>
-                  <div class="text-xs text-amber-600">缺 1 项发明专利，建议布局后申报</div>
-                </div>
-                <button class="js-join-plan flex-shrink-0 rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">加入培育计划</button>
-              </div>
-            </div>
-
-            <div id="plan-tab-long" class="hidden space-y-3">
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-50"><i data-lucide="globe" class="h-4 w-4 text-cyan-600"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">海外专利布局</div>
-                  <div class="text-xs text-gray-400">建议 2025 年启动，布局 PCT 国际申请</div>
-                </div>
-                <span class="flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">跨年度</span>
-              </div>
-              <div class="flex items-center gap-3 rounded-lg border border-gray-100 p-3">
-                <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="trophy" class="h-4 w-4 text-violet-600"></i></div>
-                <div class="min-w-0 flex-1">
-                  <div class="text-sm font-medium text-gray-800">专精特新“小巨人”</div>
-                  <div class="text-xs text-gray-400">建议 2026 年申报，需跨年度培育</div>
-                </div>
-                <span class="flex-shrink-0 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">跨年度</span>
               </div>
             </div>
           </div>
@@ -3191,7 +3158,7 @@
               <div class="mb-8">
                 <div class="mb-3 flex items-center gap-2">
                   <h2 class="text-base font-semibold text-gray-800">专业工具</h2>
-                  <span class="text-xs text-gray-400">政策发现 · 年度申报规划</span>
+                  <span class="text-xs text-gray-400">政策发现</span>
                 </div>
                 <div class="grid grid-cols-3 gap-5">
                   <div class="js-expert-tool group cursor-pointer rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md" data-target="page-policy" data-title="政策发现">
@@ -3202,21 +3169,6 @@
                       <div class="min-w-0">
                         <div class="text-base font-semibold text-gray-800">政策发现</div>
                         <p class="mt-1 text-sm leading-relaxed text-gray-500">精准匹配惠企政策，智能推荐申报机会</p>
-                      </div>
-                    </div>
-                    <div class="mt-4 flex items-center justify-end border-t border-gray-100 pt-3">
-                      <span class="text-sm text-gray-400 transition group-hover:text-primary">进入 →</span>
-                    </div>
-                  </div>
-
-                  <div class="js-expert-tool group cursor-pointer rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md" data-target="page-planning" data-title="年度申报规划">
-                    <div class="flex items-center gap-4">
-                      <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-violet-50">
-                        <i data-lucide="route" class="h-6 w-6 text-violet-600"></i>
-                      </div>
-                      <div class="min-w-0">
-                        <div class="text-base font-semibold text-gray-800">年度申报规划</div>
-                        <p class="mt-1 text-sm leading-relaxed text-gray-500">项目窗口期监控与分级培育，制定申报时序</p>
                       </div>
                     </div>
                     <div class="mt-4 flex items-center justify-end border-t border-gray-100 pt-3">
@@ -3825,10 +3777,62 @@
 
               <div id="mall-pagination" class="mt-6 flex flex-wrap items-center justify-center gap-1.5"></div>
           </div>
+
+          <!-- 服务详情 -->
+          <div id="service-detail-view" class="hidden">
+            <button class="mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary" onclick="closeServiceDetail()">
+              <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回服务商城
+            </button>
+
+            <div class="rounded-lg bg-white p-6 shadow-sm">
+              <div class="flex items-start justify-between border-b border-gray-100 pb-4">
+                <div class="min-w-0">
+                  <h1 id="service-detail-name" class="text-xl font-semibold text-gray-900">企业数据治理服务</h1>
+                  <p id="service-detail-intro" class="mt-2 text-sm text-gray-500">梳理多源业务数据，建立统一、可持续的数据管理体系。</p>
+                </div>
+                <div id="service-detail-price" class="flex-shrink-0 text-xl font-semibold text-primary">￥3,000</div>
+              </div>
+
+              <div class="mt-5">
+                <h3 class="mb-3 text-base font-semibold text-gray-800">服务详情</h3>
+                <div class="space-y-4">
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">服务内容</h4>
+                    <p id="service-detail-content" class="text-sm leading-relaxed text-gray-600">围绕“企业数据治理”提供需求诊断、方案规划、实施辅导与成果复核，结合企业实际业务场景形成清晰、可落地的服务交付。</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">适用企业群体</h4>
+                    <p id="service-detail-audience" class="text-sm leading-relaxed text-gray-600">适用于在数据运营领域有明确提升需求，希望借助专业团队提升效率、降低风险或建立标准化能力的成长型企业。</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">准入条件</h4>
+                    <p id="service-detail-conditions" class="text-sm leading-relaxed text-gray-600">企业具备真实、合规的经营主体及明确服务需求，可按项目需要提供基础业务资料，并安排相关负责人参与需求沟通与方案确认。</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">必要性</h4>
+                    <p id="service-detail-necessity" class="text-sm leading-relaxed text-gray-600">通过专业的数据运营服务，可减少试错成本，提前识别关键问题，让企业资源更聚焦于核心经营目标。</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">服务优势</h4>
+                    <p id="service-detail-advantages" class="text-sm leading-relaxed text-gray-600">润兴团队提供一对一顾问对接、分阶段透明交付和全过程跟进；方案贴合企业实际，并可根据实施反馈持续优化。</p>
+                  </div>
+                  <div>
+                    <h4 class="mb-1.5 text-sm font-semibold text-gray-800">联系我们</h4>
+                    <p class="text-sm leading-relaxed text-gray-600">如需了解服务周期、交付清单或获取专属方案，请点击下方“立即咨询”，润兴专属顾问将为您提供一对一服务。</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 flex items-center gap-2 border-t border-gray-100 pt-4">
+                <button id="service-detail-buy" class="rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">立即咨询</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- 服务与订单：我的订单 -->
         <div id="page-my-orders" class="page hidden">
+          <div id="order-list-view">
           <div class="mb-5">
             <h2 class="text-xl font-semibold text-gray-800">我的订单</h2>
             <p class="mt-1 text-sm text-gray-400">按立项项目归集订单，托管项目下的服务订单集中展示</p>
@@ -3880,15 +3884,58 @@
                 <i data-lucide="shopping-bag" class="h-4 w-4 text-gray-400"></i>
                 <h3 class="text-sm font-semibold text-gray-800">独立服务订单（未关联项目）</h3>
               </div>
-              <span class="text-xs text-gray-400">共 2 笔订单 · 合计 ¥3,300</span>
+              <span class="text-xs text-gray-400">共 3 笔订单 · 合计 ¥5,300</span>
             </div>
             <table class="w-full text-sm">
               <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
               <tbody>
+                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1106-01</td><td class="px-4 py-2.5">研发费用归集整改服务</td><td class="px-4 py-2.5 text-gray-500">2024-11-06</td><td class="px-4 py-2.5">¥2,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
                 <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-0815-02</td><td class="px-4 py-2.5">商标注册申请</td><td class="px-4 py-2.5 text-gray-500">2024-08-15</td><td class="px-4 py-2.5">¥800</td><td class="px-4 py-2.5"><span class="rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600">已完结</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">下载交付物</a>　<a class="js-quick-nav cursor-pointer text-primary hover:underline" data-target="page-my-invoice">申请开票</a></td></tr>
                 <tr><td class="px-5 py-2.5">FW-2024-0920-01</td><td class="px-4 py-2.5">专利申请代理</td><td class="px-4 py-2.5 text-gray-500">2024-09-20</td><td class="px-4 py-2.5">¥2,500</td><td class="px-4 py-2.5"><span class="rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600">已完结</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">下载交付物</a>　<a class="js-quick-nav cursor-pointer text-primary hover:underline" data-target="page-my-invoice">申请开票</a></td></tr>
               </tbody>
             </table>
+          </div>
+          </div>
+
+          <!-- 订单详情 -->
+          <div id="order-detail-view" class="hidden">
+            <button class="mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary" onclick="closeOrderDetail()">
+              <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回我的订单
+            </button>
+
+            <div class="rounded-lg bg-white p-5 shadow-sm">
+              <div class="flex items-start justify-between">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2">
+                    <h2 id="order-detail-name" class="text-lg font-semibold text-gray-800">研发费用归集整改服务</h2>
+                    <span id="order-detail-status" class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span>
+                  </div>
+                  <div id="order-detail-meta" class="mt-1.5 text-xs text-gray-400">订单编号 FW-2024-1106-01 · 2024-11-06</div>
+                </div>
+                <div id="order-detail-price" class="text-xl font-semibold text-primary">￥2,000</div>
+              </div>
+
+              <div class="mt-5">
+                <div class="mb-2 text-sm font-semibold text-gray-800">订单状态</div>
+                <div class="flex items-center" id="order-detail-timeline"></div>
+              </div>
+
+              <div class="mt-5">
+                <div class="mb-2 text-sm font-semibold text-gray-800">服务内容</div>
+                <p id="order-detail-desc" class="text-sm leading-relaxed text-gray-600">本服务由专属顾问按约定内容执行，全程进度可查。</p>
+              </div>
+
+              <div class="mt-5">
+                <div class="mb-2 text-sm font-semibold text-gray-800">交付物</div>
+                <div id="order-detail-files" class="space-y-2"></div>
+              </div>
+
+              <div class="mt-5 flex items-center gap-2 border-t border-gray-100 pt-4">
+                <button class="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">联系服务商</button>
+                <button class="js-quick-nav cursor-pointer rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary" data-target="page-my-invoice">申请开票</button>
+                <button class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">下载交付物</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -4903,10 +4950,8 @@
 
     // 已并入「科创专家」的专业工具，无独立菜单项时的标题兜底
     const EXPERT_TOOL_TITLES = {
-      'page-health': '科创体检',
       'page-policy': '政策发现',
       'page-doc-expert': 'AI 申报书专家',
-      'page-planning': '年度申报规划',
     };
 
     function goToPage(target, title) {
@@ -4926,12 +4971,13 @@
       if (target === 'page-archive') initArchiveCharts();
       // 驾驶舱：进入时懒加载图表
       if (target === 'page-dashboard') initDashboardCharts();
-      // 年度申报规划：进入时懒加载甘特图
-      if (target === 'page-planning') initPlanningGantt();
     }
 
     navItems.forEach((item) => {
-      item.addEventListener('click', () => goToPage(item.dataset.target, item.dataset.title));
+      item.addEventListener('click', () => {
+        if (item.dataset.drawer === 'message') { openMessageDrawer(); return; }
+        goToPage(item.dataset.target, item.dataset.title);
+      });
     });
 
     // 科创专家 → 专业工具卡片
@@ -5906,9 +5952,11 @@
       tab.addEventListener('click', () => {
         document.querySelectorAll('.policy-tab').forEach((t) => t.classList.remove('policy-tab-active'));
         tab.classList.add('policy-tab-active');
-        const isOpp = tab.dataset.policyTab === 'opportunity';
-        document.getElementById('policy-tab-opportunity').classList.toggle('hidden', !isOpp);
-        document.getElementById('policy-tab-calculator').classList.toggle('hidden', isOpp);
+        const tabName = tab.dataset.policyTab;
+        ['all', 'opportunity', 'calculator'].forEach((name) => {
+          const el = document.getElementById('policy-tab-' + name);
+          if (el) el.classList.toggle('hidden', name !== tabName);
+        });
       });
     });
 
@@ -5931,6 +5979,16 @@
       btn.addEventListener('click', () => {
         const name = btn.closest('[data-policy]').dataset.policy;
         showToast('正在跳转到「' + name + '」官方申报网站（演示）', 'info');
+      });
+    });
+
+    // 政策匹配检测
+    document.querySelectorAll('.js-policy-match').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('[data-policy]');
+        const name = row.dataset.policy;
+        const match = row.dataset.match;
+        showToast('「' + name + '」匹配检测完成，匹配度 ' + (match || '--') + '%', 'success');
       });
     });
 
@@ -6029,7 +6087,6 @@
       messageDrawer.classList.add('translate-x-full');
     }
 
-    document.getElementById('bell-btn').addEventListener('click', openMessageDrawer);
     document.getElementById('message-close').addEventListener('click', closeMessageDrawer);
     messageOverlay.addEventListener('click', closeMessageDrawer);
 
@@ -6208,7 +6265,6 @@
       { name:'高价值发明专利布局', star:4, type:'知识产权服务商', served:512, rate:97, solve:'发明专利挖掘与申请', price:8000 },
     ];
 
-    let healthOrders = [{ no:'FW-2024-1106-01', name:'研发费用归集整改服务', jc:'JC-2024-1102', amt:2000, time:'2024-11-06', status:'服务中' }];
 
     function switchHealth(view) {
       document.querySelectorAll('.health-view').forEach(v => v.classList.add('hidden'));
@@ -6219,9 +6275,9 @@
     document.querySelectorAll('.health-tab').forEach(t => t.addEventListener('click', () => switchHealth(t.dataset.health)));
 
     // 进度环 SVG
-    function healthRing(percent, color, fs) {
+    function healthRing(percent, color, fs, label) {
       const r = 52, c = 2 * Math.PI * r;
-      return '<svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="#f3f4f6" stroke-width="10"/><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="10" stroke-linecap="round" stroke-dasharray="' + (c * percent / 100) + ' ' + c + '" transform="rotate(-90 55 55)"/><text x="55" y="55" text-anchor="middle" dominant-baseline="middle" font-size="' + fs + '" font-weight="700" fill="' + color + '">' + percent + '</text></svg>';
+      return '<svg width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="#f3f4f6" stroke-width="10"/><circle cx="55" cy="55" r="' + r + '" fill="none" stroke="' + color + '" stroke-width="10" stroke-linecap="round" stroke-dasharray="' + (c * percent / 100) + ' ' + c + '" transform="rotate(-90 55 55)"/><text x="55" y="55" text-anchor="middle" dominant-baseline="middle" font-size="' + fs + '" font-weight="700" fill="' + color + '">' + (label !== undefined ? label : percent) + '</text></svg>';
     }
 
     // 雷达图 SVG（企业实际 vs 申报标准）
@@ -6282,7 +6338,7 @@
     function openHealthService(name) {
       document.getElementById('health-svc-ctx').textContent = name || '研发费用占营收比 · C 待提升';
       document.getElementById('health-svc-list').innerHTML = HEALTH_SERVICES.map(s =>
-        '<div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>' + s.name + '</b><span style="color:#FFB400">★' + s.star + '.0</span></div><div class="mt-1 flex flex-wrap gap-1.5"><span class="rounded px-1.5 py-0.5 text-xs" style="background:#E0F7F7;color:#00B2B2">' + s.type + '</span><span class="text-xs text-gray-400">已服务 ' + s.served + ' 家 · 好评 ' + s.rate + '%</span></div><div class="mt-2 text-sm text-gray-600">可解决：' + s.solve + '</div><div class="mt-2 flex items-center justify-between"><span class="text-lg font-bold text-primary">￥' + s.price + '</span><div class="flex gap-2"><button class="rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600">查看详情</button><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthOrder(\'' + s.name + '\',' + s.price + ')">立即下单</button></div></div></div>').join('');
+        '<div class="rounded-lg border border-gray-100 p-4"><div class="flex items-center justify-between"><b>' + s.name + '</b><span style="color:#FFB400">★' + s.star + '.0</span></div><div class="mt-1 flex flex-wrap gap-1.5"><span class="rounded px-1.5 py-0.5 text-xs" style="background:#E0F7F7;color:#00B2B2">' + s.type + '</span><span class="text-xs text-gray-400">已服务 ' + s.served + ' 家 · 好评 ' + s.rate + '%</span></div><div class="mt-2 text-sm text-gray-600">可解决：' + s.solve + '</div><div class="mt-2 flex items-center justify-between"><span class="text-lg font-bold text-primary">￥' + s.price + '</span><div class="flex gap-2"><button onclick="closeHealthService(); openMallDetail(\'' + s.name + '\')" class="rounded-md border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">查看详情</button><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthOrder(\'' + s.name + '\',' + s.price + ')">立即下单</button></div></div></div>').join('');
       document.getElementById('health-svc-overlay').classList.add('health-open');
       document.getElementById('health-svc-drawer').classList.add('health-open');
     }
@@ -6299,23 +6355,6 @@
       showToast('下单成功，问题卡片状态已更新为「已委托」', 'success');
       HEALTH_PROBLEMS.forEach(p => { if (p.name.includes('研发费用')) p.entrust = true; });
       renderHealthProblems();
-      healthOrders.unshift({ no: 'FW-2024-1106-0' + (healthOrders.length + 2), name: '研发费用归集整改服务', jc: 'JC-2024-1102', amt: 2000, time: '2024-11-06', status: '待支付' });
-      renderHealthOrders();
-    }
-
-    // P9 订单
-    function renderHealthOrderTabs() {
-      const tabs = ['全部', '待支付', '待接单', '服务中', '待验收', '已完成', '已取消'];
-      document.getElementById('health-order-tabs').innerHTML = tabs.map((t, i) => '<button class="rounded-lg px-3 py-1.5 text-sm ' + (i === 0 ? 'bg-primary text-white' : 'border border-gray-200 text-gray-600') + '">' + t + '</button>').join('');
-    }
-    function renderHealthOrders() {
-      document.getElementById('health-order-list').innerHTML = healthOrders.map(o =>
-        '<tr class="border-b border-gray-100"><td class="px-3 py-2.5">' + o.no + '</td><td class="px-3 py-2.5">' + o.name + '</td><td class="px-3 py-2.5">' + o.jc + '</td><td class="px-3 py-2.5">￥' + o.amt + '</td><td class="px-3 py-2.5 text-gray-500">' + o.time + '</td><td class="px-3 py-2.5"><span class="g-b rounded px-1.5 py-0.5 text-xs">' + o.status + '</span></td><td class="px-3 py-2.5"><a class="cursor-pointer text-primary hover:underline" onclick="switchHealth(\'order-detail\')">详情</a>　<a class="cursor-pointer text-primary hover:underline">联系服务商</a></td></tr>').join('');
-    }
-    function renderHealthOrderTimeline() {
-      const st = ['待支付', '待接单', '服务中', '待验收', '已完成'];
-      document.getElementById('health-order-timeline').innerHTML = st.map((s, i) =>
-        '<div class="flex-1 text-center"><div class="mx-auto h-3.5 w-3.5 rounded-full" style="background:' + (i < 2 ? '#00B42A' : i === 2 ? '#1677ff' : '#E5E6EB') + '"></div><div class="mt-1.5 text-xs" style="color:' + (i <= 2 ? '#1D2129' : '#86909C') + '">' + s + '</div></div>').join('');
     }
 
     // P5 评估动画（智能体调用系统数据）
@@ -6339,11 +6378,8 @@
     renderHealthVeto();
     renderHealthProblems();
     renderHealthConcl();
-    renderHealthOrderTabs();
-    renderHealthOrders();
-    renderHealthOrderTimeline();
     document.getElementById('health-radar').innerHTML = healthRadarSVG();
-    document.getElementById('health-total-ring').innerHTML = healthRing(72, '#FF7D00', 40);
+    document.getElementById('health-total-ring').innerHTML = healthRing(72, '#FF7D00', 40, 'C');
 
     // ==================== 科创专家（矩阵 / 运行 / 交付） ====================
     function agCell(v, cls, span) { return { v: v || '', cls: cls || 'sheet-plain', span: span || 0 }; }
@@ -7057,7 +7093,10 @@
                 '<div class="truncate text-sm font-medium text-gray-800" title="' + s.name + '">' + s.name + '</div>' +
                 '<div class="mt-0.5 text-xs font-semibold text-primary">' + s.price + '</div>' +
               '</div>' +
-              '<button onclick="orderService(\'' + s.name + '\', \'' + s.price + '\')" class="flex-shrink-0 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>' +
+              '<div class="flex flex-shrink-0 items-center gap-1.5">' +
+                '<button onclick="openMallDetail(\'' + s.name + '\')" class="rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>' +
+                '<button onclick="orderService(\'' + s.name + '\', \'' + s.price + '\')" class="rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>' +
+              '</div>' +
             '</div>' +
           '</div>';
         }).join('');
@@ -7422,6 +7461,39 @@
       );
     }
 
+    function openOrderDetailPage(orderNo, serviceName, time, price, status) {
+      document.getElementById('order-detail-name').textContent = serviceName;
+      document.getElementById('order-detail-status').textContent = status;
+      document.getElementById('order-detail-meta').textContent = '订单编号 ' + orderNo + ' · ' + time;
+      document.getElementById('order-detail-price').textContent = price;
+      document.getElementById('order-detail-desc').textContent = '本服务由专属顾问按约定内容执行，全程进度可查、交付物可下载。';
+
+      const steps = ['待支付', '待接单', '服务中', '待验收', '已完成'];
+      const current = Math.max(0, steps.indexOf(status));
+      document.getElementById('order-detail-timeline').innerHTML = steps.map((s, i) => {
+        const state = i < current ? 'done' : (i === current ? 'now' : 'todo');
+        const color = state === 'done' ? '#00B42A' : state === 'now' ? '#1677ff' : '#E5E6EB';
+        const txtColor = state === 'todo' ? '#86909C' : '#1D2129';
+        return '<div class="flex-1 text-center"><div class="mx-auto h-3.5 w-3.5 rounded-full" style="background:' + color + '"></div><div class="mt-1.5 text-xs" style="color:' + txtColor + '">' + s + '</div></div>';
+      }).join('');
+
+      document.getElementById('order-detail-files').innerHTML =
+        '<div class="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5">' +
+          '<div class="flex min-w-0 items-center gap-2.5"><i data-lucide="file-text" class="h-4 w-4 flex-shrink-0 text-primary"></i><span class="truncate text-sm text-gray-700">' + serviceName + ' · 成果物</span></div>' +
+          '<button class="flex-shrink-0 rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">下载</button>' +
+        '</div>';
+      lucide.createIcons();
+
+      document.getElementById('order-list-view').classList.add('hidden');
+      document.getElementById('order-detail-view').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeOrderDetail() {
+      document.getElementById('order-detail-view').classList.add('hidden');
+      document.getElementById('order-list-view').classList.remove('hidden');
+    }
+
     document.addEventListener('click', (e) => {
       const link = e.target.closest('.js-order-detail');
       if (!link) return;
@@ -7429,8 +7501,10 @@
       if (!tr) return;
       const orderNo = tr.cells[0] ? tr.cells[0].textContent.trim() : '';
       const serviceName = tr.cells[1] ? tr.cells[1].textContent.trim() : '';
+      const time = tr.cells[2] ? tr.cells[2].textContent.trim() : '';
+      const price = tr.cells[3] ? tr.cells[3].textContent.trim() : '';
       const status = tr.cells[4] ? tr.cells[4].textContent.trim() : '';
-      openOrderDetail(orderNo, serviceName, status);
+      openOrderDetailPage(orderNo, serviceName, time, price, status);
     });
 
     function createProjectFromTodos() {
@@ -7648,7 +7722,7 @@
         document.querySelectorAll('.cultivation-tab').forEach((t) => t.classList.remove('cultivation-tab-active'));
         tab.classList.add('cultivation-tab-active');
         const view = tab.dataset.cultivation;
-        ['health', 'diagnosis', 'planning'].forEach((v) => {
+        ['health', 'planning'].forEach((v) => {
           const el = document.getElementById('cultivation-' + v);
           if (el) el.classList.toggle('hidden', v !== view);
         });
@@ -8251,32 +8325,28 @@
     });
     function openMallDetail(name) {
       const p = MALL_PRODUCTS.find(function (x) { return x.name === name; });
-      if (!p) return;
-      const price = (p.priceMain + ' ' + p.priceUnit).trim();
-      openAgentModal(
-        '<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">' +
-          '<h3 class="text-base font-semibold text-gray-900">服务详情</h3>' +
-          '<button onclick="closeAgentModal()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-4 w-4"></i></button>' +
-        '</div>' +
-        '<div class="space-y-4 px-6 py-5">' +
-          '<div class="flex items-center gap-3">' +
-            '<div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white" style="background:linear-gradient(135deg,' + p.c1 + ',' + p.c2 + ')">' + p.badge + '</div>' +
-            '<div class="min-w-0"><div class="text-base font-semibold text-gray-800">' + p.name + '</div><div class="mt-1 text-xs text-gray-400">' + p.cat + ' · 编号 ' + p.id + ' · ★ ' + p.rating + '</div></div>' +
-          '</div>' +
-          '<div class="rounded-xl border border-gray-100 bg-gray-50 p-4">' +
-            '<div class="text-sm font-medium text-gray-800">服务内容</div>' +
-            '<p class="mt-1.5 text-sm leading-relaxed text-gray-600">' + p.desc + '</p>' +
-          '</div>' +
-          '<div class="flex items-center justify-between rounded-xl border border-gray-100 bg-gray-50 p-4">' +
-            '<div><div class="text-xs text-gray-400">价格</div><div class="mt-0.5 text-lg font-semibold text-primary">' + p.priceMain + ' <span class="text-xs font-normal text-gray-400">' + p.priceUnit + '</span></div></div>' +
-            '<div class="text-right"><div class="text-xs text-gray-400">已服务</div><div class="mt-0.5 text-sm font-medium text-gray-700">' + p.sold + ' 家企业</div></div>' +
-          '</div>' +
-        '</div>' +
-        '<div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">' +
-          '<button onclick="closeAgentModal()" class="rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300">取消</button>' +
-          '<button onclick="orderService(\'' + p.name + '\', \'' + price + '\')" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">立即下单</button>' +
-        '</div>'
-      );
+      const title = p ? p.name : name;
+      const price = p ? (p.priceMain + ' ' + p.priceUnit).trim() : '方案定价';
+      const cat = p ? p.cat : '科创服务';
+      const intro = p ? p.desc : '专业的科创服务，为企业提供一站式解决方案。';
+      document.getElementById('service-detail-name').textContent = title;
+      document.getElementById('service-detail-intro').textContent = intro;
+      document.getElementById('service-detail-price').textContent = price;
+      document.getElementById('service-detail-content').textContent = '围绕“' + title + '”提供需求诊断、方案规划、实施辅导与成果复核，结合企业实际业务场景形成清晰、可落地的服务交付。';
+      document.getElementById('service-detail-audience').textContent = '适用于在' + cat + '领域有明确提升需求，希望借助专业团队提升效率、降低风险或建立标准化能力的成长型企业。';
+      document.getElementById('service-detail-conditions').textContent = '企业具备真实、合规的经营主体及明确服务需求，可按项目需要提供基础业务资料，并安排相关负责人参与需求沟通与方案确认。';
+      document.getElementById('service-detail-necessity').textContent = '通过专业的' + cat + '服务，可减少试错成本，提前识别关键问题，让企业资源更聚焦于核心经营目标。';
+      document.getElementById('service-detail-advantages').textContent = '专属顾问提供一对一对接、分阶段透明交付和全过程跟进；方案贴合企业实际，并可根据实施反馈持续优化。';
+      document.getElementById('service-detail-buy').onclick = function () { orderService(title, price); };
+
+      goToPage('page-mall', '服务商城');
+      document.getElementById('mall-market-view').classList.add('hidden');
+      document.getElementById('service-detail-view').classList.remove('hidden');
+    }
+
+    function closeServiceDetail() {
+      document.getElementById('service-detail-view').classList.add('hidden');
+      document.getElementById('mall-market-view').classList.remove('hidden');
     }
 
     document.getElementById('mall-service-list').addEventListener('click', e => {
