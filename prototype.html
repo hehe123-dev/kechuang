@@ -742,20 +742,16 @@
             <span>项目与申报</span>
           </div>
         </div>
-
-        <!-- 消息中心 -->
-        <div class="mt-6 space-y-1">
-          <div class="nav-item" data-drawer="message">
-            <i data-lucide="bell" class="nav-icon"></i>
-            <span>消息中心</span>
-            <span class="ml-auto h-2 w-2 rounded-full bg-red-500"></span>
-          </div>
-        </div>
       </nav>
 
-      <!-- 底部用户信息（下拉含切换企业/退出登录） -->
+      <!-- 底部：消息中心 + 用户信息 -->
       <div class="border-t border-gray-100 p-3">
-        <div class="relative" id="user-menu-wrap">
+        <div class="nav-item" data-drawer="message">
+          <i data-lucide="bell" class="nav-icon"></i>
+          <span>消息中心</span>
+          <span class="ml-auto h-2 w-2 rounded-full bg-red-500"></span>
+        </div>
+        <div class="relative mt-2" id="user-menu-wrap">
           <button id="user-menu-btn" class="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 transition hover:bg-gray-50">
             <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-blue-400 text-sm font-medium text-white">张</div>
             <div class="min-w-0 flex-1 text-left leading-tight">
@@ -3821,6 +3817,11 @@
                     <p class="text-sm leading-relaxed text-gray-600">如需了解服务周期、交付清单或获取专属方案，请点击下方“立即咨询”，润兴专属顾问将为您提供一对一服务。</p>
                   </div>
                 </div>
+              </div>
+
+              <div class="mt-5">
+                <h3 class="mb-3 text-base font-semibold text-gray-800">服务交付物</h3>
+                <div id="service-detail-deliverables" class="space-y-2"></div>
               </div>
 
               <div class="mt-6 flex items-center gap-2 border-t border-gray-100 pt-4">
@@ -8338,6 +8339,17 @@
       document.getElementById('service-detail-necessity').textContent = '通过专业的' + cat + '服务，可减少试错成本，提前识别关键问题，让企业资源更聚焦于核心经营目标。';
       document.getElementById('service-detail-advantages').textContent = '专属顾问提供一对一对接、分阶段透明交付和全过程跟进；方案贴合企业实际，并可根据实施反馈持续优化。';
       document.getElementById('service-detail-buy').onclick = function () { orderService(title, price); };
+      document.getElementById('service-detail-deliverables').innerHTML = [
+        { ext: 'pdf', name: title + '·成果报告.pdf' },
+        { ext: 'xlsx', name: title + '·交付清单.xlsx' },
+        { ext: 'docx', name: title + '·实施方案.docx' },
+      ].map(function (d) {
+        return '<div class="flex items-center justify-between rounded-lg border border-gray-100 bg-gray-50 px-3 py-2.5">' +
+          '<div class="flex min-w-0 items-center gap-2.5"><i data-lucide="file-text" class="h-4 w-4 flex-shrink-0 text-primary"></i><span class="truncate text-sm text-gray-700">' + d.name + '</span></div>' +
+          '<span class="flex-shrink-0 rounded bg-gray-100 px-1.5 py-0.5 text-[11px] text-gray-500">' + d.ext.toUpperCase() + '</span>' +
+        '</div>';
+      }).join('');
+      lucide.createIcons();
 
       goToPage('page-mall', '服务商城');
       document.getElementById('mall-market-view').classList.add('hidden');
