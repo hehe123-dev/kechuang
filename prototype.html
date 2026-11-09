@@ -720,6 +720,10 @@
             <i data-lucide="bot" class="nav-icon"></i>
             <span>科创专家</span>
           </div>
+          <div class="nav-item" data-target="page-policy" data-title="政策发现">
+            <i data-lucide="compass" class="nav-icon"></i>
+            <span>政策发现</span>
+          </div>
         </div>
 
         <!-- 服务与订单 -->
@@ -2372,9 +2376,6 @@
 
         <!-- 政策发现 -->
         <div id="page-policy" class="page hidden">
-          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
-            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
-          </button>
           <!-- 列表视图 -->
           <div id="policy-list-view">
           <div class="mb-5 flex items-start justify-between">
@@ -3147,31 +3148,7 @@
               <!-- 页头 -->
               <div class="mb-6">
                 <h1 class="text-2xl font-semibold text-gray-900">科创专家</h1>
-                <p class="mt-1 text-sm text-gray-500">十二大科创专家智能体，覆盖企业科创能力建设全链路</p>
-              </div>
-
-              <!-- 专业工具（原能力中心独立模块，已并入科创专家） -->
-              <div class="mb-8">
-                <div class="mb-3 flex items-center gap-2">
-                  <h2 class="text-base font-semibold text-gray-800">专业工具</h2>
-                  <span class="text-xs text-gray-400">政策发现</span>
-                </div>
-                <div class="grid grid-cols-3 gap-5">
-                  <div class="js-expert-tool group cursor-pointer rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md" data-target="page-policy" data-title="政策发现">
-                    <div class="flex items-center gap-4">
-                      <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-indigo-50">
-                        <i data-lucide="compass" class="h-6 w-6 text-indigo-600"></i>
-                      </div>
-                      <div class="min-w-0">
-                        <div class="text-base font-semibold text-gray-800">政策发现</div>
-                        <p class="mt-1 text-sm leading-relaxed text-gray-500">精准匹配惠企政策，智能推荐申报机会</p>
-                      </div>
-                    </div>
-                    <div class="mt-4 flex items-center justify-end border-t border-gray-100 pt-3">
-                      <span class="text-sm text-gray-400 transition group-hover:text-primary">进入 →</span>
-                    </div>
-                  </div>
-                </div>
+                <p class="mt-1 text-sm text-gray-500">五大科创专家智能体，覆盖企业科创能力建设全链路</p>
               </div>
 
               <!-- 科创专家矩阵（JS 渲染） -->
@@ -4951,7 +4928,6 @@
 
     // 已并入「科创专家」的专业工具，无独立菜单项时的标题兜底
     const EXPERT_TOOL_TITLES = {
-      'page-policy': '政策发现',
       'page-doc-expert': 'AI 申报书专家',
     };
 
@@ -6453,116 +6429,62 @@
 
     const AGENTS = [
       makeAgent({
-        id: 'archive',
-        title: '企业数字档案管家',
-        intro: '负责企业全量科创数据的归集、校验、冲突发现与证据链管理，维护企业数字档案主数据',
-        tag: '治理·约3分钟',
-        category: '档案治理',
-        status: 'ok',
-        statusText: '服务包内',
-        icon: 'database',
-        grad: 'from-blue-500 to-cyan-500',
-        runIntro: '归集企业全量科创数据，校验一致性，发现冲突并维护证据链与主数据。',
-        artifacts: ['档案治理清单', '档案治理看板', '档案治理报告'],
-        dlDesc: ['数据归集与校验明细', '主数据质量可视化', '冲突发现与治理建议'],
-        seq: 1201,
-        reportTitle: '档案治理报告',
-        conclusion: '企业数字档案已完成全量数据归集与校验，发现 3 处数据冲突并给出证据链修复建议。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'checkup',
-        title: '科创体检诊断专家',
-        intro: '五维创新能力量化评估、硬条件核验、风险排查，输出企业科创体检报告与评级',
-        tag: '体检·约4分钟',
-        category: '能力评估',
-        status: 'ok',
-        statusText: '服务包内',
-        icon: 'activity',
-        grad: 'from-amber-500 to-orange-500',
-        runIntro: '五维量化评估科创能力，核验硬条件，排查风险并输出体检报告与评级。',
-        artifacts: ['科创体检评分表', '科创体检看板', '科创体检报告'],
-        dlDesc: ['指标评分明细', '雷达图对标可视化', '体检结论与整改建议'],
-        seq: 1202,
-        reportTitle: '科创体检报告',
-        conclusion: '综合科创能力得分 86.5 分，高于同行业均值；知识产权与研发组织管理表现突出，财务指标仍有提升空间。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
         id: 'policy',
-        title: '政策匹配专家',
+        title: '政策分析师',
         intro: '政策结构化解析、双向适配打分、临期政策监控与精准推送',
-        tag: '匹配·约2分钟',
+        tag: '分析·约2分钟',
         category: '政策服务',
         status: 'ok',
         statusText: '服务包内',
         icon: 'target',
         grad: 'from-indigo-500 to-violet-500',
         runIntro: '解析政策条款，双向适配打分，监控临期政策并精准推送。',
-        artifacts: ['政策匹配清单', '政策匹配看板', '政策匹配报告'],
-        dlDesc: ['匹配政策与适配打分', '匹配结果可视化', '匹配结论与申报建议'],
-        seq: 1203,
-        reportTitle: '政策匹配报告',
+        artifacts: ['政策分析清单', '政策分析看板', '政策分析报告'],
+        dlDesc: ['匹配政策与适配打分', '匹配结果可视化', '分析结论与申报建议'],
+        seq: 1301,
+        reportTitle: '政策分析报告',
         conclusion: '共匹配到 6 项适配政策，其中 2 项满足全部硬门槛，匹配度评分位居前列，建议优先跟进。',
         steps: defaultSteps,
       }),
       makeAgent({
-        id: 'planning',
-        title: '梯度培育规划专家',
-        intro: '科小→高企→专精特新→小巨人进阶路径规划、任务时序排布、甘特图与路线图生成',
-        tag: '规划·约3分钟',
-        category: '梯度培育',
-        status: 'warn',
-        statusText: '需补 1 项数据',
-        icon: 'route',
-        grad: 'from-violet-500 to-purple-500',
-        runIntro: '规划梯度进阶路径，排布任务时序并生成甘特图与路线图。',
-        artifacts: ['培育路径排期表', '梯度培育看板', '梯度培育报告'],
-        dlDesc: ['进阶路径与排期', '甘特图与路线图', '培育结论与建议'],
-        seq: 1204,
-        reportTitle: '梯度培育报告',
-        conclusion: '已按科小→高企→专精特新→小巨人梳理进阶路径并完成时序排布，建议优先推进近期截止的重点申报。',
+        id: 'checkup',
+        title: '科创体检医生',
+        intro: '五维创新能力量化评估、硬条件核验、风险排查，输出企业科创体检报告与评级',
+        tag: '体检·约4分钟',
+        category: '能力评估',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'stethoscope',
+        grad: 'from-amber-500 to-orange-500',
+        runIntro: '五维量化评估科创能力，核验硬条件，排查风险并输出体检报告与评级。',
+        artifacts: ['科创体检评分表', '科创体检看板', '科创体检报告'],
+        dlDesc: ['指标评分明细', '雷达图对标可视化', '体检结论与整改建议'],
+        seq: 1302,
+        reportTitle: '科创体检报告',
+        conclusion: '综合科创能力得分 86.5 分，高于同行业均值；知识产权与研发组织管理表现突出，财务指标仍有提升空间。',
         steps: defaultSteps,
       }),
       makeAgent({
-        id: 'gaoxin',
-        title: '高企认定申报专家',
-        intro: '高新技术企业认定全流程条件把握、材料组织、任务拆解与评审要点应对',
-        tag: '申报·约4分钟',
-        category: '资质申报',
-        status: 'warn',
-        statusText: '需补 2 项数据',
-        icon: 'award',
-        grad: 'from-emerald-500 to-teal-500',
-        runIntro: '把握高企认定全流程条件，组织材料、拆解任务并应对评审要点。',
-        artifacts: ['高企申报任务表', '高企认定看板', '高企认定申报方案'],
-        dlDesc: ['申报任务与条件', '进度可视化', '申报方案与要点'],
-        seq: 1205,
-        reportTitle: '高企认定申报方案',
-        conclusion: '已梳理高企认定全流程条件与任务拆解，材料组织基本齐备，重点补齐研发费用佐证后即可申报。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'srds',
-        title: '专精特新/小巨人培育专家',
-        intro: '专精特新及小巨人梯度条件把握、主导产品细分市场占有率论证、补短板建议',
-        tag: '培育·约4分钟',
-        category: '资质申报',
-        status: 'warn',
-        statusText: '需补 2 项数据',
-        icon: 'gem',
-        grad: 'from-teal-500 to-green-500',
-        runIntro: '把握专精特新及小巨人梯度条件，论证细分市场占有率并给出补短板建议。',
-        artifacts: ['专精特新培育清单', '小巨人培育看板', '梯度培育申报方案'],
-        dlDesc: ['梯度条件与差距', '培育进度可视化', '申报方案与建议'],
-        seq: 1206,
-        reportTitle: '专精特新培育方案',
-        conclusion: '已完成专精特新/小巨人梯度条件核验，主导产品细分市场占有率论证可行，建议补充 2 项发明专利后申报。',
+        id: 'service',
+        title: '科创服务专家',
+        intro: '短板需求识别与服务线索匹配，分级推送',
+        tag: '挖掘·约3分钟',
+        category: '服务挖掘',
+        status: 'ok',
+        statusText: '服务包内',
+        icon: 'search',
+        grad: 'from-pink-500 to-rose-500',
+        runIntro: '识别企业短板需求，匹配科创服务线索并撰写挖掘报告，按优先级推送。',
+        artifacts: ['服务线索清单', '服务挖掘看板', '服务挖掘报告'],
+        dlDesc: ['匹配服务与需求线索', '线索可视化', '挖掘结论与推送建议'],
+        seq: 1303,
+        reportTitle: '服务挖掘报告',
+        conclusion: '识别出 3 项高优先级科创服务需求，匹配到 5 条可对接服务线索，建议按优先级分级推送。',
         steps: defaultSteps,
       }),
       makeAgent({
         id: 'finance',
-        title: '研发费用与加计扣除专家',
+        title: '财税专家',
         intro: '研发费用辅助账归集口径、高企口径与加计扣除口径差异、归集合规性审查',
         tag: '测算·约3分钟',
         category: '财税合规',
@@ -6573,14 +6495,14 @@
         runIntro: '梳理研发费用辅助账归集口径，比对高企与加计扣除口径差异并审查合规性。',
         artifacts: ['研发费用辅助账', '加计扣除看板', '财税合规审查报告'],
         dlDesc: ['辅助账归集明细', '口径差异可视化', '合规审查结论'],
-        seq: 1207,
-        reportTitle: '研发费用与加计扣除报告',
+        seq: 1304,
+        reportTitle: '财税合规审查报告',
         conclusion: '已完成研发费用辅助账归集口径梳理，高企口径与加计扣除口径差异已标注，归集合规性审查通过。',
         steps: defaultSteps,
       }),
       makeAgent({
         id: 'ip',
-        title: '知识产权布局与运营专家',
+        title: '知识产权专家',
         intro: 'IP资产盘点、发明专利占比分析、临期预警、PCT/许可转让布局建议',
         tag: '盘点·约3分钟',
         category: 'IP资产',
@@ -6591,81 +6513,9 @@
         runIntro: '盘点 IP 资产，分析发明专利占比，预警临期专利并给出布局建议。',
         artifacts: ['IP资产盘点表', '知产布局看板', '知产布局与运营报告'],
         dlDesc: ['资产盘点明细', '布局可视化', '运营结论与建议'],
-        seq: 1208,
+        seq: 1305,
         reportTitle: '知产布局与运营报告',
         conclusion: '已完成 IP 资产盘点与发明专利占比分析，发现 3 项临期专利，建议补充 PCT 布局并优化许可转让策略。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'writer',
-        title: '申报书撰写专家',
-        intro: '申报模板适配、章节自动生成、润色、合规自检、证据凭证挂接',
-        tag: '成稿·约5分钟',
-        category: '材料撰写',
-        status: 'warn',
-        statusText: '需补 2 项数据',
-        icon: 'pen-line',
-        grad: 'from-rose-500 to-pink-500',
-        runIntro: '适配申报模板，自动生成章节，润色并完成合规自检与证据挂接。',
-        artifacts: ['申报书素材表', '申报书在线预览', '项目申报书'],
-        dlDesc: ['章节内容与要点', '成稿在线预览', '最终成稿'],
-        seq: 1209,
-        reportTitle: '项目申报书',
-        conclusion: '已按申报模板生成完整章节内容并回填基础信息，合规自检通过，可进入人工复核。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'transfer',
-        title: '科技成果转化专家',
-        intro: '成果成熟度判定、转化路径设计、融资可行性分析、成果推介页生成',
-        tag: '转化·约3分钟',
-        category: '成果转化',
-        status: 'ok',
-        statusText: '服务包内',
-        icon: 'rocket',
-        grad: 'from-orange-500 to-red-500',
-        runIntro: '判定成果成熟度，设计转化路径，分析融资可行性并生成推介页。',
-        artifacts: ['成果转化清单', '成果转化看板', '成果转化报告'],
-        dlDesc: ['成果与路径清单', '转化进度可视化', '转化结论与建议'],
-        seq: 1210,
-        reportTitle: '成果转化报告',
-        conclusion: '已完成成果成熟度判定与转化路径设计，融资可行性分析通过，建议优先推进 2 项高成熟度成果转化。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'platform',
-        title: '创新平台与人才专家',
-        intro: '技术中心/工程中心/博士后基地申报条件核查、高层次人才项目匹配',
-        tag: '核查·约3分钟',
-        category: '平台与人才',
-        status: 'warn',
-        statusText: '需补 1 项数据',
-        icon: 'users',
-        grad: 'from-sky-500 to-blue-500',
-        runIntro: '核查平台申报条件，匹配高层次人才项目并输出申报建议。',
-        artifacts: ['平台申报清单', '人才项目看板', '平台与人才申报报告'],
-        dlDesc: ['平台申报条件', '人才项目可视化', '申报结论与建议'],
-        seq: 1211,
-        reportTitle: '平台与人才申报报告',
-        conclusion: '已完成技术中心/工程中心/博士后基地申报条件核查，匹配到 3 项高层次人才项目，建议优先申报。',
-        steps: defaultSteps,
-      }),
-      makeAgent({
-        id: 'benchmark',
-        title: '同赛道对标专家',
-        intro: '标杆企业获证榜分析、本地区同赛道水平对标、申报时机建议',
-        tag: '对标·约3分钟',
-        category: '竞争情报',
-        status: 'ok',
-        statusText: '服务包内',
-        icon: 'bar-chart-3',
-        grad: 'from-fuchsia-500 to-pink-500',
-        runIntro: '分析标杆企业获证榜，对标本地区同赛道水平并给出申报时机建议。',
-        artifacts: ['同赛道对标清单', '竞争情报看板', '对标分析报告'],
-        dlDesc: ['对标样本清单', '对标结果可视化', '对标结论与建议'],
-        seq: 1212,
-        reportTitle: '同赛道对标报告',
-        conclusion: '已完成标杆企业获证榜与本地区同赛道水平对标，建议把握近期申报窗口，优先申报高匹配项目。',
         steps: defaultSteps,
       }),
     ];
@@ -6819,6 +6669,7 @@
       transfer: '建议推进转化',
       platform: '建议择机申报',
       benchmark: '建议择期申报',
+      service: '建议对接服务',
     };
 
     const REPORT_VERDICTS_OK = {
@@ -6834,6 +6685,7 @@
       transfer: '可转化',
       platform: '可申报',
       benchmark: '可申报',
+      service: '需求已匹配',
     };
 
     const REPORT_TODOS_OK = {
@@ -6849,6 +6701,7 @@
       transfer: [{ text: '推进高成熟度成果转化签约', action: '去发起' }],
       platform: [{ text: '提交平台/人才项目申报', action: '去提交' }],
       benchmark: [{ text: '按对标结论推进重点申报', action: '去发起' }],
+      service: [{ text: '对接高优先级服务线索', action: '去对接' }],
     };
 
     const REPORT_CONCLUSIONS_OK = {
@@ -6864,6 +6717,7 @@
       transfer: '成果成熟度判定完成，转化路径清晰，融资可行性通过，可推进转化。',
       platform: '平台与人才申报条件满足，已匹配到适配的高层次人才项目，可申报。',
       benchmark: '同赛道对标分析完成，企业处于中上水平，建议把握近期申报窗口。',
+      service: '企业需求清晰，已匹配到多条可对接服务线索，建议按优先级对接。',
     };
 
     const REPORT_SERVICES = {
@@ -6915,6 +6769,10 @@
         { name: '同赛道对标分析', tag: '情报服务', price: '￥4,000' },
         { name: '申报时机咨询', tag: '咨询服务', price: '￥3,000' },
       ],
+      service: [
+        { name: '发明专利快速预审代办', tag: '快速通道', price: '￥3,800' },
+        { name: '高企认定审计服务', tag: '官方备案', price: '￥8,000' },
+      ],
     };
 
     const REPORT_TODOS = {
@@ -6965,6 +6823,10 @@
       benchmark: [
         { text: '补充同赛道对标样本数据', action: '去补录' },
         { text: '确认申报时机与排期', action: '去确认' },
+      ],
+      service: [
+        { text: '对接高优先级服务线索', action: '去对接' },
+        { text: '将需求转成服务单', action: '去转单' },
       ],
     };
 
@@ -7028,6 +6890,10 @@
       benchmark: [
         { text: '对标标杆企业补齐短板' },
         { text: '优化申报节奏与时机' },
+      ],
+      service: [
+        { text: '布局高价值发明专利，提升专利资产价值' },
+        { text: '提升研发费用占营收比，增强研发投入强度' },
       ],
     };
 
