@@ -720,10 +720,6 @@
             <i data-lucide="bot" class="nav-icon"></i>
             <span>科创专家</span>
           </div>
-          <div class="nav-item" data-target="page-policy" data-title="政策发现">
-            <i data-lucide="compass" class="nav-icon"></i>
-            <span>政策发现</span>
-          </div>
           <div class="nav-item" data-target="page-skills" data-title="技能">
             <i data-lucide="sparkles" class="nav-icon"></i>
             <span>技能</span>
@@ -2110,6 +2106,9 @@
 
         <!-- 政策发现 -->
         <div id="page-policy" class="page hidden">
+          <button class="js-back-expert mb-4 flex items-center gap-1.5 text-sm text-gray-500 transition hover:text-primary">
+            <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回科创专家
+          </button>
           <!-- 列表视图 -->
           <div id="policy-list-view">
           <div class="mb-5 flex items-start justify-between">
@@ -3188,6 +3187,45 @@
                 <p class="mt-1 text-sm text-gray-500">十二大科创专家智能体，覆盖企业科创能力建设全链路</p>
               </div>
 
+              <!-- 专业工具（原能力中心独立模块，已并入科创专家） -->
+              <div class="mb-8">
+                <div class="mb-3 flex items-center gap-2">
+                  <h2 class="text-base font-semibold text-gray-800">专业工具</h2>
+                  <span class="text-xs text-gray-400">政策发现 · 年度申报规划</span>
+                </div>
+                <div class="grid grid-cols-3 gap-5">
+                  <div class="js-expert-tool group cursor-pointer rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md" data-target="page-policy" data-title="政策发现">
+                    <div class="flex items-center gap-4">
+                      <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-indigo-50">
+                        <i data-lucide="compass" class="h-6 w-6 text-indigo-600"></i>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="text-base font-semibold text-gray-800">政策发现</div>
+                        <p class="mt-1 text-sm leading-relaxed text-gray-500">精准匹配惠企政策，智能推荐申报机会</p>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-end border-t border-gray-100 pt-3">
+                      <span class="text-sm text-gray-400 transition group-hover:text-primary">进入 →</span>
+                    </div>
+                  </div>
+
+                  <div class="js-expert-tool group cursor-pointer rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md" data-target="page-planning" data-title="年度申报规划">
+                    <div class="flex items-center gap-4">
+                      <div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-violet-50">
+                        <i data-lucide="route" class="h-6 w-6 text-violet-600"></i>
+                      </div>
+                      <div class="min-w-0">
+                        <div class="text-base font-semibold text-gray-800">年度申报规划</div>
+                        <p class="mt-1 text-sm leading-relaxed text-gray-500">项目窗口期监控与分级培育，制定申报时序</p>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-end border-t border-gray-100 pt-3">
+                      <span class="text-sm text-gray-400 transition group-hover:text-primary">进入 →</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- 科创专家矩阵（JS 渲染） -->
               <div id="agent-grid" class="grid grid-cols-3 gap-5"></div>
             </div>
@@ -3449,9 +3487,14 @@
               </div>
 
               <!-- 页头 -->
-              <div class="mb-5">
-                <h1 class="text-2xl font-semibold text-gray-900">技能</h1>
-                <p class="mt-1 text-sm text-gray-500">科创研究方法与工作流：一次定义，交给你的科创专家反复执行</p>
+              <div class="mb-5 flex items-start justify-between">
+                <div>
+                  <h1 class="text-2xl font-semibold text-gray-900">技能</h1>
+                  <p class="mt-1 text-sm text-gray-500">科创研究方法与工作流：一次定义，交给你的科创专家反复执行</p>
+                </div>
+                <button onclick="openUploadModal('技能')" class="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">
+                  <i data-lucide="plus" class="h-4 w-4"></i> 新建技能
+                </button>
               </div>
 
               <!-- 分类筛选 -->
@@ -3636,9 +3679,14 @@
               </div>
 
               <!-- 页头 -->
-              <div class="mb-5">
-                <h1 class="text-2xl font-semibold text-gray-900">连接器</h1>
-                <p class="mt-1 text-sm text-gray-500">为科创专家接入外部数据源与业务系统，数据不落地、按需调用</p>
+              <div class="mb-5 flex items-start justify-between">
+                <div>
+                  <h1 class="text-2xl font-semibold text-gray-900">连接器</h1>
+                  <p class="mt-1 text-sm text-gray-500">为科创专家接入外部数据源与业务系统，数据不落地、按需调用</p>
+                </div>
+                <button onclick="openUploadModal('连接器')" class="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">
+                  <i data-lucide="plus" class="h-4 w-4"></i> 添加连接器
+                </button>
               </div>
 
               <!-- 状态概览 -->
@@ -7261,7 +7309,7 @@
           '<label id="upload-dropzone" class="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 py-10 text-center transition hover:border-primary hover:bg-primary-light/30">' +
             '<i data-lucide="upload-cloud" class="h-10 w-10 text-gray-400"></i>' +
             '<div class="mt-2 text-sm font-medium text-gray-700">点击选择文件</div>' +
-            '<div class="mt-1 text-xs text-gray-400">支持 PDF、Word、Excel、图片，单个不超过 20MB</div>' +
+            '<div class="mt-1 text-xs text-gray-400">支持任意格式文件，单个不超过 20MB</div>' +
             '<input type="file" id="upload-file-input" class="hidden">' +
           '</label>' +
           '<div id="upload-file-list" class="space-y-2"></div>' +
