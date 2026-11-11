@@ -331,6 +331,32 @@
     .u-kpi-label { font-size: 12px; color: #6b7280; }
     .u-kpi-value { margin-top: 6px; font-size: 22px; font-weight: 700; color: var(--kpi, #2563eb); }
     .u-kpi-value small { font-size: 13px; font-weight: 400; color: #9ca3af; margin-left: 2px; }
+    .u-kpi-note { display: block; margin-top: 6px; font-size: 11px; color: #9ca3af; line-height: 1.5; }
+    .u-section-kicker { display: block; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #2563eb; margin-bottom: 6px; }
+    .u-policy-calculator { border: 1px solid #eef1f5; border-radius: 14px; background: #fff; padding: 18px 20px; }
+    .u-policy-calculator-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+    .u-policy-calculator-head h3 { font-size: 17px; font-weight: 600; color: #1f2937; }
+    .u-policy-calculator-head p { margin-top: 4px; font-size: 12px; color: #6b7280; line-height: 1.6; }
+    .u-policy-input { border: 1px solid #eef1f5; border-radius: 14px; overflow: hidden; }
+    .u-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .u-field label { display: block; font-size: 12px; color: #6b7280; margin-bottom: 6px; }
+    .u-select { width: 100%; height: 38px; border: 1px solid #e5e7eb; border-radius: 8px; padding: 0 10px; font-size: 13px; color: #1f2937; background: #fff; outline: none; }
+    .u-select:focus { border-color: #2563eb; }
+    .u-calculator-source { margin-top: 14px; display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: #6b7280; background: #f8fafc; border-radius: 10px; padding: 10px 12px; }
+    .u-calculator-source strong { color: #1f2937; }
+    .u-footer-actions { margin-top: 14px; display: flex; justify-content: flex-end; }
+    .u-policy-breakdown { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
+    .u-policy-breakdown > div { border: 1px solid #f1f4f8; border-radius: 12px; padding: 14px 16px; background: #fbfcfe; }
+    .u-policy-breakdown strong { display: block; font-size: 13px; color: #1f2937; }
+    .u-policy-breakdown span { display: block; margin-top: 4px; font-size: 12px; color: #6b7280; line-height: 1.55; }
+    .u-policy-breakdown b { display: block; margin-top: 8px; font-size: 16px; font-weight: 700; color: #2563eb; }
+    .ob-step { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #9ca3af; white-space: nowrap; }
+    .ob-step-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #e5e7eb; color: #6b7280; font-size: 12px; font-weight: 600; }
+    .ob-step-active { color: #2563eb; font-weight: 500; }
+    .ob-step-active .ob-step-num { background: #2563eb; color: #fff; }
+    .ob-step-done { color: #16a34a; }
+    .ob-step-done .ob-step-num { background: #16a34a; color: #fff; }
+    .ob-step-conn { flex: 1; height: 1px; background: #e5e7eb; margin: 0 10px; }
 
     .u-file { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 12px; border: 1px solid #f1f4f8; border-radius: 10px; }
     .u-file + .u-file { margin-top: 8px; }
@@ -374,6 +400,17 @@
     .u-full-dim-head h3 { font-size: 20px; font-weight: 600; color: #1f2937; margin-top: 10px; }
     .u-full-dim-head p { font-size: 12px; color: #6b7280; margin-top: 4px; line-height: 1.6; }
     .u-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .u-button.primary { background: #2563eb; color: #fff; }
+    .u-policy-card { display: flex; align-items: center; justify-content: space-between; gap: 20px; border: 1px solid #eef1f5; border-radius: 14px; background: #fff; padding: 18px 20px; transition: box-shadow 0.15s ease, border-color 0.15s ease; }
+    .u-policy-card:hover { box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); border-color: #2563eb; }
+    .u-policy-card.high { border-color: #2563eb; }
+    .u-policy-card h3 { font-size: 15px; font-weight: 600; color: #1f2937; }
+    .u-policy-card p { font-size: 12px; color: #6b7280; margin-top: 8px; }
+    .u-policy-rule { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: #6b7280; }
+    .u-policy-rule i { flex: 1; height: 6px; border-radius: 3px; background: #eef2f7; overflow: hidden; }
+    .u-policy-rule i b { display: block; height: 100%; border-radius: 3px; background: #2563eb; }
+    .u-policy-match { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; padding-left: 20px; border-left: 1px solid #eef1f5; }
+    .u-policy-match b { font-size: 26px; font-weight: 600; color: #2563eb; font-variant-numeric: tabular-nums; }
 
     .u-chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .u-chart-box { border: 1px solid #eef1f5; border-radius: 14px; padding: 16px; background: #fff; }
@@ -2081,6 +2118,7 @@
                   <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
                     <span class="status-chip chip-done" id="docStatus"><span class="ic-slot" data-ic="CompletedIcon"></span>AI 验稿已通过</span>
                     <div class="doc-actions">
+                      <button class="btn-ghost" onclick="previewFullReport()"><span class="ic-slot" data-ic="DocumentIcon"></span>预览整个报告</button>
                       <button class="btn-ghost" onclick="showToast('已重新生成申报书（演示）', 'success')"><span class="ic-slot" data-ic="RefreshIcon"></span>重新生成</button>
                       <button class="btn-ghost" onclick="showToast('已导出 Word（演示）', 'success')"><span class="ic-slot" data-ic="DownloadIcon"></span>导出 Word</button>
                     </div>
@@ -2546,9 +2584,9 @@
 
           <!-- Tab 切换 -->
           <div class="mb-4 inline-flex items-center gap-1 rounded-lg border border-gray-200 bg-white p-1">
-            <button data-policy-tab="all" class="policy-tab policy-tab-active">全部政策</button>
             <button data-policy-tab="opportunity" class="policy-tab">政策机会（申报期内）</button>
             <button data-policy-tab="calculator" class="policy-tab">政策计算器（不限期内）</button>
+            <button data-policy-tab="all" class="policy-tab policy-tab-active">全部政策</button>
           </div>
 
           <!-- 全部政策 -->
@@ -2559,149 +2597,14 @@
               <button class="policy-region-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-region="武汉市">武汉市</button>
               <button class="policy-region-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-region="东湖高新区">东湖高新区</button>
             </div>
-            <div class="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm">
-              <table class="w-full text-sm">
-                <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-3 font-medium">政策名称</th><th class="px-5 py-3 font-medium">主管部门</th><th class="px-5 py-3 font-medium">申报截止</th><th class="px-5 py-3 font-medium">状态</th><th class="px-5 py-3 font-medium">操作</th></tr></thead>
-                <tbody class="divide-y divide-gray-100">
-                  <tr data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年湖北省专精特新中小企业认定</td>
-                    <td class="px-5 py-3.5 text-gray-600">湖北省经济和信息化厅</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-11-20</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
-                  </tr>
-                  <tr data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年高新技术企业认定（第二批）</td>
-                    <td class="px-5 py-3.5 text-gray-600">湖北省科学技术厅</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-11-30</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
-                  </tr>
-                  <tr data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">东湖高新区瞪羚企业认定</td>
-                    <td class="px-5 py-3.5 text-gray-600">东湖高新区管委会</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-11-22</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
-                  </tr>
-                  <tr data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">武汉市科技型中小企业入库评价</td>
-                    <td class="px-5 py-3.5 text-gray-600">武汉市科学技术局</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-12-08</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">申报中</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button><button class="js-create-project cursor-pointer text-primary hover:underline">一键立项申报</button></div></td>
-                  </tr>
-                  <tr data-policy="2026年湖北省重点研发计划项目" data-match="54" data-region="湖北省">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年湖北省重点研发计划项目</td>
-                    <td class="px-5 py-3.5 text-gray-600">湖北省科学技术厅</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-12-01</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-600">即将开始</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
-                  </tr>
-                  <tr data-policy="2026年武汉市人工智能创新专项" data-match="61" data-region="武汉市">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">2026年武汉市人工智能创新专项</td>
-                    <td class="px-5 py-3.5 text-gray-600">武汉市科学技术局</td>
-                    <td class="px-5 py-3.5 text-gray-500">2026-12-15</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-600">即将开始</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
-                  </tr>
-                  <tr data-policy="2025年湖北省专精特新中小企业认定" data-match="88" data-region="湖北省">
-                    <td class="px-5 py-3.5 font-medium text-gray-800">2025年湖北省专精特新中小企业认定</td>
-                    <td class="px-5 py-3.5 text-gray-600">湖北省经济和信息化厅</td>
-                    <td class="px-5 py-3.5 text-gray-500">2025-08-31</td>
-                    <td class="px-5 py-3.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">已截止</span></td>
-                    <td class="px-5 py-3.5"><div class="flex items-center gap-3 text-xs"><button class="js-policy-match cursor-pointer text-primary hover:underline">匹配检测</button><button class="js-policy-detail cursor-pointer text-primary hover:underline">查看详情</button></div></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <div class="space-y-3" id="policy-card-list"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span><i><b style="width:92%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span><i><b style="width:87%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span><i><b style="width:78%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span><i><b style="width:65%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年湖北省重点研发计划项目" data-match="54" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">重点研发</span><span class="u-chip green">最高 500 万元</span><span class="u-chip violet">即将开始</span></div><h3 style="margin-top:10px">2026年湖北省重点研发计划项目</h3><p>湖北省科学技术厅 · 截止 2026-12-01 · 剩余 20 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 54%</span><i><b style="width:54%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>54%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年武汉市人工智能创新专项" data-match="61" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">人工智能</span><span class="u-chip green">最高 300 万元</span><span class="u-chip violet">即将开始</span></div><h3 style="margin-top:10px">2026年武汉市人工智能创新专项</h3><p>武汉市科学技术局 · 截止 2026-12-15 · 剩余 34 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 61%</span><i><b style="width:61%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>61%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2025年湖北省专精特新中小企业认定" data-match="88" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip gray">已截止</span></div><h3 style="margin-top:10px">2025年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2025-08-31</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 88%</span><i><b style="width:88%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip gray">已截止</span></div></article></div>
           </div>
 
           <!-- 政策机会 -->
           <div id="policy-tab-opportunity" class="hidden">
             <!-- 排序 -->
             <!-- 政策卡片（2 列） -->
-            <div class="grid grid-cols-2 gap-4" id="policy-card-grid">
-            <div class="rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-deadline="2026-11-20">
-              <div class="flex items-start justify-between gap-3">
-                <h3 class="text-[14.5px] font-semibold leading-snug text-gray-800">2026年湖北省专精特新中小企业认定</h3>
-                <span class="flex-shrink-0 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-600">92% 匹配</span>
-              </div>
-              <p class="mt-2 text-xs text-gray-400">湖北省经济和信息化厅 · 截止 2026-11-20</p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-500">剩 3 天</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 50 万元</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">同赛道 18 家已申领</span>
-              </div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <button class="js-policy-site flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i> 官方申报网址
-                </button>
-                <button class="js-policy-detail rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">查看详情</button>
-                <button class="js-create-project rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">一键立项申报</button>
-              </div>
-            </div>
-
-            <div class="rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-deadline="2026-11-30">
-              <div class="flex items-start justify-between gap-3">
-                <h3 class="text-[14.5px] font-semibold leading-snug text-gray-800">2026年高新技术企业认定（第二批）</h3>
-                <span class="flex-shrink-0 rounded-full bg-green-50 px-2 py-0.5 text-xs font-medium text-green-600">87% 匹配</span>
-              </div>
-              <p class="mt-2 text-xs text-gray-400">湖北省科学技术厅 · 截止 2026-11-30</p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-600">剩 12 天</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 30 万元</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">同赛道 12 家已申领</span>
-              </div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <button class="js-policy-site flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i> 官方申报网址
-                </button>
-                <button class="js-policy-detail rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">查看详情</button>
-                <button class="js-create-project rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">一键立项申报</button>
-              </div>
-            </div>
-
-            <div class="rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-deadline="2026-11-22">
-              <div class="flex items-start justify-between gap-3">
-                <h3 class="text-[14.5px] font-semibold leading-snug text-gray-800">东湖高新区瞪羚企业认定</h3>
-                <span class="flex-shrink-0 rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600">78% 匹配</span>
-              </div>
-              <p class="mt-2 text-xs text-gray-400">东湖高新区管委会 · 截止 2026-11-22</p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-red-50 px-2 py-0.5 text-xs font-medium text-red-500">剩 5 天</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 100 万元</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">同赛道 9 家已申领</span>
-              </div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <button class="js-policy-site flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i> 官方申报网址
-                </button>
-                <button class="js-policy-detail rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">查看详情</button>
-                <button class="js-create-project rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">一键立项申报</button>
-              </div>
-            </div>
-
-            <div class="rounded-lg bg-white p-5 shadow-sm transition hover:shadow-md" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-deadline="2026-12-08">
-              <div class="flex items-start justify-between gap-3">
-                <h3 class="text-[14.5px] font-semibold leading-snug text-gray-800">武汉市科技型中小企业入库评价</h3>
-                <span class="flex-shrink-0 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-600">65% 匹配</span>
-              </div>
-              <p class="mt-2 text-xs text-gray-400">武汉市科学技术局 · 截止 2026-12-08</p>
-              <div class="mt-3 flex flex-wrap items-center gap-2">
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">剩 20 天</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 10 万元</span>
-                <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">同赛道 45 家已入库</span>
-              </div>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <button class="js-policy-site flex items-center gap-1 rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="external-link" class="h-3.5 w-3.5"></i> 官方申报网址
-                </button>
-                <button class="js-policy-detail rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary">查看详情</button>
-                <button class="js-create-project rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover">一键立项申报</button>
-              </div>
-            </div>
-          </div>
+            <div class="space-y-3" id="policy-card-grid"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span><i><b style="width:92%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span><i><b style="width:87%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span><i><b style="width:78%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span><i><b style="width:65%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article></div>
 
             <!-- 同行业标杆企业获证榜 -->
             <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
@@ -2724,79 +2627,34 @@
 
           <!-- 政策计算器 -->
           <div id="policy-tab-calculator" class="hidden">
-            <div class="mb-4 rounded-lg bg-white p-5 shadow-sm">
-              <div class="text-sm font-semibold text-gray-800">政策测算</div>
-              <div class="mt-3 grid grid-cols-3 gap-3">
-                <label class="block">
-                  <span class="text-xs text-gray-500">营业收入（万元）</span>
-                  <input id="calc-revenue" type="text" value="8000" class="mt-1 h-9 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
-                </label>
-                <label class="block">
-                  <span class="text-xs text-gray-500">研发费用占比（%）</span>
-                  <input id="calc-rd-ratio" type="text" value="15" class="mt-1 h-9 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
-                </label>
-                <label class="block">
-                  <span class="text-xs text-gray-500">发明专利数量（件）</span>
-                  <input id="calc-patents" type="text" value="12" class="mt-1 h-9 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary">
-                </label>
+            <section class="u-policy-calculator">
+              <div class="u-policy-calculator-head"><div><span class="u-section-kicker">功能一 · AI 预算测算</span><h3>宏观年度政策预测计算器</h3><p>结合企业画像、历史申报结果和当前年度政策库，估算可申报机会、奖励上限与申报准备预算。</p></div><span class="u-chip green">画像 + 历史 + 政策库</span></div>
+              <div class="u-grid u-grid-3">
+                <article class="u-kpi" style="--kpi:#059669"><span class="u-kpi-label">全年可申报政策总额</span><div class="u-kpi-value">620<small>万元</small></div><span class="u-kpi-note">按已发布政策奖励上限测算，不代表最终获批金额</span></article>
+                <article class="u-kpi" style="--kpi:#2563eb"><span class="u-kpi-label">匹配政策数量</span><div class="u-kpi-value">23<small>项</small></div><span class="u-kpi-note">其中匹配度超过 70% 共 8 项</span></article>
+                <article class="u-kpi" style="--kpi:#d97706"><span class="u-kpi-label">本年度建议预算</span><div class="u-kpi-value">18<small>万元</small></div><span class="u-kpi-note">材料、知识产权与专家服务准备投入</span></article>
               </div>
-              <div class="mt-3 flex items-center justify-between">
-                <button id="calc-run-btn" class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-                  <i data-lucide="calculator" class="h-4 w-4"></i> 开始测算
-                </button>
-                <span id="calc-result" class="text-sm font-semibold text-primary">预计可申领政策金额约 250 万元</span>
+              <div class="u-grid u-grid-2 u-section-space">
+                <section class="u-policy-input">
+                  <div class="u-panel-head"><div><h3>测算口径</h3><p>修改参数后重新计算当前年度政策预算。</p></div></div>
+                  <div class="u-panel-body">
+                    <div class="u-form-grid">
+                      <div class="u-field"><label>测算年度</label><select class="u-select"><option>2026 年</option><option>2027 年</option></select></div>
+                      <div class="u-field"><label>企业阶段</label><select class="u-select"><option>高新技术企业 · 向专精特新成长</option><option>科技型中小企业</option></select></div>
+                      <div class="u-field"><label>历史申报情况</label><select class="u-select"><option>近三年已申报 8 项，获批 5 项</option><option>近三年暂无申报记录</option></select></div>
+                      <div class="u-field"><label>政策预算偏好</label><select class="u-select"><option>奖励金额优先</option><option>资质成长优先</option><option>研发项目优先</option></select></div>
+                    </div>
+                    <div class="u-calculator-source"><strong>AI 当前取数</strong><span>已读取 12 维画像、7 条历史项目记录和 83 条有效政策。</span></div>
+                    <div class="u-footer-actions"><button type="button" class="u-button " onclick="openPolicyCalcDetail()">查看测算详情</button><button type="button" class="u-button primary" onclick="openPolicyCalcDetail()">重新计算</button></div>
+                  </div>
+                </section>
               </div>
-            </div>
-
-            <div class="mb-4 flex flex-wrap items-center gap-2">
-              <span class="text-sm text-gray-500">按政策排序：</span>
-              <button class="calc-sort-chip rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-white" data-sort="match">匹配度</button>
-              <button class="calc-sort-chip rounded-full bg-gray-100 px-3 py-1.5 text-xs text-gray-600 transition hover:bg-gray-200" data-sort="deadline">截止时间</button>
-            </div>
-
-            <div id="calc-policy-list" class="space-y-3">
-              <div class="flex items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-sm" data-match="92" data-deadline="2026-11-20">
-                <div class="min-w-0">
-                  <div class="text-sm font-semibold text-gray-800">2026年湖北省专精特新中小企业认定</div>
-                  <div class="mt-1 text-xs text-gray-400">湖北省经济和信息化厅 · 截止 2026-11-20</div>
-                </div>
-                <div class="flex flex-shrink-0 items-center gap-3">
-                  <span class="text-sm font-semibold text-green-600">92% 匹配</span>
-                  <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 50 万元</span>
-                </div>
+              <div class="u-policy-breakdown">
+                <div><strong>资质与梯度奖励</strong><span>高企、专精特新、科小及配套奖励</span><b>约 170 万元</b></div>
+                <div><strong>研发与成果转化</strong><span>研发投入补助、科技计划、成果转化</span><b>约 320 万元</b></div>
+                <div><strong>人才与知识产权</strong><span>人才计划、专利运营、标准奖励</span><b>约 130 万元</b></div>
               </div>
-              <div class="flex items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-sm" data-match="87" data-deadline="2026-11-30">
-                <div class="min-w-0">
-                  <div class="text-sm font-semibold text-gray-800">2026年高新技术企业认定（第二批）</div>
-                  <div class="mt-1 text-xs text-gray-400">湖北省科学技术厅 · 截止 2026-11-30</div>
-                </div>
-                <div class="flex flex-shrink-0 items-center gap-3">
-                  <span class="text-sm font-semibold text-green-600">87% 匹配</span>
-                  <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 30 万元</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-sm" data-match="78" data-deadline="2026-11-22">
-                <div class="min-w-0">
-                  <div class="text-sm font-semibold text-gray-800">东湖高新区瞪羚企业认定</div>
-                  <div class="mt-1 text-xs text-gray-400">东湖高新区管委会 · 截止 2026-11-22</div>
-                </div>
-                <div class="flex flex-shrink-0 items-center gap-3">
-                  <span class="text-sm font-semibold text-blue-600">78% 匹配</span>
-                  <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 100 万元</span>
-                </div>
-              </div>
-              <div class="flex items-center justify-between gap-4 rounded-lg bg-white p-4 shadow-sm" data-match="65" data-deadline="2026-12-08">
-                <div class="min-w-0">
-                  <div class="text-sm font-semibold text-gray-800">武汉市科技型中小企业入库评价</div>
-                  <div class="mt-1 text-xs text-gray-400">武汉市科学技术局 · 截止 2026-12-08</div>
-                </div>
-                <div class="flex flex-shrink-0 items-center gap-3">
-                  <span class="text-sm font-semibold text-amber-600">65% 匹配</span>
-                  <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">最高 10 万元</span>
-                </div>
-              </div>
-            </div>
-
+            </section>
           </div>
           </div>
 
@@ -4477,6 +4335,69 @@
     </div>
   </div>
 
+  <!-- ==================== 报告预览弹窗 ==================== -->
+  <div id="report-preview-overlay" class="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200" onclick="if(event.target===this)closeReportPreview()"></div>
+  <div id="report-preview-modal" class="pointer-events-none fixed left-1/2 top-1/2 z-[95] w-[760px] max-w-[92vw] -translate-x-1/2 -translate-y-1/2 scale-95 overflow-hidden rounded-2xl bg-white opacity-0 shadow-2xl transition-all duration-200">
+    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+      <span class="text-base font-semibold text-gray-800">报告预览</span>
+      <button onclick="closeReportPreview()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+    <div id="report-preview-body" class="max-h-[70vh] overflow-y-auto px-6 py-5"></div>
+  </div>
+
+  <!-- ==================== 政策测算详情弹窗 ==================== -->
+  <div id="policy-calc-detail-overlay" class="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-200" onclick="if(event.target===this)closePolicyCalcDetail()"></div>
+  <div id="policy-calc-detail-modal" class="pointer-events-none fixed left-1/2 top-1/2 z-[95] w-[880px] max-w-[92vw] max-h-[88vh] -translate-x-1/2 -translate-y-1/2 scale-95 overflow-y-auto rounded-2xl bg-white opacity-0 shadow-2xl transition-all duration-200">
+    <div class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white px-6 py-4">
+      <span class="text-base font-semibold text-gray-800">年度政策预算测算详情</span>
+      <button onclick="closePolicyCalcDetail()" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600"><i data-lucide="x" class="h-5 w-5"></i></button>
+    </div>
+    <div class="px-6 py-5">
+      <div class="flex items-center justify-between"><span class="u-chip green">AI 已完成测算</span><button type="button" class="u-button primary" onclick="showToast('已重新计算（演示）', 'success')">重新计算</button></div>
+      <div class="u-grid u-section-space" style="grid-template-columns:repeat(4,minmax(0,1fr));">
+        <article class="u-kpi" style="--kpi:#059669"><span class="u-kpi-label">测算年度</span><div class="u-kpi-value" style="font-size:20px">2026<small>年</small></div><span class="u-kpi-note">当前政策库版本</span></article>
+        <article class="u-kpi" style="--kpi:#2563eb"><span class="u-kpi-label">企业阶段</span><div class="u-kpi-value" style="font-size:18px">成长型</div><span class="u-kpi-note">高企 → 专精特新</span></article>
+        <article class="u-kpi" style="--kpi:#6d5dfc"><span class="u-kpi-label">历史申报</span><div class="u-kpi-value">8<small>项</small></div><span class="u-kpi-note">近三年获批 5 项</span></article>
+        <article class="u-kpi" style="--kpi:#d97706"><span class="u-kpi-label">预算偏好</span><div class="u-kpi-value" style="font-size:18px">奖励优先</div><span class="u-kpi-note">优先计算有金额政策</span></article>
+      </div>
+      <div class="u-grid u-grid-2 u-section-space">
+        <section class="u-panel">
+          <div class="u-panel-head"><div><h3>AI 测算取数</h3><p>系统已读取以下数据并用于本次预算估算。</p></div><span class="u-chip green">可追溯</span></div>
+          <div class="u-panel-body">
+            <div class="u-list">
+              <div class="u-row"><div><strong>企业科创画像</strong><small>12 个维度 · 55 个关键字段 · 当前完整度 76%</small></div><span class="u-chip green">已读取</span></div>
+              <div class="u-row"><div><strong>历史申报项目</strong><small>7 条历史项目记录 · 5 项已获批</small></div><span class="u-chip green">已读取</span></div>
+              <div class="u-row"><div><strong>政策库</strong><small>83 条有效政策 · 23 项初步匹配</small></div><span class="u-chip green">已读取</span></div>
+            </div>
+          </div>
+        </section>
+        <section class="u-panel">
+          <div class="u-panel-head"><div><h3>测算规则</h3><p>只用于年度规划，不代表最终获批金额。</p></div><span class="u-chip amber">人工可复核</span></div>
+          <div class="u-panel-body">
+            <div class="u-list">
+              <div class="u-row"><div><strong>奖励金额</strong><small>按政策公开支持上限归集，同一事项不重复计算。</small></div><span class="u-chip">权重 40%</span></div>
+              <div class="u-row"><div><strong>匹配度</strong><small>优先保留匹配度 70% 以上且窗口明确的政策。</small></div><span class="u-chip">权重 35%</span></div>
+              <div class="u-row"><div><strong>准备投入</strong><small>按材料、知识产权、审计与专家服务估算。</small></div><span class="u-chip">权重 25%</span></div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="u-panel">
+        <div class="u-panel-head"><div><h3>本次测算结果</h3><p>可申报上限按奖励政策分组展示，建议预算用于准备投入。</p></div><span class="u-chip green">预计 620 万元</span></div>
+        <div class="u-panel-body">
+          <div class="u-policy-breakdown" style="margin-top:0">
+            <div><strong>资质与梯度奖励</strong><span>高企、专精特新、科小及配套奖励</span><b>约 170 万元</b></div>
+            <div><strong>研发与成果转化</strong><span>研发投入补助、科技计划、成果转化</span><b>约 320 万元</b></div>
+            <div><strong>人才与知识产权</strong><span>人才计划、专利运营、标准奖励</span><b>约 130 万元</b></div>
+          </div>
+          <div class="u-footer-actions"><button type="button" class="u-button" onclick="closePolicyCalcDetail()">回到政策计算器</button><button type="button" class="u-button primary" onclick="showToast('已补充画像数据（演示）', 'success')">补充画像数据</button></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
   <!-- ==================== 项目详情抽屉 ==================== -->
   <div id="drawer-overlay" class="pointer-events-none fixed inset-0 z-40 bg-black/40 opacity-0 transition-opacity duration-300"></div>
   <div id="project-drawer" class="fixed inset-y-0 right-0 z-50 flex w-1/2 min-w-[560px] max-w-full translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300">
@@ -5555,51 +5476,110 @@
         <div id="ps-onboarding" class="ps-page hidden">
           <div class="mx-auto max-w-3xl">
             <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-              <h2 class="text-lg font-semibold text-gray-900">企业入驻申请</h2>
-              <p class="mt-1 text-sm text-gray-500">请填写企业主体信息，平台运营人员将在 1-2 个工作日内完成核验。</p>
-              <div class="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
-                <div class="col-span-2">
-                  <label class="mb-1.5 block text-sm text-gray-700">企业名称 <span class="text-red-500">*</span></label>
-                  <input id="ob-name" type="text" placeholder="请输入企业全称" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+              <h2 class="text-lg font-semibold text-gray-900">企业入驻 · 身份与授权认证</h2>
+              <p class="mt-1 text-sm text-gray-500">以下三个步骤相互独立、可任意顺序完成，每步确认后即可生效，不强求顺序执行。</p>
+
+              <!-- 步骤一：个人实名认证 -->
+              <div class="ob-card mt-5 rounded-xl border border-gray-100 p-4" data-ob-card="1">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2"><span class="ob-step-num">1</span><span class="text-sm font-semibold text-gray-800">个人实名认证</span></div>
+                  <span class="ob-badge rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500" data-ob-badge="1">未完成</span>
                 </div>
-                <div>
-                  <label class="mb-1.5 block text-sm text-gray-700">统一社会信用代码 <span class="text-red-500">*</span></label>
-                  <input id="ob-credit" type="text" maxlength="18" placeholder="请输入 18 位统一社会信用代码" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                <div class="mt-4 grid grid-cols-2 gap-x-6 gap-y-4">
+                  <div>
+                    <label class="mb-1.5 block text-sm text-gray-700">真实姓名 <span class="text-red-500">*</span></label>
+                    <input id="ob-realname" type="text" placeholder="请输入真实姓名" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm text-gray-700">身份证号 <span class="text-red-500">*</span></label>
+                    <input id="ob-idcard" type="text" maxlength="18" placeholder="请输入身份证号" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm text-gray-700">手机号 <span class="text-red-500">*</span></label>
+                    <input id="ob-phone" type="text" maxlength="11" placeholder="请输入手机号" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                  <div>
+                    <label class="mb-1.5 block text-sm text-gray-700">验证码 <span class="text-red-500">*</span></label>
+                    <div class="flex gap-2">
+                      <input id="ob-sms" type="text" maxlength="6" placeholder="6 位验证码" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                      <button id="ob-send-sms" type="button" class="h-11 shrink-0 rounded-lg border border-gray-200 px-3 text-sm text-gray-600 transition hover:border-primary hover:text-primary">获取验证码</button>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label class="mb-1.5 block text-sm text-gray-700">属地 <span class="text-red-500">*</span></label>
-                  <select id="ob-region" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
-                    <option value="">请选择</option>
-                    <option>武汉市东湖新技术开发区</option>
-                    <option>武汉市其他区</option>
-                    <option>湖北省其他地市</option>
-                    <option>其他省市</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="mb-1.5 block text-sm text-gray-700">联系人姓名 <span class="text-red-500">*</span></label>
-                  <input id="ob-contact" type="text" placeholder="请输入联系人姓名" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
-                </div>
-                <div>
-                  <label class="mb-1.5 block text-sm text-gray-700">申请关系</label>
-                  <select id="ob-relation" class="h-11 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-800 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20">
-                    <option>企业管理员</option>
-                    <option>企业成员</option>
-                    <option>委托服务商代办</option>
-                  </select>
-                </div>
-                <div class="col-span-2">
-                  <label class="mb-1.5 block text-sm text-gray-700">上传证明（营业执照等）</label>
-                  <label class="flex h-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-gray-300 text-gray-400 transition hover:border-primary hover:text-primary">
-                    <i data-lucide="upload" class="h-6 w-6"></i>
-                    <span class="text-xs">点击上传营业执照或相关证明（演示）</span>
-                    <input type="file" class="hidden" />
-                  </label>
-                </div>
+                <div class="mt-4 flex justify-end"><button type="button" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" data-ob-confirm="1">确认实名认证</button></div>
               </div>
-              <div class="mt-6 flex justify-end gap-3 border-t border-gray-100 pt-5">
+
+              <!-- 步骤二：企业弱绑定 -->
+              <div class="ob-card mt-4 rounded-xl border border-gray-100 p-4" data-ob-card="2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2"><span class="ob-step-num">2</span><span class="text-sm font-semibold text-gray-800">企业弱绑定</span></div>
+                  <span class="ob-badge rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500" data-ob-badge="2">未完成</span>
+                </div>
+                <div class="mt-4 rounded-lg border border-gray-100 bg-gray-50 p-4">
+                  <div class="text-sm font-medium text-gray-800">二选一即可</div>
+                  <p class="mt-1 text-xs text-gray-500">上传营业执照或填写统一社会信用代码，完成与企业主体的弱绑定。</p>
+                  <div class="mt-4">
+                    <label class="mb-1.5 block text-sm text-gray-700">方式一：上传营业执照</label>
+                    <label class="flex h-24 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-gray-300 bg-white text-gray-400 transition hover:border-primary hover:text-primary">
+                      <i data-lucide="upload" class="h-6 w-6"></i>
+                      <span class="text-xs">点击上传营业执照（演示）</span>
+                      <input type="file" class="hidden" />
+                    </label>
+                  </div>
+                  <div class="mt-4">
+                    <label class="mb-1.5 block text-sm text-gray-700">方式二：填写统一社会信用代码</label>
+                    <input id="ob-credit" type="text" maxlength="18" placeholder="请输入 18 位统一社会信用代码" class="h-11 w-full rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-800 outline-none transition placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20" />
+                  </div>
+                </div>
+                <div class="mt-4 flex justify-end"><button type="button" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" data-ob-confirm="2">确认弱绑定</button></div>
+              </div>
+
+              <!-- 步骤三：企业强绑定 -->
+              <div class="ob-card mt-4 rounded-xl border border-gray-100 p-4" data-ob-card="3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2"><span class="ob-step-num">3</span><span class="text-sm font-semibold text-gray-800">企业强绑定</span></div>
+                  <span class="ob-badge rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500" data-ob-badge="3">未完成</span>
+                </div>
+                <div class="mt-4">
+                  <div class="text-sm font-medium text-gray-800">三选一即可</div>
+                  <p class="mt-1 text-xs text-gray-500">完成强绑定后，可解锁企业数字档案、政策匹配、项目申报等完整能力。</p>
+                  <div class="mt-4 space-y-3" id="ob-strong-methods">
+                    <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:border-primary">
+                      <input type="radio" name="ob-strong" value="authorize" class="mt-1" checked />
+                      <div class="flex-1">
+                        <div class="text-sm font-medium text-gray-800">上传盖章授权书</div>
+                        <div class="mt-1 text-xs text-gray-500">上传加盖企业公章的授权书，授权当前账号代表企业办理平台业务。</div>
+                        <div class="mt-2 flex h-16 cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-gray-300 text-gray-400 transition hover:border-primary hover:text-primary"><i data-lucide="upload" class="h-4 w-4"></i><span class="text-xs">点击上传盖章授权书（演示）</span><input type="file" class="hidden" /></div>
+                      </div>
+                    </label>
+                    <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:border-primary">
+                      <input type="radio" name="ob-strong" value="legal" class="mt-1" />
+                      <div class="flex-1">
+                        <div class="text-sm font-medium text-gray-800">法人身份 + 法人手机号验证</div>
+                        <div class="mt-1 text-xs text-gray-500">填写法人姓名与法人手机号，通过短信验证完成强绑定。</div>
+                        <div class="mt-2 grid grid-cols-2 gap-3">
+                          <input id="ob-legal-name" type="text" placeholder="法人姓名" class="h-10 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary" />
+                          <input id="ob-legal-phone" type="text" maxlength="11" placeholder="法人手机号" class="h-10 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary" />
+                        </div>
+                      </div>
+                    </label>
+                    <label class="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:border-primary">
+                      <input type="radio" name="ob-strong" value="scan" class="mt-1" />
+                      <div class="flex-1">
+                        <div class="text-sm font-medium text-gray-800">法人扫码授权</div>
+                        <div class="mt-1 text-xs text-gray-500">生成授权二维码，法人使用手机扫码后完成强绑定。</div>
+                        <div class="mt-2 flex h-24 w-24 items-center justify-center rounded-lg bg-gray-100 text-gray-400"><i data-lucide="qr-code" class="h-10 w-10"></i></div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="mt-4 flex justify-end"><button type="button" class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover" data-ob-confirm="3">确认强绑定</button></div>
+              </div>
+
+              <!-- 底部按钮 -->
+              <div class="mt-6 flex items-center justify-between border-t border-gray-100 pt-5">
                 <button id="ob-cancel" type="button" class="rounded-lg border border-gray-200 px-5 py-2.5 text-sm text-gray-600 transition hover:border-primary hover:text-primary">取消</button>
-                <button id="ob-submit" type="button" class="rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">提交入驻申请</button>
+                <button id="ob-submit" type="button" class="rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">完成入驻</button>
               </div>
             </div>
           </div>
@@ -6736,7 +6716,7 @@
         });
         chip.className = 'policy-region-chip rounded-full px-3 py-1 text-xs transition bg-primary text-white';
         const region = chip.dataset.region;
-        document.querySelectorAll('#policy-tab-all tbody tr').forEach((row) => {
+        document.querySelectorAll('#policy-card-list .u-policy-card').forEach((row) => {
           const match = region === '全部' || row.dataset.region === region;
           row.classList.toggle('hidden', !match);
         });
@@ -6758,33 +6738,26 @@
       document.getElementById('policy-list-view').classList.remove('hidden');
     });
 
-    // 政策计算器：按匹配度 / 截止时间排序
-    document.querySelectorAll('.calc-sort-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        document.querySelectorAll('.calc-sort-chip').forEach((c) => {
-          c.className = 'calc-sort-chip rounded-full bg-gray-100 px-3 py-1.5 text-xs text-gray-600 transition hover:bg-gray-200';
-        });
-        chip.className = 'calc-sort-chip rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-white';
-        const list = document.getElementById('calc-policy-list');
-        if (!list) return;
-        const rows = Array.from(list.querySelectorAll('[data-match]'));
-        const sort = chip.dataset.sort;
-        rows.sort((a, b) => sort === 'deadline'
-          ? (a.dataset.deadline < b.dataset.deadline ? -1 : 1)
-          : (Number(b.dataset.match) - Number(a.dataset.match)));
-        rows.forEach((r) => list.appendChild(r));
+    // 收藏政策
+    document.querySelectorAll('.js-policy-favorite').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const name = btn.closest('[data-policy]').dataset.policy;
+        const fav = btn.dataset.fav === '1';
+        btn.dataset.fav = fav ? '0' : '1';
+        btn.textContent = fav ? '收藏' : '已收藏';
+        showToast(fav ? '已取消收藏「' + name + '」' : '已收藏「' + name + '」', 'success');
       });
     });
 
-    // 政策测算
-    document.getElementById('calc-run-btn').addEventListener('click', function () {
-      const revenue = parseFloat((document.getElementById('calc-revenue').value || '').replace(/,/g, '')) || 0;
-      const rdRatio = parseFloat(document.getElementById('calc-rd-ratio').value) || 0;
-      const patents = parseFloat(document.getElementById('calc-patents').value) || 0;
-      const amount = Math.round(revenue * 0.02 + rdRatio * 4 + patents * 2);
-      document.getElementById('calc-result').textContent = '预计可申领政策金额约 ' + amount + ' 万元';
-      showToast('已根据输入条件完成测算', 'success');
-    });
+    // 政策测算详情弹窗
+    window.openPolicyCalcDetail = function () {
+      document.getElementById('policy-calc-detail-overlay').classList.remove('pointer-events-none', 'opacity-0');
+      document.getElementById('policy-calc-detail-modal').classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+    };
+    window.closePolicyCalcDetail = function () {
+      document.getElementById('policy-calc-detail-overlay').classList.add('pointer-events-none', 'opacity-0');
+      document.getElementById('policy-calc-detail-modal').classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+    };
 
     // 筛选器下拉
     document.querySelectorAll('.policy-filter').forEach((wrap) => {
@@ -8028,6 +8001,15 @@
         {icon:'WarningIcon', cls:'warni', name:'评分模拟（预估 82 / 100）', detail:'研发人员占比 9.8% 接近临界值，是主要拉分项'}
       ];
 
+      var SECTION_CONTENT = {
+        '一、企业基本情况': '武汉汉企业科技有限公司成立于 2015 年，注册地为武汉市东湖新技术开发区，注册资本 5000 万元，所属领域为高端装备制造 + 人工智能。企业信用良好，近三年无重大违法失信记录。',
+        '二、研发项目情况（RD 表）': '近三年累计开展研发项目 14 项，其中在研项目 6 项。RD01 智能检测装备关键技术攻关、RD02 视觉算法平台研发等核心项目已完成阶段性验收。',
+        '三、知识产权情况': '现有有效专利 42 件，其中发明专利 18 件、实用新型 21 件、外观设计 3 件；软件著作权 15 项。核心自主知识产权覆盖主营业务产品。',
+        '四、科技成果转化情况': '近三年科技成果转化 13 项，年平均 4.3 项。其中 2 项需补充销售合同扫描件，1 项需补充检测报告。',
+        '五、研发费用归集': '近三年研发费用占比分别为 11.2%、12.1%、13.0%，满足高新技术企业认定要求。研发费用辅助账已按项目归集。',
+        '六、附件清单': '营业执照、近三年审计报告、知识产权证书、研发立项报告、成果转化证明材料、研发人员名册等 14 份附件。'
+      };
+
       var pl = document.getElementById('projList');
       projects.forEach(function(p, i){
         var b = document.createElement('button');
@@ -8038,12 +8020,13 @@
             '<span class="fit">适配度 <b>' + p.fit + '</b><span class="fit-bar"><i style="width:' + p.fit + '%"></i></span></span>' +
             '<span>截止 ' + p.deadline + '</span><span>' + p.fund + '</span>' +
           '</div>' +
-          '<div class="proj-actions"><span class="btn-sm">生成申报书</span></div>';
+          '<div class="proj-actions"><button class="btn-sm" onclick="event.stopPropagation(); showToast(\'已生成申报书（演示）\', \'success\')">生成申报书</button></div>';
         b.addEventListener('click', function(){
           document.querySelectorAll('.proj').forEach(function(x){ x.classList.remove('selected'); });
           b.classList.add('selected');
           document.getElementById('docTitle').textContent = p.name;
           document.getElementById('docSub').textContent = '依据企业档案生成 · 已生成于 ' + p.gen + ' · 全文约 ' + p.words + ' 字';
+          window._docSecs = p.secs;
           renderSecs(p);
         });
         pl.appendChild(b);
@@ -8052,14 +8035,69 @@
       function renderSecs(p){
         var el = document.getElementById('secList');
         el.innerHTML = '';
-        p.secs.forEach(function(s){
-          var d = document.createElement('div');
-          d.className = 'sec';
-          d.innerHTML = '<span style="display:flex">' + ICONS.DocumentIcon + '</span>' +
-            '<span class="sec-name">' + s + '</span>' +
-            '<span class="sec-state ok">已生成</span>' +
-            '<button class="btn-ghost" style="padding:4px 10px;font-size:12px;"><span style="display:flex">' + ICONS.EditIcon + '</span>编辑</button>';
-          el.appendChild(d);
+
+        function draftText(){
+          var t = p.name + '\n\n';
+          p.secs.forEach(function(s){
+            t += s + '\n' + (SECTION_CONTENT[s] || '本部分内容待补充。') + '\n\n';
+          });
+          return t.trim();
+        }
+
+        // 工具栏
+        var bar = document.createElement('div');
+        bar.style.cssText = 'display:flex;gap:8px;margin-bottom:14px;';
+        bar.innerHTML =
+          '<button class="btn-ghost" data-act="edit">编辑</button>' +
+          '<button class="btn-ghost" data-act="ai">AI 生成</button>';
+        el.appendChild(bar);
+
+        // 正文（一整篇）
+        var article = document.createElement('div');
+        article.className = 'draft-article';
+        article.style.cssText = 'font-size:14px;line-height:2;color:var(--kimi-color-text-primary);white-space:pre-wrap;';
+        article.textContent = draftText();
+        el.appendChild(article);
+
+        // 编辑器（整篇）
+        var editor = document.createElement('div');
+        editor.className = 'draft-editor';
+        editor.style.cssText = 'display:none;';
+        editor.innerHTML =
+          '<textarea style="width:100%;min-height:420px;border:1px solid var(--kimi-color-border);border-radius:8px;padding:12px;font-size:13px;line-height:1.9;color:var(--kimi-color-text-primary);outline:none;resize:vertical;"></textarea>' +
+          '<div style="margin-top:8px;display:flex;justify-content:flex-end;gap:6px;">' +
+            '<button class="btn-ghost" data-act="cancel">取消</button>' +
+            '<button class="btn-primary" style="width:auto;padding:5px 16px;" data-act="save">保存修改</button>' +
+          '</div>';
+        el.appendChild(editor);
+
+        bar.querySelector('[data-act="edit"]').addEventListener('click', function(){
+          editor.querySelector('textarea').value = article.textContent;
+          article.style.display = 'none';
+          editor.style.display = '';
+        });
+        editor.querySelector('[data-act="cancel"]').addEventListener('click', function(){
+          editor.style.display = 'none';
+          article.style.display = '';
+        });
+        editor.querySelector('[data-act="save"]').addEventListener('click', function(){
+          var v = editor.querySelector('textarea').value.trim();
+          if (!v) { showToast('内容不能为空', 'warning'); return; }
+          article.textContent = v;
+          editor.style.display = 'none';
+          article.style.display = '';
+          showToast('已保存修改', 'success');
+        });
+        bar.querySelector('[data-act="ai"]').addEventListener('click', function(){
+          var btn = this;
+          btn.textContent = '生成中…';
+          btn.disabled = true;
+          setTimeout(function(){
+            article.textContent = draftText();
+            btn.textContent = 'AI 生成';
+            btn.disabled = false;
+            showToast('AI 已重新生成整篇初稿', 'success');
+          }, 800);
         });
       }
       renderSecs(projects[0]);
@@ -8090,6 +8128,29 @@
         this.disabled = true;
         document.getElementById('bookState').classList.add('on');
       });
+
+      window._docSecs = projects[0].secs;
+      window.previewFullReport = function(){
+        var title = document.getElementById('docTitle').textContent;
+        var sub = document.getElementById('docSub').textContent;
+        var body = document.getElementById('report-preview-body');
+        if (!body) return;
+        var secs = window._docSecs || projects[0].secs;
+        var html = '<h2 style="font-size:18px;font-weight:600;margin:0 0 4px;">' + title + '</h2>' +
+          '<div style="font-size:12px;color:var(--kimi-color-text-tertiary);margin-bottom:16px;">' + sub + '</div>';
+        secs.forEach(function(s){
+          var content = SECTION_CONTENT[s] || '本部分内容待补充。';
+          html += '<h3 style="font-size:15px;font-weight:600;margin:16px 0 6px;color:var(--kimi-color-text-primary);">' + s + '</h3>' +
+            '<p style="font-size:13px;line-height:1.9;color:var(--kimi-color-text-secondary);margin:0;white-space:pre-wrap;">' + content + '</p>';
+        });
+        body.innerHTML = html;
+        document.getElementById('report-preview-overlay').classList.remove('pointer-events-none', 'opacity-0');
+        document.getElementById('report-preview-modal').classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+      };
+      window.closeReportPreview = function(){
+        document.getElementById('report-preview-overlay').classList.add('pointer-events-none', 'opacity-0');
+        document.getElementById('report-preview-modal').classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+      };
     })();
 
     // ==================== 同行对标抽屉 ====================
@@ -8884,19 +8945,69 @@
       if (enterpriseLogout) enterpriseLogout.addEventListener('click', logout);
       document.getElementById('ps-logout').addEventListener('click', logout);
 
+      // 企业入驻：三步相互独立，可任意顺序确认，不强求顺序执行
+      var obDone = { 1: false, 2: false, 3: false };
+      function obMark(step, done) {
+        obDone[step] = done;
+        var badge = document.querySelector('[data-ob-badge="' + step + '"]');
+        if (badge) {
+          if (done) {
+            badge.className = 'ob-badge rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600';
+            badge.textContent = '已完成';
+          } else {
+            badge.className = 'ob-badge rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500';
+            badge.textContent = '未完成';
+          }
+        }
+      }
+      document.querySelectorAll('[data-ob-confirm]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var step = Number(btn.dataset.obConfirm);
+          if (step === 1) {
+            var realname = document.getElementById('ob-realname').value.trim();
+            var idcard = document.getElementById('ob-idcard').value.trim();
+            var phone = document.getElementById('ob-phone').value.trim();
+            var sms = document.getElementById('ob-sms').value.trim();
+            if (!realname) { showToast('请填写真实姓名', 'warning'); return; }
+            if (!idcard) { showToast('请填写身份证号', 'warning'); return; }
+            if (!phone) { showToast('请填写手机号', 'warning'); return; }
+            if (!sms) { showToast('请填写验证码', 'warning'); return; }
+            obMark(1, true);
+            showToast('个人实名认证已确认', 'success');
+          } else if (step === 2) {
+            var credit = document.getElementById('ob-credit').value.trim();
+            if (!credit) { showToast('请上传营业执照或填写统一社会信用代码', 'warning'); return; }
+            obMark(2, true);
+            showToast('企业弱绑定已确认', 'success');
+          } else if (step === 3) {
+            var method = document.querySelector('input[name="ob-strong"]:checked').value;
+            var methodText = method === 'authorize' ? '盖章授权书' : method === 'legal' ? '法人身份+手机号' : '法人扫码';
+            obMark(3, true);
+            showToast('已通过「' + methodText + '」确认企业强绑定', 'success');
+          }
+        });
+      });
       document.getElementById('ob-submit').addEventListener('click', function () {
-        var name = document.getElementById('ob-name').value.trim();
-        var credit = document.getElementById('ob-credit').value.trim();
-        var region = document.getElementById('ob-region').value;
-        var contact = document.getElementById('ob-contact').value.trim();
-        if (!name) { showToast('请填写企业名称', 'warning'); return; }
-        if (!credit) { showToast('请填写统一社会信用代码', 'warning'); return; }
-        if (!region) { showToast('请选择属地', 'warning'); return; }
-        if (!contact) { showToast('请填写联系人姓名', 'warning'); return; }
-        showToast('入驻申请已提交，平台将在 1-2 个工作日内完成核验', 'success');
-        ['ob-name', 'ob-credit', 'ob-region', 'ob-contact'].forEach(function (id) { document.getElementById(id).value = ''; });
+        if (!obDone[1]) { showToast('请先完成个人实名认证', 'warning'); return; }
+        if (!obDone[2]) { showToast('请先完成企业弱绑定', 'warning'); return; }
+        if (!obDone[3]) { showToast('请先完成企业强绑定', 'warning'); return; }
+        saveSession({ phone: currentPhone || DEMO_PHONE, hasEnterprise: true });
+        showToast('企业入驻已完成，正在进入企业工作台', 'success');
+        showEnterprise();
       });
       document.getElementById('ob-cancel').addEventListener('click', function () { psGoTo('ps-ai', 'AI工作台'); });
+      document.getElementById('ob-send-sms').addEventListener('click', function () {
+        var phoneInput = document.getElementById('ob-phone');
+        if (!isPhone(phoneInput.value.trim())) { showToast('请先输入正确的 11 位手机号', 'warning'); return; }
+        var btn = this; var total = 60;
+        btn.disabled = true; btn.classList.add('opacity-60', 'cursor-not-allowed');
+        var t = setInterval(function () {
+          total--;
+          btn.textContent = total + 's 后重发';
+          if (total <= 0) { clearInterval(t); btn.disabled = false; btn.textContent = '获取验证码'; btn.classList.remove('opacity-60', 'cursor-not-allowed'); }
+        }, 1000);
+        showToast('验证码已发送（演示：任意 6 位数字）', 'success');
+      });
 
       var session = getSession();
       if (session && session.phone) {
