@@ -1079,6 +1079,14 @@
               </button>
             </div>
 
+<!-- 积分与会员 -->
+            <div class="border-t border-gray-100 p-2">
+              <div id="points-membership-btn" class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 text-sm text-gray-600 transition hover:bg-gray-50 hover:text-primary">
+                <i data-lucide="crown" class="h-4 w-4"></i>
+                <span>积分与会员</span>
+              </div>
+            </div>
+
             <!-- 退出登录 -->
             <div class="border-t border-gray-100 p-2">
               <div id="enterprise-logout" class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 text-sm text-gray-600 transition hover:bg-gray-50 hover:text-red-500">
@@ -2073,8 +2081,8 @@
                   <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;">
                     <span class="status-chip chip-done" id="docStatus"><span class="ic-slot" data-ic="CompletedIcon"></span>AI 验稿已通过</span>
                     <div class="doc-actions">
-                      <button class="btn-ghost"><span class="ic-slot" data-ic="RefreshIcon"></span>重新生成</button>
-                      <button class="btn-ghost"><span class="ic-slot" data-ic="DownloadIcon"></span>导出 Word</button>
+                      <button class="btn-ghost" onclick="showToast('已重新生成申报书（演示）', 'success')"><span class="ic-slot" data-ic="RefreshIcon"></span>重新生成</button>
+                      <button class="btn-ghost" onclick="showToast('已导出 Word（演示）', 'success')"><span class="ic-slot" data-ic="DownloadIcon"></span>导出 Word</button>
                     </div>
                   </div>
                 </div>
@@ -3927,15 +3935,58 @@
             <p class="mt-1 text-sm text-gray-400">按立项项目归集订单，托管项目下的服务订单集中展示</p>
           </div>
 
+          <!-- 订单统计 -->
+          <div class="mb-5 grid grid-cols-4 gap-4">
+            <div class="flex items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary-light">
+                <i data-lucide="receipt" class="h-5 w-5 text-primary"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500">全部订单</div>
+                <div class="text-xl font-semibold text-gray-800">3</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-blue-50">
+                <i data-lucide="loader-2" class="h-5 w-5 text-blue-500"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500">服务中</div>
+                <div class="text-xl font-semibold text-gray-800">2</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-amber-50">
+                <i data-lucide="clock" class="h-5 w-5 text-amber-500"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500">待支付</div>
+                <div class="text-xl font-semibold text-gray-800">1</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 rounded-lg bg-white px-4 py-3 shadow-sm">
+              <div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50">
+                <i data-lucide="wallet" class="h-5 w-5 text-violet-600"></i>
+              </div>
+              <div>
+                <div class="text-xs text-gray-500">累计金额</div>
+                <div class="text-xl font-semibold text-gray-800">¥43,000</div>
+              </div>
+            </div>
+          </div>
+
           <!-- 湖北省重点研发计划项目（托管） -->
-          <div class="mb-4 overflow-hidden rounded-lg bg-white shadow-sm">
+          <div id="first-project-orders" class="mb-4 overflow-hidden rounded-lg bg-white shadow-sm">
             <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">
               <div class="flex items-center gap-2">
                 <i data-lucide="briefcase" class="h-4 w-4 text-primary"></i>
                 <h3 class="text-sm font-semibold text-gray-800">湖北省重点研发计划项目</h3>
                 <span class="rounded-full bg-purple-50 px-2 py-0.5 text-xs font-medium text-purple-600">托管</span>
               </div>
-              <span class="text-xs text-gray-400">共 3 笔订单 · 合计 ¥43,000</span>
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400">共 3 笔订单 · 合计 ¥43,000</span>
+                <button class="js-quick-nav flex items-center gap-1 text-xs text-primary transition hover:underline" data-target="page-project">查看项目 →</button>
+              </div>
             </div>
             <table class="w-full text-sm">
               <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
@@ -3943,44 +3994,6 @@
                 <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1110-01</td><td class="px-4 py-2.5">高企认定审计服务</td><td class="px-4 py-2.5 text-gray-500">2024-11-10</td><td class="px-4 py-2.5">¥8,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
                 <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1110-02</td><td class="px-4 py-2.5">发明专利快速预审代办</td><td class="px-4 py-2.5 text-gray-500">2024-11-10</td><td class="px-4 py-2.5">¥5,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
                 <tr><td class="px-5 py-2.5">FW-2024-1108-01</td><td class="px-4 py-2.5">知识产权贯标认证</td><td class="px-4 py-2.5 text-gray-500">2024-11-08</td><td class="px-4 py-2.5">¥30,000</td><td class="px-4 py-2.5"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- 2024年高新技术企业认定（自主） -->
-          <div class="mb-4 overflow-hidden rounded-lg bg-white shadow-sm">
-            <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">
-              <div class="flex items-center gap-2">
-                <i data-lucide="briefcase" class="h-4 w-4 text-primary"></i>
-                <h3 class="text-sm font-semibold text-gray-800">2024年高新技术企业认定</h3>
-                <span class="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-600">自主</span>
-              </div>
-              <span class="text-xs text-gray-400">共 2 笔订单 · 合计 ¥2,000</span>
-            </div>
-            <table class="w-full text-sm">
-              <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
-              <tbody>
-                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1106-01</td><td class="px-4 py-2.5">商标注册申请</td><td class="px-4 py-2.5 text-gray-500">2024-11-06</td><td class="px-4 py-2.5">¥800</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-                <tr><td class="px-5 py-2.5">FW-2024-1102-03</td><td class="px-4 py-2.5">软件著作权登记</td><td class="px-4 py-2.5 text-gray-500">2024-11-02</td><td class="px-4 py-2.5">¥1,200</td><td class="px-4 py-2.5"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- 独立服务订单（未关联项目） -->
-          <div class="overflow-hidden rounded-lg bg-white shadow-sm">
-            <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">
-              <div class="flex items-center gap-2">
-                <i data-lucide="shopping-bag" class="h-4 w-4 text-gray-400"></i>
-                <h3 class="text-sm font-semibold text-gray-800">独立服务订单（未关联项目）</h3>
-              </div>
-              <span class="text-xs text-gray-400">共 3 笔订单 · 合计 ¥5,300</span>
-            </div>
-            <table class="w-full text-sm">
-              <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
-              <tbody>
-                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1106-01</td><td class="px-4 py-2.5">研发费用归集整改服务</td><td class="px-4 py-2.5 text-gray-500">2024-11-06</td><td class="px-4 py-2.5">¥2,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-0815-02</td><td class="px-4 py-2.5">商标注册申请</td><td class="px-4 py-2.5 text-gray-500">2024-08-15</td><td class="px-4 py-2.5">¥800</td><td class="px-4 py-2.5"><span class="rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600">已完结</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">下载交付物</a>　<a class="js-quick-nav cursor-pointer text-primary hover:underline" data-target="page-my-invoice">申请开票</a></td></tr>
-                <tr><td class="px-5 py-2.5">FW-2024-0920-01</td><td class="px-4 py-2.5">专利申请代理</td><td class="px-4 py-2.5 text-gray-500">2024-09-20</td><td class="px-4 py-2.5">¥2,500</td><td class="px-4 py-2.5"><span class="rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600">已完结</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">下载交付物</a>　<a class="js-quick-nav cursor-pointer text-primary hover:underline" data-target="page-my-invoice">申请开票</a></td></tr>
               </tbody>
             </table>
           </div>
@@ -4199,6 +4212,267 @@
           </div>
         </div>
 
+<!-- 积分与会员 -->
+        <div id="page-points" class="page hidden">
+          <style>
+.pwm .wrap{font-family:var(--kimi-font-sans);color:var(--kimi-color-text-primary);padding:4px 0 8px}
+.pwm .wrap button{font:inherit}
+.pwm .ic{width:1em;height:1em;display:block;flex:none}
+.pwm .crumb{font-size:12px;color:var(--kimi-color-text-tertiary);display:flex;align-items:center;gap:4px;margin-bottom:12px}
+.pwm .crumb .ic{width:12px;height:12px}
+.pwm .layout{display:grid;grid-template-columns:216px 1fr;gap:20px;align-items:start}
+@media (max-width:800px){.pwm .layout{grid-template-columns:1fr}}
+.pwm .panel{border:1px solid var(--kimi-color-border);border-radius:12px}
+.pwm .side{padding:8px;position:sticky;top:0}
+.pwm .side-title{font-size:12px;color:var(--kimi-color-text-tertiary);padding:6px 10px 8px}
+.pwm .nav{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:9px 10px;border:0;border-radius:8px;background:transparent;font-size:14px;color:var(--kimi-color-text-secondary);cursor:pointer}
+.pwm .nav:hover{background:var(--kimi-color-surface-muted);color:var(--kimi-color-text-primary)}
+.pwm .nav.active{background:#1677ff;color:#fff;font-weight:500}
+.pwm .nav .ic{width:16px;height:16px}
+.pwm .nav-badge{margin-left:auto;font-size:11px;color:var(--kimi-color-warning)}
+.pwm .nav.active .nav-badge{color:var(--kimi-color-surface);opacity:.75}
+.pwm .page{display:none}
+.pwm .page.active{display:block}
+.pwm .page-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.pwm .page-title{font-size:18px;font-weight:500}
+.pwm .page-sub{font-size:13px;color:var(--kimi-color-text-tertiary)}
+.pwm .cards{display:grid;grid-template-columns:1.25fr 1fr;gap:12px}
+@media (max-width:640px){.pwm .cards{grid-template-columns:1fr}}
+.pwm .stat{border:1px solid var(--kimi-color-border);border-radius:12px;padding:16px}
+.pwm .stat-top{display:flex;align-items:center;gap:8px}
+.pwm .stat-ic{width:34px;height:34px;border-radius:10px;background:var(--kimi-color-surface-muted);display:flex;align-items:center;justify-content:center}
+.pwm .stat-ic .ic{width:18px;height:18px}
+.pwm .stat-label{font-size:13px;color:var(--kimi-color-text-secondary)}
+.pwm .stat-state{font-size:16px;font-weight:500;margin-top:2px}
+.pwm .stat-desc{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:10px;line-height:1.6}
+.pwm .pts-num{font-size:30px;font-weight:500;font-variant-numeric:tabular-nums;margin-top:8px}
+.pwm .pts-unit{font-size:13px;color:var(--kimi-color-text-secondary);font-weight:400}
+.pwm .pts-sum{display:flex;gap:12px;margin-top:8px;font-size:12px;color:var(--kimi-color-text-tertiary)}
+.pwm .pts-sum b{font-weight:500;font-variant-numeric:tabular-nums}
+.pwm .up{color:var(--kimi-color-positive)}
+.pwm .btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#1677ff;color:#fff;border:0;border-radius:10px;padding:9px 16px;font-size:14px;font-weight:500;cursor:pointer}
+.pwm .btn-primary:hover{opacity:.88}
+.pwm .btn-primary .ic{width:15px;height:15px}
+.pwm .btn-ghost{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--kimi-color-border);background:transparent;border-radius:10px;padding:8px 14px;font-size:13px;cursor:pointer;color:var(--kimi-color-text-primary)}
+.pwm .btn-ghost:hover{border-color:var(--kimi-color-text-primary)}
+.pwm .stat-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.pwm .loop{border:1px solid var(--kimi-color-border);border-radius:12px;padding:16px;margin-top:12px}
+.pwm .loop-title{font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}
+.pwm .loop-title .ic{width:15px;height:15px}
+.pwm .loop-steps{display:flex;align-items:stretch;gap:8px;margin-top:12px}
+.pwm .ls{flex:1;border:1px solid var(--kimi-color-border);border-radius:10px;padding:10px 12px}
+.pwm .ls-top{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500}
+.pwm .ls-top .n{width:18px;height:18px;border-radius:50%;background:var(--kimi-color-text-primary);color:var(--kimi-color-surface);font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.pwm .ls-desc{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:5px;line-height:1.55}
+.pwm .ls-arrow{align-self:center;color:var(--kimi-color-text-quaternary)}
+.pwm .ls-arrow .ic{width:14px;height:14px}
+@media (max-width:760px){.pwm .loop-steps{flex-direction:column}.pwm .ls-arrow{transform:rotate(90deg);align-self:center}}
+.pwm .loop-note{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:12px}
+.pwm .loop-note .ic{width:13px;height:13px;color:var(--kimi-color-positive)}
+.pwm .btable{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+.pwm .btable th{text-align:left;font-weight:500;color:var(--kimi-color-text-secondary);padding:9px 12px;border-bottom:1px solid var(--kimi-color-border);font-size:13px}
+.pwm .btable td{padding:10px 12px;border-bottom:1px dashed var(--kimi-color-border);vertical-align:top;line-height:1.55}
+.pwm .btable tr:last-child td{border-bottom:0}
+.pwm .btable .mem{font-weight:500}
+.pwm .btable .fee{color:var(--kimi-color-text-tertiary)}
+.pwm .sec-title{font-size:15px;font-weight:500;margin:20px 0 10px}
+.pwm .pkgs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:760px){.pwm .pkgs{grid-template-columns:1fr}}
+.pwm .pkg{border:1px solid var(--kimi-color-border);border-radius:12px;padding:16px;cursor:pointer;position:relative;transition:border-color var(--t-fast) var(--ease-out)}
+.pwm .pkg:hover{border-color:var(--kimi-color-text-tertiary)}
+.pwm .pkg.selected{border-color:#1677ff;box-shadow:0 0 0 1px #1677ff}
+.pwm .pkg-rec{position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:11px;background:#1677ff;color:#fff;border-radius:6px;padding:2px 8px}
+.pwm .pkg-name{font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}
+.pwm .pkg-name .ic{width:15px;height:15px;color:var(--kimi-color-text-secondary)}
+.pwm .pkg-pts{font-size:24px;font-weight:500;margin-top:10px;font-variant-numeric:tabular-nums}
+.pwm .pkg-pts small{font-size:12px;color:var(--kimi-color-text-secondary);font-weight:400}
+.pwm .pkg-bonus{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--kimi-color-positive);margin-top:6px}
+.pwm .pkg-bonus .ic{width:12px;height:12px}
+.pwm .pkg-rows{margin-top:10px}
+.pwm .pkg-rows div{display:flex;justify-content:space-between;font-size:12px;color:var(--kimi-color-text-tertiary);padding:4px 0}
+.pwm .pkg-rows b{font-weight:500;color:var(--kimi-color-text-secondary)}
+.pwm .pkg-price{margin-top:12px;display:flex;align-items:baseline;gap:8px}
+.pwm .pkg-price b{font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.pwm .pkg-price s{font-size:12px;color:var(--kimi-color-text-quaternary)}
+.pwm .pkg-deduct{display:none;font-size:12px;margin-top:4px;color:var(--kimi-color-text-tertiary)}
+.pwm .pkg-deduct b{color:var(--kimi-color-positive);font-weight:500}
+.pwm .pkg-pay{display:none;margin-top:2px;font-size:14px}
+.pwm .pkg-pay b{font-weight:500;font-variant-numeric:tabular-nums}
+.pwm .pkg .btn-primary{width:100%;margin-top:12px}
+.pwm .deduct-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed var(--kimi-color-border);border-radius:10px;padding:10px 14px;margin-top:14px;flex-wrap:wrap}
+.pwm .deduct-l{display:flex;align-items:center;gap:8px;font-size:13px}
+.pwm .deduct-l .ic{width:15px;height:15px;color:var(--kimi-color-text-secondary)}
+.pwm .deduct-l b{font-weight:500;font-variant-numeric:tabular-nums}
+.pwm .deduct-l .muted{color:var(--kimi-color-text-tertiary);font-size:12px}
+.pwm .switch{position:relative;width:36px;height:20px;flex:none}
+.pwm .switch input{opacity:0;width:100%;height:100%;position:absolute;margin:0;cursor:pointer}
+.pwm .switch i{position:absolute;inset:0;border-radius:10px;background:var(--kimi-color-surface-strong);pointer-events:none}
+.pwm .switch i:after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:transform var(--t-fast) var(--ease-out)}
+.pwm .switch input:checked + i{background:#1677ff}
+.pwm .switch input:checked + i:after{transform:translateX(16px)}
+.pwm .pay-sec{margin-top:16px}
+.pwm .pay-opts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.pwm .pay{border:1px solid var(--kimi-color-border);border-radius:10px;padding:8px 14px;font-size:13px;cursor:pointer;background:transparent;color:var(--kimi-color-text-secondary)}
+.pwm .pay.active{border-color:#1677ff;color:#1677ff;font-weight:500}
+.pwm .fine{font-size:11px;color:var(--kimi-color-text-quaternary);margin-top:12px;line-height:1.6;display:flex;gap:5px}
+.pwm .fine .ic{width:12px;height:12px;margin-top:2px;flex:none}
+.pwm .task-group{border:1px solid var(--kimi-color-border);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.pwm .tg-head{display:flex;align-items:center;gap:6px;padding:11px 14px 6px;font-size:14px;font-weight:500}
+.pwm .tg-head .ic{width:15px;height:15px}
+.pwm .tg-hint{margin-left:auto;font-size:12px;color:var(--kimi-color-text-tertiary);font-weight:400}
+.pwm .task{display:flex;align-items:center;gap:10px;padding:10px 14px;border-top:1px dashed var(--kimi-color-border)}
+.pwm .task-ic{width:28px;height:28px;border-radius:8px;background:var(--kimi-color-surface-muted);display:flex;align-items:center;justify-content:center;flex:none}
+.pwm .task-ic .ic{width:15px;height:15px;color:var(--kimi-color-text-secondary)}
+.pwm .task-body{flex:1;min-width:0}
+.pwm .task-name{font-size:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pwm .task-pts{font-size:12px;font-weight:500;color:var(--kimi-color-positive);background:color-mix(in srgb,var(--kimi-color-positive) 12%,transparent);border-radius:6px;padding:1px 6px}
+.pwm .task-pts.x{color:var(--kimi-color-text-secondary);background:var(--kimi-color-surface-muted)}
+.pwm .task-desc{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:2px}
+.pwm .task-prog{display:flex;align-items:center;gap:8px;margin-top:6px}
+.pwm .task-bar{width:120px;height:4px;border-radius:2px;background:var(--kimi-color-surface-muted);overflow:hidden}
+.pwm .task-bar i{display:block;height:100%;background:var(--kimi-color-text-primary);border-radius:2px}
+.pwm .task-prog span{font-size:11px;color:var(--kimi-color-text-tertiary)}
+.pwm .task-act{flex:none}
+.pwm .task-done{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--kimi-color-positive)}
+.pwm .task-done .ic{width:13px;height:13px}
+.pwm .task-claimed{font-size:12px;color:var(--kimi-color-text-quaternary)}
+.pwm .member-banner{display:flex;align-items:center;gap:8px;border:1px solid var(--kimi-color-border);border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:12px}
+.pwm .member-banner .ic{width:15px;height:15px;color:var(--kimi-color-warning)}
+.pwm .member-banner b{font-weight:500}
+.pwm .sum-chips{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.pwm .chip-stat{border:1px solid var(--kimi-color-border);border-radius:10px;padding:10px 16px;min-width:150px}
+.pwm .chip-stat .k{font-size:12px;color:var(--kimi-color-text-tertiary)}
+.pwm .chip-stat .v{font-size:20px;font-weight:500;margin-top:2px;font-variant-numeric:tabular-nums}
+.pwm .filters{display:flex;gap:6px;margin-bottom:10px}
+.pwm .fbtn{border:1px solid var(--kimi-color-border);background:transparent;border-radius:8px;padding:4px 12px;font-size:12px;cursor:pointer;color:var(--kimi-color-text-secondary)}
+.pwm .fbtn.active{border-color:#1677ff;color:#1677ff;font-weight:500}
+.pwm .led{border:1px solid var(--kimi-color-border);border-radius:12px;overflow:hidden}
+.pwm .led-row{display:flex;align-items:center;gap:12px;padding:11px 14px;border-top:1px solid var(--kimi-color-border)}
+.pwm .led-row:first-child{border-top:0}
+.pwm .led-ic{width:30px;height:30px;border-radius:8px;background:var(--kimi-color-surface-muted);display:flex;align-items:center;justify-content:center;flex:none}
+.pwm .led-ic .ic{width:15px;height:15px;color:var(--kimi-color-text-secondary)}
+.pwm .led-body{flex:1;min-width:0}
+.pwm .led-name{font-size:14px}
+.pwm .led-time{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:1px}
+.pwm .led-right{text-align:right;flex:none}
+.pwm .led-delta{font-size:14px;font-weight:500;font-variant-numeric:tabular-nums}
+.pwm .led-delta.plus{color:var(--kimi-color-positive)}
+.pwm .led-delta.minus{color:var(--kimi-color-text-secondary)}
+.pwm .led-bal{font-size:11px;color:var(--kimi-color-text-quaternary);margin-top:2px}
+
+          </style>
+<div class="pwm wrap">
+  <div class="crumb">个人中心 <span class="ic-slot" data-ic="RightIcon"></span> 我的积分与会员</div>
+  <div class="layout">
+    <nav class="panel side">
+      <div class="side-title">积分与会员</div>
+      <button class="nav active" data-page="overview"><span class="ic-slot" data-ic="crownIcon"></span>会员总览</button>
+      <button class="nav" data-page="packages"><span class="ic-slot" data-ic="TagIcon"></span>积分套餐<span class="nav-badge">开通</span></button>
+      <button class="nav" data-page="tasks"><span class="ic-slot" data-ic="TodoIcon"></span>赚积分任务</button>
+      <button class="nav" data-page="ledger"><span class="ic-slot" data-ic="ListIcon"></span>积分明细</button>
+    </nav>
+
+    <div>
+      <section class="page active" data-pg="overview">
+        <div class="page-head"><span class="page-title">会员总览</span><span class="page-sub">积分与会员是一体的：用系统赚积分，积分抵扣套餐，购买套餐即成为会员</span></div>
+        <div class="cards">
+          <div class="stat">
+            <div class="stat-top">
+              <span class="stat-ic"><span class="ic-slot" data-ic="crownIcon"></span></span>
+              <div><div class="stat-label">会员状态</div><div class="stat-state">未开通会员</div></div>
+            </div>
+            <div class="stat-desc">购买任意积分套餐即可成为会员，在套餐有效期内享受不限次 AI 生成、专家验稿折扣等权益。</div>
+            <div class="stat-actions">
+              <button class="btn-primary" id="goPkg"><span class="ic-slot" data-ic="crownIcon"></span>去开通会员</button>
+              <button class="btn-ghost" id="goTask">做任务赚积分</button>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-top">
+              <span class="stat-ic"><span class="ic-slot" data-ic="coinIcon"></span></span>
+              <div><div class="stat-label">当前积分</div></div>
+            </div>
+            <div class="pts-num">1,260 <span class="pts-unit">积分</span></div>
+            <div class="pts-sum"><span>本月获得 <b class="up">+1,000</b></span><span>本月消耗 <b>−1,020</b></span></div>
+            <div class="stat-desc">100 积分 = ¥1，购买套餐时可直接抵扣（单档套餐最高抵 20%）。</div>
+          </div>
+        </div>
+
+        <div class="loop">
+          <div class="loop-title"><span class="ic-slot" data-ic="coinIcon"></span>积分 × 会员 循环</div>
+          <div class="loop-steps">
+            <div class="ls"><div class="ls-top"><span class="n">1</span>使用系统赚积分</div><div class="ls-desc">完善档案、生成申报书、邀请企业等行为均可获得积分</div></div>
+            <div class="ls-arrow"><span class="ic-slot" data-ic="RightIcon"></span></div>
+            <div class="ls"><div class="ls-top"><span class="n">2</span>积分抵扣套餐</div><div class="ls-desc">100 积分抵 ¥1，最高可抵套餐金额的 20%</div></div>
+            <div class="ls-arrow"><span class="ic-slot" data-ic="RightIcon"></span></div>
+            <div class="ls"><div class="ls-top"><span class="n">3</span>购买套餐成会员</div><div class="ls-desc">支付成功即开通，有效期按套餐档位 3～24 个月</div></div>
+            <div class="ls-arrow"><span class="ic-slot" data-ic="RightIcon"></span></div>
+            <div class="ls"><div class="ls-top"><span class="n">4</span>会员享权益</div><div class="ls-desc">AI 生成不限次、专家验稿折扣、专属顾问对接</div></div>
+          </div>
+          <div class="loop-note"><span class="ic-slot" data-ic="CheckIcon"></span>闭环回流：会员期间完成任务积分按 1.5 倍发放，继续回到步骤 1。</div>
+        </div>
+
+        <div class="sec-title">会员权益对比</div>
+        <div class="panel" style="overflow:auto;">
+          <table class="btable">
+            <tr><th style="width:34%;">权益项</th><th style="width:33%;">非会员</th><th>会员</th></tr>
+            <tr><td>AI 申报书生成</td><td class="fee">免费 3 次，之后 20 积分 / 次</td><td class="mem">不限次免费</td></tr>
+            <tr><td>AI 自动验稿</td><td class="fee">免费 1 次，之后 30 积分 / 次</td><td class="mem">不限次免费</td></tr>
+            <tr><td>专家人工验稿</td><td class="fee">原价 ¥980 起</td><td class="mem">9 折起，积分再抵 20%</td></tr>
+            <tr><td>行为积分倍率</td><td class="fee">1×</td><td class="mem">1.5× 加速</td></tr>
+            <tr><td>培育顾问</td><td class="fee">—</td><td class="mem">1v1 专属对接</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section class="page" data-pg="packages">
+        <div class="page-head"><span class="page-title">积分套餐</span><span class="page-sub">购买积分套餐后即为会员，套餐有效期内享受会员权益</span></div>
+        <div class="pkgs" id="pkgList"></div>
+
+        <div class="deduct-bar">
+          <div class="deduct-l">
+            <span class="ic-slot" data-ic="coinIcon"></span>
+            <span>使用积分抵扣 <b>1,260</b> 积分 <span class="muted">可抵 ¥12.60 · 100 积分 = ¥1</span></span>
+          </div>
+          <label class="switch"><input type="checkbox" id="deductToggle"><i></i></label>
+        </div>
+
+        <div class="pay-sec" id="paySec" style="display:none">
+          <div style="font-size:13px; color: var(--kimi-color-text-secondary);">支付方式</div>
+          <div class="pay-opts" id="payOpts">
+            <button class="pay active">微信支付</button>
+            <button class="pay">支付宝</button>
+          </div>
+        </div>
+        <div class="fine"><span class="ic-slot" data-ic="WarningIcon"></span><span>支付成功后积分立即到账，会员权益即时生效；支持开具增值税普通发票；积分长期有效，会员到期后已获积分不清零。</span></div>
+      </section>
+
+      <section class="page" data-pg="tasks">
+        <div class="page-head"><span class="page-title">赚积分任务</span><span class="page-sub">成为会员前也能攒积分，攒下的积分可直接抵扣套餐</span></div>
+        <div class="member-banner"><span class="ic-slot" data-ic="crownIcon"></span><span>开通会员后，任务积分按 <b>1.5 倍</b>发放，赚积分更快。</span></div>
+        <div id="taskGroups"></div>
+      </section>
+
+      <section class="page" data-pg="ledger">
+        <div class="page-head"><span class="page-title">积分明细</span><span class="page-sub">每一笔积分的获得与消耗都有记录</span></div>
+        <div class="sum-chips">
+          <div class="chip-stat"><div class="k">当前余额</div><div class="v">1,260</div></div>
+          <div class="chip-stat"><div class="k">本月获得</div><div class="v" style="color: var(--kimi-color-positive);">+1,000</div></div>
+          <div class="chip-stat"><div class="k">本月消耗</div><div class="v" style="color: var(--kimi-color-text-secondary);">−1,020</div></div>
+        </div>
+        <div class="filters" id="ledFilters">
+          <button class="fbtn active" data-f="all">全部</button>
+          <button class="fbtn" data-f="plus">仅获得</button>
+          <button class="fbtn" data-f="minus">仅消耗</button>
+        </div>
+        <div class="led" id="ledList"></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+        </div>
+
       </main>
     </div>
   </div>
@@ -4221,6 +4495,9 @@
         </div>
       </div>
       <div class="flex items-center gap-2">
+        <button class="js-quick-nav flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-primary-hover" data-target="page-doc-expert">
+          <i data-lucide="file-edit" class="h-3.5 w-3.5"></i> 撰写申报书
+        </button>
         <button id="drawer-upgrade-btn" class="flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-violet-500 to-purple-500 px-3 py-2 text-xs font-medium text-white shadow-sm transition hover:opacity-90">
           升级托管服务
           <span class="rounded bg-white/20 px-1.5 py-0.5">¥9,800</span>
@@ -4297,10 +4574,154 @@
               <td class="px-4 py-3 text-gray-500">高企申报书</td>
               <td class="px-4 py-3 text-gray-500">2024-11-20</td>
               <td class="px-4 py-3"><span class="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-600">待处理</span></td>
-              <td class="px-4 py-3"><button class="flex items-center gap-1 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="openUploadModal('高企申报书')"><i data-lucide="upload" class="h-3.5 w-3.5"></i> 上传</button></td>
+              <td class="px-4 py-3"><div class="flex items-center gap-1.5"><button class="js-quick-nav flex items-center gap-1 rounded-md border border-gray-200 px-2.5 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-target="page-doc-expert"><i data-lucide="file-edit" class="h-3.5 w-3.5"></i> 撰写</button><button class="flex items-center gap-1 rounded-md bg-primary px-2.5 py-1 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="openUploadModal('高企申报书')"><i data-lucide="upload" class="h-3.5 w-3.5"></i> 上传</button></div></td>
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- 关联订单 -->
+      <div id="order-section" class="mt-4">
+        <div class="mb-2 flex items-center justify-between">
+          <span class="text-sm font-semibold text-gray-800">关联订单</span>
+          <button class="js-quick-nav flex items-center gap-1 text-xs text-primary transition hover:underline" data-target="page-my-orders">查看全部订单 →</button>
+        </div>
+        <div class="overflow-hidden rounded-lg border border-gray-100">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-left text-xs text-gray-500">
+                <th class="px-4 py-2.5 font-medium">订单编号</th>
+                <th class="px-4 py-2.5 font-medium">服务名称</th>
+                <th class="px-4 py-2.5 font-medium">金额</th>
+                <th class="px-4 py-2.5 font-medium">状态</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100 text-gray-700">
+              <tr><td class="px-4 py-3">FW-2024-1110-01</td><td class="px-4 py-3">高企认定审计服务</td><td class="px-4 py-3">¥8,000</td><td class="px-4 py-3"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td></tr>
+              <tr><td class="px-4 py-3">FW-2024-1110-02</td><td class="px-4 py-3">发明专利快速预审代办</td><td class="px-4 py-3">¥5,000</td><td class="px-4 py-3"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td></tr>
+              <tr><td class="px-4 py-3">FW-2024-1108-01</td><td class="px-4 py-3">知识产权贯标认证</td><td class="px-4 py-3">¥30,000</td><td class="px-4 py-3"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 验收 -->
+      <div id="accept-section" class="mt-4">
+        <div class="mb-2 flex items-center justify-between">
+          <span class="text-sm font-semibold text-gray-800">验收</span>
+          <span id="accept-batch-wrap"><button class="rounded-lg border border-gray-200 px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" onclick="batchAccept()">批量验收通过</button></span>
+        </div>
+        <div class="space-y-2" id="accept-list">
+          <div class="accept-item rounded-lg border border-gray-100 p-3">
+            <div class="flex items-center justify-between">
+              <label class="flex min-w-0 items-center gap-3">
+                <input type="checkbox" class="accept-check h-4 w-4 rounded" />
+                <div class="min-w-0">
+                  <div class="truncate text-sm font-medium text-gray-800">高企认定审计服务</div>
+                  <div class="text-xs text-gray-400">订单 FW-2024-1110-01 · 交付物：审计报告.pdf</div>
+                </div>
+              </label>
+              <div class="accept-actions flex flex-shrink-0 items-center gap-2">
+                <button class="rounded-md border border-green-500 px-3 py-1 text-xs text-green-600 transition hover:bg-green-50" onclick="acceptItem(this, true)">通过</button>
+                <button class="rounded-md border border-red-300 px-3 py-1 text-xs text-red-500 transition hover:bg-red-50" onclick="acceptItem(this, false)">不通过</button>
+              </div>
+            </div>
+            <div class="accept-reason mt-2 hidden">
+              <textarea class="h-16 w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-red-400" placeholder="请输入不通过理由，将回传运营端处理"></textarea>
+              <div class="mt-2 flex justify-end"><button class="rounded-md bg-red-500 px-3 py-1.5 text-xs text-white transition hover:bg-red-600" onclick="submitReject(this)">提交驳回理由</button></div>
+            </div>
+            <div class="accept-result mt-1 hidden text-xs font-medium"></div>
+          </div>
+
+          <div class="accept-item rounded-lg border border-gray-100 p-3">
+            <div class="flex items-center justify-between">
+              <label class="flex min-w-0 items-center gap-3">
+                <input type="checkbox" class="accept-check h-4 w-4 rounded" />
+                <div class="min-w-0">
+                  <div class="truncate text-sm font-medium text-gray-800">发明专利快速预审代办</div>
+                  <div class="text-xs text-gray-400">订单 FW-2024-1110-02 · 交付物：专利清单.xlsx</div>
+                </div>
+              </label>
+              <div class="accept-actions flex flex-shrink-0 items-center gap-2">
+                <button class="rounded-md border border-green-500 px-3 py-1 text-xs text-green-600 transition hover:bg-green-50" onclick="acceptItem(this, true)">通过</button>
+                <button class="rounded-md border border-red-300 px-3 py-1 text-xs text-red-500 transition hover:bg-red-50" onclick="acceptItem(this, false)">不通过</button>
+              </div>
+            </div>
+            <div class="accept-reason mt-2 hidden">
+              <textarea class="h-16 w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-red-400" placeholder="请输入不通过理由，将回传运营端处理"></textarea>
+              <div class="mt-2 flex justify-end"><button class="rounded-md bg-red-500 px-3 py-1.5 text-xs text-white transition hover:bg-red-600" onclick="submitReject(this)">提交驳回理由</button></div>
+            </div>
+            <div class="accept-result mt-1 hidden text-xs font-medium"></div>
+          </div>
+
+          <div class="accept-item rounded-lg border border-gray-100 p-3">
+            <div class="flex items-center justify-between">
+              <label class="flex min-w-0 items-center gap-3">
+                <input type="checkbox" class="accept-check h-4 w-4 rounded" />
+                <div class="min-w-0">
+                  <div class="truncate text-sm font-medium text-gray-800">知识产权贯标认证</div>
+                  <div class="text-xs text-gray-400">订单 FW-2024-1108-01 · 交付物：贯标认证证书.pdf</div>
+                </div>
+              </label>
+              <div class="accept-actions flex flex-shrink-0 items-center gap-2">
+                <button class="rounded-md border border-green-500 px-3 py-1 text-xs text-green-600 transition hover:bg-green-50" onclick="acceptItem(this, true)">通过</button>
+                <button class="rounded-md border border-red-300 px-3 py-1 text-xs text-red-500 transition hover:bg-red-50" onclick="acceptItem(this, false)">不通过</button>
+              </div>
+            </div>
+            <div class="accept-reason mt-2 hidden">
+              <textarea class="h-16 w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-xs outline-none focus:border-red-400" placeholder="请输入不通过理由，将回传运营端处理"></textarea>
+              <div class="mt-2 flex justify-end"><button class="rounded-md bg-red-500 px-3 py-1.5 text-xs text-white transition hover:bg-red-600" onclick="submitReject(this)">提交驳回理由</button></div>
+            </div>
+            <div class="accept-result mt-1 hidden text-xs font-medium"></div>
+          </div>
+        </div>
+
+        <!-- 质检日志与历史版本 -->
+        <div class="mt-4 space-y-4">
+          <div>
+            <div class="mb-2 text-sm font-semibold text-gray-800">质检过程日志</div>
+            <div class="space-y-1.5 text-xs text-gray-500">
+              <div><span class="text-gray-400">2024-11-10 14:30</span> · 系统 · <span class="text-gray-700">提交质检</span> · 审计报告.pdf v1</div>
+              <div><span class="text-gray-400">2024-11-10 15:40</span> · 质检员 · <span class="text-gray-700">格式校验通过</span> · 审计报告.pdf v1</div>
+              <div><span class="text-gray-400">2024-11-10 16:20</span> · 李顾问 · <span class="text-gray-700">质检通过</span> · 审计报告.pdf v2</div>
+            </div>
+          </div>
+          <div>
+            <div class="mb-2 text-sm font-semibold text-gray-800">审核日志</div>
+            <div class="space-y-1.5 text-xs text-gray-500">
+              <div><span class="text-gray-400">2024-11-10 15:02</span> · 张伟 · <span class="text-gray-700">提交验收</span> · 审计报告.pdf</div>
+              <div><span class="text-gray-400">2024-11-09 10:12</span> · 王专员 · <span class="text-gray-700">上传交付物</span> · 专利清单.xlsx</div>
+            </div>
+          </div>
+          <div>
+            <div class="mb-2 text-sm font-semibold text-gray-800">历史版本</div>
+            <div class="space-y-1.5 text-xs">
+              <div class="flex items-center justify-between rounded-lg border border-gray-100 px-3 py-2"><span class="text-gray-700">审计报告.pdf · v2（当前）</span><span class="text-gray-400">2024-11-10 16:20</span><button class="rounded border border-gray-200 px-2 py-0.5 text-gray-500 transition hover:border-primary hover:text-primary">查看</button></div>
+              <div class="flex items-center justify-between rounded-lg border border-gray-100 px-3 py-2"><span class="text-gray-700">审计报告.pdf · v1</span><span class="text-gray-400">2024-11-09 18:05</span><button class="rounded border border-gray-200 px-2 py-0.5 text-gray-500 transition hover:border-primary hover:text-primary">查看</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 项目结果登记 -->
+      <div id="result-register-section" class="mt-4">
+        <div class="mb-2 flex items-center justify-between">
+          <span class="text-sm font-semibold text-gray-800">项目结果登记</span>
+          <span class="rounded bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-600">待登记</span>
+        </div>
+        <div class="rounded-lg border border-gray-100 p-3">
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
+            <div class="flex items-center justify-between"><span class="text-gray-500">验收结果</span><span class="font-medium text-green-600">已通过</span></div>
+            <div class="flex items-center justify-between"><span class="text-gray-500">登记状态</span><span class="font-medium text-amber-600">待登记</span></div>
+            <div class="flex items-center justify-between"><span class="text-gray-500">公示结果</span><span class="text-gray-400">—</span></div>
+            <div class="flex items-center justify-between"><span class="text-gray-500">获批金额</span><span class="text-gray-400">—</span></div>
+            <div class="flex items-center justify-between"><span class="text-gray-500">证书编号</span><span class="text-gray-400">—</span></div>
+            <div class="flex items-center justify-between"><span class="text-gray-500">归档状态</span><span class="font-medium text-primary">已归档</span></div>
+          </div>
+          <div class="mt-3 flex justify-end">
+            <button class="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-white transition hover:bg-primary-hover" onclick="showToast('已提交结果登记（演示）', 'success')">登记结果</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4576,7 +4997,9 @@
     </div>
   </div>
 
-  <!-- ==================== 切换企业弹窗 ==================== -->
+        
+
+      <!-- ==================== 切换企业弹窗 ==================== -->
   <div id="enterprise-modal-overlay" class="pointer-events-none fixed inset-0 z-[70] bg-black/50 opacity-0 transition-opacity duration-200"></div>
   <div id="enterprise-modal" class="pointer-events-none fixed left-1/2 top-1/2 z-[80] w-[440px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 scale-95 rounded-xl bg-white opacity-0 shadow-2xl transition-all duration-200">
     <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
@@ -4641,7 +5064,7 @@
   </div>
 
   <!-- ==================== 智能客服 ==================== -->
-  <button id="cs-fab" class="fixed bottom-8 right-8 z-[120] flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform duration-200 hover:scale-110" title="智能客服">
+  <button id="cs-fab" class="fixed bottom-8 right-8 z-[120] flex h-14 w-14 cursor-grab select-none items-center justify-center rounded-full bg-primary text-white shadow-lg transition-transform duration-200 hover:scale-110 active:cursor-grabbing" title="智能客服（可拖动）">
     <i data-lucide="headset" class="h-6 w-6"></i>
   </button>
   <div id="cs-panel" class="fixed bottom-24 right-8 z-[120] hidden w-[350px] overflow-hidden rounded-xl bg-white shadow-2xl">
@@ -5181,6 +5604,8 @@
             </div>
           </div>
         </div>
+        
+
       </main>
     </div>
   </div>
@@ -5372,6 +5797,11 @@
     document.getElementById('switch-enterprise-btn').addEventListener('click', () => {
       document.getElementById('user-dropdown').classList.add('hidden');
       openEnterpriseModal();
+    });
+
+    document.getElementById('points-membership-btn').addEventListener('click', () => {
+      document.getElementById('user-dropdown').classList.add('hidden');
+      goToPage('page-points', '积分与会员');
     });
     document.getElementById('enterprise-modal-close').addEventListener('click', closeEnterpriseModal);
     document.getElementById('enterprise-modal-cancel').addEventListener('click', closeEnterpriseModal);
@@ -5600,6 +6030,22 @@
 
       const isSelf = type === '自主';
       drawerUpgradeBtn.classList.toggle('hidden', !isSelf);
+
+      // 订单/验收/结果登记仅托管（下单）项目有，自主项目去掉
+      const orderSection = document.getElementById('order-section');
+      const acceptSection = document.getElementById('accept-section');
+      const resultSection = document.getElementById('result-register-section');
+      if (orderSection) orderSection.classList.toggle('hidden', isSelf);
+      if (acceptSection) acceptSection.classList.toggle('hidden', isSelf);
+      if (resultSection) resultSection.classList.toggle('hidden', isSelf);
+
+      // 托管项目验收由运营负责，隐藏客户验收操作
+      const batchWrap = document.getElementById('accept-batch-wrap');
+      const acceptActions = document.querySelectorAll('#accept-list .accept-actions');
+      const acceptChecks = document.querySelectorAll('#accept-list .accept-check');
+      if (batchWrap) batchWrap.classList.toggle('hidden', !isSelf);
+      acceptActions.forEach(function (a) { a.classList.toggle('hidden', !isSelf); });
+      acceptChecks.forEach(function (c) { c.classList.toggle('hidden', !isSelf); });
 
       drawerOverlay.classList.remove('pointer-events-none', 'opacity-0');
       projectDrawer.classList.remove('translate-x-full');
@@ -6450,6 +6896,49 @@
       closeProjectModal();
     });
 
+    // ==================== 项目验收 ====================
+    function openDeliverableReview() { showToast('已打开交付物验收面板（演示）', 'success'); }
+    function openUploadModal(name) { showToast('已打开「' + name + '」上传面板（演示）', 'success'); }
+    function acceptItem(btn, pass) {
+      const item = btn.closest('.accept-item');
+      if (!item) return;
+      const actions = item.querySelector('.accept-actions');
+      const result = item.querySelector('.accept-result');
+      const reason = item.querySelector('.accept-reason');
+      if (pass) {
+        if (actions) actions.innerHTML = '<span class="rounded bg-green-50 px-2 py-0.5 text-xs text-green-600">已通过</span>';
+        if (result) { result.className = 'accept-result mt-1 text-xs font-medium text-green-600'; result.textContent = '✓ 验收通过 · 已自动归档至企业档案库'; result.classList.remove('hidden'); }
+        const cb = item.querySelector('.accept-check');
+        if (cb) cb.checked = true;
+        item.classList.add('opacity-60');
+      } else {
+        if (actions) actions.querySelectorAll('button').forEach(function (b) { b.classList.add('hidden'); });
+        if (reason) reason.classList.remove('hidden');
+      }
+    }
+    function submitReject(btn) {
+      const item = btn.closest('.accept-item');
+      if (!item) return;
+      const ta = item.querySelector('textarea');
+      const reason = item.querySelector('.accept-reason');
+      const result = item.querySelector('.accept-result');
+      if (reason) reason.classList.add('hidden');
+      if (result) { result.className = 'accept-result mt-1 text-xs font-medium text-red-500'; result.textContent = '✗ 已驳回：' + (ta && ta.value.trim() ? ta.value.trim() : '未填写理由') + '（已回传运营端）'; result.classList.remove('hidden'); }
+      item.classList.add('opacity-60');
+    }
+    function batchAccept() {
+      const items = document.querySelectorAll('#accept-list .accept-item');
+      let count = 0;
+      items.forEach(function (item) {
+        const cb = item.querySelector('.accept-check');
+        if (cb && cb.checked) {
+          const passBtn = item.querySelector('.accept-actions button');
+          if (passBtn) { acceptItem(passBtn, true); count++; }
+        }
+      });
+      showToast(count ? '已批量验收 ' + count + ' 项' : '请先勾选待验收项', count ? 'success' : 'warning');
+    }
+
     // ==================== 驾驶舱 ====================
     // 快捷入口：点击切换到对应页面
     document.querySelectorAll('.js-quick-nav').forEach((btn) => {
@@ -6752,9 +7241,38 @@
     function healthSubmitOrder() {
       if (!document.getElementById('health-agree').checked) { showToast('请先勾选服务协议', 'warning'); return; }
       closeHealthOrder();
+      addHealthOrder(currentHealthService);
       addProjectFromHealth(currentHealthService);
-      showToast('下单成功，已添加到项目与申报', 'success');
-      goToPage('page-project', '项目与申报');
+      showToast('下单成功，已生成订单', 'success');
+      goToPage('page-my-orders', '我的订单');
+    }
+    function addHealthOrder(service) {
+      const anchor = document.getElementById('first-project-orders');
+      const listView = document.getElementById('order-list-view');
+      if (!anchor || !listView) return;
+      const name = currentHealthProject || '制造业单项冠军企业（国家级）';
+      const section = document.createElement('div');
+      section.className = 'mb-4 overflow-hidden rounded-lg bg-white shadow-sm';
+      section.innerHTML =
+        '<div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">' +
+          '<div class="flex items-center gap-2">' +
+            '<i data-lucide="briefcase" class="h-4 w-4 text-primary"></i>' +
+            '<h3 class="text-sm font-semibold text-gray-800">' + name + '</h3>' +
+            '<span class="rounded-full bg-purple-50 px-2 py-0.5 text-xs font-medium text-purple-600">托管</span>' +
+          '</div>' +
+          '<div class="flex items-center gap-3">' +
+            '<span class="text-xs text-gray-400">共 1 笔订单</span>' +
+            '<button class="flex items-center gap-1 text-xs text-primary transition hover:underline" onclick="goToPage(\'page-project\', \'项目与申报\')">查看项目 →</button>' +
+          '</div>' +
+        '</div>' +
+        '<table class="w-full text-sm">' +
+          '<thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>' +
+          '<tbody>' +
+            '<tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2026-1111-01</td><td class="px-4 py-2.5">' + service + '</td><td class="px-4 py-2.5 text-gray-500">2026-11-11</td><td class="px-4 py-2.5">—</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>' +
+          '</tbody>' +
+        '</table>';
+      listView.insertBefore(section, anchor);
+      lucide.createIcons();
     }
     function addProjectFromHealth(service) {
       const list = document.getElementById('project-inprogress-list');
@@ -7177,6 +7695,184 @@
 
     renderRoleCards();
 
+    // ==================== 积分与会员 ====================
+    (function(){
+      var CROWN = '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 16.2 L5.4 8.2 L9.2 11.5 L12 5.8 L14.8 11.5 L18.6 8.2 L19.5 16.2 Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" fill="none"/><path d="M5 19 H19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+      var COIN = '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/></svg>';
+      var ICONS = {
+        crownIcon: CROWN, coinIcon: COIN,
+        RightIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.4387 12.814C21.788 12.4622 21.787 11.8941 21.4364 11.5436L15.8979 6.0051C15.5464 5.65363 14.9766 5.65363 14.6251 6.0051C14.2737 6.35657 14.2737 6.92642 14.6251 7.27789L18.6272 11.28H2.79998C2.30293 11.28 1.89998 11.6829 1.89998 12.18C1.89998 12.677 2.30293 13.08 2.79998 13.08H18.6272L14.6251 17.0821C14.2737 17.4336 14.2737 18.0034 14.6251 18.3549C14.9766 18.7064 15.5464 18.7064 15.8979 18.3549L21.4364 12.8164C21.4371 12.8157 21.4379 12.8149 21.4387 12.814Z" fill="currentColor"/></svg>',
+        CheckIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.3027 5.9053C19.6542 5.55397 20.2247 5.55388 20.5761 5.9053C20.9273 6.25675 20.9273 6.82734 20.5761 7.17874L9.65911 18.0948C9.30773 18.4461 8.73814 18.446 8.38665 18.0948L3.42376 13.1328C3.0726 12.7814 3.07263 12.2118 3.42376 11.8604C3.77524 11.509 4.34575 11.5089 4.6972 11.8604L9.02303 16.1863L19.3027 5.9053Z" fill="currentColor"/></svg>',
+        WarningIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9996 7C11.5026 7 11.0996 7.36985 11.0996 7.82609V14.1739C11.0996 14.6301 11.5026 15 11.9996 15C12.4967 15 12.8996 14.6301 12.8996 14.1739V7.82609C12.8996 7.36985 12.4967 7 11.9996 7Z" fill="currentColor"/><path d="M12.8996 17.1006C12.8996 17.5974 12.4968 18.001 11.9992 18.001C11.5016 18.001 11.0988 17.5974 11.0988 17.1006C11.0988 16.6038 11.5016 16.2002 11.9992 16.2002C12.4968 16.2002 12.8996 16.6038 12.8996 17.1006Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2.09961C17.4678 2.09961 21.9 6.53185 21.9 11.9996C21.9 17.4675 17.4678 21.8997 12 21.8997C6.53225 21.8997 2.10001 17.4675 2.10001 11.9996C2.10001 6.53185 6.53225 2.09961 12 2.09961ZM12 3.89961C7.52636 3.89961 3.90001 7.52596 3.90001 11.9996C3.90001 16.4733 7.52636 20.0997 12 20.0997C16.4737 20.0997 20.1 16.4733 20.1 11.9996C20.1 7.52596 16.4737 3.89961 12 3.89961Z" fill="currentColor"/></svg>',
+        SafeIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 3.8H7C5.78497 3.8 4.8 4.78497 4.8 6V15.7647C4.8 16.574 5.24438 17.318 5.95698 17.7017L10.957 20.394C11.6081 20.7446 12.3919 20.7446 13.043 20.394L18.043 17.7017C18.7556 17.318 19.2 16.574 19.2 15.7647V6C19.2 4.78497 18.215 3.8 17 3.8ZM7 2C4.79086 2 3 3.79086 3 6V15.7647C3 17.253 3.75277 18.6125 4.96826 19.3557L9.96826 22.048C11.2386 22.8235 12.7614 22.8235 14.0317 22.048L19.0317 19.3557C20.2472 18.6125 21 17.253 21 15.7647V6C21 3.79086 19.2091 2 17 2H7Z" fill="currentColor"/><path d="M12 7C12.497 7 12.9004 7.40294 12.9004 7.9V8.5H13.5C13.997 8.5 14.4004 8.90294 14.4004 9.4C14.4004 9.89705 13.997 10.3 13.5 10.3H12.9004V12.1H14.1C14.597 12.1 15.0004 12.5029 15.0004 13C15.0004 13.4971 14.597 13.9 14.1 13.9H12.9004V15.1H13.5C13.997 15.1 14.4004 15.5029 14.4004 16C14.4004 16.4971 13.997 16.9 13.5 16.9H12.9004V17.5C12.9004 17.9971 12.497 18.4 12 18.4C11.5029 18.4 11.0996 17.9971 11.0996 17.5V16.9H10.5C10.0029 16.9 9.59961 16.4971 9.59961 16C9.59961 15.5029 10.0029 15.1 10.5 15.1H11.0996V13.9H9.9C9.40295 13.9 8.99961 13.4971 8.99961 13C8.99961 12.5029 9.40295 12.1 9.9 12.1H11.0996V10.3H10.5C10.0029 10.3 9.59961 9.89705 9.59961 9.4C9.59961 8.90294 10.0029 8.5 10.5 8.5H11.0996V7.9C11.0996 7.40294 11.5029 7 12 7Z" fill="currentColor"/></svg>',
+        TaskIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.9893 6.60743C20.5897 6.60757 21.8877 7.8926 21.8877 9.47736C21.8877 10.7416 21.0607 11.8129 19.9141 12.1955V14.257C19.914 15.8428 18.6152 17.1288 17.0137 17.1289H12.8438V20.1381C12.8437 20.6301 12.4412 21.0293 11.9443 21.0296C11.4004 21.0296 10.9438 20.573 10.9438 20.0291V17.1289H6.99023C5.38867 17.1289 4.08984 15.8428 4.08984 14.2568V12.1953C2.94336 11.8127 2.11621 10.7415 2.11621 9.47736C2.11621 7.89258 3.41426 6.60743 5.01465 6.60743C5.77246 6.60743 6.49316 6.90039 7.03125 7.43848C7.56934 7.97656 7.8623 8.69727 7.8623 9.45508C7.8623 10.2129 7.56934 10.9336 7.03125 11.4717C6.61523 11.8877 6.09375 12.1689 5.54199 12.2729V14.2568C5.54199 15.042 6.18066 15.6807 6.96582 15.6807H17.0381C17.8232 15.6807 18.4619 15.042 18.4619 14.2568V12.2729C17.9102 12.1689 17.3887 11.8877 16.9727 11.4717C16.4346 10.9336 16.1416 10.2129 16.1416 9.45508C16.1416 8.69727 16.4346 7.97656 16.9727 7.43848C17.5107 6.90039 18.2314 6.60743 18.9893 6.60743ZM5.01465 8.40723C4.40723 8.40723 3.91602 8.89844 3.91602 9.50586C3.91602 10.1133 4.40723 10.6045 5.01465 10.6045C5.62207 10.6045 6.11328 10.1133 6.11328 9.50586C6.11328 8.89844 5.62207 8.40723 5.01465 8.40723ZM18.9893 8.40723C18.3818 8.40723 17.8906 8.89844 17.8906 9.50586C17.8906 10.1133 18.3818 10.6045 18.9893 10.6045C19.5967 10.6045 20.0879 10.1133 20.0879 9.50586C20.0879 8.89844 19.5967 8.40723 18.9893 8.40723Z" fill="currentColor"/></svg>',
+        TodoIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.28994 4.92561C9.6436 4.57634 9.64716 4.0065 9.29789 3.65284C8.94862 3.29918 8.37878 3.29563 8.02512 3.6449L5.91339 5.73041L5.16642 4.95888C4.82067 4.60177 4.2509 4.59256 3.89379 4.9383C3.53668 5.28404 3.52747 5.85382 3.87321 6.21093L5.25245 7.63551C5.41956 7.80811 5.64874 7.90674 5.88897 7.90943C6.1292 7.91213 6.36053 7.81866 6.53146 7.64985L9.28994 4.92561Z" fill="currentColor"/><path d="M12 5.10022C11.503 5.10022 11.1 5.50316 11.1 6.00022C11.1 6.49728 11.503 6.90022 12 6.90022L19.9965 6.90022C20.4935 6.90022 20.8965 6.49728 20.8965 6.00022C20.8965 5.50316 20.4935 5.10022 19.9965 5.10022L12 5.10022Z" fill="currentColor"/><path d="M12 11.1002C11.503 11.1002 11.1 11.5032 11.1 12.0002C11.1 12.4973 11.503 12.9002 12 12.9002H19.9965C20.4935 12.9002 20.8965 12.4973 20.8965 12.0002C20.8965 11.5032 20.4935 11.1002 19.9965 11.1002L12 11.1002Z" fill="currentColor"/><path d="M11.1 18.0002C11.1 17.5032 11.503 17.1002 12 17.1002L19.9965 17.1002C20.4935 17.1002 20.8965 17.5032 20.8965 18.0002C20.8965 18.4973 20.4935 18.9002 19.9965 18.9002H12C11.503 18.9002 11.1 18.4973 11.1 18.0002Z" fill="currentColor"/><path d="M9.29789 9.77064C9.64716 10.1243 9.6436 10.6941 9.28994 11.0434L6.53146 13.7676C6.36053 13.9365 6.1292 14.0299 5.88897 14.0272C5.64874 14.0245 5.41956 13.9259 5.25245 13.7533L3.87321 12.3287C3.52747 11.9716 3.53668 11.4018 3.89379 11.0561C4.2509 10.7104 4.82067 10.7196 5.16642 11.0767L5.91339 11.8482L8.02512 9.76269C8.37878 9.41342 8.94862 9.41698 9.29789 9.77064Z" fill="currentColor"/><path d="M9.29789 15.7436C9.64716 16.0973 9.6436 16.6671 9.28994 17.0164L6.53146 19.7406C6.36053 19.9094 6.1292 20.0029 5.88897 20.0002C5.64874 19.9975 5.41956 19.8989 5.25245 19.7263L3.87321 18.3017C3.52747 17.9446 3.53668 17.3748 3.89379 17.0291C4.2509 16.6833 4.82067 16.6926 5.16642 17.0497L5.91339 17.8212L8.02512 15.7357C8.37878 15.3864 8.94862 15.39 9.29789 15.7436Z" fill="currentColor"/></svg>',
+        ListIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.10001 5.99998C4.10001 5.50292 4.50295 5.09998 5.00001 5.09998H19C19.4971 5.09998 19.9 5.50292 19.9 5.99998C19.9 6.49703 19.4971 6.89998 19 6.89998H5.00001C4.50295 6.89998 4.10001 6.49703 4.10001 5.99998ZM4.10001 12C4.10001 11.5029 4.50295 11.1 5.00001 11.1H19C19.4971 11.1 19.9 11.5029 19.9 12C19.9 12.497 19.4971 12.9 19 12.9H5.00001C4.50295 12.9 4.10001 12.497 4.10001 12ZM4.10001 18C4.10001 17.5029 4.50295 17.1 5.00001 17.1H19C19.4971 17.1 19.9 17.5029 19.9 18C19.9 18.497 19.4971 18.9 19 18.9H5.00001C4.50295 18.9 4.10001 18.497 4.10001 18Z" fill="currentColor"/></svg>',
+        TagIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.711 2.52188C17.2215 2.43557 16.7547 2.76242 16.6684 3.25192L15.9899 7.1L9.97778 7.1L10.6011 3.56521C10.6874 3.07571 10.3605 2.60892 9.87102 2.5226C9.38151 2.43629 8.91472 2.76314 8.82841 3.25265L8.15002 7.1H4.00001C3.50295 7.1 3.10001 7.50294 3.10001 8C3.10001 8.49705 3.50295 8.9 4.00001 8.9H7.83263L6.7394 15.1H3.00001C2.50295 15.1 2.10001 15.5029 2.10001 16C2.10001 16.4971 2.50295 16.9 3.00001 16.9H6.42201L5.78982 20.4853C5.70351 20.9748 6.03036 21.4416 6.51987 21.5279C7.00937 21.6142 7.47617 21.2874 7.56248 20.7979L8.24978 16.9H14.2619L13.6297 20.4853C13.5434 20.9748 13.8702 21.4416 14.3597 21.5279C14.8492 21.6142 15.316 21.2874 15.4023 20.7979L16.0896 16.9H20C20.4971 16.9 20.9 16.4971 20.9 16C20.9 15.5029 20.4971 15.1 20 15.1H16.407L17.5002 8.9H21C21.4971 8.9 21.9 8.49705 21.9 8C21.9 7.50294 21.4971 7.1 21 7.1H17.8176L18.441 3.56449C18.5273 3.07499 18.2005 2.60819 17.711 2.52188ZM15.6725 8.9L14.5792 15.1L8.56717 15.1L9.6604 8.9L15.6725 8.9Z" fill="currentColor"/></svg>',
+        PlusIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6.09961C12.4971 6.09961 12.9004 6.50294 12.9004 7V11.0996H17C17.4971 11.0996 17.9004 11.5029 17.9004 12C17.9004 12.4971 17.4971 12.9004 17 12.9004H12.9004V17C12.9004 17.4971 12.4971 17.9004 12 17.9004C11.5029 17.9004 11.0996 17.4971 11.0996 17V12.9004H7C6.50294 12.9004 6.09961 12.4971 6.09961 12C6.09961 11.5029 6.50294 11.0996 7 11.0996H11.0996V7C11.0996 6.50294 11.5029 6.09961 12 6.09961Z" fill="currentColor"/></svg>',
+        DocumentIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4795 15.4971C15.9765 15.4971 16.3799 15.9004 16.3799 16.3975C16.3799 16.8945 15.9765 17.2978 15.4795 17.2979H8.52051C8.02345 17.2979 7.62012 16.8945 7.62012 16.3975C7.62012 15.9004 8.02345 15.4971 8.52051 15.4971H15.4795Z" fill="currentColor"/><path d="M12.3359 11.0996C12.833 11.0996 13.2363 11.503 13.2363 12.0001C13.2363 12.4972 12.833 12.9006 12.3359 12.9006H8.52051C8.02345 12.9006 7.62012 12.4973 7.62012 12.0002C7.62012 11.5031 8.02345 11.0997 8.52051 11.0997L12.3359 11.0996Z" fill="currentColor"/><path d="M6.3 2.09961C5.14161 2.09961 4.2 3.04052 4.2 4.19922V19.8008C4.2 20.9595 5.14161 21.9004 6.3 21.9004H17.7C18.8584 21.9004 19.8 20.9595 19.8 19.8008V8.69922C19.8 8.20201 19.3966 7.79883 18.8994 7.79883H14.7C14.2028 7.79883 13.8 7.39648 13.8 6.89922V2.90039C13.8 2.40344 13.3966 2 12.8994 2H6.3ZM12 2.90039V6.69922H18V19.8008C18 20.4063 17.5644 20.9004 17 20.9004H7C6.43557 20.9004 6 20.4063 6 19.8008V4.19922C6 3.59375 6.43557 3.09961 7 3.09961H12Z" fill="currentColor"/></svg>',
+        ProfileIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.9997 12.8779C16.0197 12.878 19.4393 15.3848 20.7048 18.8828C21.0812 19.9234 20.2782 20.8962 19.2038 21.0137L18.9861 21.0264H5.0134L4.79562 21.0137C3.7213 20.8961 2.91743 19.9233 3.29367 18.8828C4.55905 15.3847 7.9797 12.8781 11.9997 12.8779ZM11.9997 14.6777C8.84467 14.6777 6.07214 16.6631 5.09344 19.2266L5.0426 19.3584C5.0188 19.416 5.00696 19.4395 5.00464 19.4453L5.01245 19.4492L18.987 19.4482C18.9865 19.4472 18.9859 19.4462 18.9852 19.4452L18.933 19.3115C17.9675 16.7154 15.1642 14.7104 11.9997 14.6777ZM12 2.09961C14.7614 2.09961 17 4.33817 17 7.09961C17 9.86105 14.7614 12.0996 12 12.0996C9.23856 12.0996 7 9.86105 7 7.09961C7 4.33817 9.23856 2.09961 12 2.09961ZM12 3.89961C10.2327 3.89961 8.8 5.33232 8.8 7.09961C8.8 8.8669 10.2327 10.2996 12 10.2996C13.7673 10.2996 15.2 8.8669 15.2 7.09961C15.2 5.33232 13.7673 3.89961 12 3.89961Z" fill="currentColor"/></svg>',
+        HistogramIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M4 3.33203C4.55224 3.33203 4.99993 3.7798 5 4.33203V18.0908H20.0674C20.6195 18.0908 21.0671 18.5388 21.0674 19.0908C21.0674 19.6431 20.6197 20.0908 20.0674 20.0908H5C3.89543 20.0908 3 19.1954 3 18.0908V4.33203C3.00007 3.7798 3.44776 3.33203 4 3.33203ZM8.19922 9.28418C8.7515 9.28418 9.19922 9.73189 9.19922 10.2842V15.6045C9.19908 16.1567 8.75142 16.6045 8.19922 16.6045C7.64719 16.6043 7.19936 16.1565 7.19922 15.6045V10.2842C7.19922 9.73202 7.6471 9.28438 8.19922 9.28418ZM17.2227 6.85645C17.7748 6.85658 18.2226 7.3043 18.2227 7.85645V15.6045C18.2225 16.1566 17.7747 16.6044 17.2227 16.6045C16.6705 16.6045 16.2228 16.1566 16.2227 15.6045V7.85645C16.2227 7.30422 16.6704 6.85645 17.2227 6.85645ZM12.7109 3.96387C13.2631 3.96387 13.7107 4.41175 13.7109 4.96387V15.6035C13.7109 16.1558 13.2632 16.6035 12.7109 16.6035C12.1587 16.6035 11.7109 16.1558 11.7109 15.6035V4.96387C11.7111 4.41175 12.1588 3.96387 12.7109 3.96387Z" fill="currentColor"/> </svg>',
+        LikeIcon: '<svg class="ic" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M11.8008 2.20386C11.8418 2.20504 11.8761 2.20679 11.9004 2.20679C12.9196 2.20697 14.0714 2.95768 14.6924 4.17847C15.3083 5.25838 15.3183 6.6302 15.0029 8.06226H18.0244C20.3536 8.06238 22.3556 10.0885 21.6377 12.4167L19.7588 18.5105C19.286 20.0439 17.7636 21.0064 16.1455 21.0066H8.86621C7.29432 21.0066 6.01953 19.7318 6.01953 18.1599V9.61792C6.01953 8.75706 6.59143 8.12094 7.18652 7.81421C7.74138 7.52813 8.27631 7.03526 8.55762 6.28882C8.7423 5.79875 8.81718 5.36749 8.89551 4.91284C8.90613 4.85121 8.91669 4.78901 8.92773 4.72632C9.01218 4.24725 9.13189 3.60409 9.57715 3.073C9.98574 2.58579 10.4533 2.34616 10.9248 2.25269C11.2492 2.18839 11.6072 2.19827 11.8008 2.20386ZM3.90039 8.70679C4.39721 8.707 4.79972 9.10935 4.7998 9.6062V19.6062C4.7998 20.1031 4.39727 20.5064 3.90039 20.5066C3.40333 20.5066 3 20.1033 3 19.6062V9.6062C3.00009 9.10922 3.40339 8.70679 3.90039 8.70679ZM11.5127 3.99976C11.4072 4.00007 11.3335 4.0066 11.2744 4.01831C11.1904 4.03501 11.0911 4.0682 10.9561 4.22925C10.8577 4.34667 10.79 4.52909 10.7002 5.03882C10.6906 5.093 10.6811 5.15005 10.6709 5.20972C10.5941 5.66065 10.4914 6.26229 10.2422 6.92358C9.77757 8.15644 8.89074 8.9602 8.01074 9.41382C7.93454 9.45309 7.88026 9.5043 7.84961 9.54761C7.82127 9.58767 7.81934 9.6106 7.81934 9.61792V18.1599C7.81934 18.7377 8.28844 19.2068 8.86621 19.2068H16.1455C17.1015 19.2066 17.8346 18.6435 18.0391 17.9802L19.918 11.8865C20.1905 11.0025 19.4593 9.86217 18.0244 9.86206H13.8223C13.5343 9.86197 13.264 9.72391 13.0947 9.49097C12.9254 9.25776 12.8776 8.95738 12.9668 8.68335C13.5367 6.93328 13.5148 5.73387 13.1221 5.05835C13.1126 5.04208 13.1031 5.02537 13.0947 5.00854C12.7129 4.24514 12.1035 4.00689 11.9004 4.00659C11.8294 4.00659 11.7579 4.00414 11.6982 4.00269H11.6865C11.6208 4.00109 11.5658 3.9996 11.5127 3.99976Z" fill="currentColor"/> </svg>',
+      };
+      document.querySelectorAll('.pwm .ic-slot').forEach(function(slot){ slot.innerHTML = ICONS[slot.getAttribute('data-ic')] || ''; });
+
+      function goPage(name){
+        document.querySelectorAll('.pwm .nav').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-page') === name); });
+        document.querySelectorAll('.pwm .page').forEach(function(p){ p.classList.toggle('active', p.getAttribute('data-pg') === name); });
+      }
+      document.querySelectorAll('.pwm .nav').forEach(function(n){ n.addEventListener('click', function(){ goPage(n.getAttribute('data-page')); }); });
+      document.getElementById('goPkg').addEventListener('click', function(){ goPage('packages'); });
+      document.getElementById('goTask').addEventListener('click', function(){ goPage('tasks'); });
+
+      var BALANCE = 1260, RATE = 100, MAX_RATE = 0.2;
+      var pkgs = [
+        { id:1, name:'体验套餐', pts:'500', bonus:100, price:99, validity:'会员 3 个月', unit:'¥0.17 / 积分', rec:false },
+        { id:2, name:'专业套餐', pts:'2,000', bonus:500, price:299, validity:'会员 12 个月', unit:'¥0.13 / 积分', rec:true },
+        { id:3, name:'旗舰套餐', pts:'6,000', bonus:2000, price:799, validity:'会员 24 个月', unit:'¥0.11 / 积分', rec:false }
+      ];
+      var deductOn = false;
+      var list = document.getElementById('pkgList');
+      pkgs.forEach(function(p, i){
+        var d = Math.min(BALANCE / RATE, p.price * MAX_RATE);
+        var pay = (p.price - d).toFixed(2).replace(/\.00$/, '');
+        var ded = d.toFixed(2).replace(/\.00$/, '');
+        var el = document.createElement('div');
+        el.className = 'pkg' + (p.rec ? ' selected' : '');
+        el.innerHTML =
+          (p.rec ? '<span class="pkg-rec">推荐</span>' : '') +
+          '<div class="pkg-name"><span style="display:flex">' + ICONS.TagIcon + '</span>' + p.name + '</div>' +
+          '<div class="pkg-pts">' + p.pts + ' <small>积分</small></div>' +
+          '<div class="pkg-bonus"><span style="display:flex">' + ICONS.PlusIcon + '</span>加赠 ' + p.bonus + ' 积分 · 支付即到账</div>' +
+          '<div class="pkg-rows"><div><span>会员有效期</span><b>' + p.validity + '</b></div><div><span>折合单价</span><b>' + p.unit + '</b></div></div>' +
+          '<div class="pkg-price"><b>¥' + p.price + '</b></div>' +
+          '<div class="pkg-deduct" data-d>已用 1,260 积分抵 <b>¥' + ded + '</b></div>' +
+          '<div class="pkg-pay" data-p>实付 <b>¥' + pay + '</b></div>' +
+          '<button class="btn-primary" data-buy>' + (p.rec ? '立即购买 · 开通会员' : '立即购买') + '</button>';
+        el.addEventListener('click', function(){
+          document.querySelectorAll('.pwm .pkg').forEach(function(x){ x.classList.remove('selected'); });
+          el.classList.add('selected');
+        });
+        list.appendChild(el);
+      });
+      function renderDeduct(){
+        document.querySelectorAll('.pwm [data-d]').forEach(function(x){ x.style.display = deductOn ? 'block' : 'none'; });
+        document.querySelectorAll('.pwm [data-p]').forEach(function(x){ x.style.display = deductOn ? 'block' : 'none'; });
+      }
+      document.getElementById('deductToggle').addEventListener('change', function(e){ deductOn = e.target.checked; renderDeduct(); });
+      document.querySelectorAll('.pwm [data-buy]').forEach(function(b){
+        var buying = false;
+        b.addEventListener('click', function(e){
+          e.stopPropagation();
+          var paySec = document.getElementById('paySec');
+          var original = b.closest('.pkg').querySelector('.pkg-rec') ? '立即购买 · 开通会员' : '立即购买';
+          if (!buying) {
+            // 第一次点击：展示支付方式
+            buying = true;
+            if (paySec) paySec.style.display = '';
+            b.textContent = '确认支付';
+          } else {
+            // 确认支付
+            b.textContent = '支付确认中…';
+            b.disabled = true;
+            setTimeout(function(){ b.textContent = '已下单，开通会员'; }, 900);
+            setTimeout(function(){
+              buying = false;
+              b.textContent = original;
+              b.disabled = false;
+              if (paySec) paySec.style.display = 'none';
+            }, 2600);
+          }
+        });
+      });
+      document.querySelectorAll('#payOpts .pay').forEach(function(b){
+        b.addEventListener('click', function(){
+          document.querySelectorAll('#payOpts .pay').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+        });
+      });
+
+      var groups = [
+        { title:'注册与认证', hint:'一次性', icon:'ProfileIcon', items:[
+          { icon:'ProfileIcon', name:'注册账号', pts:'+100', desc:'完成企业账号注册', state:'done' },
+          { icon:'SafeIcon', name:'实名认证', pts:'+200', desc:'完成法人实名或对公账户认证', state:'done' },
+          { icon:'ProfileIcon', name:'绑定企业', pts:'+300', desc:'绑定企业主体，建立企业档案', state:'done' }
+        ]},
+        { title:'完善档案', hint:'共 4 档 · 50 积分 / 档', icon:'DocumentIcon', items:[
+          { icon:'DocumentIcon', name:'基本工商信息', pts:'+50', desc:'营业执照、成立年限、所属领域', state:'done' },
+          { icon:'DocumentIcon', name:'财务数据', pts:'+50', desc:'近三年财务三表', state:'done' },
+          { icon:'DocumentIcon', name:'知识产权', pts:'+50', desc:'专利、软著、商标清单', state:'done' },
+          { icon:'DocumentIcon', name:'研发与人员信息', pts:'+50', desc:'研发项目、人员占比、成果转化', state:'todo' }
+        ]},
+        { title:'使用服务', hint:'用得越多赚得越多', icon:'TaskIcon', items:[
+          { icon:'TaskIcon', name:'首次完成测评', pts:'+100', desc:'完成一次企业科创能力测评', state:'done' },
+          { icon:'TagIcon', name:'首次下单', pts:'+500', desc:'购买任意积分套餐或专家服务', state:'todo' },
+          { icon:'HistogramIcon', name:'订单验收', pts:'+300', desc:'订单交付后 7 日内完成验收', state:'locked' },
+          { icon:'LikeIcon', name:'服务评价', pts:'+50', desc:'对已完成订单进行服务评价', state:'locked' },
+          { icon:'DocumentIcon', name:'订阅政策提醒', pts:'+50', desc:'订阅所在地区的申报政策提醒', state:'todo' }
+        ]},
+        { title:'邀请', hint:'上不封顶', icon:'TodoIcon', items:[
+          { icon:'ProfileIcon', name:'邀请同事', pts:'+100 / 位', desc:'同事注册并完成实名认证', state:'todo' },
+          { icon:'TagIcon', name:'邀请企业注册并认证', pts:'+500 / 家', desc:'被邀请企业完成注册 + 实名认证后发放', state:'progress', cur:1, total:2 }
+        ]}
+      ];
+      var tg = document.getElementById('taskGroups');
+      groups.forEach(function(g){
+        var box = document.createElement('div');
+        box.className = 'task-group';
+        var h = '<div class="tg-head"><span style="display:flex">' + ICONS[g.icon] + '</span>' + g.title + '<span class="tg-hint">' + g.hint + '</span></div>';
+        var rows = g.items.map(function(t){
+          var act = '';
+          if (t.state === 'done') act = '<span class="task-done"><span style="display:flex">' + ICONS.CheckIcon + '</span>已完成</span>';
+          else if (t.state === 'claimed') act = '<span class="task-claimed">今日已领</span>';
+          else if (t.state === 'locked') act = '<span class="task-claimed">完成首单后解锁</span>';
+          else act = '<button class="btn-ghost" style="padding:5px 12px; font-size:12px;">去完成</button>';
+          var prog = t.state === 'progress' ? '<div class="task-prog"><span class="task-bar"><i style="width:' + Math.round(t.cur / t.total * 100) + '%"></i></span><span>进度 ' + t.cur + ' / ' + t.total + '</span></div>' : '';
+          return '<div class="task"><span class="task-ic">' + ICONS[t.icon] + '</span>' +
+            '<div class="task-body"><div class="task-name">' + t.name + ' <span class="task-pts' + (t.state === 'claimed' ? ' x' : '') + '">' + t.pts + '</span></div>' +
+            '<div class="task-desc">' + t.desc + '</div>' + prog + '</div>' +
+            '<div class="task-act">' + act + '</div></div>';
+        }).join('');
+        box.innerHTML = h + rows;
+        tg.appendChild(box);
+      });
+
+      var records = [
+        { icon:'DocumentIcon', name:'完善档案 · 知识产权信息', time:'2026-11-11 09:12', delta:+50, bal:1260, t:'plus' },
+        { icon:'DocumentIcon', name:'AI 生成高企申报书', time:'2026-11-10 14:02', delta:-20, bal:1210, t:'minus' },
+        { icon:'DocumentIcon', name:'订阅政策提醒', time:'2026-11-09 08:30', delta:+50, bal:1230, t:'plus' },
+        { icon:'SafeIcon', name:'专家验稿服务费抵扣', time:'2026-11-08 17:45', delta:-1000, bal:1180, t:'minus' },
+        { icon:'ProfileIcon', name:'邀请同事（王工）', time:'2026-11-07 10:15', delta:+100, bal:2180, t:'plus' },
+        { icon:'ProfileIcon', name:'绑定企业', time:'2026-11-06 14:40', delta:+300, bal:2080, t:'plus' },
+        { icon:'SafeIcon', name:'实名认证', time:'2026-11-05 11:22', delta:+200, bal:1780, t:'plus' },
+        { icon:'ProfileIcon', name:'注册账号', time:'2026-11-04 09:01', delta:+100, bal:1580, t:'plus' },
+        { icon:'DocumentIcon', name:'完善档案 · 财务数据', time:'2026-11-04 09:05', delta:+50, bal:1480, t:'plus' },
+        { icon:'DocumentIcon', name:'完善档案 · 基本工商信息', time:'2026-11-04 09:03', delta:+50, bal:1430, t:'plus' },
+        { icon:'TaskIcon', name:'首次完成测评', time:'2026-11-03 16:47', delta:+100, bal:1380, t:'plus' }
+      ];
+      var led = document.getElementById('ledList');
+      records.forEach(function(r){
+        var d = document.createElement('div');
+        d.className = 'led-row';
+        d.setAttribute('data-t', r.t);
+        var sign = r.delta > 0 ? '+' : '−';
+        d.innerHTML = '<span class="led-ic">' + ICONS[r.icon] + '</span>' +
+          '<div class="led-body"><div class="led-name">' + r.name + '</div><div class="led-time">' + r.time + '</div></div>' +
+          '<div class="led-right"><div class="led-delta ' + r.t + '">' + sign + Math.abs(r.delta) + '</div><div class="led-bal">余额 ' + r.bal.toLocaleString() + '</div></div>';
+        led.appendChild(d);
+      });
+      document.querySelectorAll('#ledFilters .fbtn').forEach(function(b){
+        b.addEventListener('click', function(){
+          document.querySelectorAll('#ledFilters .fbtn').forEach(function(x){ x.classList.remove('active'); });
+          b.classList.add('active');
+          var f = b.getAttribute('data-f');
+          document.querySelectorAll('.pwm .led-row').forEach(function(row){
+            row.style.display = (f === 'all' || row.getAttribute('data-t') === f) ? '' : 'none';
+          });
+        });
+      });
+    })();
+
     // ==================== 智能客服 ====================
     const csFab = document.getElementById('cs-fab');
     const csPanel = document.getElementById('cs-panel');
@@ -7207,7 +7903,50 @@
       lucide.createIcons();
     }
 
-    csFab.addEventListener('click', () => csPanel.classList.toggle('hidden'));
+    // 悬浮按钮可自由拖动，并联动面板位置
+    let csDrag = null;
+    let csDragMoved = false;
+    function csPositionPanel() {
+      const rect = csFab.getBoundingClientRect();
+      const pw = csPanel.offsetWidth || 350;
+      const ph = 500;
+      let left = rect.right - pw;
+      let top = rect.top - ph - 12;
+      left = Math.max(8, Math.min(window.innerWidth - pw - 8, left));
+      top = Math.max(8, Math.min(window.innerHeight - ph - 8, top));
+      csPanel.style.right = 'auto';
+      csPanel.style.bottom = 'auto';
+      csPanel.style.left = left + 'px';
+      csPanel.style.top = top + 'px';
+    }
+    csFab.addEventListener('mousedown', (e) => {
+      const rect = csFab.getBoundingClientRect();
+      csDrag = { startX: e.clientX, startY: e.clientY, left: rect.left, top: rect.top };
+      csDragMoved = false;
+      e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!csDrag) return;
+      const dx = e.clientX - csDrag.startX;
+      const dy = e.clientY - csDrag.startY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) csDragMoved = true;
+      if (csDragMoved) {
+        csFab.style.right = 'auto';
+        csFab.style.bottom = 'auto';
+        csFab.style.left = Math.max(0, Math.min(window.innerWidth - 56, csDrag.left + dx)) + 'px';
+        csFab.style.top = Math.max(0, Math.min(window.innerHeight - 56, csDrag.top + dy)) + 'px';
+        if (!csPanel.classList.contains('hidden')) csPositionPanel();
+      }
+    });
+    document.addEventListener('mouseup', () => {
+      csDrag = null;
+    });
+
+    csFab.addEventListener('click', () => {
+      if (csDragMoved) { csDragMoved = false; return; }
+      csPanel.classList.toggle('hidden');
+      if (!csPanel.classList.contains('hidden')) csPositionPanel();
+    });
     csClose.addEventListener('click', () => csPanel.classList.add('hidden'));
 
     document.querySelectorAll('.cs-quick').forEach((btn) => {
