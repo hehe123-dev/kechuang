@@ -1059,9 +1059,9 @@
         <!-- 能力中心 -->
         <div class="nav-group-label mt-6">能力中心</div>
         <div class="space-y-1">
-          <div class="nav-item" data-target="page-agent" data-title="科创专家">
+          <div class="nav-item" data-target="page-agent" data-title="智能体广场">
             <i data-lucide="bot" class="nav-icon"></i>
-            <span>科创专家</span>
+            <span>智能体广场</span>
           </div>
           <div class="nav-item" data-target="page-policy" data-title="政策发现">
             <i data-lucide="compass" class="nav-icon"></i>
@@ -1087,6 +1087,28 @@
           <div class="nav-item" data-target="page-my-invoice" data-title="发票管理">
             <i data-lucide="receipt" class="nav-icon"></i>
             <span>发票管理</span>
+          </div>
+        </div>
+
+        <!-- 企业管理 -->
+        <div class="nav-group-label mt-6">企业管理</div>
+        <div class="space-y-1">
+          <div class="nav-item" data-target="page-members" data-title="用户与权限管理">
+            <i data-lucide="users" class="nav-icon"></i>
+            <span>用户与权限管理</span>
+          </div>
+        </div>
+
+        <!-- 会员与帮助 -->
+        <div class="nav-group-label mt-6">会员与帮助</div>
+        <div class="space-y-1">
+          <div class="nav-item" data-target="page-points" data-title="积分与会员">
+            <i data-lucide="crown" class="nav-icon"></i>
+            <span>积分与会员</span>
+          </div>
+          <div class="nav-item" data-manual="1">
+            <i data-lucide="book-open" class="nav-icon"></i>
+            <span>平台功能手册</span>
           </div>
         </div>
       </nav>
@@ -1129,18 +1151,6 @@
               <button id="switch-enterprise-btn" class="mt-1.5 flex w-full items-center justify-center gap-1.5 rounded-md border border-gray-200 px-2 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
                 <i data-lucide="refresh-cw" class="h-3.5 w-3.5"></i> 切换企业
               </button>
-            </div>
-
-<!-- 积分与会员 -->
-            <div class="border-t border-gray-100 p-2">
-              <div id="points-membership-btn" class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 text-sm text-gray-600 transition hover:bg-gray-50 hover:text-primary">
-                <i data-lucide="crown" class="h-4 w-4"></i>
-                <span>积分与会员</span>
-              </div>
-              <div id="platform-manual-btn" class="flex cursor-pointer items-center gap-2.5 rounded-md px-2 py-2 text-sm text-gray-600 transition hover:bg-gray-50 hover:text-primary">
-                <i data-lucide="book-open" class="h-4 w-4"></i>
-                <span>平台功能手册</span>
-              </div>
             </div>
 
             <!-- 退出登录 -->
@@ -1188,105 +1198,12 @@
 
         <!-- AI工作台 -->
         <div id="page-ai" class="page -m-6 h-[calc(100vh-44px)]">
-          <!-- ===== 1级落地页：对话框 + 待办/政策/申报模块 ===== -->
-          <div id="ai-landing" class="h-full overflow-y-auto bg-gray-50">
-            <div class="h-full p-6">
-              <div class="flex h-full gap-6">
-                <!-- 左侧：AI 主导区 -->
-                <div class="flex min-w-0 flex-1 flex-col">
-                  <div class="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-                    <div class="flex items-center gap-4">
-                      <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-blue-400 text-white shadow-sm">
-                        <i data-lucide="bot" class="h-7 w-7"></i>
-                      </div>
-                      <div>
-                        <h2 class="text-2xl font-semibold text-gray-900">科创 AI 助手</h2>
-                        <p class="mt-1 text-sm text-gray-500">知识库入口 · 百问百答 · 政策匹配解读，帮您从「问答」直达「办事」</p>
-                      </div>
-                    </div>
-
-                    <div class="mt-5 rounded-xl bg-gray-50 p-4">
-                      <div class="text-xs font-medium text-gray-500">回答后，可直接进入下一步办理</div>
-                      <div class="mt-2.5 flex flex-wrap gap-2">
-                        <button class="js-quick-nav flex items-center gap-1.5 rounded-lg border border-primary/30 bg-white px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" data-target="page-agent"><i data-lucide="bot" class="h-3.5 w-3.5"></i> 进入智能体广场</button>
-                        <button class="js-quick-nav flex items-center gap-1.5 rounded-lg border border-primary/30 bg-white px-3 py-1.5 text-xs text-primary transition hover:bg-primary-light" data-target="page-cultivation">科创培育（智能测评）</button>
-                      </div>
-                    </div>
-
-                    <div class="mt-auto">
-                      <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                        <button class="js-landing-prompt text-xs text-gray-500 transition hover:text-primary" data-prompt="一键立项申报：请结合我的企业画像，为高企认定发起立项申报">一键立项申报</button>
-                        <span class="text-gray-300">·</span>
-                        <button class="js-landing-prompt text-xs text-gray-500 transition hover:text-primary" data-prompt="企业培育规划：请为我生成年度科创培育路线与目标">企业培育规划</button>
-                        <span class="text-gray-300">·</span>
-                        <button class="js-landing-prompt text-xs text-gray-500 transition hover:text-primary" data-prompt="政策匹配：匹配适合我的专精特新与高企政策">政策匹配</button>
-                        <span class="text-gray-300">·</span>
-                        <button class="js-landing-prompt text-xs text-gray-500 transition hover:text-primary" data-prompt="行业百问百答：科创申报有哪些常见问题？">行业百问百答</button>
-                      </div>
-                      <div class="mt-2.5 flex items-end gap-2 rounded-2xl border border-gray-200 bg-white p-2 shadow-sm transition focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/20">
-                        <textarea id="ai-landing-input" rows="3" placeholder="输入您的问题，例如：这家企业今年更适合先冲高企，还是先做专精特新后备？" class="max-h-40 flex-1 resize-none bg-transparent px-3 py-2 text-base leading-relaxed text-gray-700 outline-none placeholder:text-gray-400"></textarea>
-                        <button onclick="enterAiChat()" class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm transition hover:bg-primary-hover" title="发送">
-                          <i data-lucide="send" class="h-5 w-5"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 右侧：待办 + 申报任务（后置缩小） -->
-                <div class="w-72 flex-shrink-0 space-y-4">
-                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                    <div class="flex items-center justify-between">
-                      <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="check-square" class="h-4 w-4 text-primary"></i> 待办事项</h3>
-                      <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-project">全部</button>
-                    </div>
-                    <div class="mt-2 space-y-1.5">
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-500"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">确认申报时序排期</div><div class="text-[11px] text-red-500">今日到期</div></div></div>
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-400"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">补充财务审计材料</div><div class="text-[11px] text-gray-400">高企 · 剩 3 天</div></div></div>
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-400"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">完善知识产权权属信息</div><div class="text-[11px] text-gray-400">高企 · 剩 5 天</div></div></div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                    <div class="flex items-center justify-between">
-                      <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="briefcase" class="h-4 w-4 text-amber-500"></i> 申报任务</h3>
-                      <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-project">全部</button>
-                    </div>
-                    <div class="mt-2 space-y-1.5">
-                      <div class="rounded-lg border border-gray-100 px-2.5 py-2"><div class="flex items-center justify-between"><span class="truncate text-xs text-gray-700">高企认定申报</span><span class="rounded-full bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">进行中</span></div><div class="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:53%"></div></div></div>
-                      <div class="rounded-lg border border-gray-100 px-2.5 py-2"><div class="flex items-center justify-between"><span class="truncate text-xs text-gray-700">湖北省重点研发计划</span><span class="rounded-full bg-violet-50 px-1.5 py-0.5 text-[10px] text-violet-600">托管</span></div><div class="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:50%"></div></div></div>
-                      <div class="rounded-lg border border-gray-100 px-2.5 py-2"><div class="flex items-center justify-between"><span class="truncate text-xs text-gray-700">专精特新“小巨人”培育</span><span class="rounded-full bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">进行中</span></div><div class="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-gray-100"><div class="h-full rounded-full bg-primary" style="width:40%"></div></div></div>
-                    </div>
-                  </div>
-
-                  <div class="rounded-2xl border border-gray-200 bg-white p-4">
-                    <div class="flex items-center justify-between">
-                      <h3 class="flex items-center gap-2 text-sm font-semibold text-gray-800"><i data-lucide="bell" class="h-4 w-4 text-violet-500"></i> 订阅政策</h3>
-                      <button class="js-quick-nav text-xs text-gray-400 transition hover:text-primary" data-target="page-policy">全部</button>
-                    </div>
-                    <div class="mt-2 space-y-1.5">
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-500"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">高新技术企业认定</div><div class="text-[11px] text-gray-400">已订阅 · 更新 2 条</div></div></div>
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-green-500"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">专精特新中小企业</div><div class="text-[11px] text-gray-400">已订阅 · 更新 1 条</div></div></div>
-                      <div class="flex items-start gap-2 rounded-lg border border-gray-100 px-2.5 py-2"><span class="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-300"></span><div class="min-w-0 flex-1"><div class="truncate text-xs text-gray-700">研发费用加计扣除</div><div class="text-[11px] text-gray-400">已订阅</div></div></div>
-                    </div>
-                    <button class="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-gray-300 py-2 text-xs text-gray-500 transition hover:border-primary hover:text-primary">
-                      <i data-lucide="plus" class="h-3.5 w-3.5"></i> 订阅新政策
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- ===== 2级页面：对话工作台 ===== -->
-          <div id="ai-chat" class="hidden h-full">
+          <!-- ===== 对话工作台 ===== -->
+          <div id="ai-chat" class="h-full">
           <div class="flex h-full overflow-hidden">
             <!-- 左侧：历史对话 -->
             <aside class="flex h-full w-72 flex-shrink-0 flex-col border-r border-gray-200 bg-white">
               <div class="space-y-2 p-3">
-                <button onclick="enterAiLanding()" class="flex w-full items-center justify-center gap-1.5 rounded-lg border border-gray-200 bg-white py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary">
-                  <i data-lucide="arrow-left" class="h-4 w-4"></i> 返回工作台
-                </button>
                 <button id="new-chat-btn" class="flex w-full items-center justify-center gap-1.5 rounded-lg bg-primary py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
                   <i data-lucide="plus" class="h-4 w-4"></i> 新建对话
                 </button>
@@ -1496,6 +1413,12 @@
                       <button id="send-btn" class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-md bg-primary text-white shadow-sm transition hover:bg-primary-hover" title="发送">
                         <i data-lucide="send" class="h-4 w-4"></i>
                       </button>
+                    </div>
+                    <div class="mt-2 flex flex-wrap items-center gap-2">
+                      <button class="js-agent-quick flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-agent="zc"><i data-lucide="compass" class="h-3.5 w-3.5"></i> 政策分析</button>
+                      <button class="js-agent-quick flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-agent="cp"><i data-lucide="activity" class="h-3.5 w-3.5"></i> 智能测评</button>
+                      <button class="js-agent-quick flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-agent="cs"><i data-lucide="calculator" class="h-3.5 w-3.5"></i> 财税专家</button>
+                      <button class="js-agent-quick flex items-center gap-1.5 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600 transition hover:border-primary hover:text-primary" data-agent="sb"><i data-lucide="pen-tool" class="h-3.5 w-3.5"></i> 申报书撰写</button>
                     </div>
                     <div class="mt-2 text-center text-xs text-gray-300">AI 生成内容仅供参考，请以官方发布为准</div>
                   </div>
@@ -2063,8 +1986,6 @@
                 </div>
                 <button type="button" class="ai-btn" onclick="openCultivationDoc()">AI 生成申报书</button>
               </div>
-            <div style="margin-bottom:8px"><div class="sec-title">企业科创培育进阶路径<span class="chip" style="background:color-mix(in srgb,var(--kimi-color-text-primary) 8%,transparent);color:var(--kimi-color-text-secondary)">金字塔视图 · 五级梯度</span></div><div class="sec-sub">塔尖为终极目标「小巨人」，塔基为当前定位；由塔基向塔尖逐级进阶，前序资质是后续申报的前置条件</div></div>            <div class="card" style="padding:16px 20px;margin:12px 0 24px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">              <div style="display:flex;flex-direction:column;justify-content:center">                <div style="height:60px;flex:none"></div><div style="height:60px;flex:none"></div>                <div style="height:60px;flex:none;display:flex;flex-direction:column;justify-content:center"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end"><span style="font-size:13px;color:var(--kimi-color-text-tertiary)">同赛道企业 80% 所处阶段</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">L3</span><svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;color:var(--kimi-chart-1)"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>                <div style="height:60px;flex:none"></div>                <div style="height:60px;flex:none;display:flex;flex-direction:column;justify-content:center"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end"><span style="font-size:13px;color:var(--kimi-color-text-tertiary)">当前企业所处阶段</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">L1</span><svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;color:var(--kimi-chart-1)"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>              </div>              <div style="position:relative;display:flex;flex-direction:column;justify-content:center">                <div class="pyr-layer" style="width:44%;background:color-mix(in srgb,var(--kimi-chart-1) 100%,transparent);color:#fff;">L5 小巨人</div>                <div class="pyr-layer" style="width:57%;background:color-mix(in srgb,var(--kimi-chart-1) 72%,transparent);color:#fff;">L4 专精特新</div>                <div class="pyr-layer" style="width:70%;background:color-mix(in srgb,var(--kimi-chart-1) 50%,transparent);color:#fff;">L3 高新技术企业</div>                <div class="pyr-layer" style="width:83%;background:color-mix(in srgb,var(--kimi-chart-1) 30%,transparent);color:var(--kimi-color-text-primary);">L2 创新型中小企业</div>                <div class="pyr-layer" style="width:96%;background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-color-text-primary);border-left:2px solid var(--kimi-color-text-primary);border-right:2px solid var(--kimi-color-text-primary);">L1 科技型中小企业</div>              </div>              <div style="display:flex;flex-direction:column;justify-content:center;padding-left:64px">                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">专精特新「小巨人」</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 12-18个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">主导产品市占率佐证 · 营收≥1亿或融资≥8000万 · 研发占比≥3%</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：国家重点支持、北交所上市通道</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">专精特新中小企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈9个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">细分赛道深耕≥2年 · 上年度研发占比≥3% · 营收≥1000万</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：梯度培育奖励、融资对接</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">高新技术企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈6个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">核心知识产权 · 研发费占比5%/4%/3% · 高新收入≥60%</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：15%企业所得税、人才引进加分</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">创新型中小企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈2个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">评价得分≥60分 · 拥有自主知识产权 · 无重大安全质量事故</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：专精特新申报资格</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">科技型中小企业</span><span class="chip" style="background:color-mix(in srgb,var(--kimi-color-text-primary) 10%,transparent);color:var(--kimi-color-text-primary)">当前定位</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈1个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">职工≤500人 · 年销售收入≤2亿 · 研发费用占比达标</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：加计扣除、研发费用后补助</div></div>              </div></div></div>
-            <div style="margin-bottom:8px"><div class="sec-title">科创培育路线图</div><div class="sec-sub">按「筑基 → 认定 → 升级 → 领军」四阶段推进，每阶段设置可验收里程碑</div></div>            <div class="phase-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 24px">              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-1);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">筑基期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2026 Q4</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">科小评价入库</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">研发费用归集体系</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">发明专利布局 2-3 件</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-4);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">认定期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2027 H1</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">创新型中小企业评价</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">高企申报材料编制</div><div style="font-size:13px;font-weight:500;color:var(--kimi-color-text-primary)">高新技术企业申报</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-3);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">升级期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2027 H2</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">专精特新中小企业申报</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">省级企业技术中心备案</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">小巨人诊断对标</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-5);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">领军期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2028+</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">小巨人申报</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">制造业单项冠军后备</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">北交所 / 科创板上市培育</div></div></div>            </div>
             <div style="margin-bottom:8px"><div class="sec-title">申报时间轴<span class="chip" style="background:color-mix(in srgb,var(--kimi-color-text-primary) 8%,transparent);color:var(--kimi-color-text-secondary)">2026-11 → 2027-10</span></div><div class="sec-sub">甘特图 / 列表 / 日历多视图查看申报节奏 · 竖线为今日（2026-11-12）</div></div>            <div style="margin:12px 0 8px;display:flex;gap:8px"><button class="tab on" data-planview="gantt">甘特图</button><button class="tab" data-planview="list">列表</button><button class="tab" data-planview="calendar">日历</button></div>            <div class="card" style="padding:14px 16px;margin:0 0 24px;overflow-x:auto"><div id="gantt" style="min-width:640px"></div><div id="legend" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:12px"></div><div id="plan-list" style="display:none;min-width:640px"></div><div id="plan-calendar" style="display:none;min-width:640px"></div></div>
             <div style="margin-bottom:12px"><div class="sec-title">申报规划清单<span class="num" style="margin-left:auto;font-size:12px;color:var(--kimi-color-text-tertiary);font-weight:400">已立项 <b id="statLx" style="color:var(--kimi-chart-3)">0</b> · 已下单 <b id="statOd" style="color:var(--kimi-chart-1)">0</b></span></div><div class="sec-sub">勾选框标记材料准备完成；「立项」启动内部申报项目，「下单」预订第三方辅导服务</div></div>            <div class="grid3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:8px">              <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--kimi-chart-1);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">即刻申报</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary)">3个月内 · 2026-11 ~ 2027-01</span><span class="num chip" id="cnt0" style="margin-left:auto;background:color-mix(in srgb,var(--kimi-chart-1) 14%,transparent);color:var(--kimi-chart-1)">0/4</span></div><div class="list-col" id="list0"></div></div>              <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--kimi-chart-4);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">短期培育</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary)">3-6个月 · 2027-02 ~ 2027-05</span><span class="num chip" id="cnt1" style="margin-left:auto;background:color-mix(in srgb,var(--kimi-chart-4) 14%,transparent);color:var(--kimi-chart-4)">0/4</span></div><div class="list-col" id="list1"></div></div>              <div><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:8px;height:8px;border-radius:50%;background:var(--kimi-chart-5);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">中长期储备</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary)">6个月以上 · 2027-06 起</span><span class="num chip" id="cnt2" style="margin-left:auto;background:color-mix(in srgb,var(--kimi-chart-5) 18%,transparent);color:var(--kimi-color-text-secondary)">0/4</span></div><div class="list-col" id="list2"></div></div>            </div>
             </div>
@@ -2878,6 +2799,11 @@
 
         <!-- 培育规划 -->
         <div id="page-project" class="page hidden">
+          <!-- 培育总览：企业进阶路径 + 培育路线图 -->
+          <div class="kc" style="font-family:var(--kimi-font-sans);width:100%;box-sizing:border-box;margin-bottom:24px">
+            <div style="margin-bottom:8px"><div class="sec-title">企业科创培育进阶路径<span class="chip" style="background:color-mix(in srgb,var(--kimi-color-text-primary) 8%,transparent);color:var(--kimi-color-text-secondary)">金字塔视图 · 五级梯度</span></div><div class="sec-sub">塔尖为终极目标「小巨人」，塔基为当前定位；由塔基向塔尖逐级进阶，前序资质是后续申报的前置条件</div></div>            <div class="card" style="padding:16px 20px;margin:12px 0 24px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">              <div style="display:flex;flex-direction:column;justify-content:center">                <div style="height:60px;flex:none"></div><div style="height:60px;flex:none"></div>                <div style="height:60px;flex:none;display:flex;flex-direction:column;justify-content:center"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end"><span style="font-size:13px;color:var(--kimi-color-text-tertiary)">同赛道企业 80% 所处阶段</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">L3</span><svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;color:var(--kimi-chart-1)"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>                <div style="height:60px;flex:none"></div>                <div style="height:60px;flex:none;display:flex;flex-direction:column;justify-content:center"><div style="display:flex;align-items:center;gap:8px;justify-content:flex-end"><span style="font-size:13px;color:var(--kimi-color-text-tertiary)">当前企业所处阶段</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">L1</span><svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px;color:var(--kimi-chart-1)"><path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>              </div>              <div style="position:relative;display:flex;flex-direction:column;justify-content:center">                <div class="pyr-layer" style="width:44%;background:color-mix(in srgb,var(--kimi-chart-1) 100%,transparent);color:#fff;">L5 小巨人</div>                <div class="pyr-layer" style="width:57%;background:color-mix(in srgb,var(--kimi-chart-1) 72%,transparent);color:#fff;">L4 专精特新</div>                <div class="pyr-layer" style="width:70%;background:color-mix(in srgb,var(--kimi-chart-1) 50%,transparent);color:#fff;">L3 高新技术企业</div>                <div class="pyr-layer" style="width:83%;background:color-mix(in srgb,var(--kimi-chart-1) 30%,transparent);color:var(--kimi-color-text-primary);">L2 创新型中小企业</div>                <div class="pyr-layer" style="width:96%;background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-color-text-primary);border-left:2px solid var(--kimi-color-text-primary);border-right:2px solid var(--kimi-color-text-primary);">L1 科技型中小企业</div>              </div>              <div style="display:flex;flex-direction:column;justify-content:center;padding-left:64px">                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">专精特新「小巨人」</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 12-18个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">主导产品市占率佐证 · 营收≥1亿或融资≥8000万 · 研发占比≥3%</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：国家重点支持、北交所上市通道</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">专精特新中小企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈9个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">细分赛道深耕≥2年 · 上年度研发占比≥3% · 营收≥1000万</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：梯度培育奖励、融资对接</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">高新技术企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈6个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">核心知识产权 · 研发费占比5%/4%/3% · 高新收入≥60%</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：15%企业所得税、人才引进加分</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">创新型中小企业</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈2个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">评价得分≥60分 · 拥有自主知识产权 · 无重大安全质量事故</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：专精特新申报资格</div></div>                <div style="height:60px;display:flex;flex-direction:column;justify-content:center;gap:3px;margin:2px 0"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">科技型中小企业</span><span class="chip" style="background:color-mix(in srgb,var(--kimi-color-text-primary) 10%,transparent);color:var(--kimi-color-text-primary)">当前定位</span><span class="num chip" style="background:color-mix(in srgb,var(--kimi-chart-1) 16%,transparent);color:var(--kimi-chart-1)">周期 ≈1个月</span></div><div style="font-size:12px;color:var(--kimi-color-text-tertiary);line-height:17px">职工≤500人 · 年销售收入≤2亿 · 研发费用占比达标</div><div style="font-size:12px;color:var(--kimi-color-text-secondary)">解锁：加计扣除、研发费用后补助</div></div>              </div></div></div>
+            <div style="margin-bottom:8px"><div class="sec-title">科创培育路线图</div><div class="sec-sub">按「筑基 → 认定 → 升级 → 领军」四阶段推进，每阶段设置可验收里程碑</div></div>            <div class="phase-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 24px">              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-1);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">筑基期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2026 Q4</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">科小评价入库</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">研发费用归集体系</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">发明专利布局 2-3 件</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-4);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">认定期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2027 H1</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">创新型中小企业评价</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">高企申报材料编制</div><div style="font-size:13px;font-weight:500;color:var(--kimi-color-text-primary)">高新技术企业申报</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-3);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">升级期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2027 H2</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">专精特新中小企业申报</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">省级企业技术中心备案</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">小巨人诊断对标</div></div></div>              <div class="card" style="padding:12px 14px"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="width:10px;height:10px;border-radius:50%;background:var(--kimi-chart-5);flex:none"></span><span style="font-size:14px;font-weight:500;color:var(--kimi-color-text-primary)">领军期</span><span class="num" style="font-size:12px;color:var(--kimi-color-text-quaternary);margin-left:auto">2028+</span></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;color:var(--kimi-color-text-secondary)">小巨人申报</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">制造业单项冠军后备</div><div style="font-size:13px;color:var(--kimi-color-text-secondary)">北交所 / 科创板上市培育</div></div></div>            </div>
+          </div>
           <!-- 一、标题 + 主按钮 -->
           <div class="mb-5 flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-800">培育规划</h2>
@@ -2973,9 +2899,9 @@
                 <span id="project-inprogress-count" class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">3</span>
               </div>
               <div id="project-inprogress-list" class="space-y-3">
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="2024年高新技术企业认定" data-type="自主" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">进行中</span></div><h3>2024年高新技术企业认定</h3><p>来自高企测评，围绕知识产权、研发费用和成果转化建立年度培育路径。</p><div class="u-project-result"><div><span>测评结果</span><strong>A+ <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 53% · 8/15 任务</span><span>截止 5 天</span></div><div class="u-progress green"><i style="width:53%"></i></div><small class="cultivation-project-task-count">负责人 张伟 · 距截止 5 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openCultivationProject('2024年高新技术企业认定','高企测评 · 年度培育')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="湖北省重点研发计划项目" data-type="托管" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip amber">进行中</span></div><h3>湖北省重点研发计划项目</h3><p>来自政策中心，围绕研发投入与创新产出推进项目申报。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 50% · 6/12 任务</span><span>截止 12 天</span></div><div class="u-progress green"><i style="width:50%"></i></div><small class="cultivation-project-task-count">负责人 李娜 · 距截止 12 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openCultivationProject('湖北省重点研发计划项目','政策项目 · 研发申报')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="专精特新“小巨人”培育" data-type="自主" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">进行中</span></div><h3>专精特新“小巨人”培育</h3><p>来自专精特新测评，重点补强市场地位与创新能力。</p><div class="u-project-result"><div><span>测评结果</span><strong>B <small>待提升</small></strong></div><div><span>满足条件</span><strong class="good">1 项</strong></div><div><span>不满足条件</span><strong class="warn">2 项</strong></div><div><span>一票否决</span><strong class="bad">1 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 40% · 4/10 任务</span><span>截止 3 天</span></div><div class="u-progress red"><i style="width:40%"></i></div><small class="cultivation-project-task-count">负责人 王强 · 距截止 3 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openCultivationProject('专精特新“小巨人”培育','专精特新 · 梯度培育')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="2024年高新技术企业认定" data-type="自主" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">进行中</span></div><h3>2024年高新技术企业认定</h3><p>来自高企测评，围绕知识产权、研发费用和成果转化建立年度培育路径。</p><div class="u-project-result"><div><span>测评结果</span><strong>A+ <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 53% · 8/15 任务</span><span>截止 5 天</span></div><div class="u-progress green"><i style="width:53%"></i></div><small class="cultivation-project-task-count">负责人 张伟 · 距截止 5 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openHealthResult('2024年高新技术企业认定')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="湖北省重点研发计划项目" data-type="托管" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip amber">进行中</span></div><h3>湖北省重点研发计划项目</h3><p>来自政策中心，围绕研发投入与创新产出推进项目申报。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 50% · 6/12 任务</span><span>截止 12 天</span></div><div class="u-progress green"><i style="width:50%"></i></div><small class="cultivation-project-task-count">负责人 李娜 · 距截止 12 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openHealthResult('湖北省重点研发计划项目')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="专精特新“小巨人”培育" data-type="自主" data-status="进行中"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">进行中</span></div><h3>专精特新“小巨人”培育</h3><p>来自专精特新测评，重点补强市场地位与创新能力。</p><div class="u-project-result"><div><span>测评结果</span><strong>B <small>待提升</small></strong></div><div><span>满足条件</span><strong class="good">1 项</strong></div><div><span>不满足条件</span><strong class="warn">2 项</strong></div><div><span>一票否决</span><strong class="bad">1 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 40% · 4/10 任务</span><span>截止 3 天</span></div><div class="u-progress red"><i style="width:40%"></i></div><small class="cultivation-project-task-count">负责人 王强 · 距截止 3 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openHealthResult('专精特新“小巨人”培育')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
               </div>
             </div>
 
@@ -2987,8 +2913,8 @@
                 <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">2</span>
               </div>
               <div class="space-y-3">
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="科技型中小企业评价" data-type="托管" data-status="待审核"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip amber">待审核</span></div><h3>科技型中小企业评价</h3><p>轻量首诊，检查科技人员、研发投入与规模条件。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 15/15 任务</span><span>截止 8 天</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 陈静 · 距截止 8 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openCultivationProject('科技型中小企业评价','科小评价 · 轻量首诊')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="东湖高新区瞪羚企业认定" data-type="自主" data-status="待审核"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">待审核</span></div><h3>东湖高新区瞪羚企业认定</h3><p>围绕营收成长性与创新产出推进瞪羚企业认定。</p><div class="u-project-result"><div><span>测评结果</span><strong>A- <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 75% · 9/12 任务</span><span>截止 15 天</span></div><div class="u-progress green"><i style="width:75%"></i></div><small class="cultivation-project-task-count">负责人 刘洋 · 距截止 15 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openCultivationProject('东湖高新区瞪羚企业认定','瞪羚认定 · 成长性培育')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="科技型中小企业评价" data-type="托管" data-status="待审核"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip amber">待审核</span></div><h3>科技型中小企业评价</h3><p>轻量首诊，检查科技人员、研发投入与规模条件。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 15/15 任务</span><span>截止 8 天</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 陈静 · 距截止 8 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openHealthResult('科技型中小企业评价')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="东湖高新区瞪羚企业认定" data-type="自主" data-status="待审核"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip amber">待审核</span></div><h3>东湖高新区瞪羚企业认定</h3><p>围绕营收成长性与创新产出推进瞪羚企业认定。</p><div class="u-project-result"><div><span>测评结果</span><strong>A- <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">2 项</strong></div><div><span>不满足条件</span><strong class="warn">1 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 75% · 9/12 任务</span><span>截止 15 天</span></div><div class="u-progress green"><i style="width:75%"></i></div><small class="cultivation-project-task-count">负责人 刘洋 · 距截止 15 天</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button ghost" onclick="openHealthResult('东湖高新区瞪羚企业认定')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
               </div>
             </div>
 
@@ -3000,8 +2926,8 @@
                 <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500">2</span>
               </div>
               <div class="space-y-3">
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="武汉市科技创新平台申报" data-type="托管" data-status="已完成"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip green">已完成</span></div><h3>武汉市科技创新平台申报</h3><p>科技创新平台申报已完成，结果已回写企业档案。</p><div class="u-project-result"><div><span>测评结果</span><strong>A+ <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 12/12 任务</span><span>截止 —</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 赵磊 · 已完成</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button download" onclick="downloadProjectMaterials('武汉市科技创新平台申报')"><i data-lucide="download" class="h-4 w-4"></i>下载资料包</button><button type="button" class="u-button ghost" onclick="openCultivationProject('武汉市科技创新平台申报','创新平台 · 结果回写')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
-<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="高新技术企业重新认定" data-type="自主" data-status="已完成"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip green">已完成</span></div><h3>高新技术企业重新认定</h3><p>高企重新认定材料已提交并公示。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 14/14 任务</span><span>截止 —</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 孙丽 · 已完成</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button download" onclick="downloadProjectMaterials('高新技术企业重新认定')"><i data-lucide="download" class="h-4 w-4"></i>下载资料包</button><button type="button" class="u-button ghost" onclick="openCultivationProject('高新技术企业重新认定','高企复审 · 结果回写')">查看培育详情</button><button type="button" class="u-button js-open-drawer">查看任务清单</button><button type="button" class="u-button ghost" onclick="goToPage('page-cultivation','智能测评')">AI 检测</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#7c3aed" data-name="武汉市科技创新平台申报" data-type="托管" data-status="已完成"><div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip green">已完成</span></div><h3>武汉市科技创新平台申报</h3><p>科技创新平台申报已完成，结果已回写企业档案。</p><div class="u-project-result"><div><span>测评结果</span><strong>A+ <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 12/12 任务</span><span>截止 —</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 赵磊 · 已完成</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button download" onclick="downloadProjectMaterials('武汉市科技创新平台申报')"><i data-lucide="download" class="h-4 w-4"></i>下载资料包</button><button type="button" class="u-button ghost" onclick="openHealthResult('武汉市科技创新平台申报')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
+<div class="u-project-card cultivation-project-card-v2 project-card" style="--project-accent:#2563eb" data-name="高新技术企业重新认定" data-type="自主" data-status="已完成"><div class="u-flex"><div class="u-project-tags"><span class="u-chip blue">自主申报项目</span></div><span class="u-chip green">已完成</span></div><h3>高新技术企业重新认定</h3><p>高企重新认定材料已提交并公示。</p><div class="u-project-result"><div><span>测评结果</span><strong>A <small>符合</small></strong></div><div><span>满足条件</span><strong class="good">3 项</strong></div><div><span>不满足条件</span><strong class="warn">0 项</strong></div><div><span>一票否决</span><strong class="bad">0 项</strong></div></div><div class="u-project-bar"><div class="u-flex"><span>任务进度 100% · 14/14 任务</span><span>截止 —</span></div><div class="u-progress green"><i style="width:100%"></i></div><small class="cultivation-project-task-count">负责人 孙丽 · 已完成</small></div><div class="u-actions cultivation-project-actions-v2"><button type="button" class="u-button download" onclick="downloadProjectMaterials('高新技术企业重新认定')"><i data-lucide="download" class="h-4 w-4"></i>下载资料包</button><button type="button" class="u-button ghost" onclick="openHealthResult('高新技术企业重新认定')">测评详情</button><button type="button" class="u-button js-open-drawer">培育任务</button><button type="button" class="u-button ghost" onclick="goToPage('page-doc-expert','AI 申报书专家')">AI申报书撰写</button></div></div>
               </div>
             </div>
           </div>
@@ -3123,7 +3049,7 @@
           </div>
         </div>
 
-        <!-- 科创专家 -->
+        <!-- 智能体广场 -->
         <div id="page-agent" class="page hidden -m-6">
           <style>
 .kw{font-family:var(--kimi-font-sans);color:var(--kimi-color-text-primary)}
@@ -3136,15 +3062,22 @@
 .prof b{color:var(--kimi-color-text-primary);font-weight:500;font-size:13px}
 .prof .pc{color:var(--kimi-color-text-tertiary)}
 .agents{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.ag{border:1px solid var(--kimi-color-border);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:border-color var(--t-fast) var(--ease-out)}
-.ag:hover{border-color:var(--kimi-color-text-primary)}
-.ag-i{width:40px;height:40px;border-radius:10px;background:var(--kimi-color-surface-muted);display:flex;align-items:center;justify-content:center;color:var(--kimi-color-text-primary)}
-.ag-i .ic{width:20px;height:20px}
-.ag-n{font-size:16px;font-weight:500;margin-top:4px}
-.ag-d{font-size:13px;color:var(--kimi-color-text-tertiary);line-height:20px;min-height:40px}
-.ag-f{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px}
-.st{font-size:11px;color:var(--kimi-color-text-quaternary);display:flex;align-items:center;gap:4px}
-.go{font-size:12px;font-weight:500;color:var(--kimi-color-text-primary);display:flex;align-items:center;gap:4px}
+.ag{--ac:#2e6be6;position:relative;overflow:hidden;border:1px solid var(--kimi-color-border);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px;cursor:pointer;background:linear-gradient(180deg,color-mix(in srgb,var(--ac) 6%,transparent),transparent 46%);transition:border-color var(--t-normal) var(--ease-out),box-shadow var(--t-normal) var(--ease-out),transform var(--t-normal) var(--ease-out)}
+.ag::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);opacity:0;transition:opacity var(--t-normal) var(--ease-out)}
+.ag:hover{border-color:color-mix(in srgb,var(--ac) 42%,var(--kimi-color-border));box-shadow:0 12px 28px color-mix(in srgb,var(--ac) 14%,transparent);transform:translateY(-3px)}
+.ag:hover::before{opacity:1}
+.ag-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.ag-i{width:46px;height:46px;border-radius:13px;background:color-mix(in srgb,var(--ac) 14%,var(--kimi-color-surface));display:flex;align-items:center;justify-content:center;color:var(--ac);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 24%,transparent)}
+.ag-i .ic{width:23px;height:23px}
+.ag-badge{font-size:11px;font-weight:500;color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,transparent);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.ag-n{font-size:16px;font-weight:600;letter-spacing:.2px}
+.ag-intro{font-size:12.5px;color:var(--kimi-color-text-tertiary);line-height:20px}
+.ag-tags{display:flex;flex-wrap:wrap;gap:6px}
+.ag-tag{font-size:11.5px;line-height:1;color:var(--kimi-color-text-secondary);background:var(--kimi-color-surface);border:1px solid color-mix(in srgb,var(--ac) 20%,var(--kimi-color-border));border-radius:7px;padding:6px 9px}
+.ag-f{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--kimi-color-border) 55%,transparent)}
+.st{font-size:11px;color:var(--kimi-color-text-quaternary);display:flex;align-items:center;gap:6px}
+.st::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 15%,transparent)}
+.go{font-size:12.5px;font-weight:600;color:var(--ac);display:flex;align-items:center;gap:4px}
 .go .ic{width:14px;height:14px}
 .runbar{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .rb{border:1px solid var(--kimi-color-border);border-radius:8px;background:transparent;color:var(--kimi-color-text-secondary);padding:6px 12px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px}
@@ -3321,7 +3254,7 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.4355 3.09961C19.1417 3.09961 21.3359 5.2938 21.3359 8V16.8711C21.3359 19.5773 19.1417 21.7715 16.4355 21.7715H7.56445C4.85826 21.7715 2.66406 19.5773 2.66406 16.8711V8C2.66406 5.29381 4.85826 3.09961 7.56445 3.09961H16.4355ZM7.56445 4.90039C5.85237 4.90039 4.46484 6.28792 4.46484 8V16.8711C4.46484 18.5832 5.85237 19.9707 7.56445 19.9707H16.4355C18.1476 19.9707 19.5352 18.5832 19.5352 16.8711V8C19.5352 6.28792 18.1476 4.90039 16.4355 4.90039H7.56445Z" fill="currentColor"/>
 </symbol></svg>
           <div class="kw" style="padding:20px">
-            <div class="top"><div class="tt">科创培育规划 · 智能体矩阵</div></div>
+            <div class="top"><div><div class="tt">智能体广场</div><div style="font-size:13px;color:var(--kimi-color-text-tertiary);margin-top:4px">汇集六大科创智能体与专业工具，覆盖政策匹配、智能测评、申报撰写、财税规划、知产管理与梯度培育，一站式完成科创申报全流程。</div></div></div>
 
             <div id="pgMatrix">
               <div class="agents" id="agents"></div>
@@ -3925,8 +3858,8 @@
         <!-- 成员与角色 -->
         <div id="page-members" class="page hidden">
           <div class="mb-5">
-            <h2 class="text-xl font-semibold text-gray-800">成员与角色</h2>
-            <p class="mt-1 text-sm text-gray-400">组织成员管理与权限角色配置</p>
+            <h2 class="text-xl font-semibold text-gray-800">用户与权限管理</h2>
+            <p class="mt-1 text-sm text-gray-400">企业管理员可为企业成员分配角色，并通过角色控制菜单与功能权限</p>
           </div>
 
           <!-- 操作区 -->
@@ -3943,15 +3876,14 @@
                 </button>
                 <div class="policy-filter-menu absolute left-0 top-full z-20 mt-1 hidden w-36 rounded-lg border border-gray-100 bg-white py-1 shadow-lg">
                   <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="全部角色">全部角色</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="管理员">管理员</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="申报专员">申报专员</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="财务人员">财务人员</div>
-                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="普通员工">普通员工</div>
+                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="企业管理员">企业管理员</div>
+                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="专业成员">专业成员</div>
+                  <div class="policy-filter-option cursor-pointer px-3 py-2 text-sm text-gray-700 transition hover:bg-gray-50" data-label="普通成员">普通成员</div>
                 </div>
               </div>
             </div>
-            <button id="invite-member-btn" class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-              <i data-lucide="plus" class="h-4 w-4"></i> 邀请新成员
+            <button id="add-member-btn" class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
+              <i data-lucide="plus" class="h-4 w-4"></i> 添加成员
             </button>
           </div>
 
@@ -3968,7 +3900,7 @@
                   <th class="px-5 py-3 font-medium">操作</th>
                 </tr>
               </thead>
-              <tbody class="divide-y divide-gray-100">
+              <tbody id="member-tbody" class="divide-y divide-gray-100">
                 <tr>
                   <td class="px-5 py-3.5">
                     <div class="flex items-center gap-2.5">
@@ -3979,11 +3911,11 @@
                   </td>
                   <td class="px-5 py-3.5 text-gray-600">138****8888</td>
                   <td class="px-5 py-3.5 text-gray-600">管理层</td>
-                  <td class="px-5 py-3.5"><span class="rounded-full bg-primary-light px-2 py-0.5 text-xs text-primary">管理员</span></td>
+                  <td class="px-5 py-3.5"><span id="member-role-0" class="rounded-full bg-primary-light px-2 py-0.5 text-xs text-primary">企业管理员</span></td>
                   <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">已激活</span></td>
                   <td class="px-5 py-3.5">
                     <div class="flex items-center gap-3 text-xs">
-                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色">编辑角色</button>
+                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="0" data-member-name="张伟">编辑角色</button>
                       <button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>
                       <button class="js-member-action text-primary hover:underline" data-action="转让管理员">转让管理员</button>
                     </div>
@@ -3998,11 +3930,11 @@
                   </td>
                   <td class="px-5 py-3.5 text-gray-600">139****1234</td>
                   <td class="px-5 py-3.5 text-gray-600">申报部</td>
-                  <td class="px-5 py-3.5"><span class="rounded-full bg-violet-50 px-2 py-0.5 text-xs text-violet-600">申报专员</span></td>
+                  <td class="px-5 py-3.5"><span id="member-role-1" class="rounded-full bg-violet-50 px-2 py-0.5 text-xs text-violet-600">专业成员</span></td>
                   <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">已激活</span></td>
                   <td class="px-5 py-3.5">
                     <div class="flex items-center gap-3 text-xs">
-                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色">编辑角色</button>
+                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="1" data-member-name="李娜">编辑角色</button>
                       <button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>
                     </div>
                   </td>
@@ -4016,11 +3948,11 @@
                   </td>
                   <td class="px-5 py-3.5 text-gray-600">137****5678</td>
                   <td class="px-5 py-3.5 text-gray-600">财务部</td>
-                  <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">财务人员</span></td>
+                  <td class="px-5 py-3.5"><span id="member-role-2" class="rounded-full bg-violet-50 px-2 py-0.5 text-xs text-violet-600">专业成员</span></td>
                   <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">已激活</span></td>
                   <td class="px-5 py-3.5">
                     <div class="flex items-center gap-3 text-xs">
-                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色">编辑角色</button>
+                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="2" data-member-name="王强">编辑角色</button>
                       <button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>
                     </div>
                   </td>
@@ -4034,11 +3966,29 @@
                   </td>
                   <td class="px-5 py-3.5 text-gray-600">136****9012</td>
                   <td class="px-5 py-3.5 text-gray-600">研发部</td>
-                  <td class="px-5 py-3.5"><span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">普通员工</span></td>
+                  <td class="px-5 py-3.5"><span id="member-role-3" class="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">普通成员</span></td>
                   <td class="px-5 py-3.5"><span class="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-600">待接受</span></td>
                   <td class="px-5 py-3.5">
                     <div class="flex items-center gap-3 text-xs">
-                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色">编辑角色</button>
+                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="3" data-member-name="陈静">编辑角色</button>
+                      <button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="px-5 py-3.5">
+                    <div class="flex items-center gap-2.5">
+                      <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-cyan-600 text-xs font-medium text-white">赵</div>
+                      <span class="font-medium text-gray-800">赵磊</span>
+                    </div>
+                  </td>
+                  <td class="px-5 py-3.5 text-gray-600">135****3456</td>
+                  <td class="px-5 py-3.5 text-gray-600">顾问团队</td>
+                  <td class="px-5 py-3.5"><span id="member-role-4" class="rounded-full bg-cyan-50 px-2 py-0.5 text-xs text-cyan-600">外部顾问</span></td>
+                  <td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">已激活</span></td>
+                  <td class="px-5 py-3.5">
+                    <div class="flex items-center gap-3 text-xs">
+                      <button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="4" data-member-name="赵磊">编辑角色</button>
                       <button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>
                     </div>
                   </td>
@@ -4219,7 +4169,7 @@
 
           </style>
 <div class="pwm wrap">
-  <div class="crumb">个人中心 <span class="ic-slot" data-ic="RightIcon"></span> 我的积分与会员</div>
+  <div class="crumb">积分与会员</div>
   <div class="layout">
     <nav class="panel side">
       <div class="side-title">积分与会员</div>
@@ -4652,7 +4602,7 @@
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-blue-50"><i data-lucide="folder-open" class="h-4 w-4 text-blue-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">企业数字档案</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">十三维度企业画像与材料管理，是政策匹配、测评、申报的数据底座。</div></div></div>
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-green-50"><i data-lucide="activity" class="h-4 w-4 text-green-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">智能测评</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">企业科创能力量化测评与风险排查，输出评级、差距与整改建议。</div></div></div>
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-amber-50"><i data-lucide="briefcase" class="h-4 w-4 text-amber-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">培育规划</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">项目全流程管理与申报任务跟踪，看板 / 列表 / 日历多视图。</div></div></div>
-          <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="bot" class="h-4 w-4 text-violet-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">科创专家</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">六大智能体与专业工具，覆盖政策、测评、申报、财税、知产、培育。</div></div></div>
+          <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-violet-50"><i data-lucide="bot" class="h-4 w-4 text-violet-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">智能体广场</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">六大智能体与专业工具，覆盖政策、测评、申报、财税、知产、培育。</div></div></div>
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-cyan-50"><i data-lucide="compass" class="h-4 w-4 text-cyan-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">政策发现</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">政策智能匹配与申报机会发现，含申报期机会、计算器与免申即享普惠政策。</div></div></div>
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-rose-50"><i data-lucide="pen-tool" class="h-4 w-4 text-rose-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">AI 申报书专家</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">申报书在线编写与 AI 验稿，自动核验申报条件与材料。</div></div></div>
           <div class="flex gap-3 rounded-lg border border-gray-100 p-3"><div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg bg-orange-50"><i data-lucide="shopping-bag" class="h-4 w-4 text-orange-500"></i></div><div class="min-w-0"><div class="text-sm font-medium text-gray-800">服务商城</div><div class="mt-0.5 text-xs leading-relaxed text-gray-500">科创服务商品与在线下单，专家报告、申报、财税、知产、培育一站式服务。</div></div></div>
@@ -4997,6 +4947,85 @@
     <div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">
       <button id="role-modal-cancel" class="rounded-md border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:bg-gray-50">取消</button>
       <button id="role-modal-save" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">保存</button>
+    </div>
+  </div>
+
+  <!-- ==================== 成员角色分配弹窗 ==================== -->
+  <div id="member-role-overlay" class="pointer-events-none fixed inset-0 z-[70] bg-black/50 opacity-0 transition-opacity duration-200"></div>
+  <div id="member-role-modal" class="pointer-events-none fixed left-1/2 top-1/2 z-[80] w-[460px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 scale-95 rounded-xl bg-white opacity-0 shadow-2xl transition-all duration-200">
+    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+      <span class="text-base font-semibold text-gray-800">分配角色</span>
+      <button id="member-role-close" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+    <div class="px-6 py-5">
+      <div class="mb-4 flex items-center gap-3 rounded-lg bg-gray-50 px-4 py-3">
+        <div id="member-role-avatar" class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-blue-400 text-sm font-medium text-white">张</div>
+        <div>
+          <div id="member-role-name" class="text-sm font-medium text-gray-800">张伟</div>
+          <div class="text-xs text-gray-400">选择要分配的系统角色或自定义角色</div>
+        </div>
+      </div>
+      <div class="mb-2 text-xs text-gray-500">角色</div>
+      <div id="member-role-options" class="max-h-[320px] space-y-2 overflow-y-auto"></div>
+    </div>
+    <div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">
+      <button id="member-role-cancel" class="rounded-md border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:bg-gray-50">取消</button>
+      <button id="member-role-save" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">保存</button>
+    </div>
+  </div>
+
+  <!-- ==================== 添加成员弹窗 ==================== -->
+  <div id="add-member-overlay" class="pointer-events-none fixed inset-0 z-[70] bg-black/50 opacity-0 transition-opacity duration-200"></div>
+  <div id="add-member-modal" class="pointer-events-none fixed left-1/2 top-1/2 z-[80] w-[520px] max-w-[92vw] -translate-x-1/2 -translate-y-1/2 scale-95 rounded-xl bg-white opacity-0 shadow-2xl transition-all duration-200">
+    <div class="flex items-center justify-between border-b border-gray-100 px-6 py-4">
+      <span class="text-base font-semibold text-gray-800">添加成员</span>
+      <button id="add-member-close" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+    <div class="flex gap-6 border-b border-gray-100 px-6">
+      <button id="add-member-tab-invite" class="add-member-tab -mb-px border-b-2 border-primary pb-2.5 pt-3 text-sm font-medium text-primary" data-tab="invite">邀请成员</button>
+      <button id="add-member-tab-account" class="add-member-tab -mb-px border-b-2 border-transparent pb-2.5 pt-3 text-sm text-gray-500" data-tab="account">添加账号</button>
+    </div>
+
+    <!-- 邀请成员 -->
+    <div id="add-member-invite-panel" class="px-6 py-5">
+      <div class="rounded-lg border border-gray-100 bg-gray-50 p-3">
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-700">邀请链接</span>
+          <button id="add-member-copy-link" class="flex items-center gap-1 text-xs text-primary hover:underline"><i data-lucide="copy" class="h-3.5 w-3.5"></i> 复制链接</button>
+        </div>
+        <div class="mt-1 truncate rounded bg-white px-2 py-1.5 text-xs text-gray-500">https://whkc.example.com/invite/8f3K2mQx</div>
+      </div>
+      <div class="mt-4">
+        <label class="mb-1 block text-xs text-gray-500">手机号邀请（多个用逗号或换行分隔）</label>
+        <textarea id="add-member-invite-phones" rows="3" placeholder="例如：13900000000, 13700000000" class="w-full resize-none rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"></textarea>
+      </div>
+    </div>
+
+    <!-- 添加账号 -->
+    <div id="add-member-account-panel" class="hidden px-6 py-5">
+      <div class="space-y-3">
+        <div>
+          <label class="mb-1 block text-xs text-gray-500">成员姓名</label>
+          <input id="add-member-name" type="text" placeholder="请输入成员姓名" class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+        <div>
+          <label class="mb-1 block text-xs text-gray-500">手机号</label>
+          <input id="add-member-phone" type="text" maxlength="11" inputmode="numeric" placeholder="请输入 11 位手机号" class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm text-gray-700 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+        <div>
+          <label class="mb-1 block text-xs text-gray-500">分配角色</label>
+          <div id="add-member-role-options" class="max-h-[220px] space-y-2 overflow-y-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 border-t border-gray-100 px-6 py-4">
+      <button id="add-member-cancel" class="rounded-md border border-gray-200 px-4 py-2 text-sm text-gray-600 transition hover:bg-gray-50">取消</button>
+      <button id="add-member-confirm" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-hover">确定</button>
     </div>
   </div>
 
@@ -5777,6 +5806,7 @@
     navItems.forEach((item) => {
       item.addEventListener('click', () => {
         if (item.dataset.drawer === 'message') { openMessageDrawer(); return; }
+        if (item.dataset.manual) { openPlatformManual(); return; }
         goToPage(item.dataset.target, item.dataset.title);
       });
     });
@@ -5791,7 +5821,7 @@
     // 专业工具页 → 返回科创专家
     document.querySelectorAll('.js-back-expert').forEach((btn) => {
       btn.addEventListener('click', () => {
-        goToPage('page-agent', '科创专家');
+        goToPage('page-agent', '智能体广场');
         const _run = document.getElementById('pgRun');
         const _matrix = document.getElementById('pgMatrix');
         if (_run && _matrix) { _run.style.display = 'none'; _matrix.style.display = 'block'; }
@@ -5836,11 +5866,6 @@
       openEnterpriseModal();
     });
 
-    document.getElementById('points-membership-btn').addEventListener('click', () => {
-      document.getElementById('user-dropdown').classList.add('hidden');
-      goToPage('page-points', '积分与会员');
-    });
-
     // ==================== 平台功能手册 ====================
     function openPlatformManual() {
       document.getElementById('user-dropdown').classList.add('hidden');
@@ -5851,7 +5876,6 @@
       document.getElementById('manual-modal-overlay').classList.add('pointer-events-none', 'opacity-0');
       document.getElementById('manual-modal').classList.add('scale-95', 'opacity-0');
     }
-    document.getElementById('platform-manual-btn').addEventListener('click', openPlatformManual);
     document.getElementById('manual-modal-close').addEventListener('click', closePlatformManual);
     document.getElementById('manual-modal-overlay').addEventListener('click', function (e) { if (e.target === this) closePlatformManual(); });
     document.getElementById('enterprise-modal-close').addEventListener('click', closeEnterpriseModal);
@@ -5952,45 +5976,15 @@
     // 新建对话
     document.getElementById('new-chat-btn').addEventListener('click', () => showToast('已新建对话（演示）'));
 
-    // ==================== AI工作台：落地页 / 对话页切换 ====================
-    function switchAiView(view) {
-      const landing = document.getElementById('ai-landing');
-      const chat = document.getElementById('ai-chat');
-      if (landing) landing.classList.toggle('hidden', view !== 'landing');
-      if (chat) chat.classList.toggle('hidden', view !== 'chat');
-    }
-
-    function enterAiChat() {
-      const input = document.getElementById('ai-landing-input');
-      const q = input ? input.value.trim() : '';
-      if (q) {
-        const chatInput = document.getElementById('chat-input');
-        if (chatInput) chatInput.value = q;
-      }
-      switchAiView('chat');
-    }
-
-    function enterAiLanding() {
-      switchAiView('landing');
-    }
-
-    document.querySelectorAll('.js-landing-prompt').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        const chatInput = document.getElementById('chat-input');
-        if (chatInput) chatInput.value = btn.dataset.prompt || '';
-        switchAiView('chat');
+    // 智能体快捷入口：跳转到对应智能体运行台
+    document.querySelectorAll('.js-agent-quick').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const agent = AGENTS.find((a) => a.id === btn.dataset.agent);
+        if (!agent) return;
+        goToPage('page-agent', '智能体广场');
+        runAgent(agent);
       });
     });
-
-    const landingInput = document.getElementById('ai-landing-input');
-    if (landingInput) {
-      landingInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          enterAiChat();
-        }
-      });
-    }
 
     // 查看详情 → 跳转政策发现（现已并入科创专家）
     document.getElementById('ai-view-detail').addEventListener('click', () => {
@@ -7404,6 +7398,11 @@
       document.querySelectorAll('.health-tab').forEach(t => t.classList.toggle('health-tab-active', t.dataset.health === view));
     }
     document.querySelectorAll('.health-tab').forEach(t => t.addEventListener('click', () => switchHealth(t.dataset.health)));
+    function openHealthResult(name) {
+      if (name) currentHealthProject = name;
+      goToPage('page-cultivation', '智能测评');
+      switchHealth('result');
+    }
 
     // 进度环 SVG
     function healthRing(percent, color, fs, label) {
@@ -7680,9 +7679,9 @@
           '<small class="cultivation-project-task-count">顾问：待分配</small>' +
         '</div>' +
         '<div class="u-actions cultivation-project-actions-v2">' +
-          '<button type="button" class="u-button ghost" onclick="openCultivationProject(\'' + name + '\',\'托管培育\')">查看培育详情</button>' +
-          '<button type="button" class="u-button js-open-drawer">查看任务清单</button>' +
-          '<button type="button" class="u-button ghost" onclick="goToPage(\'page-cultivation\',\'智能测评\')">AI 检测</button>' +
+          '<button type="button" class="u-button ghost" onclick="openHealthResult(\'' + name + '\')">测评详情</button>' +
+          '<button type="button" class="u-button js-open-drawer">培育任务</button>' +
+          '<button type="button" class="u-button ghost" onclick="goToPage(\'page-doc-expert\',\'AI 申报书专家\')">AI申报书撰写</button>' +
         '</div>';
       list.insertBefore(card, list.firstChild);
     }
@@ -7806,7 +7805,7 @@
 
     // ==================== 科创专家（智能体矩阵） ====================
     const AGENTS=[
-    {id:'zc',icon:'ic-search',name:'政策分析智能体',desc:'政策检索匹配 · 扶持力度测算 · 申报窗口追踪',tools:[
+    {id:'zc',icon:'ic-search',name:'政策分析智能体',desc:'政策检索匹配 · 扶持力度测算 · 申报窗口追踪',intro:'实时扫描政策库，结合企业画像精准匹配可申报政策与扶持资金。',tools:[
      ['policy.db.search','检索国家 / 省 / 市政策库，命中 128 项'],
      ['policy.match','按企业画像精准匹配，锁定 12 项'],
      ['subsidy.calc','测算年度可享扶持资金合计'],
@@ -7817,7 +7816,7 @@
     '经测算，2026 年度可申领扶持资金合计约 486 万元，最高单项为省“尖兵领雁”攻关计划 500 万元。',
     '窗口提醒：3 项政策将在 60 天内截止申报，建议优先准备省攻关计划与市重大科技专项材料。'],
     deliver:'<div class="dl"><div class="dl-h"><svg class="ic"><use href="#ic-search"/></svg><div><div class="dl-t">政策匹配与扶持测算报告</div><div class="dl-s">命中 12 项 · 年度可申领约 486 万元</div></div></div><div class="stats"><div class="stat"><div class="sv">128</div><div class="sk">检索政策</div></div><div class="stat"><div class="sv">12</div><div class="sk">精准匹配</div></div><div class="stat"><div class="sv">486万</div><div class="sk">年度可申领</div></div><div class="stat"><div class="sv" style="color:var(--kimi-color-warning)">3</div><div class="sk">60 天内截止</div></div></div><div class="sec-t">高优先级政策</div><ul class="proj"><li><b>省“尖兵领雁”攻关计划</b><span class="p-tag">最高 500 万</span><p>匹配 92% · 2026-02-28 截止</p></li><li><b>市重大科技专项（人工智能方向）</b><span class="p-tag">最高 300 万</span><p>匹配 87% · 2026-01-20 截止</p></li><li><b>专精特新中小企业认定</b><span class="p-tag">奖励 30 万</span><p>匹配 78% · 2026-04-30 截止</p></li><li><b>研发费用加计扣除配套奖补</b><span class="p-tag">约 96 万/年</span><p>匹配 90% · 常年受理</p></li></ul><div class="sec-t">行动建议</div><ul class="adv"><li>60 天内组织省攻关计划与市重大专项的联合申报，共享研发证明材料；</li><li>常年受理类政策按季度批量申领，避免窗口拥堵。</li></ul></div>'},
-    {id:'cp',icon:'ic-diagram',name:'智能测评智能体',desc:'科创能力六维测评 · 培育评级 · 短板诊断',tools:[
+    {id:'cp',icon:'ic-diagram',name:'智能测评智能体',desc:'科创能力六维测评 · 培育评级 · 短板诊断',intro:'对标申报标准开展六维科创能力测评，输出培育评级与短板诊断。',tools:[
      ['model.load','加载科创能力测评模型 v2.1'],
      ['data.ingest','注入企业档案与近三年经营数据'],
      ['score.calc','计算六大维度得分，综合 82 分'],
@@ -7828,7 +7827,7 @@
     '综合得分 82 分（行业 P78 分位），评级 A-，处于“优秀培育层”，具备冲击专精特新的基础。',
     '短板诊断：管理水平（74 分）与财务成长（78 分）相对偏弱，主要失分点为研发管理制度留痕与应收账款周转。'],
     deliver:'<div class="dl"><div class="dl-h"><svg class="ic"><use href="#ic-diagram"/></svg><div><div class="dl-t">科创能力测评报告</div><div class="dl-s">综合 82 分 · 评级 A- · 行业 P78 分位</div></div></div><div class="meter"><div class="m-row"><span>技术创新</span><div class="m-bar"><i style="width:86%"></i></div><b>86</b></div><div class="m-row"><span>研发投入</span><div class="m-bar"><i style="width:88%"></i></div><b>88</b></div><div class="m-row"><span>知识产权</span><div class="m-bar"><i style="width:84%"></i></div><b>84</b></div><div class="m-row"><span>人才团队</span><div class="m-bar"><i style="width:80%"></i></div><b>80</b></div><div class="m-row"><span>财务成长</span><div class="m-bar"><i style="width:78%"></i></div><b>78</b></div><div class="m-row"><span>管理水平</span><div class="m-bar"><i style="width:74%"></i></div><b>74</b></div></div><div class="sec-t">短板与提升建议</div><ul class="adv"><li>管理水平 74 分：补齐研发项目管理制度与过程留痕，预计 +6 分；</li><li>财务成长 78 分：优化应收账款账期，提升成长性得分，预计 +4 分；</li><li>按当前增速，2027 年测评有望达到 88 分（A 级），建议同步启动小巨人培育。</li></ul></div>'},
-    {id:'kw',icon:'ic-task',name:'科创服务智能体',desc:'三年培育路线图 · 服务机构与导师对接',tools:[
+    {id:'kw',icon:'ic-task',name:'科创服务智能体',desc:'三年培育路线图 · 服务机构与导师对接',intro:'制定三年培育路线图，对接服务机构与创业导师，护航梯度跃迁。',tools:[
      ['path.plan','生成三年培育路线图（2026–2028）'],
      ['service.match','匹配服务机构 6 家、导师 3 名'],
      ['milestone.set','设定 2026 年度关键里程碑']],
@@ -7837,7 +7836,7 @@
     '路线：2026 完成高企复审 + 专精特新认定，2027 冲击省企业技术中心，2028 申报国家级专精特新“小巨人”。',
     '已匹配服务机构 6 家（技术转移、券商、律所各 2 家）与创业导师 3 名，均可一键发起对接。'],
     deliver:'<div class="dl"><div class="dl-h"><svg class="ic"><use href="#ic-task"/></svg><div><div class="dl-t">三年培育路线图</div><div class="dl-s">2026–2028 · 三级跃迁路径</div></div></div><ul class="proj"><li><b>2026 · 筑基</b><span class="p-tag">本年重点</span><p>高企复审 + 专精特新认定 + B 轮融资 6,000 万</p></li><li><b>2027 · 跃升</b><span class="p-tag">储备</span><p>省企业技术中心 + 省领军型创新创业团队</p></li><li><b>2028 · 领军</b><span class="p-tag">远景</span><p>国家级专精特新“小巨人” + 北交所上市辅导</p></li></ul><div class="sec-t">2026 里程碑</div><ul class="adv"><li>Q1：完成高企复审材料提交（窗口 03-15 截止）；</li><li>Q2：启动 B 轮融资并签约产业资本；</li><li>Q4：专精特新认定公示入围。</li></ul></div>'},
-    {id:'cs',icon:'ic-histogram',name:'财税专家智能体',desc:'研发费用归集体检 · 加计扣除 · 财税合规',tools:[
+    {id:'cs',icon:'ic-histogram',name:'财税专家智能体',desc:'研发费用归集体检 · 加计扣除 · 财税合规',intro:'体检研发费用归集与加计扣除口径，测算节税空间并提示合规风险。',tools:[
      ['ledger.read','读取近三年研发费用辅助账'],
      ['deduct.check','比对加计扣除口径，检出 2 处偏差'],
      ['tax.calc','重算可加计扣除基数与节税额'],
@@ -7848,7 +7847,7 @@
     '调整后 2025 年可加计扣除基数 2,260 万元，按 15% 税率测算节税约 169 万元。',
     '风险提示：研发领料单据与项目立项编号存在 7 处不一致，需在汇算清缴前补齐关联。'],
     deliver:'<div class="dl"><div class="dl-h"><svg class="ic"><use href="#ic-histogram"/></svg><div><div class="dl-t">研发费用财税体检报告</div><div class="dl-s">2025 年度 · 可加计扣除基数 2,260 万元</div></div></div><div class="stats"><div class="stat"><div class="sv">2,346万</div><div class="sk">研发费用</div></div><div class="stat"><div class="sv">13.0%</div><div class="sk">占营收比</div></div><div class="stat"><div class="sv">169万</div><div class="sk">测算节税</div></div><div class="stat"><div class="sv" style="color:var(--kimi-color-warning)">86万</div><div class="sk">归集偏差</div></div></div><div class="sec-t">整改建议</div><ul class="adv"><li>生产辅助人员工时按项目重新分摊，调减研发费用 62 万元；</li><li>共用设备折旧按使用记录拆分，调减 24 万元；</li><li>补齐 7 处研发领料单据与立项编号的关联，留存备查。</li></ul></div>'},
-    {id:'ip',icon:'ic-docdone',name:'知识产权专家智能体',desc:'IP 资产盘点 · 发明专利占比 · 临期预警 · 布局建议',tools:[
+    {id:'ip',icon:'ic-docdone',name:'知识产权专家智能体',desc:'IP 资产盘点 · 发明专利占比 · 临期预警 · 布局建议',intro:'盘点专利资产、监测临期状态，围绕主营产品给出布局与续展建议。',tools:[
      ['patent_db.query','按申请人检索有效专利，命中 42 件'],
      ['ip.analyze','统计类型结构：发明 18 · 实用新型 21 · 外观 3'],
      ['patent.expiry_scan','扫描法律状态，3 件 12 个月内到期'],
@@ -7859,7 +7858,7 @@
     '临期预警：3 件发明专利将在 12 个月内到期，其中 2 件为核心检测算法专利，维持年费的同时建议评估技术迭代替代。',
     '布局建议：围绕“AI 缺陷检测”主线补强算法层专利，对硬件结构专利做防御性布局，并将 2 件临期核心专利纳入优先续展清单。'],
     deliver:'<div class="dl"><div class="dl-h"><svg class="ic"><use href="#ic-docdone"/></svg><div><div class="dl-t">知识产权盘点与布局报告</div><div class="dl-s">由知识产权专家智能体生成 · 基于企业档案 v3.2</div></div></div><div class="stats"><div class="stat"><div class="sv">42</div><div class="sk">有效专利</div></div><div class="stat"><div class="sv">42.9%</div><div class="sk">发明专利占比</div></div><div class="stat"><div class="sv">15</div><div class="sk">软件著作权</div></div><div class="stat"><div class="sv" style="color:var(--kimi-color-warning)">3</div><div class="sk">12 个月内临期</div></div></div><div class="dl-b"><div class="donut"><svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="46" fill="none" stroke="var(--kimi-color-border)" stroke-width="14"/><circle cx="60" cy="60" r="46" fill="none" stroke="var(--kimi-chart-1)" stroke-width="14" stroke-dasharray="123.8 289" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="46" fill="none" stroke="color-mix(in srgb, var(--kimi-chart-1) 55%, transparent)" stroke-width="14" stroke-dasharray="144.4 289" stroke-dashoffset="-123.8" transform="rotate(-90 60 60)"/><circle cx="60" cy="60" r="46" fill="none" stroke="color-mix(in srgb, var(--kimi-chart-1) 28%, transparent)" stroke-width="14" stroke-dasharray="20.8 289" stroke-dashoffset="-268.2" transform="rotate(-90 60 60)"/><text x="60" y="57" text-anchor="middle" class="dn-v">42.9%</text><text x="60" y="73" text-anchor="middle" class="dn-k">发明专利</text></svg></div><div class="legend"><div><span class="dot" style="background:var(--kimi-chart-1)"></span>发明专利 18 件</div><div><span class="dot" style="background:color-mix(in srgb,var(--kimi-chart-1) 55%,transparent)"></span>实用新型 21 件</div><div><span class="dot" style="background:color-mix(in srgb,var(--kimi-chart-1) 28%,transparent)"></span>外观设计 3 件</div></div></div><div class="sec-t">临期专利预警</div><div class="warn"><svg class="ic"><use href="#ic-warning"/></svg><div class="w-m"><div class="w-t">一种基于深度学习的表面缺陷检测方法</div><div class="w-s">发明 · 2027-03-18 到期 · 剩余 126 天</div></div><span class="w-tag">优先续展</span></div><div class="warn"><svg class="ic"><use href="#ic-warning"/></svg><div class="w-m"><div class="w-t">视觉定位装置及检测流水线</div><div class="w-s">发明 · 2027-08-02 到期 · 剩余 264 天</div></div><span class="w-tag">优先续展</span></div><div class="warn"><svg class="ic"><use href="#ic-warning"/></svg><div class="w-m"><div class="w-t">可调式工业相机支架</div><div class="w-s">实用新型 · 2026-12-30 到期 · 剩余 49 天</div></div><span class="w-tag">评估放弃</span></div><div class="sec-t">布局建议</div><ol class="adv"><li>围绕“AI 缺陷检测”主线，2026 年 Q1 前提交 6–8 件算法层发明专利申请；</li><li>硬件结构类专利转为防御性布局，压缩年费支出约 15%；</li><li>将 2 件临期核心算法专利纳入优先续展清单，同步启动迭代改进方案备案；</li><li>以 2 件核心专利为基础规划 PCT 进入欧洲与东南亚市场。</li></ol></div>'},
-    {id:'sb',icon:'ic-create',name:'申报书撰写智能体',desc:'高企认定 / 项目申报书一键撰写与润色',tools:[
+    {id:'sb',icon:'ic-create',name:'申报书撰写智能体',desc:'高企认定 / 项目申报书一键撰写与润色',intro:'按标准大纲一键撰写与润色申报书，自动核对证明材料引用。',tools:[
      ['outline.gen','生成高企申报书大纲（12 章 42 节）'],
      ['draft.write','基于企业档案撰写初稿 18,400 字'],
      ['cite.check','核对证明材料引用，检出 3 处待补'],
@@ -7878,10 +7877,13 @@
     function clearTimers(){timers.forEach(t=>{clearTimeout(t);clearInterval(t)});timers=[]}
     function scroll(){const c=$('#consB');if(c)c.scrollTop=c.scrollHeight;const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight}
     const AG=$('#agents');
+    const AGENT_COLORS={'zc':'#2e6be6','cp':'#8b5cf6','kw':'#2f9e6e','cs':'#d97706','ip':'#dc2626','sb':'#0891b2'};
     if(AG){
       AGENTS.forEach(a=>{
-        const d=document.createElement('div');d.className='ag';d.id='ag-'+a.id;
-        d.innerHTML='<div class="ag-i"><svg class="ic"><use href="#'+a.icon+'"/></svg></div><div class="ag-n">'+a.name+'</div><div class="ag-d">'+a.desc+'</div><div class="ag-f"><span class="st">就绪</span><span class="go">进入运行台<svg class="ic"><use href="#ic-right"/></svg></span></div>';
+        const ac=AGENT_COLORS[a.id]||'#2e6be6';
+        const tags=a.desc.split(/[·/]/).map(x=>x.trim()).filter(Boolean).map(x=>'<span class="ag-tag">'+x+'</span>').join('');
+        const d=document.createElement('div');d.className='ag';d.id='ag-'+a.id;d.style.setProperty('--ac',ac);
+        d.innerHTML='<div class="ag-head"><div class="ag-i"><svg class="ic"><use href="#'+a.icon+'"/></svg></div><span class="ag-badge">'+a.tools.length+' 项能力</span></div><div class="ag-n">'+a.name+'</div><div class="ag-intro">'+a.intro+'</div><div class="ag-tags">'+tags+'</div><div class="ag-f"><span class="st">就绪</span><span class="go">进入运行台<svg class="ic"><use href="#ic-right"/></svg></span></div>';
         d.onclick=()=>runAgent(a);
         AG.appendChild(d);
       });
@@ -8038,27 +8040,31 @@
     });
 
     // ==================== 成员与角色 ====================
-    document.getElementById('invite-member-btn').addEventListener('click', () => {
-      showToast('已生成邀请链接（演示），可发送至新成员手机号');
-    });
-    document.querySelectorAll('.js-member-action').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        showToast('已执行「' + btn.dataset.action + '」（演示）');
-      });
+    document.getElementById('add-member-btn').addEventListener('click', openAddMemberModal);
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.js-member-action');
+      if (!btn) return;
+      if (btn.dataset.action === '编辑角色') {
+        openMemberRoleModal(btn.dataset.memberIdx, btn.dataset.memberName);
+        return;
+      }
+      showToast('已执行「' + btn.dataset.action + '」（演示）');
     });
 
     // ==================== 角色权限管理 ====================
-    const permissionModules = ['驾驶舱', 'AI工作台', '企业数字档案', '智能测评', '政策发现', '培育规划', '科创专家', '服务商城', '成员与角色'];
+    const permissionModules = ['驾驶舱', 'AI工作台', '企业数字档案', '智能测评', '政策发现', '培育规划', '智能体广场', '服务商城', '成员与角色'];
     const roleColorMap = {
-      '管理员': 'bg-primary-light text-primary',
-      '申报专员': 'bg-violet-50 text-violet-600',
-      '财务人员': 'bg-green-50 text-green-600',
+      '企业管理员': 'bg-primary-light text-primary',
+      '专业成员': 'bg-violet-50 text-violet-600',
+      '普通成员': 'bg-gray-100 text-gray-600',
+      '外部顾问': 'bg-cyan-50 text-cyan-600',
     };
 
     let roleList = [
-      { name: '管理员', desc: '拥有全部权限，可管理成员、角色及全部业务数据', preset: true, icon: 'shield-check', perms: permissionModules.slice() },
-      { name: '申报专员', desc: '仅可操作项目申报相关模块，无成员管理权限', preset: true, icon: 'briefcase', perms: ['培育规划', '政策发现', '智能测评'] },
-      { name: '财务人员', desc: '仅可查看财务档案相关数据', preset: true, icon: 'calculator', perms: ['企业数字档案'] },
+      { name: '企业管理员', desc: '拥有全部权限，可管理成员、角色及全部业务数据', preset: true, icon: 'shield-check', perms: permissionModules.slice() },
+      { name: '专业成员', desc: '可操作申报、测评、政策等专业模块，无成员管理权限', preset: true, icon: 'briefcase', perms: ['培育规划', '政策发现', '智能测评', '智能体广场', 'AI工作台'] },
+      { name: '普通成员', desc: '仅可查看企业档案与政策信息', preset: true, icon: 'user', perms: ['企业数字档案', '政策发现'] },
+      { name: '外部顾问', desc: '外聘顾问，仅可查看培育规划项目进度', preset: false, icon: 'user-cog', perms: ['培育规划'], refCount: 1 },
     ];
 
     let editingRoleName = null;
@@ -8076,6 +8082,9 @@
         const badge = r.preset
           ? '<span class="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-500">系统预设</span>'
           : '<span class="rounded bg-primary-light px-1.5 py-0.5 text-[10px] text-primary">自定义</span>';
+        const usage = (r.refCount > 0)
+          ? '<span class="rounded bg-amber-50 px-1.5 py-0.5 text-[10px] text-amber-600">被 ' + r.refCount + ' 人使用</span>'
+          : '';
         const actions = '<button class="js-edit-role text-primary hover:underline" data-name="' + r.name + '">编辑</button>' +
           (r.preset ? '' : '<button class="js-del-role text-gray-400 hover:text-red-500" data-name="' + r.name + '">删除</button>');
         return '<div class="rounded-lg border border-gray-100 bg-white p-4">' +
@@ -8086,7 +8095,7 @@
               '</div>' +
               '<div>' +
                 '<div class="flex items-center gap-2">' +
-                  '<span class="text-sm font-medium text-gray-800">' + r.name + '</span>' + badge +
+                  '<span class="text-sm font-medium text-gray-800">' + r.name + '</span>' + badge + usage +
                 '</div>' +
                 '<p class="mt-1 text-xs leading-relaxed text-gray-500">' + r.desc + '</p>' +
               '</div>' +
@@ -8144,6 +8153,11 @@
       }
       const delBtn = e.target.closest('.js-del-role');
       if (delBtn) {
+        const role = roleList.find((r) => r.name === delBtn.dataset.name);
+        if (role && role.refCount > 0) {
+          showToast('角色「' + role.name + '」已被 ' + role.refCount + ' 名成员引用，请先改派成员角色后再删除', 'warning');
+          return;
+        }
         roleList = roleList.filter((r) => r.name !== delBtn.dataset.name);
         renderRoleCards();
         showToast('已删除角色「' + delBtn.dataset.name + '」');
@@ -8175,6 +8189,184 @@
     });
 
     renderRoleCards();
+
+    // ==================== 成员角色分配 ====================
+    const memberRoleOverlay = document.getElementById('member-role-overlay');
+    const memberRoleModal = document.getElementById('member-role-modal');
+    let assigningMemberIdx = null;
+
+    function renderMemberRoleOptions(selected) {
+      const container = document.getElementById('member-role-options');
+      if (!container) return;
+      container.innerHTML = roleList.map((r) => {
+        const checked = r.name === selected ? 'checked' : '';
+        return '<label class="flex cursor-pointer items-center gap-2 rounded-md border border-gray-200 px-3 py-2 transition hover:bg-gray-50">' +
+          '<input type="radio" name="member-role" class="member-role-radio accent-primary h-4 w-4" value="' + r.name + '" ' + checked + ' />' +
+          '<span class="text-sm text-gray-700">' + r.name + '</span>' +
+          '<span class="ml-auto text-[11px] text-gray-400">' + r.desc + '</span>' +
+        '</label>';
+      }).join('');
+    }
+
+    function openMemberRoleModal(idx, name) {
+      assigningMemberIdx = idx;
+      document.getElementById('member-role-name').textContent = name;
+      document.getElementById('member-role-avatar').textContent = name.charAt(0);
+      const badge = document.getElementById('member-role-' + idx);
+      renderMemberRoleOptions(badge ? badge.textContent.trim() : '');
+      memberRoleOverlay.classList.remove('pointer-events-none', 'opacity-0');
+      memberRoleModal.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+    }
+    function closeMemberRoleModal() {
+      memberRoleOverlay.classList.add('pointer-events-none', 'opacity-0');
+      memberRoleModal.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+    }
+
+    document.getElementById('member-role-close').addEventListener('click', closeMemberRoleModal);
+    document.getElementById('member-role-cancel').addEventListener('click', closeMemberRoleModal);
+    memberRoleOverlay.addEventListener('click', closeMemberRoleModal);
+    document.getElementById('member-role-save').addEventListener('click', () => {
+      const selected = document.querySelector('.member-role-radio:checked');
+      if (!selected) {
+        showToast('请选择一个角色', 'warning');
+        return;
+      }
+      const roleName = selected.value;
+      const badge = document.getElementById('member-role-' + assigningMemberIdx);
+      const prevRoleName = badge ? badge.textContent.trim() : '';
+      if (roleName !== prevRoleName) {
+        const prevRole = roleList.find((r) => r.name === prevRoleName);
+        if (prevRole && !prevRole.preset) prevRole.refCount = Math.max(0, (prevRole.refCount || 0) - 1);
+        const newRole = roleList.find((r) => r.name === roleName);
+        if (newRole && !newRole.preset) newRole.refCount = (newRole.refCount || 0) + 1;
+      }
+      if (badge) {
+        badge.textContent = roleName;
+        badge.className = 'rounded-full px-2 py-0.5 text-xs ' + (roleColorMap[roleName] || 'bg-cyan-50 text-cyan-600');
+      }
+      renderRoleCards();
+      showToast('已将角色改为「' + roleName + '」', 'success');
+      closeMemberRoleModal();
+    });
+
+    // ==================== 添加成员 ====================
+    const addMemberOverlay = document.getElementById('add-member-overlay');
+    const addMemberModal = document.getElementById('add-member-modal');
+    let addMemberActiveTab = 'invite';
+    let memberIndex = 5;
+    const avatarGradients = [
+      'from-primary to-blue-400',
+      'from-rose-400 to-rose-600',
+      'from-orange-400 to-orange-600',
+      'from-violet-400 to-violet-600',
+      'from-cyan-400 to-cyan-600',
+      'from-emerald-400 to-emerald-600',
+    ];
+
+    function renderAddMemberRoleOptions(selected) {
+      const container = document.getElementById('add-member-role-options');
+      if (!container) return;
+      container.innerHTML = roleList.map((r) => {
+        const checked = r.name === selected ? 'checked' : '';
+        return '<label class="flex cursor-pointer items-center gap-2 rounded-md border border-gray-200 px-3 py-2 transition hover:bg-gray-50">' +
+          '<input type="radio" name="add-member-role" class="add-member-role-radio accent-primary h-4 w-4" value="' + r.name + '" ' + checked + ' />' +
+          '<span class="text-sm text-gray-700">' + r.name + '</span>' +
+          '<span class="ml-auto text-[11px] text-gray-400">' + r.desc + '</span>' +
+        '</label>';
+      }).join('');
+    }
+
+    function setAddMemberTab(tab) {
+      addMemberActiveTab = tab;
+      const inviteTab = document.getElementById('add-member-tab-invite');
+      const accountTab = document.getElementById('add-member-tab-account');
+      [inviteTab, accountTab].forEach((t) => {
+        const active = t.dataset.tab === tab;
+        t.classList.toggle('border-primary', active);
+        t.classList.toggle('text-primary', active);
+        t.classList.toggle('font-medium', active);
+        t.classList.toggle('border-transparent', !active);
+        t.classList.toggle('text-gray-500', !active);
+      });
+      document.getElementById('add-member-invite-panel').classList.toggle('hidden', tab !== 'invite');
+      document.getElementById('add-member-account-panel').classList.toggle('hidden', tab !== 'account');
+    }
+
+    function openAddMemberModal() {
+      document.getElementById('add-member-invite-phones').value = '';
+      document.getElementById('add-member-name').value = '';
+      document.getElementById('add-member-phone').value = '';
+      renderAddMemberRoleOptions('');
+      setAddMemberTab('invite');
+      addMemberOverlay.classList.remove('pointer-events-none', 'opacity-0');
+      addMemberModal.classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
+    }
+    function closeAddMemberModal() {
+      addMemberOverlay.classList.add('pointer-events-none', 'opacity-0');
+      addMemberModal.classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+    }
+
+    document.getElementById('add-member-close').addEventListener('click', closeAddMemberModal);
+    document.getElementById('add-member-cancel').addEventListener('click', closeAddMemberModal);
+    addMemberOverlay.addEventListener('click', closeAddMemberModal);
+    document.querySelectorAll('.add-member-tab').forEach((tab) => {
+      tab.addEventListener('click', () => setAddMemberTab(tab.dataset.tab));
+    });
+
+    document.getElementById('add-member-copy-link').addEventListener('click', () => {
+      showToast('邀请链接已复制', 'success');
+    });
+
+    document.getElementById('add-member-confirm').addEventListener('click', () => {
+      if (addMemberActiveTab === 'invite') {
+        const raw = document.getElementById('add-member-invite-phones').value;
+        const phones = raw.split(/[,，\s\n]+/).map((p) => p.trim()).filter((p) => /^1\d{10}$/.test(p));
+        if (phones.length === 0) {
+          showToast('请输入要邀请的手机号', 'warning');
+          return;
+        }
+        showToast('已发送邀请至 ' + phones.length + ' 个手机号', 'success');
+        closeAddMemberModal();
+        return;
+      }
+
+      const name = document.getElementById('add-member-name').value.trim();
+      const phone = document.getElementById('add-member-phone').value.trim();
+      const roleRadio = document.querySelector('.add-member-role-radio:checked');
+      if (!name) { showToast('请填写成员姓名', 'warning'); return; }
+      if (!/^1\d{10}$/.test(phone)) { showToast('请填写正确的 11 位手机号', 'warning'); return; }
+      if (!roleRadio) { showToast('请选择要分配的角色', 'warning'); return; }
+
+      const roleName = roleRadio.value;
+      const maskedPhone = phone.slice(0, 3) + '****' + phone.slice(7);
+      const gradient = avatarGradients[memberIndex % avatarGradients.length];
+      const color = roleColorMap[roleName] || 'bg-cyan-50 text-cyan-600';
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td class="px-5 py-3.5">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br ' + gradient + ' text-xs font-medium text-white">' + name.charAt(0) + '</div>' +
+            '<span class="font-medium text-gray-800">' + name + '</span>' +
+          '</div>' +
+        '</td>' +
+        '<td class="px-5 py-3.5 text-gray-600">' + maskedPhone + '</td>' +
+        '<td class="px-5 py-3.5 text-gray-600">—</td>' +
+        '<td class="px-5 py-3.5"><span id="member-role-' + memberIndex + '" class="rounded-full px-2 py-0.5 text-xs ' + color + '">' + roleName + '</span></td>' +
+        '<td class="px-5 py-3.5"><span class="rounded-full bg-green-50 px-2 py-0.5 text-xs text-green-600">已激活</span></td>' +
+        '<td class="px-5 py-3.5">' +
+          '<div class="flex items-center gap-3 text-xs">' +
+            '<button class="js-member-action text-primary hover:underline" data-action="编辑角色" data-member-idx="' + memberIndex + '" data-member-name="' + name + '">编辑角色</button>' +
+            '<button class="js-member-action text-gray-400 hover:text-red-500" data-action="停用">停用</button>' +
+          '</div>' +
+        '</td>';
+      document.getElementById('member-tbody').appendChild(tr);
+      const newRole = roleList.find((r) => r.name === roleName);
+      if (newRole && !newRole.preset) newRole.refCount = (newRole.refCount || 0) + 1;
+      renderRoleCards();
+      memberIndex += 1;
+      showToast('已添加成员「' + name + '」并分配角色「' + roleName + '」', 'success');
+      closeAddMemberModal();
+    });
 
     // ==================== 积分与会员 ====================
     (function(){
@@ -8965,7 +9157,6 @@
       if(chatInput){
         chatInput.value='请根据我的企业情况（行业、规模、人员、研发占比、已有资质与知识产权数量）生成一份完整的科创培育规划报告，包含进阶路径建议、年度路线图和分优先级申报清单。';
         goToPage('page-ai','AI工作台');
-        switchAiView('chat');
       }else{
         showToast('AI 报告生成入口（演示）','success');
       }
