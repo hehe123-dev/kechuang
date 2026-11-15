@@ -403,6 +403,7 @@
     .u-chip.gray { background: #f1f5f9; color: #64748b; }
     .u-chip.violet { background: #f5f3ff; color: #7c3aed; }
     .u-chip.cyan { background: #ecfeff; color: #0891b2; }
+    .u-chip.peer { background: linear-gradient(135deg, #ff7a00, #f5222d); color: #fff; font-weight: 600; box-shadow: 0 1px 4px rgba(245, 34, 45, 0.35); }
 
     .u-full-dim { display: flex; flex-direction: column; gap: 16px; }
     .u-full-dim-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
@@ -416,8 +417,6 @@
     .u-policy-card h3 { font-size: 15px; font-weight: 600; color: #1f2937; }
     .u-policy-card p { font-size: 12px; color: #6b7280; margin-top: 8px; }
     .u-policy-rule { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: #6b7280; }
-    .u-policy-rule i { flex: 1; height: 6px; border-radius: 3px; background: #eef2f7; overflow: hidden; }
-    .u-policy-rule i b { display: block; height: 100%; border-radius: 3px; background: #2563eb; }
     .u-policy-match { display: flex; flex-direction: column; align-items: center; gap: 6px; flex-shrink: 0; padding-left: 20px; border-left: 1px solid #eef1f5; }
     .u-policy-match b { font-size: 26px; font-weight: 600; color: #2563eb; font-variant-numeric: tabular-nums; }
 
@@ -2419,356 +2418,206 @@
         </div>
 
         <!-- AI 申报书专家 -->
-        <div id="page-doc-expert" class="page hidden -m-6">
+                <div id="page-doc-expert" class="page hidden -m-6">
           <style>
 #page-doc-expert{--doc-primary:#1677FF;--doc-primary-hover:#0E62E0;--doc-primary-light:#E8F1FF;--doc-primary-border:#BBD1FF;--doc-primary-track:#DCE8FF}
-#page-doc-expert .wrap{font-family:var(--kimi-font-sans);color:var(--kimi-color-text-primary);padding:20px}
+#page-doc-expert .wrap{font-family:var(--kimi-font-sans);color:var(--kimi-color-text-primary);padding:16px 20px 20px}
 #page-doc-expert .wrap button{font-family:inherit}
-#page-doc-expert .ic{width:1em;height:1em;display:block;flex:none}
-#page-doc-expert .crumb{font-size:12px;color:var(--kimi-color-text-tertiary);display:flex;align-items:center;gap:4px;margin-bottom:8px}
-#page-doc-expert .crumb .ic{width:12px;height:12px}
-#page-doc-expert .head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-#page-doc-expert .title{font-size:20px;font-weight:500;line-height:1.2}
-#page-doc-expert .subtitle{font-size:14px;color:var(--kimi-color-text-secondary);margin-top:4px}
-#page-doc-expert .ent{display:flex;align-items:center;gap:8px;border:1px solid var(--kimi-color-border);border-radius:10px;padding:8px 12px}
-#page-doc-expert .ent .ic{width:18px;height:18px;color:var(--kimi-color-text-secondary)}
-#page-doc-expert .ent-name{font-size:14px;font-weight:500}
-#page-doc-expert .ent-meta{font-size:12px;color:var(--kimi-color-text-tertiary);display:flex;align-items:center;gap:4px;margin-top:2px}
-#page-doc-expert .mini-bar{width:64px;height:4px;border-radius:2px;background:var(--kimi-color-surface-muted);overflow:hidden}
-#page-doc-expert .mini-bar i{display:block;height:100%;background:var(--doc-primary);border-radius:2px}
-#page-doc-expert .steps{display:flex;align-items:center;margin:20px 0 24px;gap:8px}
-#page-doc-expert .step{display:flex;align-items:center;gap:8px}
-#page-doc-expert .step-dot{width:22px;height:22px;border-radius:50%;border:1px solid var(--kimi-color-border);color:var(--kimi-color-text-tertiary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex:none}
-#page-doc-expert .step.done .step-dot,#page-doc-expert .step.active .step-dot{background:var(--doc-primary);border-color:var(--doc-primary);color:#fff}
-#page-doc-expert .step.done .step-label{color:var(--doc-primary)}
-#page-doc-expert .step.done+.conn{background:var(--doc-primary-border)}
-#page-doc-expert .step .ic{width:12px;height:12px}
-#page-doc-expert .step-label{font-size:13px;color:var(--kimi-color-text-secondary);white-space:nowrap}
-#page-doc-expert .step.active .step-label{font-weight:600;color:var(--doc-primary)}
-#page-doc-expert .step-tag{font-size:11px;color:var(--kimi-color-text-tertiary);border:1px solid var(--kimi-color-border);border-radius:6px;padding:1px 5px}
-#page-doc-expert .conn{flex:1;height:1px;background:var(--kimi-color-border);min-width:16px}
-#page-doc-expert .dpx-grid{display:grid;grid-template-columns:440px 1fr;gap:20px;align-items:start}
-@media (max-width:760px){#page-doc-expert .dpx-grid{grid-template-columns:1fr}}
-#page-doc-expert .panel{border:1px solid var(--kimi-color-border);border-radius:12px;overflow:hidden}
-#page-doc-expert .panel + .panel{margin-top:16px}
-#page-doc-expert .panel-head{display:flex;align-items:baseline;justify-content:space-between;padding:12px 16px 8px;background:#F8FAFF}
-#page-doc-expert .panel-title{font-size:15px;font-weight:600}
-#page-doc-expert .panel-hint{font-size:12px;color:var(--kimi-color-text-tertiary)}
-#page-doc-expert .proj{display:block;width:100%;text-align:left;padding:12px 16px;border:0;border-top:1px solid var(--kimi-color-border);background:transparent;cursor:pointer;transition:background var(--t-fast) var(--ease-out)}
-#page-doc-expert .proj:hover{background:#F5F8FF}
-#page-doc-expert .proj.selected{background:var(--doc-primary-light);box-shadow:inset 3px 0 0 var(--doc-primary)}
-#page-doc-expert .proj.selected .proj-name{color:var(--doc-primary)}
-#page-doc-expert .proj-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-#page-doc-expert .proj-name{font-size:14px;font-weight:500}
-#page-doc-expert .proj-tag{font-size:11px;color:var(--doc-primary);background:#F0F5FF;border:1px solid var(--doc-primary-border);border-radius:6px;padding:1px 6px;flex:none}
-#page-doc-expert .proj-meta{display:flex;align-items:center;gap:12px;margin-top:8px;font-size:12px;color:var(--kimi-color-text-tertiary);flex-wrap:wrap}
-#page-doc-expert .fit{display:flex;align-items:center;gap:6px}
-#page-doc-expert .fit b{font-weight:500;color:var(--doc-primary);font-variant-numeric:tabular-nums}
-#page-doc-expert .fit-bar{width:56px;height:4px;border-radius:2px;background:var(--kimi-color-surface-muted);overflow:hidden}
-#page-doc-expert .fit-bar i{display:block;height:100%;border-radius:2px;background:var(--doc-primary)}
-#page-doc-expert .proj-actions{opacity:0;transition:opacity var(--t-fast) var(--ease-out);display:flex;justify-content:flex-end;margin-top:8px}
-#page-doc-expert .proj:hover .proj-actions,#page-doc-expert .proj.selected .proj-actions{opacity:1}
-#page-doc-expert .btn-sm{border:1px solid var(--doc-primary-border);background:#fff;border-radius:8px;padding:4px 10px;font-size:12px;cursor:pointer;color:var(--doc-primary)}
-#page-doc-expert .btn-sm:hover{border-color:var(--doc-primary);background:var(--doc-primary-light)}
-#page-doc-expert .prof-rows{padding:0 16px 12px}
-#page-doc-expert .prof-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;padding:7px 0;gap:8px}
-#page-doc-expert .prof-row + .prof-row{border-top:1px dashed var(--kimi-color-border)}
-#page-doc-expert .prof-k{color:var(--kimi-color-text-secondary);display:flex;align-items:center;gap:6px}
-#page-doc-expert .prof-k .ic{width:14px;height:14px;color:var(--kimi-color-text-tertiary)}
-#page-doc-expert .ok{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--kimi-color-positive);white-space:nowrap}
-#page-doc-expert .ok .ic{width:12px;height:12px}
-#page-doc-expert .warn{color:var(--kimi-color-warning)}
-#page-doc-expert .prof-bar-wrap{padding:0 16px 14px}
-#page-doc-expert .prof-bar{height:6px;border-radius:3px;background:var(--doc-primary-track);overflow:hidden}
-#page-doc-expert .prof-bar i{display:block;height:100%;width:92%;background:var(--doc-primary);border-radius:3px}
-#page-doc-expert .prof-bar-txt{display:flex;justify-content:space-between;font-size:11px;color:var(--kimi-color-text-tertiary);margin-top:6px}
-#page-doc-expert .prof-bar-txt b{font-weight:500;color:var(--kimi-color-text-secondary);font-variant-numeric:tabular-nums}
-#page-doc-expert .doc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:16px;border-bottom:1px solid var(--kimi-color-border)}
-#page-doc-expert .doc-title{font-size:16px;font-weight:500;line-height:1.35}
-#page-doc-expert .doc-sub{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:4px}
-#page-doc-expert .status-chip{display:inline-flex;align-items:center;gap:4px;font-size:12px;border-radius:6px;padding:2px 8px;flex:none}
-#page-doc-expert .status-chip .ic{width:12px;height:12px}
-#page-doc-expert .chip-done{color:var(--kimi-color-positive);background:color-mix(in srgb,var(--kimi-color-positive) 12%,transparent)}
-#page-doc-expert .chip-doing{color:var(--doc-primary);background:var(--doc-primary-light)}
-#page-doc-expert .chip-wait{color:#AD6800;background:#FFF3E5}
-#page-doc-expert .chip-idle{color:var(--kimi-color-text-secondary);background:var(--kimi-color-surface-muted)}
-#page-doc-expert .doc-actions{display:flex;gap:8px;flex:none}
-#page-doc-expert .btn-ghost{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--doc-primary-border);background:#fff;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;color:var(--doc-primary)}
-#page-doc-expert .btn-ghost:hover{border-color:var(--doc-primary);background:var(--doc-primary-light)}
-#page-doc-expert .btn-ghost .ic{width:14px;height:14px}
-#page-doc-expert .tabs{display:flex;border-bottom:1px solid var(--kimi-color-border);padding:0 8px}
-#page-doc-expert .tab{display:flex;align-items:center;gap:6px;padding:10px 12px;font-size:14px;color:var(--kimi-color-text-secondary);background:none;border:0;border-bottom:2px solid transparent;cursor:pointer;margin-bottom:-1px}
-#page-doc-expert .tab:hover{color:var(--doc-primary)}
-#page-doc-expert .tab.active{color:var(--doc-primary);font-weight:600;border-bottom-color:var(--doc-primary);background:#F5F8FF}
-#page-doc-expert .tab .ic{width:15px;height:15px}
-#page-doc-expert .fee-tag{font-size:11px;color:var(--kimi-color-text-tertiary);border:1px solid var(--kimi-color-border);border-radius:6px;padding:0 5px}
-#page-doc-expert .tabpane{display:none;padding:16px}
-#page-doc-expert .tabpane.active{display:block}
-#page-doc-expert .gen-line{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--kimi-color-text-secondary);margin-bottom:12px}
-#page-doc-expert .gen-line .ic{width:14px;height:14px;color:var(--kimi-color-positive)}
-#page-doc-expert .sec{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--kimi-color-border);border-radius:10px;margin-bottom:8px}
-#page-doc-expert .sec .ic{width:16px;height:16px;color:var(--doc-primary)}
-#page-doc-expert .sec-name{font-size:14px;flex:1}
-#page-doc-expert .sec-state{font-size:12px;color:var(--kimi-color-text-tertiary)}
-#page-doc-expert .sec-state.ok{color:var(--kimi-color-positive)}
-#page-doc-expert .score-row{display:flex;align-items:center;gap:20px;padding:4px 0 16px}
-#page-doc-expert .donut{width:88px;height:88px;flex:none}
-#page-doc-expert .donut .track{stroke:var(--doc-primary-light)}
-#page-doc-expert .donut .val{stroke:var(--doc-primary);stroke-linecap:round}
-#page-doc-expert .donut-num{font-size:22px;font-weight:500;fill:var(--doc-primary);font-variant-numeric:tabular-nums}
-#page-doc-expert .donut-cap{font-size:11px;fill:var(--kimi-color-text-tertiary)}
-#page-doc-expert .check{display:flex;gap:10px;padding:10px 0;border-top:1px dashed var(--kimi-color-border)}
-#page-doc-expert .check:first-of-type{border-top:0}
-#page-doc-expert .check .ic{width:16px;height:16px;margin-top:2px}
-#page-doc-expert .check .ic.pass{color:var(--kimi-color-positive)}
-#page-doc-expert .check .ic.warni{color:var(--kimi-color-warning)}
-#page-doc-expert .check-name{font-size:14px}
-#page-doc-expert .check-detail{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:2px}
-#page-doc-expert .expert-grid{display:grid;grid-template-columns:1fr 240px;gap:20px}
-@media (max-width:640px){#page-doc-expert .expert-grid{grid-template-columns:1fr}}
-#page-doc-expert .expert-id{display:flex;gap:12px;align-items:center}
-#page-doc-expert .avatar{width:44px;height:44px;border-radius:50%;background:var(--doc-primary-light);color:var(--doc-primary);border:1px solid var(--doc-primary-border);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;flex:none}
-#page-doc-expert .expert-name{font-size:15px;font-weight:500;display:flex;align-items:center;gap:6px}
-#page-doc-expert .expert-name .ic{width:14px;height:14px;color:var(--kimi-color-positive)}
-#page-doc-expert .expert-meta{font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:3px;line-height:1.5}
-#page-doc-expert .svc-list{margin-top:16px}
-#page-doc-expert .svc{display:flex;gap:8px;font-size:13px;color:var(--kimi-color-text-secondary);padding:5px 0}
-#page-doc-expert .svc .ic{width:14px;height:14px;color:var(--doc-primary);margin-top:3px}
-#page-doc-expert .price-card{border:1px solid var(--kimi-color-border);border-radius:12px;padding:16px}
-#page-doc-expert .price-label{font-size:12px;color:var(--kimi-color-text-tertiary)}
-#page-doc-expert .price{font-size:28px;font-weight:500;margin-top:4px;font-variant-numeric:tabular-nums}
-#page-doc-expert .price small{font-size:13px;color:var(--kimi-color-text-secondary);font-weight:400}
-#page-doc-expert .price-old{font-size:12px;color:var(--kimi-color-text-quaternary);text-decoration:line-through}
-#page-doc-expert .price-items{margin:12px 0 16px}
-#page-doc-expert .price-items div{display:flex;justify-content:space-between;font-size:12px;color:var(--kimi-color-text-secondary);padding:4px 0}
-#page-doc-expert .btn-primary{width:100%;background:var(--doc-primary);color:#fff;border:0;border-radius:10px;padding:10px 12px;font-size:14px;font-weight:500;cursor:pointer}
-#page-doc-expert .btn-primary:hover{background:var(--doc-primary-hover)}
-#page-doc-expert button:focus-visible{outline:2px solid var(--doc-primary);outline-offset:3px}
-#page-doc-expert .btn-primary:disabled{opacity:.5;cursor:default}
-#page-doc-expert .expert-state{display:none;margin-top:12px;font-size:13px;color:var(--kimi-color-positive);align-items:center;gap:6px}
-#page-doc-expert .expert-state.on{display:flex}
-#page-doc-expert .expert-state .ic{width:14px;height:14px}
-#page-doc-expert .fine{font-size:11px;color:var(--kimi-color-text-quaternary);margin-top:10px;line-height:1.5}
-#page-doc-expert .locked-note{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:10px}
-#page-doc-expert .locked-note .ic{width:13px;height:13px}
-          
-/* 本页布局与交互控件独立于其他业务模块。 */
-#page-doc-expert .wrap{width:100%;min-width:0;font-size:14px;line-height:1.65}
-#page-doc-expert .ic-slot{display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:1}
-#page-doc-expert .dpx-grid{grid-template-columns:minmax(260px,320px) minmax(0,1fr)}
-#page-doc-expert .dpx-grid>aside,#page-doc-expert .dpx-grid>section{min-width:0}
-#page-doc-expert .panel{min-width:0;background:#fff}
-#page-doc-expert .panel-head{gap:6px 12px;flex-wrap:wrap}
-#page-doc-expert .proj-top{align-items:flex-start}
-#page-doc-expert .proj-name{min-width:0;line-height:1.6}
-#page-doc-expert .proj-tag{white-space:nowrap}
-#page-doc-expert .proj-select{display:block;width:100%;padding:0;border:0;background:transparent;text-align:left;color:inherit;font-family:inherit;cursor:pointer}
-#page-doc-expert .proj-actions{margin-top:10px}
-#page-doc-expert .proj:focus-within .proj-actions{opacity:1}
-#page-doc-expert .prof-k{min-width:0}
-#page-doc-expert .prof-row .ok{flex:none}
-#page-doc-expert .doc-head{flex-wrap:wrap}
-#page-doc-expert .doc-head>div:first-child{flex:1 1 260px;min-width:0}
-#page-doc-expert .doc-toolbar{display:flex;flex-direction:column;gap:8px;align-items:flex-end;min-width:0;max-width:100%}
-#page-doc-expert .doc-actions{flex-wrap:wrap;justify-content:flex-end;max-width:100%;gap:8px}
-#page-doc-expert .btn-ghost,#page-doc-expert .btn-sm{white-space:nowrap;max-width:100%}
-#page-doc-expert .tabs{flex-wrap:wrap;gap:0 4px}
-#page-doc-expert .tab{flex:none;white-space:nowrap}
-#page-doc-expert .draft-article,#page-doc-expert .doc-title,#page-doc-expert .doc-sub{overflow-wrap:anywhere}
-#page-doc-expert .expert-grid{grid-template-columns:minmax(0,1fr) minmax(200px,240px)}
-#page-doc-expert .expert-grid>div,#page-doc-expert .expert-id>div:last-child{min-width:0}
-#page-doc-expert .expert-id{align-items:flex-start}
-#page-doc-expert .expert-name{flex-wrap:wrap}
-#page-doc-expert .price-card{min-width:0}
-#page-doc-expert .price{line-height:1.4}
-#page-doc-expert .price-items div{gap:8px}
-#page-doc-expert .score-row{flex-wrap:wrap}
-#page-doc-expert .score-row>div{flex:1;min-width:180px}
-#page-doc-expert .check>div{min-width:0}
-#page-doc-expert .gen-line,#page-doc-expert .locked-note{align-items:flex-start;line-height:1.7}
-@media(max-width:1200px){
-  #page-doc-expert .dpx-grid{grid-template-columns:280px minmax(0,1fr)}
-  #page-doc-expert .expert-grid{grid-template-columns:minmax(0,1fr)}
-  #page-doc-expert .doc-toolbar{width:100%;align-items:flex-start}
-  #page-doc-expert .doc-actions{justify-content:flex-start}
-}
-@media(max-width:1000px){
-  #page-doc-expert .dpx-grid{grid-template-columns:minmax(0,1fr)}
-  #page-doc-expert .dpx-grid>aside{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
-  #page-doc-expert .dpx-grid>aside>.panel+.panel{margin-top:0}
-}
-@media(max-width:700px){
-  #page-doc-expert .wrap{padding:16px}
-  #page-doc-expert .steps{flex-wrap:wrap;gap:8px;margin:16px 0}
-  #page-doc-expert .steps .conn{display:none}
-  #page-doc-expert .steps .step{flex:1 1 calc(50% - 8px);min-width:0;padding:8px;background:var(--kimi-color-surface-muted);border-radius:8px}
-  #page-doc-expert .steps .step-label{white-space:normal}
-  #page-doc-expert .steps .step-tag{flex:none}
-  #page-doc-expert .dpx-grid>aside{grid-template-columns:minmax(0,1fr)}
-  #page-doc-expert .proj-actions{opacity:1}
-  #page-doc-expert .doc-head>div:first-child{flex-basis:100%}
-  #page-doc-expert .doc-toolbar{width:100%;align-items:flex-start}
-  #page-doc-expert .doc-actions{justify-content:flex-start}
-  #page-doc-expert .btn-ghost{padding:6px 9px;font-size:12px}
-  #page-doc-expert .tab{padding:10px 8px;font-size:13px}
-  #page-doc-expert .expert-grid{grid-template-columns:minmax(0,1fr)}
-}
-
-#page-doc-expert [hidden]{display:none!important}
-#page-doc-expert .proj-actions{opacity:1}
-#page-doc-expert .doc-actions .btn-primary,#page-doc-expert .doc-workflow .btn-primary,#page-doc-expert .doc-material-footer .btn-primary{width:auto;white-space:nowrap}
-#page-doc-expert .doc-workflow{padding:20px}
-#page-doc-expert .doc-flow-empty{padding:40px 20px;text-align:center;background:#F5F8FF;border:1px dashed var(--doc-primary-border);border-radius:10px}
-#page-doc-expert .doc-flow-empty strong{display:block;font-size:17px;color:#1f2937}
-#page-doc-expert .doc-flow-empty p{font-size:13px;line-height:1.9;color:#64748b;max-width:460px;margin:12px auto 18px}
-#page-doc-expert .doc-flow-progress{padding:16px;background:#F5F8FF;border:1px solid var(--doc-primary-border);border-radius:10px}
-#page-doc-expert .doc-flow-progress-title{display:flex;justify-content:space-between;gap:12px;font-size:14px}
-#page-doc-expert .doc-flow-track{height:7px;border-radius:4px;background:var(--doc-primary-track);overflow:hidden;margin:14px 0 10px}
-#page-doc-expert .doc-flow-track i{display:block;height:100%;background:var(--doc-primary);border-radius:4px;transition:width .3s}
-#page-doc-expert .doc-flow-progress p{font-size:12px;line-height:1.8;color:#64748b;margin:0}
-#page-doc-expert .doc-chapter-list{margin-top:14px}
-#page-doc-expert .doc-chapter-list>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #eef1f5;font-size:13px}
-#page-doc-expert .doc-chapter-list small{color:#64748b;flex:none}
-#page-doc-expert .doc-materials{margin:0 20px 20px;padding:16px;border:1px solid #f2cf90;background:#fffcf5;border-radius:10px}
-#page-doc-expert .doc-materials h3{font-size:15px;margin:0 0 6px}
-#page-doc-expert .doc-materials>p,#page-doc-expert .doc-material-row p{font-size:12px;line-height:1.8;color:#64748b;margin:4px 0}
-#page-doc-expert .doc-material-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #f0e5d3}
-#page-doc-expert .doc-material-row>div{min-width:0;overflow-wrap:anywhere}
-#page-doc-expert .doc-material-row strong{font-size:13px}
-#page-doc-expert .doc-material-row small{font-size:12px;color:#b7791f}
-#page-doc-expert .doc-material-row button{flex:none}
-#page-doc-expert .doc-material-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:14px}
-#page-doc-expert .doc-material-footer span{font-size:12px;color:#64748b}
-#page-doc-expert button:disabled{opacity:.5;cursor:not-allowed}
-#page-doc-expert .doc-flow-error{margin:16px 20px;padding:10px 12px;background:#fff1f0;color:#c43c35;border-radius:8px;font-size:13px}
-#page-doc-expert .doc-editor-caption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px;font-size:13px}
-#page-doc-expert #docSaveStatus{color:#64748b;font-size:12px}
-#page-doc-expert #docOnlineEditor{display:block;width:100%;min-height:560px;resize:vertical;border:1px solid #dfe3e8;border-radius:8px;padding:16px;font:14px/1.95 var(--kimi-font-sans);color:#1f2937;background:#fff;box-sizing:border-box}
-#page-doc-expert #docOnlineEditor:focus{outline:2px solid var(--doc-primary-border);outline-offset:1px;border-color:var(--doc-primary)}
-@media(max-width:700px){#page-doc-expert .doc-workflow{padding:12px}#page-doc-expert .doc-materials{margin:0 12px 12px;padding:12px}#page-doc-expert .doc-flow-empty{padding:28px 14px}#page-doc-expert .doc-material-row{align-items:flex-start;flex-wrap:wrap}#page-doc-expert #docOnlineEditor{padding:12px}}
+#page-doc-expert .head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+#page-doc-expert .title{font-size:20px;font-weight:600;line-height:1.2}
+#page-doc-expert .subtitle{font-size:13px;color:var(--kimi-color-text-tertiary);margin-top:4px}
+#page-doc-expert .dw-grid{display:grid;grid-template-columns:236px minmax(0,1fr) 322px;gap:16px;align-items:start}
+@media(max-width:1240px){#page-doc-expert .dw-grid{grid-template-columns:220px minmax(0,1fr) 278px}}
+@media(max-width:1020px){#page-doc-expert .dw-grid{grid-template-columns:minmax(0,1fr)}}
+#page-doc-expert .dw-panel{border:1px solid var(--kimi-color-border);border-radius:14px;background:#fff;overflow:hidden}
+#page-doc-expert .dw-panel+.dw-panel{margin-top:14px}
+#page-doc-expert .dw-panel-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;border-bottom:1px solid var(--kimi-color-border);font-size:14px;font-weight:600}
+#page-doc-expert .dw-panel-h .sub{font-size:11px;font-weight:400;color:var(--kimi-color-text-tertiary)}
+#page-doc-expert .dw-add{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--doc-primary-border);background:var(--doc-primary-light);color:var(--doc-primary);border-radius:7px;padding:3px 9px;font-size:12px;font-weight:500;cursor:pointer}
+#page-doc-expert .dw-add:hover{background:#dbeafe}
+#page-doc-expert .dw-task{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--kimi-color-border);background:transparent;padding:11px 14px;cursor:pointer}
+#page-doc-expert .dw-task:last-child{border-bottom:0}
+#page-doc-expert .dw-task:hover{background:#f8faff}
+#page-doc-expert .dw-task.sel{background:var(--doc-primary-light);box-shadow:inset 3px 0 0 var(--doc-primary)}
+#page-doc-expert .dw-task-top{display:flex;align-items:center;gap:7px}
+#page-doc-expert .dw-task-dot{width:7px;height:7px;border-radius:50%;flex:none;background:var(--kimi-color-text-quaternary)}
+#page-doc-expert .dw-task.sel .dw-task-dot{background:var(--doc-primary)}
+#page-doc-expert .dw-task.done .dw-task-dot{background:var(--kimi-color-positive)}
+#page-doc-expert .dw-task-name{font-size:13px;font-weight:500;color:var(--kimi-color-text-primary);flex:1;min-width:0;line-height:1.5}
+#page-doc-expert .dw-task.sel .dw-task-name{color:var(--doc-primary)}
+#page-doc-expert .dw-task-st{font-size:11px;color:var(--kimi-color-text-tertiary);flex:none;white-space:nowrap}
+#page-doc-expert .dw-task-meta{font-size:11px;color:var(--kimi-color-text-tertiary);margin-top:5px;padding-left:14px;line-height:1.5}
+#page-doc-expert .dw-arch{padding:12px 14px}
+#page-doc-expert .dw-arch-h{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--kimi-color-text-secondary);margin-bottom:8px}
+#page-doc-expert .dw-arch-h b{font-size:13px;font-weight:600;color:var(--kimi-color-text-primary);font-variant-numeric:tabular-nums}
+#page-doc-expert .dw-arch-bar{height:6px;border-radius:3px;background:var(--kimi-color-surface-muted);overflow:hidden}
+#page-doc-expert .dw-arch-bar i{display:block;height:100%;width:92%;background:var(--doc-primary);border-radius:3px}
+#page-doc-expert .dw-arch-link{display:block;margin-top:10px;font-size:12px;color:var(--doc-primary);text-align:center;text-decoration:none;cursor:pointer}
+#page-doc-expert .dw-main{min-width:0}
+#page-doc-expert .dw-doc-head{padding:14px 16px;border:1px solid var(--kimi-color-border);border-radius:14px;background:#fff;margin-bottom:12px}
+#page-doc-expert .dw-doc-title{font-size:16px;font-weight:600;line-height:1.4}
+#page-doc-expert .dw-doc-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+#page-doc-expert .dw-chip{font-size:11px;color:var(--kimi-color-text-secondary);border:1px solid var(--kimi-color-border);background:var(--kimi-color-surface);border-radius:6px;padding:2px 8px;white-space:nowrap}
+#page-doc-expert .dw-chip.key{color:var(--doc-primary);border-color:var(--doc-primary-border);background:var(--doc-primary-light)}
+#page-doc-expert .dw-ctx{font-size:12px;color:var(--kimi-color-text-tertiary);margin:0 2px 12px}
+#page-doc-expert .dw-chat{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+#page-doc-expert .dw-msg{max-width:92%;border-radius:12px;padding:9px 12px;font-size:13px;line-height:1.7}
+#page-doc-expert .dw-msg-user{align-self:flex-end;background:var(--doc-primary);color:#fff}
+#page-doc-expert .dw-msg-ai{align-self:flex-start;border:1px solid var(--kimi-color-border);background:#fff;color:var(--kimi-color-text-secondary)}
+#page-doc-expert .dw-msg-meta{font-size:11px;color:var(--kimi-color-text-tertiary);margin-bottom:4px}
+#page-doc-expert .dw-msg-meta .ok{color:var(--kimi-color-positive);font-weight:500}
+#page-doc-expert .dw-trace{font-size:11px;color:var(--kimi-color-text-quaternary);margin-top:6px;padding-top:6px;border-top:1px dashed var(--kimi-color-border)}
+#page-doc-expert .dw-doc{border:1px solid var(--kimi-color-border);border-radius:14px;background:#fff;padding:18px 20px}
+#page-doc-expert .dw-doc h3{font-size:14px;font-weight:600;margin:16px 0 8px;color:var(--kimi-color-text-primary)}
+#page-doc-expert .dw-doc h3:first-child{margin-top:0}
+#page-doc-expert .dw-doc p{font-size:13px;line-height:1.9;color:var(--kimi-color-text-secondary);margin:0;text-align:justify}
+#page-doc-expert .dw-doc-more{margin-top:14px;font-size:12px;color:var(--kimi-color-text-quaternary);text-align:center;padding-top:12px;border-top:1px dashed var(--kimi-color-border)}
+#page-doc-expert .dw-composer{border:1px solid var(--kimi-color-border);border-radius:14px;background:#fff;overflow:hidden}
+#page-doc-expert .dw-sugs{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;border-bottom:1px dashed var(--kimi-color-border)}
+#page-doc-expert .dw-sg{font-size:11px;border:1px solid var(--kimi-color-border);border-radius:999px;padding:3px 10px;background:transparent;color:var(--kimi-color-text-secondary);cursor:pointer}
+#page-doc-expert .dw-sg:hover{border-color:var(--doc-primary);color:var(--doc-primary)}
+#page-doc-expert .dw-input-row{display:flex;align-items:center;gap:8px;padding:10px 12px}
+#page-doc-expert .dw-input{flex:1;border:0;outline:none;background:transparent;font-size:13px;color:var(--kimi-color-text-primary)}
+#page-doc-expert .dw-send{border:0;border-radius:9px;background:var(--doc-primary);color:#fff;padding:7px 16px;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap}
+#page-doc-expert .dw-send:hover{background:var(--doc-primary-hover)}
+#page-doc-expert .dw-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid var(--kimi-color-border);background:#fafbfc}
+#page-doc-expert .dw-tool{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--kimi-color-text-secondary);border:1px solid var(--kimi-color-border);border-radius:7px;background:#fff;padding:3px 8px;cursor:pointer}
+#page-doc-expert .dw-tool:hover{border-color:var(--doc-primary);color:var(--doc-primary)}
+#page-doc-expert .dw-fine{font-size:11px;color:var(--kimi-color-text-quaternary);margin-left:auto}
+#page-doc-expert .dw-hint{font-size:11px;color:var(--kimi-color-text-quaternary)}
+#page-doc-expert .dw-ev-sec{padding:12px 14px;border-bottom:1px solid var(--kimi-color-border)}
+#page-doc-expert .dw-ev-sec:last-child{border-bottom:0}
+#page-doc-expert .dw-ev-sec-t{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;color:var(--kimi-color-text-primary);margin-bottom:8px}
+#page-doc-expert .dw-ev-sec-t .n{font-size:11px;font-weight:400;color:var(--kimi-color-text-tertiary)}
+#page-doc-expert .dw-ev-sec-t .n.warn{color:var(--kimi-color-warning)}
+#page-doc-expert .dw-ev-item{display:flex;gap:8px;padding:7px 0;align-items:flex-start}
+#page-doc-expert .dw-ev-item+.dw-ev-item{border-top:1px dashed var(--kimi-color-border)}
+#page-doc-expert .dw-ev-no{width:16px;height:16px;border-radius:5px;background:var(--kimi-color-surface-muted);color:var(--kimi-color-text-tertiary);font-size:10px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:2px}
+#page-doc-expert .dw-ev-name{font-size:12.5px;color:var(--kimi-color-text-primary);line-height:1.5;min-width:0}
+#page-doc-expert .dw-ev-meta{font-size:11px;color:var(--kimi-color-text-tertiary);margin-top:2px}
+#page-doc-expert .dw-gap{font-size:12px;color:var(--kimi-color-text-secondary);line-height:1.6;padding:3px 0 3px 12px;position:relative}
+#page-doc-expert .dw-gap::before{content:'';position:absolute;left:0;top:11px;width:5px;height:5px;border-radius:50%;background:var(--kimi-color-warning)}
+#page-doc-expert .dw-btn-line{display:block;width:100%;border:1px solid var(--doc-primary-border);background:var(--doc-primary-light);color:var(--doc-primary);border-radius:8px;padding:6px 10px;font-size:12px;font-weight:500;cursor:pointer;margin-top:8px}
+#page-doc-expert .dw-btn-line:hover{background:#dbeafe}
+#page-doc-expert .dw-ver{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--kimi-color-text-secondary);padding:5px 0}
+#page-doc-expert .dw-ver .k{color:var(--kimi-color-text-tertiary)}
+#page-doc-expert .dw-ver b{font-weight:600;color:var(--kimi-color-text-primary)}
+#page-doc-expert .dw-switch-t{font-size:12.5px;font-weight:600;color:var(--kimi-color-text-primary);margin-bottom:4px}
+#page-doc-expert .dw-switch-p{font-size:11.5px;color:var(--kimi-color-text-tertiary);line-height:1.7;margin:0}
           </style>
           <div class="wrap">
-            <div class="crumb">科创培育规划系统 <span class="ic-slot" data-ic="RightIcon"></span> AI 申报书专家</div>
             <div class="head">
               <div>
                 <div class="title">AI 申报书专家</div>
-                <div class="subtitle">选择项目并生成申报书；发现缺失材料时可中途上传补全，生成完成后在线编辑与保存。</div>
+                <div class="subtitle">按官方大纲撰写申报书，每个结论自动挂接企业档案证据，生成后可直接继续对话修改。</div>
               </div>
             </div>
 
-            <div class="steps" aria-label="申报书生成步骤">
-              <div class="step active" data-doc-step="0"><span class="step-dot">1</span><span class="step-label">选择项目</span></div><div class="conn"></div>
-              <div class="step" data-doc-step="1"><span class="step-dot">2</span><span class="step-label">生成申报书</span></div><div class="conn"></div>
-              <div class="step" data-doc-step="2"><span class="step-dot">3</span><span class="step-label">补全缺失材料</span><span class="step-tag">按需</span></div><div class="conn"></div>
-              <div class="step" data-doc-step="3"><span class="step-dot">4</span><span class="step-label">在线编辑</span></div>
-            </div>
-            <div class="empty-only rounded-2xl border border-dashed border-gray-200 bg-white px-8 py-16 text-center">
-              <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-violet-50">
-                <i data-lucide="file-text" class="h-7 w-7 text-violet-600"></i>
-              </div>
-              <h3 class="mt-4 text-lg font-semibold text-gray-800">还没有可申报项目</h3>
-              <p class="mt-2 text-sm text-gray-500">完成智能测评或加入培育项目后，这里会列出可一键生成申报书的项目。</p>
-              <div class="mt-6 flex justify-center">
-                <button type="button" class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover" onclick="goToPage('page-cultivation','智能测评')">
-                  <i data-lucide="activity" class="h-4 w-4"></i> 去智能测评
-                </button>
-              </div>
-            </div>
-
-            <div class="demo-only dpx-grid">
-              <aside>
-                <div class="panel">
-                  <div class="panel-head"><span class="panel-title">可申报项目</span><span class="panel-hint">已按企业档案匹配 3 项</span></div>
-                  <div id="projList"></div>
+            <div class="dw-grid">
+              <!-- 左侧：申报任务 -->
+              <aside class="dw-col">
+                <div class="dw-panel">
+                  <div class="dw-panel-h">申报任务<button class="dw-add" onclick="showToast('新建申报任务（演示）','success')">＋ 新建</button></div>
+                  <div id="dwTaskList">
+                    <button class="dw-task sel" data-dw-task="0"><span class="dw-task-top"><span class="dw-task-dot"></span><span class="dw-task-name">省级专精特新申报书</span><span class="dw-task-st">进行中</span></span><span class="dw-task-meta">适配度 87 · 截止 1月20日</span></button>
+                    <button class="dw-task" data-dw-task="1"><span class="dw-task-top"><span class="dw-task-dot"></span><span class="dw-task-name">高新技术企业认定申报书</span></span><span class="dw-task-meta">适配度 92 · 截止 12月15日</span></button>
+                    <button class="dw-task done" data-dw-task="2"><span class="dw-task-top"><span class="dw-task-dot"></span><span class="dw-task-name">科技型中小企业评价</span><span class="dw-task-st">已完成</span></span><span class="dw-task-meta">适配度 95 · 截止 11月30日</span></button>
+                    <button class="dw-task done" data-dw-task="3"><span class="dw-task-top"><span class="dw-task-dot"></span><span class="dw-task-name">创新型中小企业评价</span><span class="dw-task-st">已提交</span></span><span class="dw-task-meta">已提交 · 11月2日</span></button>
+                  </div>
                 </div>
-                <div class="panel">
-                  <div class="panel-head"><span class="panel-title">企业档案</span><span class="panel-hint">生成依据</span></div>
-                  <div class="prof-rows">
-                    <div class="prof-row"><span class="prof-k"><span class="ic-slot" data-ic="DocumentIcon"></span>工商与资质信息</span><span class="ok"><span class="ic-slot" data-ic="CheckIcon"></span>已同步</span></div>
-                    <div class="prof-row"><span class="prof-k"><span class="ic-slot" data-ic="DocumentIcon"></span>近三年财务三表</span><span class="ok"><span class="ic-slot" data-ic="CheckIcon"></span>已同步</span></div>
-                    <div class="prof-row"><span class="prof-k"><span class="ic-slot" data-ic="DocumentIcon"></span>知识产权 · 18 件</span><span class="ok"><span class="ic-slot" data-ic="CheckIcon"></span>已同步</span></div>
-                    <div class="prof-row"><span class="prof-k"><span class="ic-slot" data-ic="DocumentIcon"></span>研发人员 42 人</span><span class="ok warn"><span class="ic-slot" data-ic="WarningIcon"></span>占比 9.8%，略低</span></div>
-                  </div>
-                  <div class="prof-bar-wrap">
-                    <div class="prof-bar"><i></i></div>
-                    <div class="prof-bar-txt"><span>档案完整度</span><b>92 / 100</b></div>
-                  </div>
+                <div class="dw-panel dw-arch">
+                  <div class="dw-arch-h">企业档案完整度<b>92 / 100</b></div>
+                  <div class="dw-arch-bar"><i></i></div>
+                  <a class="dw-arch-link" onclick="goToPage('page-archive','企业数字档案')">查看 12 维画像 &gt;</a>
                 </div>
               </aside>
 
-              <section class="panel">
-                <div class="doc-head">
-                  <div><div class="doc-title" id="docTitle">请选择要生成申报书的项目</div><div class="doc-sub" id="docSub">从左侧选择项目，再开始生成申报书。</div></div>
-                  <div class="doc-toolbar"><span class="status-chip chip-idle" id="docStatus">待选择项目</span><div class="doc-actions" id="docMainActions"></div></div>
-                </div>
-                <div class="doc-flow-error" id="docFlowError" role="alert" hidden></div>
-                <input type="file" id="docMissingFile" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" hidden />
-                <div id="docWorkflow" class="doc-workflow"></div>
-                <section id="docMaterials" class="doc-materials" aria-label="补充缺失材料" hidden>
-                  <h3>补充缺失材料</h3><p>请上传以下材料，识别并关联到本项目后可继续生成。原型演示不会向外部发送文件。</p>
-                  <div id="docMaterialsList"></div><div class="doc-material-footer"><span id="docMaterialsHint" role="status" aria-live="polite"></span><button type="button" class="btn-primary" id="docContinue" disabled>继续生成申报书</button></div>
-                </section>
-                <div id="docReadyArea" hidden>
-                <div class="tabs">
-                  <button class="tab active" data-tab="draft"><span class="ic-slot" data-ic="DocumentIcon"></span>在线编辑</button>
-                  <button class="tab" data-tab="review"><span class="ic-slot" data-ic="TaskIcon"></span>AI 验稿</button>
-                  <button class="tab" data-tab="expert"><span class="ic-slot" data-ic="CommentIcon"></span>专家验稿<span class="fee-tag">收费</span></button>
-                </div>
-
-                <div class="tabpane active" data-pane="draft">
-                  <div class="gen-line"><span class="ic-slot" data-ic="CompletedIcon"></span>申报书已生成，可直接编辑下方正文；修改后请保存草稿。</div>
-                  <div id="secList"></div>
-                </div>
-
-                <div class="tabpane" data-pane="review">
-                  <div class="score-row">
-                    <svg class="donut" viewBox="0 0 88 88">
-                      <circle class="track" cx="44" cy="44" r="38" fill="none" stroke-width="8"/>
-                      <circle class="val" cx="44" cy="44" r="38" fill="none" stroke-width="8" stroke-dasharray="238.76" stroke-dashoffset="42.98" transform="rotate(-90 44 44)"/>
-                      <text class="donut-num" x="44" y="46" text-anchor="middle">82</text>
-                      <text class="donut-cap" x="44" y="60" text-anchor="middle">预估评分</text>
-                    </svg>
-                    <div>
-                      <div style="font-size:14px;font-weight:500;">自动核验完成 · 4 项通过，1 项提示</div>
-                      <div style="font-size:12px;color:var(--kimi-color-text-tertiary);margin-top:4px;line-height:1.6;">AI 已比对申报条件、财务口径、知识产权关联性与材料格式。<br>提示项建议由专家进一步确认，以提升通过率。</div>
-                    </div>
-                  </div>
-                  <div id="checkList"></div>
-                </div>
-
-                <div class="tabpane" data-pane="expert">
-                  <div class="expert-grid">
-                    <div>
-                      <div class="expert-id">
-                        <div class="avatar">陈</div>
-                        <div>
-                          <div class="expert-name">陈明远 <span class="ic-slot" data-ic="SafeIcon"></span></div>
-                          <div class="expert-meta">前高新技术企业认定评审专家 · 注册会计师<br>12 年项目申报经验，累计评审 300+ 项目</div>
-                        </div>
-                      </div>
-                      <div class="svc-list">
-                        <div class="svc"><span class="ic-slot" data-ic="CheckIcon"></span>逐项核验申报指标口径与佐证材料</div>
-                        <div class="svc"><span class="ic-slot" data-ic="CheckIcon"></span>查漏补缺，出具书面验稿报告与修改清单</div>
-                        <div class="svc"><span class="ic-slot" data-ic="CheckIcon"></span>一对一沟通，支持 2 轮修改复核</div>
-                      </div>
-                      <div class="locked-note"><span class="ic-slot" data-ic="WarningIcon"></span>专家验稿由专人负责，为付费增值服务；未购买不影响 AI 初稿与 AI 验稿的免费使用。</div>
-                    </div>
-                    <div class="price-card">
-                      <div class="price-label">专家验稿服务费</div>
-                      <div class="price">¥980.00 <small>/ 份</small> <span class="price-old">¥1,280</span></div>
-                      <div class="price-items">
-                        <div><span>交付时限</span><b style="font-weight:500;">48 小时内</b></div>
-                        <div><span>修改复核</span><b style="font-weight:500;">含 2 轮</b></div>
-                        <div><span>验稿报告</span><b style="font-weight:500;">书面出具</b></div>
-                      </div>
-                      <button class="btn-primary" id="bookBtn">立即预约专家验稿</button>
-                      <div class="expert-state" id="bookState"><span class="ic-slot" data-ic="CompletedIcon"></span>已预约成功，专家将在 1 小时内与您联系</div>
-                      <div class="fine">支持对公转账与开具发票；服务不满意可在报告交付前申请退款。</div>
-                    </div>
+              <!-- 中：AI 生成工作台 -->
+              <section class="dw-col dw-main">
+                <div class="dw-doc-head">
+                  <div class="dw-doc-title">2026 年省级专精特新中小企业申报书</div>
+                  <div class="dw-doc-meta">
+                    <span class="dw-chip key">省级 · 湖北省经信厅</span>
+                    <span class="dw-chip">距截止 65 天</span>
+                    <span class="dw-chip">适配度 87</span>
+                    <span class="dw-chip">档案 92%</span>
+                    <span class="dw-chip">已挂证据 14 处</span>
                   </div>
                 </div>
+                <div class="dw-ctx">已调取企业档案 · 12 个维度 55 项指标 · 更新于 11月10日 14:02</div>
+
+                <div class="dw-chat" id="dwChat">
+                  <div class="dw-msg dw-msg-user">为「2026年省级专精特新中小企业」生成申报书，按官方大纲写，每个结论都挂上档案里的证据。</div>
+                  <div class="dw-msg dw-msg-ai">
+                    <div class="dw-msg-meta">科创助手 14:02 · 用时 38 秒 <span class="ok">✓ 已完成</span></div>
+                    已按官方大纲生成，共 6 章，全文 14 处证据均可追溯至企业档案。
+                    <div class="dw-trace">执行轨迹 · 6 步 · 38 秒 · 读取 12 维档案与 14 份材料</div>
+                  </div>
+                  <div class="dw-doc">
+                    <div class="dw-doc-title">2026 年省级专精特新中小企业申报书</div>
+                    <div class="dw-doc-meta"><span class="dw-chip">武汉汉企业科技有限公司 · 依据企业档案生成 · 已挂证据 14 处</span></div>
+                    <h3>一 企业基本情况</h3>
+                    <p>武汉汉企业科技有限公司成立于 2015 年，注册地为武汉市东湖新技术开发区，注册资本 5,000 万元，主营智能检测装备与视觉算法平台，属于智能装备制造细分领域。2025 年实现营业收入 1.42 亿元，较上年增长 21.4%。企业近三年无重大违法失信记录，纳税信用等级为 A 级。</p>
+                    <h3>二 主导产品市场占有率</h3>
+                    <p>主导产品智能检测装备在细分市场占有率约 12%，国内排名第 4，省内同赛道排名第 2。产品已进入 3 家头部整机厂商供应链，近三年该产品收入占主营业务收入比重分别为 71%、75%、78%，专业化程度持续提升。</p>
+                    <div class="dw-doc-more">共 6 章 · 6,240 字 · 已生成全部章节</div>
+                  </div>
+                </div>
+
+                <div class="dw-composer">
+                  <div class="dw-sugs">
+                    <button class="dw-sg" data-dw-sug="补充第四章证据">补充第四章证据</button>
+                    <button class="dw-sg" data-dw-sug="把第五章写正式些">把第五章写正式些</button>
+                    <button class="dw-sg" data-dw-sug="对照档案核一遍数字">对照档案核一遍数字</button>
+                    <button class="dw-sg" data-dw-sug="把第二章改成先市场后产品">把第二章改成先市场后产品</button>
+                  </div>
+                  <div class="dw-input-row">
+                    <input class="dw-input" id="dwInput" placeholder="继续提问，或让我改某一段，例如「第四章改成按项目逐项列研发投入」" maxlength="120">
+                    <button class="dw-send" id="dwSend">发送</button>
+                  </div>
+                  <div class="dw-toolbar">
+                    <button class="dw-tool" onclick="showToast('上传附件（演示）','info')">📎 附件</button>
+                    <button class="dw-tool" onclick="showToast('引用企业档案 · 12 维（演示）','info')">引用档案 · 12 维</button>
+                    <button class="dw-tool" onclick="showToast('已切换为深度撰写模式（演示）','success')">☆ 深度撰写</button>
+                    <span class="dw-fine">AI 内容依据企业档案生成：定稿前请人工复核 · 全文 14 处证据可追溯</span>
+                    <span class="dw-hint">Enter 发送 · Shift+Enter 换行</span>
+                  </div>
                 </div>
               </section>
+
+              <!-- 右：证据栏 -->
+              <aside class="dw-col">
+                <div class="dw-panel">
+                  <div class="dw-panel-h">证据栏<span class="sub">证据与状态</span></div>
+                  <div class="dw-ev-sec">
+                    <div class="dw-ev-sec-t">引用来源<span class="n">6 类 · 14 处</span></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">1</span><div><div class="dw-ev-name">近三年审计报告（2023-2025）</div><div class="dw-ev-meta">财务 · 14 页 · 08-28 更新</div></div></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">2</span><div><div class="dw-ev-name">信用中国查询结果</div><div class="dw-ev-meta">合规 · 11-06 查询 · 全篇</div></div></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">3</span><div><div class="dw-ev-name">第三方市场调研</div><div class="dw-ev-meta">市场 · 8 页 · 内部</div></div></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">4</span><div><div class="dw-ev-name">研发费用辅助账（2023-2025）</div><div class="dw-ev-meta">财税 · 表 3 · 截至 2024 年</div></div></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">5</span><div><div class="dw-ev-name">知识产权证书包</div><div class="dw-ev-meta">IP · 17 份 · 08-25 更新</div></div></div>
+                    <div class="dw-ev-item"><span class="dw-ev-no">6</span><div><div class="dw-ev-name">社保缴纳名册（2026-10）</div><div class="dw-ev-meta">人员 · 42 名研发人员</div></div></div>
+                  </div>
+                  <div class="dw-ev-sec">
+                    <div class="dw-ev-sec-t">档案缺口<span class="n warn">2 项</span></div>
+                    <div class="dw-gap">2025 年研发费用单年辅助账 — 影响第四章数字口径</div>
+                    <div class="dw-gap">第三方市场占有率证明 — 影响第二章结论</div>
+                    <button class="dw-btn-line" onclick="showToast('已跳转至材料补齐（演示）','info')">去补齐材料</button>
+                  </div>
+                  <div class="dw-ev-sec">
+                    <div class="dw-ev-sec-t">版本与用量</div>
+                    <div class="dw-ver"><span class="k">历史版本</span><b>3 个</b></div>
+                    <div class="dw-ver"><span class="k">当前版本</span><b>v3 草稿</b><span style="font-size:11px;color:var(--kimi-color-text-quaternary)">2 分钟前自动保存</span></div>
+                    <div class="dw-ver"><span class="k">本次生成消耗</span><b>20 积分</b></div>
+                    <button class="dw-btn-line" onclick="showToast('打开历史版本列表（演示）','info')">查看历史版本</button>
+                  </div>
+                  <div class="dw-ev-sec">
+                    <div class="dw-switch-t">换一份申报书？</div>
+                    <p class="dw-switch-p">当前企业还可申报 2 项：科技型中小企业评价（适配度 95）、高新技术企业认定（适配度 92）。</p>
+                    <button class="dw-btn-line" onclick="showToast('已切换申报任务（演示）','success')">切换任务</button>
+                  </div>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
@@ -3237,14 +3086,14 @@
             </div>
             <div class="policy-results-info"><span id="policy-filter-summary" aria-live="polite"></span><button type="button" class="policy-reset" data-policy-reset-region hidden>清除地区筛选</button></div>
             <div class="policy-filter-empty" id="policy-filter-empty" hidden>当前地区下暂无符合筛选的政策。<br><button type="button" class="policy-reset" data-policy-reset-region>查看全部地区</button></div>
-            <div class="space-y-3" id="policy-card-list"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span><i><b style="width:92%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span><i><b style="width:87%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span><i><b style="width:78%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span><i><b style="width:65%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年湖北省重点研发计划项目" data-match="54" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">重点研发</span><span class="u-chip green">最高 500 万元</span><span class="u-chip violet">即将开始</span></div><h3 style="margin-top:10px">2026年湖北省重点研发计划项目</h3><p>湖北省科学技术厅 · 截止 2026-12-01 · 剩余 20 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 54%</span><i><b style="width:54%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>54%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年武汉市人工智能创新专项" data-match="61" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">人工智能</span><span class="u-chip green">最高 300 万元</span><span class="u-chip violet">即将开始</span></div><h3 style="margin-top:10px">2026年武汉市人工智能创新专项</h3><p>武汉市科学技术局 · 截止 2026-12-15 · 剩余 34 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 61%</span><i><b style="width:61%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>61%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2025年湖北省专精特新中小企业认定" data-match="88" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip gray">已截止</span></div><h3 style="margin-top:10px">2025年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2025-08-31</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 88%</span><i><b style="width:88%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip gray">已截止</span></div></article><article class="u-policy-card" data-policy="研发费用税前加计扣除" data-match="96" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span></div><h3 style="margin-top:10px">研发费用税前加计扣除</h3><p>国家税务总局 · 汇算清缴时自动享受 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 96%</span><i><b style="width:96%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>96%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="小型微利企业所得税减免" data-match="93" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span></div><h3 style="margin-top:10px">小型微利企业所得税减免</h3><p>国家税务总局 · 符合条件自动享受优惠税率 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 93%</span><i><b style="width:93%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>93%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="增值税期末留抵退税" data-match="88" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span></div><h3 style="margin-top:10px">增值税期末留抵退税</h3><p>国家税务总局 · 符合条件的留抵税额自动退还 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 88%</span><i><b style="width:88%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="失业保险稳岗返还" data-match="91" data-region="武汉市" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span></div><h3 style="margin-top:10px">失业保险稳岗返还</h3><p>武汉市人社局 · 参保企业自动返还 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 91%</span><i><b style="width:91%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>91%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="首台（套）重大技术装备保险补偿" data-match="85" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span></div><h3 style="margin-top:10px">首台（套）重大技术装备保险补偿</h3><p>湖北省经信厅 · 投保企业自动享受保费补贴 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 85%</span><i><b style="width:85%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>85%</b><span class="u-chip green">普惠</span></div></article></div>
+            <div class="space-y-3" id="policy-card-list"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 23 家已申报</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 156 家已申报</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 47 家已申报</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 320 家已申报</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年湖北省重点研发计划项目" data-match="54" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">重点研发</span><span class="u-chip green">最高 500 万元</span><span class="u-chip violet">即将开始</span><span class="u-chip peer">同赛道 88 家已申报</span></div><h3 style="margin-top:10px">2026年湖北省重点研发计划项目</h3><p>湖北省科学技术厅 · 截止 2026-12-01 · 剩余 20 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 54%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>54%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2026年武汉市人工智能创新专项" data-match="61" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">人工智能</span><span class="u-chip green">最高 300 万元</span><span class="u-chip violet">即将开始</span><span class="u-chip peer">同赛道 64 家已申报</span></div><h3 style="margin-top:10px">2026年武汉市人工智能创新专项</h3><p>武汉市科学技术局 · 截止 2026-12-15 · 剩余 34 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 61%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>61%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card" data-policy="2025年湖北省专精特新中小企业认定" data-match="88" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip gray">已截止</span><span class="u-chip peer">同赛道 128 家已申报</span></div><h3 style="margin-top:10px">2025年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2025-08-31</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 88%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip gray">已截止</span></div></article><article class="u-policy-card" data-policy="研发费用税前加计扣除" data-match="96" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 2,410 家已享受</span></div><h3 style="margin-top:10px">研发费用税前加计扣除</h3><p>国家税务总局 · 汇算清缴时自动享受 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 96%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>96%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="小型微利企业所得税减免" data-match="93" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 5,320 家已享受</span></div><h3 style="margin-top:10px">小型微利企业所得税减免</h3><p>国家税务总局 · 符合条件自动享受优惠税率 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 93%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>93%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="增值税期末留抵退税" data-match="88" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 1,890 家已享受</span></div><h3 style="margin-top:10px">增值税期末留抵退税</h3><p>国家税务总局 · 符合条件的留抵税额自动退还 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 88%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="失业保险稳岗返还" data-match="91" data-region="武汉市" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 8,620 家已享受</span></div><h3 style="margin-top:10px">失业保险稳岗返还</h3><p>武汉市人社局 · 参保企业自动返还 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 91%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>91%</b><span class="u-chip green">普惠</span></div></article><article class="u-policy-card" data-policy="首台（套）重大技术装备保险补偿" data-match="85" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 36 家已享受</span></div><h3 style="margin-top:10px">首台（套）重大技术装备保险补偿</h3><p>湖北省经信厅 · 投保企业自动享受保费补贴 · 无需申报</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 85%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>85%</b><span class="u-chip green">普惠</span></div></article></div>
           </div>
 
           <!-- 政策机会 -->
           <div id="policy-tab-opportunity" class="demo-only hidden">
             <!-- 排序 -->
             <!-- 政策卡片（2 列） -->
-            <div class="space-y-3" id="policy-card-grid"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span><i><b style="width:92%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span><i><b style="width:87%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span><i><b style="width:78%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span><i><b style="width:65%"></b></i></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article></div>
+            <div class="space-y-3" id="policy-card-grid"><article class="u-policy-card high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip green">最高 50 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 23 家已申报</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20 · 剩余 9 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 92%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip green">最高 30 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 156 家已申报</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30 · 剩余 19 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 87%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip green">最高 100 万元</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 47 家已申报</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22 · 剩余 11 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 78%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 320 家已申报</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08 · 剩余 27 天</p><div class="u-policy-rule"><span>政策条件已配置</span><span>AI 匹配 65%</span></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button primary js-policy-match">AI匹配</button><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button ghost js-create-project">加入培育项目</button></div></div><div class="u-policy-match"><span style="font-size:11px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article></div>
 
             <!-- 同行业标杆企业获证榜 -->
             <div class="mt-4 rounded-lg bg-white p-5 shadow-sm">
@@ -3398,10 +3247,6 @@
           <!-- 一、标题 + 主按钮 -->
           <div class="mb-5 flex items-center justify-between">
             <h2 class="text-xl font-semibold text-gray-800">培育规划</h2>
-            <button class="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-primary-hover">
-              <i data-lucide="plus" class="h-4 w-4"></i>
-              新建自主申报项目
-            </button>
           </div>
 
           <div class="empty-only rounded-2xl border border-dashed border-gray-200 bg-white px-8 py-16 text-center">
@@ -3875,18 +3720,55 @@
                 <span class="rs" id="consS">待命</span>
               </div>
               <div class="kw-grid">
-                <div>
-                  <div class="cons">
-                    <div class="cons-h"><svg class="ic"><use href="#ic-docdone"/></svg><span id="consT">运行控制台</span></div>
-                    <div class="ctx"><span>调用上下文 · 企业档案：</span><span class="chip">工商与资质</span><span class="chip">近三年财务</span><span class="chip">研发人员 38 人</span><span class="chip">有效专利 42 件</span><span class="chip">在研项目 6 项</span></div>
-                    <div class="cons-b" id="consB"><div class="empty">正在初始化…</div></div>
-                  </div>
-                </div>
                 <div class="chat">
-                  <div class="ch-h">AI 助手<span class="cs">● 在线</span></div>
-                  <div class="msgs" id="msgs"><div class="msg ai">您好，我是科创培育规划助手。智能体运行过程会实时显示在左侧控制台，您也可以直接向我提问。</div></div>
+                  <div class="ch-h"><svg class="ic"><use href="#ic-docdone"/></svg><span id="chatTitle">AI 助手</span><span class="cs">● 在线</span></div>
+                  <div class="ctx"><span>调用上下文 · 企业档案：</span><span class="chip">工商与资质</span><span class="chip">近三年财务</span><span class="chip">研发人员 38 人</span><span class="chip">有效专利 42 件</span><span class="chip">在研项目 6 项</span></div>
+                  <div class="msgs" id="msgs"><div class="msg ai">您好，我是科创培育规划助手。选择智能体运行后，执行过程与结果会以对话形式实时呈现在这里，您也可以随时向我提问。</div></div>
                   <div class="sug" id="sug"></div>
                   <div class="ch-f"><input id="cin" placeholder="询问培育规划相关问题…" maxlength="120"><button class="btn" id="csend">发送</button></div>
+                </div>
+                <div class="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-sm font-semibold text-gray-800">推荐服务</h3>
+                    <span class="rounded-full bg-primary-light px-2 py-0.5 text-[11px] font-medium text-primary">智能匹配</span>
+                  </div>
+                  <p class="mt-1 text-xs text-gray-400">基于本次智能体运行结果推荐</p>
+                  <div class="mt-3 flex flex-col gap-2.5">
+                    <div class="rounded-lg bg-gray-50 p-3">
+                      <div class="text-sm font-medium text-gray-800">高企认定审计服务</div>
+                      <div class="mt-0.5 text-xs text-gray-400">研发费用专项审计</div>
+                      <div class="mt-2 flex items-center justify-between">
+                        <span class="text-sm font-semibold text-red-500">¥8,000</span>
+                        <div class="flex gap-1.5">
+                          <button onclick="openMallDetail('高企认定审计服务')" class="rounded-md border border-gray-200 px-2 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
+                          <button onclick="orderService('高企认定审计服务','¥8,000')" class="rounded-md bg-primary px-2 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rounded-lg bg-gray-50 p-3">
+                      <div class="text-sm font-medium text-gray-800">发明专利快速预审代办</div>
+                      <div class="mt-0.5 text-xs text-gray-400">查新检索 + 撰写 + 预审</div>
+                      <div class="mt-2 flex items-center justify-between">
+                        <span class="text-sm font-semibold text-red-500">¥5,000</span>
+                        <div class="flex gap-1.5">
+                          <button onclick="openMallDetail('发明专利快速预审代办')" class="rounded-md border border-gray-200 px-2 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
+                          <button onclick="orderService('发明专利快速预审代办','¥5,000')" class="rounded-md bg-primary px-2 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="rounded-lg bg-gray-50 p-3">
+                      <div class="text-sm font-medium text-gray-800">知识产权贯标认证</div>
+                      <div class="mt-0.5 text-xs text-gray-400">GB/T 29490 体系搭建</div>
+                      <div class="mt-2 flex items-center justify-between">
+                        <span class="text-sm font-semibold text-red-500">¥30,000</span>
+                        <div class="flex gap-1.5">
+                          <button onclick="openMallDetail('知识产权贯标认证')" class="rounded-md border border-gray-200 px-2 py-1 text-xs text-gray-600 transition hover:border-primary hover:text-primary">详情</button>
+                          <button onclick="orderService('知识产权贯标认证','¥30,000')" class="rounded-md bg-primary px-2 py-1 text-xs font-medium text-white transition hover:bg-primary-hover">下单</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="mt-3 w-full rounded-lg border border-gray-200 px-3 py-2 text-xs text-gray-600 transition hover:border-primary hover:text-primary" onclick="goToPage('page-mall','服务商城')">去服务商城查看更多</button>
                 </div>
               </div>
             </div>
@@ -4344,7 +4226,7 @@
             </div>
           </div>
 
-          <!-- 湖北省重点研发计划项目（托管） -->
+          <!-- 湖北省重点研发计划项目（托管整包） -->
           <div id="first-project-orders" class="demo-only mb-4 overflow-hidden rounded-lg bg-white shadow-sm">
             <div class="flex items-center justify-between border-b border-gray-100 px-5 py-3">
               <div class="flex items-center gap-2">
@@ -4353,16 +4235,30 @@
                 <span class="rounded-full bg-purple-50 px-2 py-0.5 text-xs font-medium text-purple-600">托管</span>
               </div>
               <div class="flex items-center gap-3">
-                <span class="text-xs text-gray-400">共 3 笔订单 · 合计 ¥43,000</span>
+                <span class="text-xs text-gray-400">共 1 笔订单 · 合计 ¥43,000</span>
                 <button class="js-quick-nav flex items-center gap-1 text-xs text-primary transition hover:underline" data-target="page-project">查看项目 →</button>
               </div>
             </div>
+            <!-- 整包 -->
+            <div class="flex items-center justify-between border-b border-gray-100 bg-gray-50/70 px-5 py-3">
+              <div class="flex items-center gap-2.5">
+                <span class="text-xs text-gray-400">FW-2024-1108-00</span>
+                <span class="text-sm font-medium text-gray-800">湖北省重点研发计划项目 · 托管整包</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-gray-400">2024-11-08</span>
+                <span class="text-sm font-semibold text-gray-800">¥43,000</span>
+                <span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span>
+                <a class="js-order-detail cursor-pointer text-xs text-primary hover:underline" data-order-id="FW-2024-1108-00">详情</a>
+              </div>
+            </div>
+            <!-- 分项列表 -->
             <table class="w-full text-sm">
-              <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>
+              <thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">任务名称</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">验收清单</th><th class="px-4 py-2.5 font-medium">日志</th><th class="px-4 py-2.5 font-medium">交付物</th></tr></thead>
               <tbody>
-                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1110-01</td><td class="px-4 py-2.5">高企认定审计服务</td><td class="px-4 py-2.5 text-gray-500">2024-11-10</td><td class="px-4 py-2.5">¥8,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-                <tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2024-1110-02</td><td class="px-4 py-2.5">发明专利快速预审代办</td><td class="px-4 py-2.5 text-gray-500">2024-11-10</td><td class="px-4 py-2.5">¥5,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
-                <tr><td class="px-5 py-2.5">FW-2024-1108-01</td><td class="px-4 py-2.5">知识产权贯标认证</td><td class="px-4 py-2.5 text-gray-500">2024-11-08</td><td class="px-4 py-2.5">¥30,000</td><td class="px-4 py-2.5"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>
+                <tr class="border-b border-gray-100"><td class="px-5 py-2.5 pl-8 text-gray-700">高企认定审计服务</td><td class="px-4 py-2.5">¥8,000</td><td class="px-4 py-2.5"><span class="rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600">已完成</span></td><td class="px-4 py-2.5 text-gray-600">3/4 项</td><td class="px-4 py-2.5 text-gray-600">3 条</td><td class="px-4 py-2.5 text-gray-600">2 份</td></tr>
+                <tr class="border-b border-gray-100"><td class="px-5 py-2.5 pl-8 text-gray-700">发明专利快速预审代办</td><td class="px-4 py-2.5">¥5,000</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">进行中</span></td><td class="px-4 py-2.5 text-gray-600">2/4 项</td><td class="px-4 py-2.5 text-gray-600">2 条</td><td class="px-4 py-2.5 text-gray-600">1 份</td></tr>
+                <tr><td class="px-5 py-2.5 pl-8 text-gray-700">知识产权贯标认证</td><td class="px-4 py-2.5">¥30,000</td><td class="px-4 py-2.5"><span class="rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-500">待开始</span></td><td class="px-4 py-2.5 text-gray-600">0/4 项</td><td class="px-4 py-2.5 text-gray-600">1 条</td><td class="px-4 py-2.5 text-gray-600">0 份</td></tr>
               </tbody>
             </table>
           </div>
@@ -4377,13 +4273,13 @@
             <div class="rounded-lg bg-white p-5 shadow-sm">
               <div class="flex items-start justify-between">
                 <div class="min-w-0">
-                  <div class="flex items-center gap-2">
-                    <h2 id="order-detail-name" class="text-lg font-semibold text-gray-800">研发费用归集整改服务</h2>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h2 id="order-detail-name" class="text-lg font-semibold text-gray-800">湖北省重点研发计划项目 · 托管整包</h2>
                     <span id="order-detail-status" class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span>
                   </div>
-                  <div id="order-detail-meta" class="mt-1.5 text-xs text-gray-400">订单编号 FW-2024-1106-01 · 2024-11-06</div>
+                  <div id="order-detail-meta" class="mt-1.5 text-xs text-gray-400">订单编号 FW-2024-1108-00 · 2024-11-08 · 共 3 项任务</div>
                 </div>
-                <div id="order-detail-price" class="text-xl font-semibold text-primary">￥2,000</div>
+                <div id="order-detail-price" class="text-xl font-semibold text-primary">¥43,000</div>
               </div>
 
               <div class="mt-5">
@@ -4392,24 +4288,14 @@
               </div>
 
               <div class="mt-5">
-                <div class="mb-2 text-sm font-semibold text-gray-800">服务介绍</div>
-                <p id="order-detail-desc" class="text-sm leading-relaxed text-gray-600">本服务由专属顾问按约定内容执行，全程进度可查。</p>
-              </div>
-
-              <div class="mt-5">
-                <div class="mb-2 text-sm font-semibold text-gray-800">订单与交付任务关系</div>
-                <div id="order-detail-tasks" class="space-y-2"></div>
-              </div>
-
-              <div class="mt-5">
-                <div class="mb-2 text-sm font-semibold text-gray-800">交付物</div>
-                <div id="order-detail-files" class="space-y-2"></div>
+                <div class="mb-2 flex items-center gap-2 text-sm font-semibold text-gray-800">任务分项<span id="order-detail-task-count" class="rounded bg-gray-100 px-1.5 py-0.5 text-xs font-normal text-gray-500">3 项</span></div>
+                <div id="order-detail-tasks" class="space-y-3"></div>
               </div>
 
               <div class="mt-5">
                 <div class="mb-2 text-sm font-semibold text-gray-800">平台规则说明</div>
                 <ul class="space-y-1.5 text-xs leading-relaxed text-gray-500">
-                  <li>· 下单即表示同意平台《服务协议》与《隐私政策》；</li>
+                  <li>· 整包订单含多个任务分项，各任务独立验收、记录日志并交付成果；</li>
                   <li>· 服务由平台认证服务商提供，平台全程监管交付进度与质量；</li>
                   <li>· 订单支付完成后，可在「发票管理」中申请开票；</li>
                   <li>· 交付物支持在线查看与下载，交付前均经平台质检。</li>
@@ -6298,6 +6184,16 @@
     <div class="border-t border-gray-100 bg-gray-50 px-5 py-3 text-xs text-gray-400">免责：增值服务不影响测评评分与结论　<a class="cursor-pointer text-primary hover:underline">查看全部科创服务 →</a></div>
   </div>
 
+  <!-- 智能测评：AI 建议抽屉 -->
+  <div class="health-overlay" id="health-ai-overlay" onclick="closeHealthAIAdvice()"></div>
+  <div class="health-drawer" id="health-ai-drawer" style="width:520px">
+    <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><div><b>AI 建议</b><div class="text-xs text-gray-400" id="health-ai-ctx">差距项 · 红 · 不达标</div></div><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthAIAdvice()">✕</button></div>
+    <div class="flex-1 overflow-auto p-5">
+      <div id="health-ai-body"></div>
+    </div>
+    <div class="border-t border-gray-100 bg-gray-50 px-5 py-3 text-xs text-gray-400">AI 建议基于企业档案与测评结果生成，仅供参考，不构成申报承诺。</div>
+  </div>
+
   <!-- 智能测评：订单确认抽屉 -->
   <div class="health-overlay" id="health-ord-overlay" onclick="closeHealthOrder()"></div>
   <div class="health-drawer" id="health-ord-drawer" style="width:560px">
@@ -6325,7 +6221,7 @@
     </div>
     <div class="border-t border-gray-100 bg-gray-50 px-5 py-3">
       <label class="mb-2 flex items-center gap-2 text-xs text-gray-500"><input type="checkbox" id="health-agree" class="h-3.5 w-3.5"> 已阅读并同意服务协议</label>
-      <div class="flex gap-2"><button class="flex-1 rounded-lg border border-gray-200 py-2 text-sm text-gray-600 transition hover:border-primary hover:text-primary" onclick="closeHealthOrder()">加入需求单</button><button id="health-pay-btn" class="flex-1 rounded-lg bg-primary py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthSubmitOrder()">直接支付 ￥2,000</button></div>
+      <div class="flex gap-2"><button id="health-pay-btn" class="flex-1 rounded-lg bg-primary py-2 text-sm font-medium text-white transition hover:bg-primary-hover" onclick="healthSubmitOrder()">直接支付 ￥2,000</button></div>
     </div>
   </div>
 
@@ -6802,6 +6698,7 @@
     const editorProjectName = document.getElementById('editor-project-name');
 
     let trustSelecting = false;
+    let trustOrderFlow = false;
     function renderTrustBtn() {
       if (trustSelecting) {
         const n = document.querySelectorAll('.task-select:checked').length;
@@ -6915,17 +6812,19 @@
       }
     });
 
-    // 升级托管服务 → 勾选要托管的单独任务
+    // 升级托管服务 → 勾选要托管的单独任务 → 确认后进入支付与订单
     drawerUpgradeBtn.addEventListener('click', () => {
-      trustSelecting = !trustSelecting;
-      document.querySelectorAll('.task-select-col').forEach((el) => el.classList.toggle('hidden', !trustSelecting));
       if (trustSelecting) {
-        renderTrustBtn();
-      } else {
         const n = document.querySelectorAll('.task-select:checked').length;
-        document.querySelectorAll('.task-select').forEach((c) => c.checked = false);
+        if (n === 0) { showToast('请先勾选需要托管的任务', 'warning'); return; }
+        currentHealthProject = drawerName.textContent;
+        trustOrderFlow = true;
+        closeDrawer();
+        openHealthOrder('全程托管服务', '¥9,800');
+      } else {
+        trustSelecting = true;
+        document.querySelectorAll('.task-select-col').forEach((el) => el.classList.remove('hidden'));
         renderTrustBtn();
-        showToast(n > 0 ? '已将 ' + n + ' 项任务交由顾问托管' : '未选择任何任务', n > 0 ? 'success' : 'warning');
       }
     });
     document.addEventListener('change', (e) => {
@@ -7994,10 +7893,10 @@
 
     // 差距项（红/黄）与服务一一对应
     const HEALTH_GAPS = [
-      { item:'近 3 年平均主营业务收入 ≥ 4 亿元', lv:'red', dim:'经营规模', current:'1.8 亿元', gap:'缺 2.2 亿元', rate:45, priority:'高', impact:'经营规模是单项冠军的规模性硬门槛，未达标将直接导致评审不通过，属关键否决项。', direction:'扩大主营产品规模化销售，必要时纳入集团合并口径收入，制定 12-18 个月收入爬坡计划。', service:'主营产品市场拓展与规模化服务', solve:'扩大主营收入规模、优化销售结构', price:'¥25,000 起' },
-      { item:'主营产品市占率全球前 3', lv:'red', dim:'市场地位', current:'国内前 8 · 全球未进前 10', gap:'未达全球前 3', rate:30, priority:'高', impact:'市场地位体现行业话语权，当前全球排名未进入第一梯队，与「全球前 3」要求差距明显。', direction:'聚焦细分赛道，委托第三方出具市场占有率证明，锁定全球前 3 细分市场。', service:'细分市场占有率证明与第三方调研', solve:'出具细分市场占有率证明', price:'¥12,000 起' },
-      { item:'细分领域深耕 10 年以上（新产品 5 年）', lv:'yellow', dim:'专业化与深耕', current:'深耕 7 年', gap:'缺 3 年', rate:70, priority:'中', impact:'深耕年限可通过新产品认定口径放宽至 5 年，属限期可争取项。', direction:'若核心产品可界定为新产品，主张按 5 年标准认定；否则补充成立以来深耕佐证。', service:'新产品界定与年限认定辅导', solve:'界定新产品属性、补强年限佐证', price:'¥6,000 起' },
-      { item:'生产技术工艺国际领先', lv:'yellow', dim:'技术先进性', current:'国内先进', gap:'未达国际领先', rate:60, priority:'中', impact:'技术先进性需以国际对标为佐证，当前缺国际领先性证明。', direction:'开展国际科技查新与对标鉴定，补充国际领先性证明。', service:'国际对标鉴定与科技查新服务', solve:'国际查新报告与领先性鉴定', price:'¥8,000 起' },
+      { item:'近 3 年平均主营业务收入 ≥ 4 亿元', lv:'red', dim:'经营规模', current:'1.8 亿元', gap:'缺 2.2 亿元', rate:45, priority:'高', impact:'经营规模是单项冠军的规模性硬门槛，未达标将直接导致评审不通过，属关键否决项。', direction:'扩大主营产品规模化销售，必要时纳入集团合并口径收入，制定 12-18 个月收入爬坡计划。', solvable:false, ai:'该差距项属于企业经营成果类指标，平台暂无可直接购买的服务一步补齐。建议从以下方向推进：\n① 收入爬坡：制定 12–18 个月主营收入爬坡计划，聚焦高毛利检测装备与算法平台产品放量；\n② 口径优化：评估将关联主体收入纳入合并口径的合规可行性，并由审计机构出具合并说明；\n③ 梯度替代：若合并口径仍难达标，建议先申报省级单项冠军 / 专精特新，待收入规模达标后再冲刺国家级。' },
+      { item:'主营产品市占率全球前 3', lv:'red', dim:'市场地位', current:'国内前 8 · 全球未进前 10', gap:'未达全球前 3', rate:30, priority:'高', impact:'市场地位体现行业话语权，当前全球排名未进入第一梯队，与「全球前 3」要求差距明显。', direction:'聚焦细分赛道，委托第三方出具市场占有率证明，锁定全球前 3 细分市场。', solvable:true, service:'细分市场占有率证明与第三方调研', solve:'出具细分市场占有率证明', price:'¥12,000 起' },
+      { item:'细分领域深耕 10 年以上（新产品 5 年）', lv:'yellow', dim:'专业化与深耕', current:'深耕 7 年', gap:'缺 3 年', rate:70, priority:'中', impact:'深耕年限可通过新产品认定口径放宽至 5 年，属限期可争取项。', direction:'若核心产品可界定为新产品，主张按 5 年标准认定；否则补充成立以来深耕佐证。', solvable:true, service:'新产品界定与年限认定辅导', solve:'界定新产品属性、补强年限佐证', price:'¥6,000 起' },
+      { item:'生产技术工艺国际领先', lv:'yellow', dim:'技术先进性', current:'国内先进', gap:'未达国际领先', rate:60, priority:'中', impact:'技术先进性需以国际对标为佐证，当前缺国际领先性证明。', direction:'开展国际科技查新与对标鉴定，补充国际领先性证明。', solvable:true, service:'国际对标鉴定与科技查新服务', solve:'国际查新报告与领先性鉴定', price:'¥8,000 起' },
     ];
 
 
@@ -8136,23 +8035,11 @@
             '<div class="rounded-md border border-gray-100 bg-white p-2.5"><div class="text-xs text-gray-400">达成度</div><div class="mt-1 text-sm font-bold text-gray-800">' + g.rate + '%</div><div class="mt-1.5 h-1.5 w-full rounded-full bg-gray-100"><div class="h-1.5 rounded-full" style="width:' + g.rate + '%;' + barColor + '"></div></div></div>' +
           '</div>' +
           '<div class="mt-3 space-y-1.5 text-sm text-gray-600"><div><b class="text-gray-800">影响分析：</b>' + g.impact + '</div><div><b class="text-gray-800">整改方向：</b>' + g.direction + '</div></div>' +
+          (g.solvable === false
+            ? '<div class="mt-3 flex items-center justify-between gap-3 rounded-lg border border-dashed border-gray-200 bg-white/70 px-3 py-2.5"><div class="min-w-0"><div class="text-xs font-medium text-gray-700">平台暂无可直接提供的服务</div><div class="mt-0.5 text-xs text-gray-400">该差距需企业经营侧长期推进，可参考 AI 建议制定培育计划</div></div><button class="ml-3 flex-shrink-0 rounded-md border border-primary px-3 py-1.5 text-xs font-medium text-primary transition hover:bg-primary-light" onclick="openHealthAIAdvice(\'' + g.item + '\')">AI 建议</button></div>'
+            : '<div class="mt-3 flex items-center justify-between gap-3 rounded-lg border border-gray-100 bg-white/80 px-3 py-2.5"><div class="min-w-0"><div class="text-xs font-medium text-gray-800">推荐服务 · ' + g.service + '</div><div class="mt-0.5 text-xs text-gray-400">' + g.solve + '</div></div><div class="ml-3 flex flex-shrink-0 items-center gap-2.5"><span class="text-sm font-bold text-primary">' + g.price + '</span><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthService(\'' + g.item + '\')">委托服务</button></div></div>') +
         '</div>';
       }).join('');
-    }
-    function renderHealthServices() {
-      document.getElementById('health-services').innerHTML =
-        '<table class="w-full text-sm">' +
-          '<thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-3 py-2.5 font-medium">差距项</th><th class="px-3 py-2.5 font-medium">等级</th><th class="px-3 py-2.5 font-medium">对应服务</th><th class="px-3 py-2.5 font-medium">可解决</th><th class="px-3 py-2.5 font-medium">价格</th><th class="px-3 py-2.5 font-medium">操作</th></tr></thead>' +
-          '<tbody>' + HEALTH_GAPS.map(g =>
-            '<tr class="border-b border-gray-50 align-middle">' +
-              '<td class="px-3 py-3 text-gray-700">' + g.item + '</td>' +
-              '<td class="px-3 py-3"><span class="' + (g.lv === 'red' ? 'lv-red' : 'lv-yellow') + ' rounded px-1.5 py-0.5 text-xs font-medium">' + (g.lv === 'red' ? '红 · 不达标' : '黄 · 部分达标') + '</span></td>' +
-              '<td class="px-3 py-3"><div class="font-medium text-gray-800">' + g.service + '</div></td>' +
-              '<td class="px-3 py-3 text-gray-500">' + g.solve + '</td>' +
-              '<td class="px-3 py-3 font-bold text-primary">' + g.price + '</td>' +
-              '<td class="px-3 py-3"><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="openHealthService(\'' + g.item + '\')">委托服务</button></td>' +
-            '</tr>').join('') +
-          '</tbody></table>';
     }
     function shareHealthReport() { showToast('分享链接已复制：https://kc.wuhan.gov.cn/report/JC-2024-1102', 'success'); }
     function downloadHealthReport() { showToast('报告下载已开始（演示）', 'success'); }
@@ -8180,6 +8067,17 @@
       document.getElementById('health-svc-drawer').classList.add('health-open');
     }
     function closeHealthService() { document.getElementById('health-svc-overlay').classList.remove('health-open'); document.getElementById('health-svc-drawer').classList.remove('health-open'); }
+    function openHealthAIAdvice(item) {
+      const gap = HEALTH_GAPS.find(g => g.item === item) || HEALTH_GAPS[0];
+      document.getElementById('health-ai-ctx').textContent = gap.item + ' · ' + (gap.lv === 'red' ? '红 · 不达标' : '黄 · 部分达标');
+      document.getElementById('health-ai-body').innerHTML =
+        '<div class="rounded-lg border border-gray-100 bg-gray-50 p-4"><div class="text-sm font-medium text-gray-800">现状与差距</div><div class="mt-2 grid grid-cols-2 gap-3 text-sm"><div><div class="text-xs text-gray-400">企业现状</div><div class="mt-1 font-medium text-gray-800">' + gap.current + '</div></div><div><div class="text-xs text-gray-400">差距值</div><div class="mt-1 font-bold ' + (gap.lv === 'red' ? 'text-red-500' : 'text-amber-500') + '">' + gap.gap + '</div></div></div></div>' +
+        '<div class="mt-4 rounded-lg border border-primary/20 bg-primary-light/30 p-4"><div class="flex items-center gap-2 text-sm font-semibold text-gray-800"><span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">AI</span>AI 建议</div><div class="mt-2 text-sm leading-relaxed text-gray-600" style="white-space:pre-line">' + (gap.ai || gap.direction) + '</div></div>' +
+        '<div class="mt-4 flex items-center justify-between rounded-lg border border-gray-100 p-3"><span class="text-xs text-gray-500">希望顾问进一步跟进？</span><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="closeHealthAIAdvice(); showToast(\'已提交需求，顾问将在 1 个工作日内联系您\', \'success\')">提交需求给顾问</button></div>';
+      document.getElementById('health-ai-overlay').classList.add('health-open');
+      document.getElementById('health-ai-drawer').classList.add('health-open');
+    }
+    function closeHealthAIAdvice() { document.getElementById('health-ai-overlay').classList.remove('health-open'); document.getElementById('health-ai-drawer').classList.remove('health-open'); }
     let currentHealthService = '';
     let currentHealthPrice = '';
     function openHealthOrder(name, price) {
@@ -8212,7 +8110,8 @@
       }
       closeHealthOrder();
       addHealthOrder(currentHealthService);
-      addProjectFromHealth(currentHealthService);
+      if (!trustOrderFlow) addProjectFromHealth(currentHealthService);
+      trustOrderFlow = false;
       showToast('支付成功，已生成订单', 'success');
       goToPage('page-my-orders', '我的订单');
     }
@@ -8227,7 +8126,8 @@
     function submitOfflinePayConsult() {
       closeOfflinePayConsult();
       addHealthOrder(currentHealthService);
-      addProjectFromHealth(currentHealthService);
+      if (!trustOrderFlow) addProjectFromHealth(currentHealthService);
+      trustOrderFlow = false;
       showToast('已提交线下支付咨询，运营人员将尽快与您联系', 'success');
       goToPage('page-my-orders', '我的订单');
     }
@@ -8241,6 +8141,31 @@
       const listView = document.getElementById('order-list-view');
       if (!anchor || !listView) return;
       const name = currentHealthProject || '制造业单项冠军企业（国家级）';
+      const orderId = 'FW-2026-1111-01';
+      const amount = currentHealthPrice || '—';
+      ORDER_PACKAGES.push({
+        id: orderId,
+        project: name,
+        name: name + ' · 托管整包',
+        time: '2026-11-11',
+        amount: amount,
+        status: '服务中',
+        tasks: [
+          {
+            name: service, price: amount, status: '进行中',
+            acceptance: { status: '验收中', steps: [['服务方提交', true, '2026-11-11'], ['平台质检', false, ''], ['企业验收', false, ''], ['验收完成', false, '']] },
+            checklist: [
+              ['需求对接与方案确认', true],
+              ['服务实施', false],
+              ['成果交付与质检', false],
+            ],
+            logs: [
+              ['2026-11-11', '订单已创建，等待顾问分配'],
+            ],
+            files: [],
+          },
+        ],
+      });
       const section = document.createElement('div');
       section.className = 'mb-4 overflow-hidden rounded-lg bg-white shadow-sm';
       section.innerHTML =
@@ -8255,10 +8180,22 @@
             '<button class="flex items-center gap-1 text-xs text-primary transition hover:underline" onclick="goToPage(\'page-project\', \'培育规划\')">查看项目 →</button>' +
           '</div>' +
         '</div>' +
+        '<div class="flex items-center justify-between border-b border-gray-100 bg-gray-50/70 px-5 py-3">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<span class="text-xs text-gray-400">' + orderId + '</span>' +
+            '<span class="text-sm font-medium text-gray-800">' + name + ' · 托管整包</span>' +
+          '</div>' +
+          '<div class="flex items-center gap-3">' +
+            '<span class="text-xs text-gray-400">2026-11-11</span>' +
+            '<span class="text-sm font-semibold text-gray-800">' + amount + '</span>' +
+            '<span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span>' +
+            '<a class="js-order-detail cursor-pointer text-xs text-primary hover:underline" data-order-id="' + orderId + '">详情</a>' +
+          '</div>' +
+        '</div>' +
         '<table class="w-full text-sm">' +
-          '<thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">订单编号</th><th class="px-4 py-2.5 font-medium">服务名称</th><th class="px-4 py-2.5 font-medium">下单时间</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">操作</th></tr></thead>' +
+          '<thead><tr class="border-b border-gray-100 bg-gray-50 text-left text-xs text-gray-500"><th class="px-5 py-2.5 font-medium">任务名称</th><th class="px-4 py-2.5 font-medium">金额</th><th class="px-4 py-2.5 font-medium">状态</th><th class="px-4 py-2.5 font-medium">验收清单</th><th class="px-4 py-2.5 font-medium">日志</th><th class="px-4 py-2.5 font-medium">交付物</th></tr></thead>' +
           '<tbody>' +
-            '<tr class="border-b border-gray-100"><td class="px-5 py-2.5">FW-2026-1111-01</td><td class="px-4 py-2.5">' + service + '</td><td class="px-4 py-2.5 text-gray-500">2026-11-11</td><td class="px-4 py-2.5">—</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td><td class="px-4 py-2.5"><a class="js-order-detail cursor-pointer text-primary hover:underline">详情</a></td></tr>' +
+            '<tr><td class="px-5 py-2.5 pl-8 text-gray-700">' + service + '</td><td class="px-4 py-2.5">' + amount + '</td><td class="px-4 py-2.5"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">进行中</span></td><td class="px-4 py-2.5 text-gray-600">1/3 项</td><td class="px-4 py-2.5 text-gray-600">1 条</td><td class="px-4 py-2.5 text-gray-600">0 份</td></tr>' +
           '</tbody>' +
         '</table>';
       listView.insertBefore(section, anchor);
@@ -8300,27 +8237,87 @@
     }
 
     // ==================== 订单详情 ====================
+    const ORDER_PACKAGES = [
+      {
+        id: 'FW-2024-1108-00',
+        project: '湖北省重点研发计划项目',
+        name: '湖北省重点研发计划项目 · 托管整包',
+        time: '2024-11-08',
+        amount: '¥43,000',
+        status: '服务中',
+        tasks: [
+          {
+            name: '高企认定审计服务', price: '¥8,000', status: '已完成',
+            acceptance: { status: '已通过', steps: [['服务方提交', true, '11-10'], ['平台质检', true, '11-12'], ['企业验收', true, '11-13'], ['验收完成', true, '11-13']] },
+            checklist: [
+              ['审计范围与时间计划确认', true],
+              ['近三年财务三表采集', true],
+              ['研发费用专项审计底稿', true],
+              ['审计报告签字盖章件', false],
+            ],
+            logs: [
+              ['11-08 10:20', '顾问接单，确认审计范围与时间计划'],
+              ['11-10 16:40', '近三年财务数据采集完成'],
+              ['11-12 09:30', '专项审计底稿完成，进入复核'],
+            ],
+            files: [
+              ['研发费用专项审计报告.pdf', 'PDF'],
+              ['审计工作底稿.xlsx', 'XLSX'],
+            ],
+          },
+          {
+            name: '发明专利快速预审代办', price: '¥5,000', status: '进行中',
+            acceptance: { status: '验收中', steps: [['服务方提交', true, '11-09'], ['平台质检', true, '11-11'], ['企业验收', false, ''], ['验收完成', false, '']] },
+            checklist: [
+              ['技术交底书收集', true],
+              ['查新检索', true],
+              ['权利要求书撰写', false],
+              ['预审通道提交', false],
+            ],
+            logs: [
+              ['11-09 11:05', '技术交底书已收齐'],
+              ['11-11 15:20', '查新检索完成，未见相同技术方案'],
+            ],
+            files: [
+              ['查新检索报告.pdf', 'PDF'],
+            ],
+          },
+          {
+            name: '知识产权贯标认证', price: '¥30,000', status: '待开始',
+            acceptance: { status: '待提交', steps: [['服务方提交', false, ''], ['平台质检', false, ''], ['企业验收', false, ''], ['验收完成', false, '']] },
+            checklist: [
+              ['体系诊断与差距分析', false],
+              ['制度文件编写', false],
+              ['内审与管理评审', false],
+              ['认证机构现场审核', false],
+            ],
+            logs: [
+              ['11-08 14:00', '订单已分配，等待排期'],
+            ],
+            files: [],
+          },
+        ],
+      },
+    ];
+    function getOrderPackage(id) {
+      return ORDER_PACKAGES.find(function (p) { return p.id === id; }) || ORDER_PACKAGES[0];
+    }
     function openOrderDetail(el) {
-      const row = el.closest('tr');
-      if (!row) return;
-      const cells = row.querySelectorAll('td');
-      const orderNo = cells[0].textContent.trim();
-      const name = cells[1].textContent.trim();
-      const time = cells[2].textContent.trim();
-      const amount = cells[3].textContent.trim();
-      const status = cells[4].textContent.trim();
-
-      document.getElementById('order-detail-name').textContent = name;
+      const pkg = getOrderPackage(el.getAttribute('data-order-id'));
+      if (!pkg) return;
+      document.getElementById('order-detail-name').textContent = pkg.name;
       const statusEl = document.getElementById('order-detail-status');
-      statusEl.textContent = status;
-      statusEl.className = status === '待支付'
+      statusEl.textContent = pkg.status;
+      statusEl.className = pkg.status === '待支付'
         ? 'rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600'
-        : 'rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600';
-      document.getElementById('order-detail-meta').textContent = '订单编号 ' + orderNo + ' · ' + time;
-      document.getElementById('order-detail-price').textContent = amount;
-      document.getElementById('order-detail-timeline').innerHTML = renderOrderTimeline(status);
-      document.getElementById('order-detail-tasks').innerHTML = renderOrderTasks(name, status);
-      document.getElementById('order-detail-files').innerHTML = renderOrderFiles(name, status);
+        : (pkg.status === '已完成'
+          ? 'rounded bg-green-50 px-1.5 py-0.5 text-xs text-green-600'
+          : 'rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600');
+      document.getElementById('order-detail-meta').textContent = '订单编号 ' + pkg.id + ' · ' + pkg.time + ' · 共 ' + pkg.tasks.length + ' 项任务';
+      document.getElementById('order-detail-price').textContent = pkg.amount;
+      document.getElementById('order-detail-timeline').innerHTML = renderOrderTimeline(pkg.status);
+      document.getElementById('order-detail-task-count').textContent = pkg.tasks.length + ' 项';
+      document.getElementById('order-detail-tasks').innerHTML = renderOrderTasks(pkg);
       lucide.createIcons();
 
       document.getElementById('order-list-view').classList.add('hidden');
@@ -8351,33 +8348,54 @@
           '</div>';
       }).join('');
     }
-    function renderOrderTasks(name, status) {
-      const tasks = [
-        { t: '需求对接与方案确认', s: '已完成' },
-        { t: name + ' · 服务实施', s: status === '待支付' ? '待开始' : '进行中' },
-        { t: '成果交付与质检', s: '待开始' },
-      ];
-      return tasks.map(function (x) {
-        const cls = x.s === '已完成' ? 'text-green-600' : (x.s === '进行中' ? 'text-blue-600' : 'text-gray-400');
-        return '<div class="flex items-center justify-between rounded-lg border border-gray-100 px-3 py-2 text-xs">' +
-          '<span class="text-gray-700">' + x.t + '</span>' +
-          '<span class="' + cls + '">' + x.s + '</span>' +
+    function renderAcceptanceFlow(acc) {
+      return '<div class="flex flex-wrap items-center gap-y-1.5">' + acc.steps.map(function (s, i) {
+        const isDone = s[1];
+        const isCurrent = !isDone && (i === 0 || acc.steps[i - 1][1]);
+        const dotCls = isDone ? 'bg-green-500 text-white' : (isCurrent ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-400');
+        const lblCls = isDone ? 'text-green-600' : (isCurrent ? 'text-blue-600' : 'text-gray-400');
+        return '<div class="flex items-center">' +
+          '<span class="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-medium ' + dotCls + '">' + (isDone ? '✓' : (i + 1)) + '</span>' +
+          '<span class="ml-1.5 text-xs ' + lblCls + '">' + s[0] + (s[2] ? '<span class="ml-1 text-[10px] text-gray-400">' + s[2] + '</span>' : '') + '</span>' +
+          (i < acc.steps.length - 1 ? '<span class="mx-1.5 h-px w-5 ' + (s[1] ? 'bg-green-300' : 'bg-gray-200') + '"></span>' : '') +
           '</div>';
-      }).join('');
+      }).join('') + '</div>';
     }
-    function renderOrderFiles(name, status) {
-      if (status === '待支付') {
-        return '<div class="rounded-lg border border-dashed border-gray-200 py-4 text-center text-xs text-gray-400">支付后开始生成交付物</div>';
-      }
-      return [
-        { n: name + ' · 成果报告.pdf', e: 'PDF' },
-        { n: name + ' · 交付清单.xlsx', e: 'XLSX' },
-        { n: name + ' · 实施方案.docx', e: 'DOCX' },
-      ].map(function (f) {
-        return '<div class="flex items-center justify-between rounded-lg border border-gray-100 px-3 py-2">' +
-          '<div class="flex items-center gap-2"><i data-lucide="file-text" class="h-4 w-4 text-primary"></i><span class="text-sm text-gray-700">' + f.n + '</span></div>' +
-          '<span class="rounded bg-gray-100 px-1.5 py-0.5 text-[11px] text-gray-500">' + f.e + '</span>' +
-          '</div>';
+    function renderOrderTasks(pkg) {
+      return pkg.tasks.map(function (t) {
+        const statusCls = t.status === '已完成' ? 'bg-green-50 text-green-600' : (t.status === '进行中' ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500');
+        const checklist = t.checklist.map(function (c) {
+          return '<div class="flex items-start gap-1.5">' +
+            '<span class="' + (c[1] ? 'text-green-600' : 'text-gray-300') + '">' + (c[1] ? '✓' : '○') + '</span>' +
+            '<span class="' + (c[1] ? 'text-gray-700' : 'text-gray-400') + '">' + c[0] + '</span>' +
+            '</div>';
+        }).join('');
+        const logs = t.logs.map(function (l) {
+          return '<div class="flex gap-1.5"><span class="flex-shrink-0 text-gray-400">' + l[0] + '</span><span class="text-gray-600">' + l[1] + '</span></div>';
+        }).join('');
+        const files = t.files.length ? t.files.map(function (f) {
+          return '<div class="flex items-center justify-between rounded-md border border-gray-100 px-2 py-1.5">' +
+            '<span class="flex min-w-0 items-center gap-1.5 text-gray-700"><i data-lucide="file-text" class="h-3.5 w-3.5 flex-shrink-0 text-primary"></i><span class="truncate">' + f[0] + '</span></span>' +
+            '<button class="ml-2 flex-shrink-0 text-xs text-primary hover:underline" onclick="showToast(\'下载已开始（演示）\',\'success\')">下载</button>' +
+            '</div>';
+        }).join('') : '<div class="rounded-md border border-dashed border-gray-200 py-2 text-center text-xs text-gray-400">交付物待生成</div>';
+        const acc = t.acceptance;
+        const accStatusCls = acc.status === '已通过' ? 'text-green-600' : (acc.status === '验收中' ? 'text-blue-600' : 'text-gray-400');
+        return '<div class="overflow-hidden rounded-lg border border-gray-100">' +
+          '<div class="flex items-center justify-between border-b border-gray-100 bg-gray-50/60 px-4 py-2.5">' +
+            '<div class="flex items-center gap-2"><span class="text-sm font-medium text-gray-800">' + t.name + '</span><span class="rounded px-1.5 py-0.5 text-xs font-medium ' + statusCls + '">' + t.status + '</span></div>' +
+            '<span class="text-sm font-semibold text-gray-800">' + t.price + '</span>' +
+          '</div>' +
+          '<div class="border-b border-gray-100 px-4 py-2.5">' +
+            '<div class="mb-2 flex items-center justify-between"><span class="text-xs font-medium text-gray-500">验收流程</span><span class="text-xs font-medium ' + accStatusCls + '">' + acc.status + '</span></div>' +
+            renderAcceptanceFlow(acc) +
+          '</div>' +
+          '<div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-3">' +
+            '<div><div class="mb-2 text-xs font-medium text-gray-500">验收清单</div><div class="space-y-1.5 text-xs">' + checklist + '</div></div>' +
+            '<div><div class="mb-2 text-xs font-medium text-gray-500">日志</div><div class="space-y-1.5 text-xs">' + logs + '</div></div>' +
+            '<div><div class="mb-2 text-xs font-medium text-gray-500">交付物</div><div class="space-y-1.5">' + files + '</div></div>' +
+          '</div>' +
+        '</div>';
       }).join('');
     }
     function downloadContractTemplate() {
@@ -8485,7 +8503,7 @@
     let timers=[],curAgent=null;
     function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
     function clearTimers(){timers.forEach(t=>{clearTimeout(t);clearInterval(t)});timers=[]}
-    function scroll(){const c=$('#consB');if(c)c.scrollTop=c.scrollHeight;const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight}
+    function scroll(){const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight}
     const AG=$('#agents');
     const AGENT_COLORS={'zc':'#2e6be6','cp':'#8b5cf6','kw':'#2f9e6e','cs':'#d97706','ip':'#dc2626','sb':'#0891b2'};
     if(AG){
@@ -8506,9 +8524,15 @@
       clearTimers();curAgent=a;
       $('#pgMatrix').style.display='none';$('#pgRun').style.display='block';window.scrollTo(0,0);
       $('#runTitle').textContent='运行台 · '+a.name;
-      $('#consT').textContent='运行控制台 · '+a.name;$('#consS').textContent='携带企业档案执行中…';
-      const B=$('#consB');B.innerHTML='';
-      const tl=document.createElement('div');tl.className='tl';B.appendChild(tl);
+      $('#chatTitle').textContent=a.name;
+      $('#consS').textContent='携带企业档案执行中…';
+      const M=$('#msgs');M.innerHTML='';
+      const intro=document.createElement('div');intro.className='msg ai';
+      intro.textContent='正在运行「'+a.name+'」，将依次执行 '+a.tools.length+' 项能力并生成结果物。';
+      M.appendChild(intro);scroll();
+      const sm=document.createElement('div');sm.className='msg ai';
+      const tl=document.createElement('div');tl.className='tl';sm.appendChild(tl);
+      M.appendChild(sm);scroll();
       let i=0;
       function step(){
         if(i>=a.tools.length){later(stream,300);return}
@@ -8522,30 +8546,32 @@
       }
       const full=a.report.join('\n\n');
       let pos=0;
+      const fm=document.createElement('div');fm.className='msg ai';fm.style.color='var(--kimi-color-text-primary)';
       const sd=document.createElement('div');sd.className='stream';sd.innerHTML='<span class="cur"></span>';
+      fm.appendChild(sd);
       function stream(){
-        B.appendChild(sd);scroll();
+        M.appendChild(fm);scroll();
         const iv=setInterval(()=>{
           pos+=1+(Math.random()<.35?1:0);
           sd.innerHTML=full.slice(0,pos).replace(/\n/g,'<br>')+'<span class="cur"></span>';
           scroll();
           if(pos>=full.length){clearInterval(iv);sd.innerHTML=full.replace(/\n/g,'<br>');
-            later(()=>{B.insertAdjacentHTML('beforeend',a.deliver);addExport(a,B);scroll();finish()},400)}
+            later(()=>{const dm=document.createElement('div');dm.className='msg ai';dm.style.color='var(--kimi-color-text-primary)';dm.innerHTML=a.deliver;M.appendChild(dm);addExport(a,dm);scroll();finish()},400)}
         },26);
         timers.push(iv);
       }
-      function finish(){$('#consS').textContent='运行完成 · 结果物已生成'}
+      function finish(){$('#consS').textContent='运行完成 · 结果物已生成';$('#chatTitle').textContent=a.name+' · 已完成'}
       step();
     }
     const SUGS=['发明专利到期怎么办？','现在适合报高企吗？','2026 年有哪些补贴可申领？'];
     const su=$('#sug');
     if(su){SUGS.forEach(s=>{const b=document.createElement('button');b.className='sg';b.textContent=s;b.onclick=()=>{$('#cin').value=s;send()};su.appendChild(b)})}
     function reply(q){
-      if(/专利|到期|续展|ip/i.test(q))return '针对临期专利，建议先评估技术是否仍为核心：核心专利（如表面缺陷检测方法）建议优先续展并同步备案迭代改进；边缘专利可考虑放弃以节省年费。完整的预警与建议见左侧结果物。';
-      if(/高企|高新/.test(q))return '贵司高企预评 78 分，已过认定线，主要风险在科技成果转化数量与研发费用辅助账对应关系，详见左侧结果物中的缺口明细。';
-      if(/补贴|政策|人才/.test(q))return '2026 年度测算可申领补贴约 96 万元，含人才引育与项目配套，清单与申报窗口见左侧结果物。';
+      if(/专利|到期|续展|ip/i.test(q))return '针对临期专利，建议先评估技术是否仍为核心：核心专利（如表面缺陷检测方法）建议优先续展并同步备案迭代改进；边缘专利可考虑放弃以节省年费。完整的预警与建议见上方结果物。';
+      if(/高企|高新/.test(q))return '贵司高企预评 78 分，已过认定线，主要风险在科技成果转化数量与研发费用辅助账对应关系，详见上方结果物中的缺口明细。';
+      if(/补贴|政策|人才/.test(q))return '2026 年度测算可申领补贴约 96 万元，含人才引育与项目配套，清单与申报窗口见上方结果物。';
       if(/融资|估值/.test(q))return '当前估值区间约 3.8–4.6 亿元，建议 2026 年 Q2 启动 B 轮。融资前建议先完成临期核心专利续展，避免尽调瑕疵。';
-      return '已记录您的问题。左侧控制台正在实时输出智能体运行结果，我会结合结果物继续为您解答。';
+      return '已记录您的问题。智能体运行结果已实时呈现在上方对话中，我会结合结果物继续为您解答。';
     }
     function send(){
       const v=$('#cin').value.trim();if(!v)return;$('#cin').value='';
@@ -9289,223 +9315,70 @@
     // ==================== AI 申报书专家 ====================
     (function(){
       var docPage = document.getElementById('page-doc-expert');
-      var ICONS = {"DocumentIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M15.4795 15.4971C15.9765 15.4971 16.3799 15.9004 16.3799 16.3975C16.3799 16.8945 15.9765 17.2978 15.4795 17.2979H8.52051C8.02345 17.2979 7.62012 16.8945 7.62012 16.3975C7.62012 15.9004 8.02345 15.4971 8.52051 15.4971H15.4795Z\" fill=\"currentColor\"/> <path d=\"M12.3359 11.0996C12.8329 11.0997 13.2354 11.503 13.2354 12C13.2354 12.497 12.8329 12.9003 12.3359 12.9004H8.52051C8.02345 12.9004 7.62012 12.4971 7.62012 12C7.62012 11.5029 8.02345 11.0996 8.52051 11.0996H12.3359Z\" fill=\"currentColor\"/> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M13.1719 2.09961C13.9408 2.09969 14.6789 2.40555 15.2227 2.94922L19.0508 6.77734C19.5946 7.32113 19.9003 8.05911 19.9004 8.82812V18C19.9004 20.1539 18.1539 21.9004 16 21.9004H8C5.84626 21.9002 4.09961 20.1538 4.09961 18V6C4.09961 3.84621 5.84626 2.09981 8 2.09961H13.1719ZM8 3.90039C6.84037 3.90059 5.90039 4.84032 5.90039 6V18C5.90039 19.1597 6.84037 20.0994 8 20.0996H16C17.1598 20.0996 18.0996 19.1598 18.0996 18V9.90039H15C13.3985 9.90019 12.0996 8.6015 12.0996 7V3.90039H8ZM13.9004 7C13.9004 7.60739 14.3927 8.09941 15 8.09961H17.8213C17.8068 8.08333 17.7928 8.06626 17.7773 8.05078L13.9492 4.22266C13.9335 4.20696 13.9169 4.19237 13.9004 4.17773V7Z\" fill=\"currentColor\"/> </svg>", "ProfileIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M11.9997 12.8779C16.0197 12.878 19.4393 15.3848 20.7048 18.8828C21.0812 19.9234 20.2782 20.8962 19.2038 21.0137L18.9861 21.0264H5.0134L4.79562 21.0137C3.7213 20.8961 2.91743 19.9233 3.29367 18.8828C4.55905 15.3847 7.9797 12.8781 11.9997 12.8779ZM11.9997 14.6777C8.84467 14.6779 6.17462 16.5794 5.09152 19.2256H18.9079C17.8248 16.5793 15.1549 14.6778 11.9997 14.6777ZM12.2312 3.00586C14.6088 3.1264 16.4997 5.09239 16.4997 7.5L16.4939 7.73145C16.3734 10.1091 14.4073 11.9999 11.9997 12C9.59225 11.9998 7.62604 10.109 7.50558 7.73145L7.49973 7.5C7.49973 5.01485 9.51462 3.00021 11.9997 3L12.2312 3.00586ZM11.9997 4.7998C10.5087 4.80001 9.29953 6.00896 9.29953 7.5C9.29953 8.99104 10.5087 10.2 11.9997 10.2002C13.4908 10.2001 14.6999 8.99112 14.6999 7.5C14.6999 6.00888 13.4908 4.79989 11.9997 4.7998Z\" fill=\"currentColor\"/> </svg>", "CheckIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M19.3027 5.9053C19.6542 5.55397 20.2247 5.55388 20.5761 5.9053C20.9273 6.25675 20.9273 6.82734 20.5761 7.17874L9.65911 18.0948C9.30773 18.4461 8.73814 18.446 8.38665 18.0948L3.42376 13.1328C3.0726 12.7814 3.07263 12.2118 3.42376 11.8604C3.77524 11.509 4.34575 11.5089 4.6972 11.8604L9.02239 16.1856L19.3027 5.9053Z\" fill=\"currentColor\"/> </svg>", "CompletedIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <g clip-path=\"url(#clip0_12787_15678)\"> <rect x=\"18.5\" y=\"4.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"17.5\" y=\"2.5\" transform=\"rotate(90 17.5 2.5)\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"18.5\" y=\"19.5\" transform=\"rotate(90 18.5 19.5)\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"4.5\" y=\"5.5\" transform=\"rotate(90 4.5 5.5)\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"20.5\" y=\"17.5\" transform=\"rotate(90 20.5 17.5)\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"5.5\" y=\"4.5\" transform=\"rotate(90 5.5 4.5)\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"7\" y=\"11\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"6\" y=\"11\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"7\" y=\"12\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"8\" y=\"12\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"8\" y=\"13\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"9\" y=\"13\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"9\" y=\"14\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"10\" y=\"14\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"10\" y=\"15\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"11\" y=\"13\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"11\" y=\"14\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"12\" y=\"12\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"12\" y=\"13\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"13\" y=\"11\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"13\" y=\"12\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"14\" y=\"10\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"14\" y=\"11\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"15\" y=\"9\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"15\" y=\"10\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"16\" y=\"8\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"16\" y=\"9\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"17\" y=\"8\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"5.5\" y=\"3.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"18.5\" y=\"18.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"6.5\" y=\"20.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"3.5\" y=\"17.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"4.5\" y=\"18.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"5.5\" y=\"19.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"2.5\" y=\"6.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"19.5\" y=\"5.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"20.5\" y=\"6.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> <rect x=\"17.5\" y=\"3.5\" fill=\"#777777\" fill-opacity=\"0.9\"/> </g> <defs> <clipPath id=\"clip0_12787_15678\"> <rect fill=\"white\"/> </clipPath> </defs> </svg>", "WarningIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M11.9996 7C11.5026 7 11.0996 7.36985 11.0996 7.82609V14.1739C11.0996 14.6301 11.5026 15 11.9996 15C12.4967 15 12.8996 14.6301 12.8996 14.1739V7.82609C12.8996 7.36985 12.4967 7 11.9996 7Z\" fill=\"currentColor\"/> <path d=\"M12.8996 17.1006C12.8996 17.5974 12.4968 18.001 11.9992 18.001C11.5024 18.001 11.0996 17.5974 11.0996 17.1006C11.0996 16.6038 11.5024 16.2002 11.9992 16.2002C12.4968 16.2002 12.8996 16.6038 12.8996 17.1006Z\" fill=\"currentColor\"/> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M14.5108 3.5501C13.3946 1.61676 10.6041 1.61676 9.48786 3.5501L1.69363 17.0501C0.577423 18.9834 1.97269 21.4001 4.20511 21.4001H19.7936C22.026 21.4001 23.4212 18.9834 22.305 17.0501L14.5108 3.5501ZM11.0467 4.4501C11.4701 3.71676 12.5286 3.71676 12.952 4.4501L20.7462 17.9501C21.1696 18.6834 20.6403 19.6001 19.7936 19.6001H4.20511C3.35833 19.6001 2.82909 18.6834 3.25248 17.9501L11.0467 4.4501Z\" fill=\"currentColor\"/> </svg>", "EditIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M18.0179 3.09998C18.3963 3.10003 18.7709 3.17491 19.1205 3.31971C19.4701 3.46454 19.7884 3.67614 20.056 3.94373C20.3237 4.21144 20.5362 4.52965 20.681 4.87928C20.8258 5.22887 20.8997 5.60423 20.8997 5.9828C20.8997 6.36118 20.8257 6.73591 20.681 7.08533C20.5362 7.43497 20.3237 7.75317 20.056 8.02088L17.639 10.4379L9.15756 18.9183C8.5296 19.5463 7.74274 19.992 6.8812 20.2074L4.21811 20.8734C3.91148 20.95 3.5871 20.8596 3.36362 20.6361C3.14017 20.4126 3.05063 20.0883 3.12729 19.7816L3.79233 17.1185C4.00771 16.257 4.45344 15.4701 5.08139 14.8422L15.9798 3.94373C16.5203 3.40346 17.2536 3.09998 18.0179 3.09998ZM19.0003 19.1C19.4972 19.1002 19.8997 19.5034 19.8997 20.0004C19.8995 20.4971 19.4971 20.8996 19.0003 20.8998H12.0003C11.5034 20.8998 11.1001 20.4973 11.0999 20.0004C11.0999 19.5033 11.5033 19.1 12.0003 19.1H19.0003ZM18.0179 4.89979C17.7309 4.89979 17.4553 5.01417 17.2523 5.21717L6.35385 16.1146C5.95661 16.5119 5.67469 17.01 5.53842 17.5551L5.23666 18.7631L6.44467 18.4613C6.98971 18.3251 7.48782 18.0431 7.8851 17.6459L18.7826 6.74744C18.883 6.64702 18.9635 6.52821 19.0179 6.39686C19.0723 6.26558 19.0999 6.1247 19.0999 5.9828C19.0999 5.84075 19.0723 5.69916 19.0179 5.56776C18.9635 5.43645 18.883 5.31757 18.7826 5.21717C18.6821 5.11678 18.5631 5.03716 18.432 4.9828C18.3008 4.92845 18.16 4.89983 18.0179 4.89979Z\" fill=\"currentColor\"/> </svg>", "RightIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M21.4387 12.814C21.788 12.4622 21.787 11.8941 21.4364 11.5436L15.8979 6.0051C15.5464 5.65363 14.9766 5.65363 14.6251 6.0051C14.2737 6.35657 14.2737 6.92642 14.6251 7.27789L18.6272 11.28H2.79998C2.30293 11.28 1.89998 11.6829 1.89998 12.18C1.89998 12.677 2.30293 13.08 2.79998 13.08H18.6382L14.6228 17.1245C14.2726 17.4772 14.2747 18.0471 14.6274 18.3973C14.9802 18.7475 15.55 18.7454 15.9002 18.3927L21.4387 12.814Z\" fill=\"currentColor\"/> </svg>", "TaskIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M18.9893 6.60743C20.5897 6.60757 21.8877 7.8926 21.8877 9.47736C21.8877 10.7416 21.0607 11.8129 19.9141 12.1955V14.257C19.914 15.8428 18.6152 17.1288 17.0137 17.1289H12.8438V20.1381C12.8437 20.6301 12.4412 21.0293 11.9443 21.0296C11.4473 21.0296 11.044 20.6302 11.0439 20.1381V16.4356C11.0441 15.8343 11.5363 15.3461 12.1436 15.3458H17.0137C17.6211 15.3457 18.1133 14.8585 18.1133 14.257V12.2129C16.9408 11.8451 16.0909 10.7598 16.0908 9.47736C16.0908 7.89251 17.3887 6.60743 18.9893 6.60743ZM18.9893 8.38953C18.3828 8.38953 17.8906 8.87684 17.8906 9.47736C17.8907 10.0778 18.3828 10.5642 18.9893 10.5642C19.5956 10.5641 20.0869 10.0777 20.0869 9.47736C20.0869 8.87693 19.5956 8.38967 18.9893 8.38953Z\" fill=\"currentColor\"/> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M4.89844 6.60743C6.49899 6.60747 7.79688 7.89254 7.79688 9.47736C7.79684 10.7388 6.97371 11.8078 5.83105 12.1926V14.4021C5.83105 15.0036 6.32315 15.4918 6.93066 15.4918H8.37109C8.86789 15.492 9.27038 15.8905 9.27051 16.3824C9.27051 16.8744 8.86797 17.2737 8.37109 17.2739H6.93066C5.32904 17.2739 4.03027 15.9879 4.03027 14.4021V12.2158C2.85382 11.8504 2.00004 10.7627 2 9.47736C2 7.89251 3.29784 6.60743 4.89844 6.60743ZM4.89844 8.38953C4.29196 8.38953 3.7998 8.87684 3.7998 9.47736C3.79985 10.0778 4.29198 10.5642 4.89844 10.5642C5.50485 10.5642 5.99605 10.0778 5.99609 9.47736C5.99609 8.87687 5.50488 8.38958 4.89844 8.38953Z\" fill=\"currentColor\"/> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M11.9434 2.9707C13.5439 2.97075 14.8418 4.25581 14.8418 5.84063C14.8418 7.11413 14.0035 8.1923 12.8438 8.56745V13.0135C12.8436 13.5056 12.4403 13.9041 11.9434 13.9041C11.4466 13.9039 11.0431 13.5055 11.043 13.0135V8.56745C9.8836 8.19209 9.04496 7.11387 9.04492 5.84063C9.04492 4.25592 10.343 2.97093 11.9434 2.9707ZM11.9434 4.75281C11.3371 4.75303 10.8447 5.24026 10.8447 5.84063C10.8448 6.44097 11.3371 6.92726 11.9434 6.92749C12.5498 6.92745 13.041 6.44108 13.041 5.84063C13.041 5.24014 12.5498 4.75285 11.9434 4.75281Z\" fill=\"currentColor\"/> </svg>", "CommentIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M11.9004 2.19995C17.3678 2.20016 21.7998 6.63285 21.7998 12.1003C21.7996 17.5677 17.3677 21.9995 11.9004 21.9998H3.80078C2.72946 21.9996 2.00334 20.9089 2.41699 19.9207L3.49805 17.3386C2.54871 15.8189 2.00007 14.0226 2 12.1003C2 6.63272 6.43277 2.19995 11.9004 2.19995ZM11.9004 3.99976C7.42688 3.99976 3.7998 7.62684 3.7998 12.1003C3.79989 13.8228 4.33669 15.4175 5.25195 16.7292L5.53516 17.1345L4.25195 20.2H11.8994C16.3727 20.1999 19.9998 16.5736 20 12.1003C20 7.62697 16.3737 3.99997 11.9004 3.99976ZM8.9541 10.8005C9.75473 10.8006 10.4041 11.4491 10.4043 12.2498C10.4043 13.0505 9.75482 13.6998 8.9541 13.7C8.15329 13.7 7.50391 13.0506 7.50391 12.2498C7.50406 11.4491 8.15339 10.8005 8.9541 10.8005ZM15.1533 10.8005C15.9539 10.8006 16.6034 11.4491 16.6035 12.2498C16.6035 13.0505 15.954 13.6998 15.1533 13.7C14.3525 13.7 13.7031 13.0506 13.7031 12.2498C13.7033 11.4491 14.3526 10.8005 15.1533 10.8005Z\" fill=\"currentColor\"/> </svg>", "RefreshIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path d=\"M6.88048 6.89231C9.69226 4.08054 14.251 4.08054 17.0628 6.89231L16.2364 7.71871C15.7324 8.22268 16.0894 9.0844 16.8021 9.0844H19.7276C20.1694 9.0844 20.5276 8.72623 20.5276 8.2844V5.35891C20.5276 4.64619 19.6659 4.28926 19.1619 4.79323L18.3356 5.61952C14.8209 2.1048 9.12241 2.1048 5.60769 5.61952C2.09297 9.13424 2.09297 14.8327 5.60769 18.3474C9.12241 21.8622 14.8209 21.8622 18.3356 18.3474C19.4929 17.1902 20.2703 15.7937 20.6655 14.3163C20.7939 13.8361 20.5087 13.3428 20.0285 13.2143C19.5483 13.0859 19.055 13.3711 18.9266 13.8513C18.611 15.0314 17.9906 16.1469 17.0628 17.0746C14.251 19.8864 9.69226 19.8864 6.88048 17.0746C4.06871 14.2629 4.06871 9.70409 6.88048 6.89231Z\" fill=\"currentColor\"/> </svg>", "DownloadIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 2.90002C12.4971 2.90002 12.9 3.30297 12.9 3.80002V12.2939L15.8081 9.38585C16.1595 9.03438 16.7294 9.03438 17.0808 9.38585C17.4323 9.73732 17.4323 10.3072 17.0808 10.6586L12.6364 15.1031C12.4676 15.2719 12.2387 15.3667 12 15.3667C11.7613 15.3667 11.5324 15.2719 11.3636 15.1031L6.91917 10.6586C6.5677 10.3072 6.5677 9.73732 6.91917 9.38585C7.27064 9.03438 7.84049 9.03438 8.19196 9.38585L11.1 12.2939V3.80002C11.1 3.30297 11.503 2.90002 12 2.90002ZM4.00001 13.5874C4.49706 13.5874 4.90001 13.9903 4.90001 14.4874V18.043C4.90001 18.2758 4.99249 18.499 5.1571 18.6636C5.32172 18.8282 5.54498 18.9207 5.77778 18.9207H18.2222C18.455 18.9207 18.6783 18.8283 18.8429 18.6636C19.0075 18.499 19.1 18.2758 19.1 18.043V14.4874C19.1 13.9903 19.5029 13.5874 20 13.5874C20.4971 13.5874 20.9 13.9903 20.9 14.4874V18.043C20.9 18.7531 20.6179 19.4342 20.1157 19.9364C19.6135 20.4386 18.9324 20.7207 18.2222 20.7207H5.77778C5.06759 20.7207 4.38649 20.4386 3.88431 19.9364C3.38213 19.4342 3.10001 18.7531 3.10001 18.043V14.4874C3.10001 13.9903 3.50295 13.5874 4.00001 13.5874Z\" fill=\"currentColor\"/> </svg>", "SafeIcon": "<svg class=\"ic\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M17 3.8H7C5.78497 3.8 4.8 4.78497 4.8 6V15.7647C4.8 16.574 5.24438 17.318 5.95698 17.7017L10.957 20.394C11.6081 20.7446 12.3919 20.7446 13.043 20.394L18.043 17.7017C18.7556 17.318 19.2 16.574 19.2 15.7647V6C19.2 4.78497 18.215 3.8 17 3.8ZM7 2C4.79086 2 3 3.79086 3 6V15.7647C3 17.2362 3.80796 18.5889 5.1036 19.2866L10.1036 21.9789C11.2875 22.6164 12.7125 22.6164 13.8964 21.9789L18.8964 19.2866C20.192 18.5889 21 17.2362 21 15.7647V6C21 3.79086 19.2091 2 17 2H7Z\" fill=\"currentColor\"/> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M16.7248 8.63051C17.0763 8.98198 17.0763 9.55183 16.7248 9.9033L11.7627 14.8654C11.4113 15.2169 10.8414 15.2169 10.4899 14.8654L7.81839 12.1939C7.46692 11.8424 7.46691 11.2726 7.81839 10.9211C8.16986 10.5696 8.7397 10.5696 9.09118 10.9211L11.1263 12.9562L15.4521 8.63051C15.8035 8.27904 16.3734 8.27904 16.7248 8.63051Z\" fill=\"currentColor\"/> </svg>"};
-      document.querySelectorAll('.ic-slot').forEach(function(slot){
-        var n = slot.getAttribute('data-ic');
-        slot.innerHTML = ICONS[n] || '';
-      });
+      if(!docPage) return;
 
-      var projects = [
-        { name:'2026 年度高新技术企业认定申报书', tag:'国家级', fit:92, deadline:'2026-12-15', fund:'最高 50 万奖励', gen:'2026-11-10 14:02', words:'8,600',
-          secs:['一、企业基本情况','二、研发项目情况（RD 表）','三、知识产权情况','四、科技成果转化情况','五、研发费用归集','六、附件清单'] },
-        { name:'2026 年省级专精特新中小企业申报书', tag:'省级', fit:87, deadline:'2027-01-20', fund:'最高 30 万奖励', gen:'2026-11-09 10:24', words:'6,200',
-          secs:['一、企业基础信息','二、主导产品市场占有率','三、专业化与精细化指标','四、创新能力指标','五、经营管理指标','六、佐证材料清单'] },
-        { name:'2026 年度科技型中小企业评价申报书', tag:'国家级', fit:95, deadline:'2026-11-30', fund:'研发费用加计扣除', gen:'2026-11-11 09:15', words:'4,800',
-          secs:['一、企业信息自评表','二、科技人员与研发费用','三、科技成果与知识产权','四、附件上传清单'] }
-      ];
-
-      var checks = [
-        {icon:'CompletedIcon', cls:'pass', name:'申报条件符合性核验', detail:'成立年限、领域范围、研发费用占比均满足要求'},
-        {icon:'CompletedIcon', cls:'pass', name:'财务数据与审计报告一致性', detail:'三表勾稽关系核对通过，无异常波动'},
-        {icon:'WarningIcon', cls:'warni', name:'知识产权与研发项目关联性', detail:'2 项实用新型未关联到具体研发项目，建议补充说明'},
-        {icon:'CompletedIcon', cls:'pass', name:'材料完整性与格式规范', detail:'6 个章节、14 份附件，格式均符合申报要求'},
-        {icon:'WarningIcon', cls:'warni', name:'评分模拟（预估 82 / 100）', detail:'研发人员占比 9.8% 接近临界值，是主要拉分项'}
-      ];
-
-      var SECTION_CONTENT = {
-        '一、企业基本情况': '武汉汉企业科技有限公司成立于 2015 年，注册地为武汉市东湖新技术开发区，注册资本 5000 万元，所属领域为高端装备制造 + 人工智能。企业信用良好，近三年无重大违法失信记录。',
-        '二、研发项目情况（RD 表）': '近三年累计开展研发项目 14 项，其中在研项目 6 项。RD01 智能检测装备关键技术攻关、RD02 视觉算法平台研发等核心项目已完成阶段性验收。',
-        '三、知识产权情况': '现有有效专利 42 件，其中发明专利 18 件、实用新型 21 件、外观设计 3 件；软件著作权 15 项。核心自主知识产权覆盖主营业务产品。',
-        '四、科技成果转化情况': '近三年科技成果转化 13 项，年平均 4.3 项。其中 2 项需补充销售合同扫描件，1 项需补充检测报告。',
-        '五、研发费用归集': '近三年研发费用占比分别为 11.2%、12.1%、13.0%，满足高新技术企业认定要求。研发费用辅助账已按项目归集。',
-        '六、附件清单': '营业执照、近三年审计报告、知识产权证书、研发立项报告、成果转化证明材料、研发人员名册等 14 份附件。'
-      };
-
-      const materialNames = [
-        ['科技成果转化证明材料', '研发费用辅助账'],
-        ['主导产品市场地位证明', '创新能力佐证材料'],
-        ['科技人员名册及社保说明']
-      ];
-      const docStates = projects.map((project, index) => ({phase:'idle', next:0, progress:0, parts:[], text:'', saved:'', savedAt:'', timer:null, showMaterials:false, booked:false, error:'', materials:materialNames[index].map(name => ({name, file:'', status:'missing', token:0}))}));
-      let selectedDoc = -1, pendingDocUpload = null;
-      const pl = document.getElementById('projList');
-      const fileInput = document.getElementById('docMissingFile');
-      const safe = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-      const nowText = () => new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date());
-      function renderProjects(){
-        const labels = {idle:'待生成',generating:'生成中',waiting:'待补充材料',ready:'可在线编辑'};
-        pl.innerHTML = projects.map((project,index) => '<div class="proj' + (selectedDoc===index?' selected':'') + '"><button type="button" class="proj-select" data-doc-select="' + index + '" aria-pressed="' + (selectedDoc===index) + '"><div class="proj-top"><span class="proj-name">' + safe(project.name) + '</span><span class="proj-tag">' + labels[docStates[index].phase] + '</span></div><div class="proj-meta"><span>' + safe(project.tag) + '</span><span>' + project.secs.length + ' 个章节</span><span>截止 ' + safe(project.deadline) + '</span></div></button><div class="proj-actions"><button type="button" class="btn-sm" data-doc-open="' + index + '">' + (docStates[index].phase==='idle'?'生成申报书':docStates[index].phase==='ready'?'打开申报书':'查看生成进度') + '</button></div></div>').join('');
-      }
-      function selectDoc(index){
-        selectedDoc = index;
-        window._docSecs = projects[index].secs;
-        docPage.querySelectorAll('.tab').forEach(button => button.classList.toggle('active',button.dataset.tab==='draft'));
-        docPage.querySelectorAll('.tabpane').forEach(pane => pane.classList.toggle('active',pane.dataset.pane==='draft'));
-        renderCurrentDoc();
-      }
-      function renderCurrentDoc(){
-        renderProjects();
-        const state = docStates[selectedDoc], project = projects[selectedDoc];
-        const ready = state?.phase==='ready';
-        document.getElementById('docTitle').textContent = project?.name || '请选择要生成申报书的项目';
-        document.getElementById('docSub').textContent = !state ? '从左侧选择项目，再开始生成申报书。' : ready ? '草稿更新于 ' + state.savedAt + ' · 支持在线编辑与保存' : '依据企业档案与本项目补充材料生成 · ' + project.secs.length + ' 个章节';
-        const status = document.getElementById('docStatus');
-        status.className = 'status-chip ' + (ready?'chip-done':state?.phase==='waiting'?'chip-wait':state?.phase==='generating'?'chip-doing':'chip-idle');
-        status.textContent = !state?'待选择项目':({idle:'待生成',generating:'正在生成',waiting:'等待补充材料',ready:'已生成 · 可编辑'})[state.phase];
-        const actions = document.getElementById('docMainActions');
-        actions.innerHTML = !state ? '' : ready ? '<button type="button" class="btn-ghost" data-doc-preview>预览申报书</button><button type="button" class="btn-primary" data-doc-save>保存草稿</button><button type="button" class="btn-ghost" data-doc-export>导出 Word</button>' : state.phase==='idle' ? '<button type="button" class="btn-primary" data-doc-start>生成申报书</button>' : '<button type="button" class="btn-ghost" data-doc-materials>补充材料</button><button type="button" class="btn-ghost" data-doc-cancel>取消生成</button>';
-        const activeStep = !state?0:state.phase==='waiting'?2:ready?3:1;
-        docPage.querySelectorAll('[data-doc-step]').forEach((step,index) => {step.classList.toggle('active',index===activeStep);step.classList.toggle('done',index<activeStep);});
-        const flow = document.getElementById('docWorkflow');
-        flow.hidden = ready;
-        if(!state){flow.innerHTML='<div class="doc-flow-empty"><strong>先选择申报项目</strong><p>选择项目后，AI 将读取企业档案并生成申报书。发现缺失材料时可中途上传，补全后继续生成。</p></div>';}
-        else if(state.phase==='idle'){flow.innerHTML='<div class="doc-flow-empty"><strong>已选择项目，准备生成申报书</strong><p>将生成 ' + project.secs.length + ' 个章节，生成过程中会检查所需材料。</p><button type="button" class="btn-primary" data-doc-start>开始生成申报书</button></div>';}
-        else {
-          flow.innerHTML='<div class="doc-flow-progress"><div class="doc-flow-progress-title"><strong>' + (state.phase==='waiting'?'生成已暂停，请补充缺失材料':'AI 正在生成申报书') + '</strong><span>' + state.progress + '%</span></div><div class="doc-flow-track" role="progressbar" aria-label="申报书生成进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + state.progress + '"><i style="width:' + state.progress + '%"></i></div><p>' + (state.phase==='waiting'?'已保留前面章节的生成结果，材料补齐后将从当前进度继续。':'正在读取档案、整理材料并逐章生成，请稍候。') + '</p></div><div class="doc-chapter-list">' + project.secs.map((section,index) => '<div><span>' + safe(section) + '</span><small>' + (index<state.next?'已生成':index===state.next?(state.phase==='waiting'?'待补材料':'生成中…'):'待生成') + '</small></div>').join('') + '</div>';
-        }
-        const materialsPanel = document.getElementById('docMaterials');
-        materialsPanel.hidden = !state || !state.showMaterials;
-        if(state){
-          document.getElementById('docMaterialsList').innerHTML = state.materials.map((item,index) => '<div class="doc-material-row"><div><strong>' + safe(item.name) + '</strong><p>' + (item.file?safe(item.file):'缺少此项证明材料，请上传 PDF、Word、Excel 或图片。') + '</p><small>' + ({missing:'待上传',reading:'正在识别并关联材料…',ready:'已识别并关联（演示）'})[item.status] + '</small></div><button type="button" class="btn-ghost" data-doc-upload="' + index + '"' + (item.status==='reading'?' disabled':'') + '>' + (item.status==='missing'?'上传材料':item.status==='reading'?'识别中…':'重新上传') + '</button></div>').join('');
-          const canContinue = state.materials.every(item=>item.status==='ready');
-          document.getElementById('docContinue').hidden = state.phase!=='waiting';
-          document.getElementById('docContinue').disabled = !canContinue;
-          document.getElementById('docMaterialsHint').textContent = canContinue?'所需材料已补齐，可继续生成申报书。':'材料上传并关联后，再继续生成申报书。';
-        }
-        const error = document.getElementById('docFlowError');
-        error.textContent = state?.error || '';
-        error.hidden = !error.textContent;
-        document.getElementById('docReadyArea').hidden = !ready;
-        if(ready){renderSecs(project);document.getElementById('bookBtn').textContent=state.booked?'已提交预约':'立即预约专家验稿';document.getElementById('bookBtn').disabled=state.booked;document.getElementById('bookState').classList.toggle('on',state.booked);}
-      }
-      function draftFor(project,state){
-        let text=project.name+'\n\n';
-        project.secs.forEach(section=>{
-          let content=SECTION_CONTENT[section] || '本章节依据企业档案及补充材料整理，请核对后完善相关数据与说明。';
-          if(section==='四、科技成果转化情况')content='本章节已关联本次补充的科技成果转化证明材料：'+state.materials[0].file+'。请结合合同与业务记录，核对转化项目、金额及时间。';
-          if(section==='五、研发费用归集')content='本章节已关联本次补充的研发费用辅助账：'+state.materials[1].file+'。各年度研发费用与归集口径请以企业核对后的辅助账为准。';
-          text+=section+'\n'+content+'\n\n';
-        });
-        text+='本次补充材料\n'+state.materials.map(item=>item.name+'：'+item.file).join('\n');
-        return text;
-      }
-      function scheduleDoc(index){
-        const state=docStates[index], project=projects[index];
-        clearTimeout(state.timer);
-        state.timer=setTimeout(()=>{
-          if(state.phase!=='generating') return;
-          if(state.next===[3,1,1][index] && !state.materials.every(item=>item.status==='ready')){state.phase='waiting';state.showMaterials=true;state.timer=null;if(selectedDoc===index)renderCurrentDoc();else renderProjects();return;}
-          state.parts.push(project.secs[state.next]);
-          state.next++;
-          state.progress=Math.round(5+state.next/project.secs.length*85);
-          if(state.next===project.secs.length){state.phase='ready';state.progress=100;state.text=draftFor(project,state);state.saved=state.text;state.savedAt=nowText();state.timer=null;state.showMaterials=false;}
-          else scheduleDoc(index);
-          if(selectedDoc===index)renderCurrentDoc();else renderProjects();
-        },550);
-      }
-      function startDoc(){
-        const state=docStates[selectedDoc];
-        if(!state || state.phase!=='idle')return;
-        state.phase='generating';state.next=0;state.parts=[];state.progress=5;state.error='';
-        renderCurrentDoc();scheduleDoc(selectedDoc);
-      }
-      function renderSecs(project){
-        const state=docStates[selectedDoc];
-        const list=document.getElementById('secList');
-        if(!list.querySelector('#docOnlineEditor'))list.innerHTML='<div class="doc-editor-caption"><strong>在线编辑申报书</strong><span id="docSaveStatus" role="status" aria-live="polite"></span></div><textarea id="docOnlineEditor" aria-label="申报书正文" spellcheck="false"></textarea>';
-        const editor=document.getElementById('docOnlineEditor');
-        if(editor.value!==state.text)editor.value=state.text;
-        editor.oninput=()=>{docStates[selectedDoc].text=editor.value;updateSaveStatus();};
-        updateSaveStatus();
-      }
-      function updateSaveStatus(){
-        const state=docStates[selectedDoc];
-        const status=document.getElementById('docSaveStatus');
-        if(status && state)status.textContent=state.text===state.saved?'草稿已保存':'有未保存的修改';
-      }
-      function saveDoc(){
-        const state=docStates[selectedDoc];
-        if(!state || state.phase!=='ready')return;
-        if(!state.text.trim()){state.error='申报书正文不能为空，请补充内容后保存。';renderCurrentDoc();return;}
-        state.saved=state.text;state.savedAt=nowText();state.error='';renderCurrentDoc();showToast('申报书草稿已保存（演示）','success');
-      }
-      pl.addEventListener('click',event=>{
-        const button=event.target.closest('[data-doc-select],[data-doc-open]');
-        if(!button)return;
-        const index=Number(button.dataset.docSelect ?? button.dataset.docOpen);
-        selectDoc(index);
-        if(button.hasAttribute('data-doc-open') && docStates[index].phase==='idle')startDoc();
-      });
-      docPage.addEventListener('click',event=>{
-        if(event.target.closest('[data-doc-start]'))startDoc();
-        if(event.target.closest('[data-doc-save]'))saveDoc();
-        if(event.target.closest('[data-doc-preview]'))window.previewFullReport();
-        if(event.target.closest('[data-doc-export]'))showToast('申报书 Word 导出演示完成，未下载实际文件','success');
-        if(event.target.closest('[data-doc-materials]')){docStates[selectedDoc].showMaterials=true;renderCurrentDoc();}
-        if(event.target.closest('[data-doc-cancel]')){const state=docStates[selectedDoc];clearTimeout(state.timer);state.phase='idle';state.next=0;state.progress=0;state.parts=[];renderCurrentDoc();}
-        const upload=event.target.closest('[data-doc-upload]');
-        if(upload){pendingDocUpload={project:selectedDoc,material:Number(upload.dataset.docUpload)};fileInput.value='';fileInput.click();}
-      });
-      document.getElementById('docContinue').addEventListener('click',()=>{
-        const state=docStates[selectedDoc];
-        if(state.phase!=='waiting' || !state.materials.every(item=>item.status==='ready'))return;
-        state.phase='generating';state.showMaterials=false;renderCurrentDoc();scheduleDoc(selectedDoc);
-      });
-      fileInput.addEventListener('change',()=>{
-        const file=fileInput.files[0], target=pendingDocUpload;
-        if(!file || !target)return;
-        const state=docStates[target.project], material=state.materials[target.material];
-        if(!/\.(pdf|docx?|xlsx?|png|jpe?g)$/i.test(file.name) || !file.size || file.size>50*1024*1024){state.error='请选择非空的 PDF、Word、Excel 或图片文件，大小不超过 50MB。';if(selectedDoc===target.project)renderCurrentDoc();return;}
-        state.error='';material.file=file.name;material.status='reading';const token=++material.token;
-        if(selectedDoc===target.project)renderCurrentDoc();
-        setTimeout(()=>{if(material.token!==token)return;material.status='ready';if(selectedDoc===target.project)renderCurrentDoc();},650);
-      });
-      renderCurrentDoc();
-
-
-      var cl = document.getElementById('checkList');
-      checks.forEach(function(c){
-        var d = document.createElement('div');
-        d.className = 'check';
-        d.innerHTML = '<span style="display:flex">' + ICONS[c.icon] + '</span>' +
-          '<div><div class="check-name">' + c.name + '</div><div class="check-detail">' + c.detail + '</div></div>';
-        cl.appendChild(d);
-      });
-
-      docPage.querySelectorAll('.tabs .tab[data-tab]').forEach(function(t){
-        t.addEventListener('click', function(){
-          docPage.querySelectorAll('.tabs .tab[data-tab]').forEach(function(x){ x.classList.remove('active'); });
-          t.classList.add('active');
-          docPage.querySelectorAll('.tabpane').forEach(function(pn){ pn.classList.remove('active'); });
-          docPage.querySelector('.tabpane[data-pane="' + t.getAttribute('data-tab') + '"]').classList.add('active');
+      docPage.querySelectorAll('.dw-task').forEach(function(task){
+        task.addEventListener('click', function(){
+          docPage.querySelectorAll('.dw-task').forEach(function(t){ t.classList.remove('sel'); });
+          task.classList.add('sel');
+          showToast('已切换到「' + task.querySelector('.dw-task-name').textContent + '」（演示）', 'success');
         });
       });
 
+      var input = document.getElementById('dwInput');
+      var chat = document.getElementById('dwChat');
+      var sendBtn = document.getElementById('dwSend');
+      function reply(text){
+        var rules = [
+          [/第四章|研发投入|逐项/, '已按项目逐项重排第四章，研发投入拆分为 RD01–RD06 六行，金额与研发费用辅助账口径一致，已重新挂接证据。'],
+          [/第五章|正式/, '已将第五章改为公文语体，去除口语化表述，并补充经营管理制度的量化指标。'],
+          [/数字|核对|口径/, '已对照企业档案核验全文数字：营收 1.42 亿元、研发占比、专利数量均与档案一致，共修正 2 处口径。'],
+          [/第二章|市场|产品/, '已将第二章改为先阐述细分市场格局，再引入主导产品，结论顺序更贴合评审阅读习惯。']
+        ];
+        var hit = rules.find(function(r){ return r[0].test(text); });
+        return hit ? hit[1] : '已记录您的修改要求，我会基于企业档案与 14 处证据重新生成对应段落。';
+      }
+      function send(){
+        var v = input.value.trim(); if(!v) return;
+        input.value = '';
+        var u = document.createElement('div'); u.className = 'dw-msg dw-msg-user'; u.textContent = v;
+        chat.appendChild(u);
+        var a = document.createElement('div'); a.className = 'dw-msg dw-msg-ai';
+        a.innerHTML = '<div class="dw-msg-meta">科创助手 · 正在修改…</div>' + reply(v);
+        chat.appendChild(a);
+        chat.scrollTop = chat.scrollHeight;
+      }
+      if(sendBtn) sendBtn.addEventListener('click', send);
+      if(input) input.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); send(); } });
 
-      document.getElementById('bookBtn').addEventListener('click', function(){
-        const state = docStates[selectedDoc];
-        if (!state || state.phase !== 'ready' || state.booked) return;
-        state.booked = true;
-        this.textContent = '已提交预约';
-        this.disabled = true;
-        document.getElementById('bookState').classList.add('on');
+      docPage.querySelectorAll('.dw-sg').forEach(function(sg){
+        sg.addEventListener('click', function(){
+          if(input){ input.value = sg.getAttribute('data-dw-sug'); }
+          send();
+        });
       });
 
-      window._docSecs = [];
-      window.previewFullReport = function(){
-        const state=docStates[selectedDoc];if(!state || state.phase!=='ready')return;
-        const body=document.getElementById('report-preview-body');if(!body)return;
-        body.innerHTML='<h2 style="font-size:18px;margin:0 0 12px">'+safe(projects[selectedDoc].name)+'</h2><p style="font-size:12px;color:#64748b">'+(state.text===state.saved?'已保存草稿':'当前编辑内容 · 尚未保存')+'</p><div style="white-space:pre-wrap;line-height:1.9;font-size:14px">'+safe(state.text)+'</div>';
-        document.getElementById('report-preview-overlay').classList.remove('pointer-events-none','opacity-0');
-        document.getElementById('report-preview-modal').classList.remove('pointer-events-none','opacity-0','scale-95');
-      };
       window.closeReportPreview = function(){
-        document.getElementById('report-preview-overlay').classList.add('pointer-events-none', 'opacity-0');
-        document.getElementById('report-preview-modal').classList.add('pointer-events-none', 'opacity-0', 'scale-95');
+        var o = document.getElementById('report-preview-overlay');
+        var m = document.getElementById('report-preview-modal');
+        if(o){ o.classList.add('pointer-events-none','opacity-0'); }
+        if(m){ m.classList.add('pointer-events-none','opacity-0','scale-95'); }
+      };
+      window.previewFullReport = function(){
+        var o = document.getElementById('report-preview-overlay');
+        var m = document.getElementById('report-preview-modal');
+        var body = document.getElementById('report-preview-body');
+        if(!o || !m) return;
+        var title = docPage.querySelector('.dw-doc-title');
+        var secs = docPage.querySelectorAll('.dw-doc h3, .dw-doc p');
+        var html = '';
+        secs.forEach(function(el){ html += el.outerHTML; });
+        if(body) body.innerHTML = '<h2 style="font-size:18px;margin:0 0 12px">' + (title ? title.textContent : '申报书预览') + '</h2><div style="line-height:1.9;font-size:14px">' + html + '</div>';
+        o.classList.remove('pointer-events-none','opacity-0');
+        m.classList.remove('pointer-events-none','opacity-0','scale-95');
       };
     })();
-
-    // ==================== 同行对标抽屉 ====================
+// ==================== 同行对标抽屉 ====================
     const benchmarkOverlay = document.getElementById('benchmark-overlay');
     const benchmarkDrawer = document.getElementById('benchmark-drawer');
 
@@ -9925,12 +9798,15 @@
         + '<th style="padding:8px 10px;font-weight:400">差距项</th><th style="padding:8px 10px;font-weight:400">对应服务</th><th style="padding:8px 10px;font-weight:400">可解决</th><th style="padding:8px 10px;font-weight:400">价格</th><th style="padding:8px 10px;font-weight:400">操作</th>'
         + '</tr></thead><tbody>';
       gaps.forEach(function(g){
+        var isSolvable = g.solvable !== false;
         html += '<tr style="border-bottom:1px solid color-mix(in srgb,var(--kimi-color-border) 55%,transparent)">'
           + '<td style="padding:10px;color:var(--kimi-color-text-primary);font-weight:500">' + g.item + '</td>'
-          + '<td style="padding:10px;color:var(--kimi-color-text-primary)">' + g.service + '</td>'
-          + '<td style="padding:10px;color:var(--kimi-color-text-secondary)">' + g.solve + '</td>'
-          + '<td class="num" style="padding:10px;color:var(--kimi-color-text-primary);font-weight:500">' + g.price + '</td>'
-          + '<td style="padding:10px"><button class="mini-btn" style="border-color:var(--kimi-chart-1);color:var(--kimi-chart-1)" onclick="openMallDetail(\'' + g.service + '\')">下单</button></td>'
+          + '<td style="padding:10px;color:' + (isSolvable ? 'var(--kimi-color-text-primary)' : 'var(--kimi-color-text-quaternary)') + '">' + (isSolvable ? g.service : '平台暂无可直接提供的服务') + '</td>'
+          + '<td style="padding:10px;color:var(--kimi-color-text-secondary)">' + (isSolvable ? g.solve : '需企业经营侧长期推进') + '</td>'
+          + '<td class="num" style="padding:10px;color:var(--kimi-color-text-primary);font-weight:500">' + (isSolvable ? g.price : '—') + '</td>'
+          + '<td style="padding:10px">' + (isSolvable
+              ? '<button class="mini-btn" style="border-color:var(--kimi-chart-1);color:var(--kimi-chart-1)" onclick="openMallDetail(\'' + g.service + '\')">下单</button>'
+              : '<button class="mini-btn" style="border-color:var(--kimi-chart-1);color:var(--kimi-chart-1)" onclick="openHealthAIAdvice(\'' + g.item + '\')">AI 建议</button>') + '</td>'
           + '</tr>';
       });
       html += '</tbody></table>';
