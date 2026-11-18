@@ -268,3 +268,17 @@
 #pgRun .ar-task-service button{border:1px solid #b4cbf2;background:#fff;border-radius:7px;padding:7px 12px;font-size:14px;color:#245fcc;font-weight:550}
 #pgRun .ar-task-service button:hover{background:#2563eb;border-color:#2563eb;color:#fff}
 @container(max-width:600px){#pgRun .ar-specific-task>header{flex-wrap:wrap}#pgRun .ar-specific-task>header>b{flex-basis:calc(100% - 90px)}}
+/* 取消右侧结果区，文件随回复展示，对话占据全部可用宽度。 */
+#pgRun .ar-desk,#pgRun.ar-idle .ar-desk{display:flex;flex-direction:column;grid-template-columns:none;grid-template-rows:none;min-height:0;width:100%;max-width:none}
+#pgRun .ar-conversation,#pgRun.ar-idle .ar-conversation{width:100%;flex:1;min-height:0}
+#pgRun .ar-inline-files{display:grid;gap:12px;margin:14px 6px 20px}
+#pgRun .ar-inline-file{background:#f3f7ff;border:1px solid #cdddf6;border-radius:10px;padding:16px}
+#pgRun .ar-inline-file>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:#2c4d7c}
+#pgRun .ar-inline-file>header>span{padding:3px 6px;border-radius:5px;background:#e0eaff;color:#3165b4;font-size:13px}
+#pgRun .ar-inline-file>header>b{font-size:16px;font-weight:600;overflow-wrap:anywhere}
+#pgRun .ar-inline-file>header>small{font-size:13px;color:#8295b0}
+#pgRun .ar-inline-file .ar-action-row button{font-size:14px}
+#pgRun .ar-inline-file>details{margin-top:14px;color:#4d6f9e;font-size:14px}
+#pgRun .ar-inline-file summary{cursor:pointer}
+#pgRun .ar-inline-file pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:360px;overflow:auto;padding:14px;margin-top:10px;background:#fff;border:1px solid #e1e8f3;border-radius:7px;color:#375273;font-size:14px;line-height:1.8}
+#pgRun .ar-inline-file iframe{display:block;width:100%;height:320px;margin-top:12px;background:white;border:1px solid #d9e4f3;border-radius:7px}
