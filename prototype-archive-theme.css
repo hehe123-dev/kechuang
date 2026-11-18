@@ -1,0 +1,43 @@
+﻿/* 企业档案：更清晰的色彩与层级。 */
+#page-archive{--blue:#2563eb;--t1:#183153;--t2:#526780;--bg:#f1f5fc}
+#page-archive .avp{background:radial-gradient(ellipse at 10% 0,#e4edff 0,transparent 45%),#f3f6fc}
+#page-archive .archive-company-header{background:linear-gradient(115deg,#123d85,#2563eb 65%,#4b83e9);border:0;box-shadow:0 10px 26px #2055ab24;border-radius:16px;padding:24px 28px;color:white}
+#page-archive .archive-company-header h1{color:#fff;font-size:23px;font-weight:650}
+#page-archive .archive-company-kicker{color:#c4d9ff}
+#page-archive .archive-company-symbol{background:#ffffff21;border:1px solid #ffffff40;color:#fff;box-shadow:inset 0 1px 0 #ffffff40}
+#page-archive .archive-company-tags span{background:#ffffff20;border:1px solid #ffffff45;color:#fff}
+#page-archive .archive-purpose{background:linear-gradient(110deg,#eef5ff,#f7f9ff);border:1px solid #cbdcf7;border-left:4px solid #3b82f6;border-radius:12px}
+#page-archive .archive-purpose h2{color:#17448a}
+#page-archive .archive-purpose-benefits li{background:#ffffffad;border:1px solid #dce7f6;border-radius:8px;padding:10px 12px}
+#page-archive .archive-purpose-benefits strong{color:#2563eb}
+#page-archive .card{border-color:#dce5f3;border-radius:14px;box-shadow:0 4px 16px #213c6907}
+#page-archive .radar-card{border:1px solid #cdddf5;box-shadow:0 8px 28px #234f9a0c;background:linear-gradient(135deg,#f3f7ff,#fff 48%);overflow:hidden}
+#page-archive .radar-card .card-head{background:linear-gradient(100deg,#e9f1ff,#f5f8ff);border-bottom:1px solid #d7e3f5;padding:19px 24px}
+#page-archive .radar-card .card-title{color:#193e76;font-size:19px;font-weight:650}
+#page-archive .radar-card .hint{color:#6380a3}
+#page-archive .radar-left{width:360px;align-self:center}
+#page-archive .radar-body{gap:28px;padding-top:20px;align-items:center}
+#page-archive .radar-right{gap:12px;min-width:0}
+#page-archive .score-row{background:#eaf2ff;border:1px solid #cfdef7;border-radius:10px;padding:12px 16px;align-items:center;justify-content:space-between}
+#page-archive .score-label{font-weight:550;line-height:1.7;color:#315d96}
+#page-archive .weak-title{color:#203c62;font-size:16px;margin-bottom:12px}
+#page-archive .weak-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#page-archive .archive-ability-row{padding:13px 14px;border:1px solid #e0e8f4;border-top:3px solid var(--ability-color);border-radius:10px;background:#fff;box-shadow:0 3px 10px #20396306;min-width:0}
+#page-archive .archive-ability-heading{align-items:center;gap:8px;font-size:15px}
+#page-archive .archive-ability-heading b{color:#243d5d;font-weight:650;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#page-archive .archive-ability-heading b small{font-size:14px;color:#6c7e97;font-weight:400}
+#page-archive .archive-ability-heading>span{font-weight:600;font-size:14px;white-space:nowrap;background:#f3f6fc;border-radius:5px;padding:3px 6px}
+#page-archive .archive-ability-track{height:6px;margin:11px 0;background:#edf2fa}
+#page-archive .archive-ability-track i{background:linear-gradient(90deg,var(--ability-color),color-mix(in srgb,var(--ability-color) 65%,white));box-shadow:0 2px 7px color-mix(in srgb,var(--ability-color) 20%,transparent)}
+#page-archive .archive-ability-basis{font-size:14px;line-height:1.85;color:#60728a}
+#page-archive .archive-ability-method{background:#edf4ff;border-color:#d6e4fb;color:#5b7295}
+#page-archive .archive-ability-method summary{color:#235aa8;font-weight:550}
+#page-archive .dim-card{border-top:3px solid #5b87de;transition:transform .15s,box-shadow .15s}
+#page-archive .dim-card:nth-child(4n+2){border-top-color:#8b5cf6}#page-archive .dim-card:nth-child(4n+3){border-top-color:#14b8a6}#page-archive .dim-card:nth-child(4n+4){border-top-color:#f59e0b}
+#page-archive .dim-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #214b9814}
+#page-archive .dim-card.selected{background:linear-gradient(130deg,#eef4ff,#fff);border-color:#83a9f1}
+#page-archive .dim-name{color:#213d62;font-weight:650}#page-archive .dim-desc{color:#687e99}
+@media(max-width:1100px){#page-archive .radar-left{width:310px}#page-archive .radar-body{gap:18px;padding-left:16px;padding-right:16px}}
+@media(max-width:850px){#page-archive .radar-body{flex-direction:column}#page-archive .radar-left{width:min(100%,380px)}#page-archive .radar-right{width:100%}}
+@media(max-width:550px){#page-archive .weak-list{grid-template-columns:1fr}#page-archive .archive-company-header{padding:18px}#page-archive .archive-company-header h1{font-size:19px}}
+#page-archive #archiveGaps.is-complete{background:#dcfce7;color:#16844b;border:1px solid #b8eaca}
