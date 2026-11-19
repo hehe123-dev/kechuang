@@ -479,6 +479,40 @@
     .u-assess-card { display: flex; flex-direction: column; border: 1px solid #eef1f5; border-radius: 14px; background: var(--card-bg, #fff); padding: 18px; transition: box-shadow 0.15s ease, transform 0.15s ease, border-color 0.15s ease; }
     .u-assess-card:hover { box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); transform: translateY(-2px); border-color: var(--card, #2563eb); }
     .assessment-project-card-v2 { min-height: 230px; }
+    .health-home-intro { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-bottom:12px; }
+    .health-home-intro section { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 14px; min-width:0; padding:12px 14px; border:1px solid #e0e9f8; border-radius:10px; background:#f5f8ff; }
+    .health-home-intro section+section { background:#fff; }
+    .health-home-intro h2 { font-size:15px; font-weight:650; color:#1f3555; }
+    .health-home-intro p { margin-top:3px; font-size:13px; line-height:1.55; color:#526780; }
+    .health-home-intro .health-intro-steps { margin-top:7px; font-size:13px; line-height:1.5; color:#2458a6; font-weight:600; }
+    @media(max-width:680px) {
+      .health-home-intro { grid-template-columns:minmax(0,1fr); }
+    }
+    #health-proj-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    #health-proj-grid .u-assess-v2-foot { flex-wrap:wrap; }
+    @media(max-width:900px) {
+      #health-proj-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media(max-width:620px) {
+      #health-proj-grid { grid-template-columns:minmax(0,1fr); }
+    }
+    .health-catalog-header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+    .health-catalog-filters { display:flex; flex:1 1 300px; min-width:0; max-width:560px; }
+    .health-catalog-filters input,.health-catalog-filters select { min-height:36px; padding:6px 10px; border:1px solid #cfdbea; background:#fff; font-size:14px; }
+    .health-catalog-filters input { flex:1; min-width:0; border-radius:8px 0 0 8px; }
+    .health-catalog-filters select { flex:none; margin-left:-1px; border-radius:0 8px 8px 0; cursor:pointer; }
+    .health-catalog-filters :focus-visible { position:relative; z-index:1; outline:2px solid #2563eb; outline-offset:-2px; }
+    #health-catalog-count { margin-left:auto; }
+    .health-catalog-table-wrap { overflow-x:auto; margin-top:12px; border:1px solid #e5edf8; border-radius:10px; }
+    .health-catalog-table { width:100%; min-width:540px; border-collapse:collapse; text-align:left; font-size:14px; }
+    .health-catalog-table th,.health-catalog-table td { padding:10px 14px; }
+    .health-catalog-table thead { background:#f3f7fd; color:#37516f; }
+    .health-catalog-table tbody th { font-weight:600; color:#1f2937; }
+    .health-catalog-table tbody tr { border-top:1px solid #e5edf8; }
+    .health-catalog-table tbody tr:hover { background:#f8faff; }
+    .health-catalog-table .health-catalog-no,.health-catalog-table .health-catalog-level { color:#526780; white-space:nowrap; }
+    .health-catalog-table .health-catalog-no { font-variant-numeric:tabular-nums; }
+    .health-catalog-actions { display:flex; gap:8px; white-space:nowrap; }
     .u-assess-v2-head { display: flex; align-items: center; justify-content: space-between; }
     .u-tags { display: flex; gap: 6px; }
     .u-assess-v2-ready { text-align: right; }
@@ -1168,13 +1202,13 @@
     #page-archive .card-title .more:hover{color:var(--blue)}
     #page-archive .hint{font-size:15px;color:var(--t3);display:flex;align-items:center;gap:4px}
 
-    #page-archive .archive-purpose{padding:16px 20px;margin-bottom:16px;border:1px solid #D6E4FF;border-radius:var(--radius);background:#F5F8FF}
-    #page-archive .archive-purpose[hidden]{display:none}
-    #page-archive .archive-purpose-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    #page-archive .archive-purpose-close{width:28px;height:28px;flex:none;border:0;border-radius:6px;background:transparent;color:var(--t2);font-size:20px;line-height:1;cursor:pointer}
-    #page-archive .archive-purpose-close:hover{background:#E5EDFF;color:var(--blue)}
-    #page-archive .archive-purpose-close:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-    #page-archive .archive-purpose h2{font-size:17px;font-weight:600;line-height:1.6;color:var(--t1)}
+    #page-archive .archive-purpose{margin-bottom:12px;border:1px solid #D6E4FF;border-radius:var(--radius);background:#F5F8FF}
+    #page-archive .archive-purpose-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 14px;border-radius:inherit;cursor:pointer;font-size:14px;font-weight:600;line-height:22px;list-style:none}
+    #page-archive .archive-purpose-summary::-webkit-details-marker{display:none}
+    #page-archive .archive-purpose-summary::after{content:"";width:7px;height:7px;flex:none;margin-right:3px;border:solid currentColor;border-width:0 1.5px 1.5px 0;transform:rotate(45deg)}
+    #page-archive .archive-purpose[open] .archive-purpose-summary::after{transform:rotate(225deg)}
+    #page-archive .archive-purpose-summary:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+    #page-archive .archive-purpose-body{padding:0 14px 12px}
     #page-archive .archive-purpose-intro{margin-top:6px;font-size:16px;line-height:1.8;color:var(--t2)}
     #page-archive .archive-purpose-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px;list-style:none}
     #page-archive .archive-purpose-benefits li{padding:10px 12px;background:#fff;border-radius:8px;font-size:15px;line-height:1.8}
@@ -1182,7 +1216,6 @@
     #page-archive .archive-purpose-benefits span{color:var(--t2)}
     #page-archive .archive-purpose-tip{margin-top:10px;font-size:15px;line-height:1.8;color:var(--t2)}
     @media(max-width:760px){
-      #page-archive .archive-purpose{padding:14px 16px}
       #page-archive .archive-purpose-benefits{grid-template-columns:1fr;gap:8px}
     }
 
@@ -1613,14 +1646,32 @@
   </style>
 
   <style id="workbook-evaluation-style">
-    #health-result .eval-gap-action{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid #e2eaf6;background:white;border-radius:8px;padding:12px;margin-top:12px}
-    #health-result .eval-gap-action b{font-size:15px;color:#365c8e}#health-result .eval-gap-action p{font-size:14px;color:#8b9ab0;margin-top:4px}
-    #health-result .eval-gap-buttons{display:flex;gap:8px;flex-shrink:0}
     #health-result .eval-table{min-width:960px}#health-result .eval-table th:nth-child(1){width:9%}#health-result .eval-table th:nth-child(2){width:25%}#health-result .eval-table th:nth-child(3){width:16%}#health-result .eval-table th:nth-child(4){width:8%}#health-result .eval-table th:nth-child(5){width:22%}#health-result .eval-table th:nth-child(6){width:20%}
-    @media(max-width:640px){#health-result .eval-gap-action{align-items:flex-start;flex-direction:column}}
+    #health-result .eval-section.eval-veto{background:#fff6f6;border-color:#f4b7b7;border-top:4px solid #d32f3b}
+    #health-result .eval-veto h3,#health-result .eval-veto h4,#health-result .eval-veto .eval-number{color:#ac2431}
+    #health-result .eval-veto .eval-number{background:#ffe0e1}
+    #health-result .eval-veto .eval-condition{border-color:#f5d3d3}
+    #health-result .eval-veto .eval-veto-tag{background:#ffe0e1;border:1px solid #efb0b6;color:#9c2330;padding:3px 8px;border-radius:6px;font-size:13px;white-space:nowrap}
+    #health-result .eval-breakdown h4{margin:20px 0 10px;font-size:16px;font-weight:650}
+    #health-result .eval-filter{display:flex;gap:8px;flex-wrap:wrap;margin:10px 12px}
+    #health-result .eval-report-table{width:100%;min-width:680px;border-collapse:collapse;text-align:left;font-size:14px}
+    #health-result .eval-report-table th,#health-result .eval-report-table td{padding:10px 12px;border-bottom:1px solid #e5ebf3;vertical-align:top}
+    #health-result .eval-report-table thead th{background:#f0f5fc;color:#37516f;white-space:nowrap}
+    #health-result .eval-report-table tbody th{font-weight:650;text-align:left}
+    #health-result .eval-report-table .eval-muted{color:#526780;font-size:13px}
+    #health-result .eval-report-table .eval-priority{color:#a33630;font-weight:650;white-space:nowrap}
+    #health-result .eval-report-table .eval-nowrap{white-space:nowrap}
+    #health-result .eval-report-table .eval-btn{white-space:nowrap;font-size:13px}
+    #health-result .eval-report-table input[type="checkbox"]{width:17px;height:17px;accent-color:#1677ff;cursor:pointer}
+    #health-result .eval-report-table tr:has(input:checked){background:#eff6ff}
+    #health-result .eval-batch-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:14px}
+    #health-result .eval-btn:disabled{opacity:.5;cursor:not-allowed}
+    #health-result .eval-batch-bar strong{color:#174d93}
+    #health-project-mode{width:min(460px,calc(100% - 32px));margin:auto;padding:20px;border:1px solid #d5e1f3;border-radius:12px;background:#fff}
+    #health-project-mode::backdrop{background:#10254975}
+    #health-project-mode .eval-mode-choice{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid #e5ebf3;cursor:pointer}
+    #health-project-mode .eval-mode-choice small{display:block;color:#526780}
 
-    #health-result .eval-grade-key{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}
-    #health-result .eval-grade-key>span{display:flex;align-items:center;gap:7px;font-size:15px;color:#718097}
     #health-result .eval-letter{display:inline-flex;align-items:center;justify-content:center;min-width:27px;height:27px;border-radius:6px;font-size:18px;font-weight:650}
     #health-result .grade-A{background:#e9f8f0;color:#21986b}
     #health-result .grade-B{background:#edf4ff;color:#1677ff}
@@ -1636,11 +1687,6 @@
     #health-result .eval-btn:hover,#health-home .eval-btn:hover{border-color:#1677ff;color:#1677ff}
     #health-result .eval-btn.primary,#health-home .eval-btn.primary{background:#1677ff;border-color:#1677ff;color:white}
     #health-result .eval-btn.is-active{background:#eaf3ff;border-color:#adccff;color:#1677ff}
-    #health-result .eval-mode-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:16px 0}
-    #health-result .eval-mode-bar small{color:#8b97a9}
-    #health-result .eval-mode-options{display:flex;padding:3px;border-radius:8px;background:#e9eef6;gap:3px}
-    #health-result .eval-mode-options button{padding:6px 12px;border:0;border-radius:6px;background:transparent;font-size:15px;cursor:pointer;color:#64738a}
-    #health-result .eval-mode-options button.is-active{background:white;color:#1677ff;box-shadow:0 1px 4px #26344a15}
     #health-result .eval-source{background:#f0f6ff;border:1px solid #d7e6ff;border-radius:10px;padding:13px 18px;margin-bottom:14px}
     #health-result .eval-source b{color:#2361b3;margin-right:14px}#health-result .eval-source span{color:#7a8ba3;font-size:15px}#health-result .eval-source p{font-size:15px;margin-top:5px;color:#6c7e97}
     #health-result .eval-section{border:1px solid #e5ebf3;border-radius:12px;background:white;padding:20px;margin-bottom:16px;min-width:0}
@@ -1656,13 +1702,11 @@
     #health-result .eval-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:18px}#health-result .eval-stat-grid div{background:#f8fafc;padding:10px;border-radius:7px;display:flex;flex-direction:column}#health-result .eval-stat-grid b{font-size:22px;color:#304c74}#health-result .eval-stat-grid span{font-size:14px;color:#7b8ba2}
     #health-result .eval-condition{display:flex;align-items:flex-start;gap:12px;border-top:1px solid #edf1f6;padding:13px 0}#health-result .eval-condition>div{flex:1;min-width:0}#health-result .eval-condition p{margin-top:4px;color:#6b7b91;font-size:15px}#health-result .eval-condition small{display:block;color:#98a3b3;margin-top:6px;font-size:14px}#health-result .eval-number{width:24px;height:24px;background:#edf5ff;border-radius:6px;text-align:center;color:#1677ff;flex-shrink:0;line-height:24px}
     #health-result .eval-dimensions{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:10px}#health-result .eval-dimensions>div{padding:13px;background:#f6f9fd;border-radius:8px;display:flex;flex-direction:column}#health-result .eval-dimensions span{font-size:14px;color:#8b99ad;margin-top:3px}#health-result .eval-dimensions strong{font-size:23px;color:#1677ff;margin-top:9px}#health-result .eval-dimensions small{font-size:14px;font-weight:400;color:#96a2b3}
-    #health-result .eval-filter{display:flex;gap:8px;margin:14px 0}
     #health-result .eval-dimension{border:1px solid #e5ebf3;border-radius:8px;overflow:hidden;margin-top:12px}#health-result .eval-dimension>summary{background:#f7faff;padding:11px 14px;cursor:pointer}#health-result .eval-dimension>summary span{font-size:15px;color:#8495ab;margin-left:12px}
     #health-result .eval-table-scroll{overflow-x:auto;max-width:100%}#health-result .eval-table{width:100%;border-collapse:collapse;min-width:1080px;table-layout:fixed;font-size:15px;text-align:left}#health-result .eval-table th{font-weight:500;background:#fafbfd;color:#8795a8}#health-result .eval-table th,#health-result .eval-table td{padding:12px 10px;border-top:1px solid #edf1f7;vertical-align:top;white-space:pre-line;overflow-wrap:anywhere}#health-result .eval-table th:nth-child(1){width:7%}#health-result .eval-table th:nth-child(2){width:24%}#health-result .eval-table th:nth-child(3){width:13%}#health-result .eval-table th:nth-child(4){width:7%}#health-result .eval-table th:nth-child(5){width:18%}#health-result .eval-table th:nth-child(6){width:17%}#health-result .eval-table th:nth-child(7){width:14%}
     #health-result .eval-rule{margin-top:8px;color:#7c8ca3;white-space:normal}#health-result .eval-rule summary{color:#1677ff;cursor:pointer;font-size:14px}#health-result .eval-rule h5{font-size:14px;margin-top:9px;font-weight:600}#health-result .eval-rule p{white-space:pre-line;margin-top:3px}#health-result .eval-table-score{font-size:21px;color:#426caa}#health-result .eval-review-inline{font-size:14px;color:#ba8a45;margin-top:7px}
-    #health-result .eval-gap-summary{background:#f3f8ff;padding:14px;border-radius:8px;margin-bottom:12px}#health-result .eval-gap-summary p{margin-top:5px;font-size:15px;color:#7e8da3}
     #health-result .eval-review{background:#fffaf4;border:1px solid #f4e4d0;padding:14px;border-radius:8px;margin-top:10px}#health-result .eval-review .eval-section-head{margin-bottom:5px}#health-result .eval-review p{font-size:15px;color:#8e795f}#health-result .eval-review small{display:block;font-size:14px;color:#aa9376;margin-top:7px}
-    #health-result .eval-evidence{border-bottom:1px solid #edf1f6}#health-result .eval-evidence>summary{padding:12px 0;cursor:pointer;font-weight:500}#health-result .eval-evidence>summary span{float:right;font-size:15px;font-weight:400;color:#8a98ab}#health-result .eval-evidence-item{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:12px;background:#f8fafd;margin-bottom:8px;border-radius:7px}#health-result .eval-evidence-item p{font-size:15px;color:#8a98ab;margin-top:3px}
+    #health-evidence,#health-repair-tasks{margin-top:10px}
     #health-result .eval-next p{margin-top:12px;color:#7c8ca3}#health-result .eval-next ol{padding-left:20px;color:#62748e;margin:12px 0 16px}#health-result .eval-unconfigured{padding:40px;text-align:center}#health-result .eval-unconfigured p{margin:12px 0;color:#8493a7}
     #health-result [hidden]{display:none!important}
     @media(max-width:1100px){#health-result .eval-toolbar{align-items:flex-start;flex-direction:column}#health-result .eval-overview{grid-template-columns:160px minmax(0,1fr)}#health-result .eval-stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -1849,7 +1893,7 @@
             <i data-lucide="briefcase" class="nav-icon"></i>
             <span>培育项目</span>
           </div>
-          <div class="nav-item" data-target="page-tasks" data-title="任务清单"><i data-lucide="list-checks" class="nav-icon"></i><span>任务清单</span><span id="task-menu-count" class="ml-auto rounded bg-blue-50 px-1.5 text-xs text-blue-600"></span></div>
+          <div class="nav-item" data-target="page-tasks" data-title="任务中心"><i data-lucide="list-checks" class="nav-icon"></i><span>任务中心</span><span id="task-menu-count" class="ml-auto rounded bg-blue-50 px-1.5 text-xs text-blue-600"></span></div>
           <div class="nav-item" data-target="page-cultivation-plan" data-title="科创培育规划" style="display: none;">
             <i data-lucide="sprout" class="nav-icon"></i>
             <span>科创培育规划</span>
@@ -2314,28 +2358,31 @@
           <div id="cultivation-health">
             <!-- P1 工作台 -->
             <div id="health-home" class="health-view">
-              <!-- 用途说明（新手引导） -->
-              <div class="rounded-lg p-6 shadow-sm" style="background:linear-gradient(135deg,#f4f8ff 0%,#faf7ff 100%);border:1px solid #e8edff">
-                <div class="flex items-start gap-4">
-                  <div class="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl text-white" style="background:#1677ff"><i data-lucide="info" class="h-5 w-5"></i></div>
-                  <div class="flex-1">
-                    <div class="text-base font-semibold text-gray-800">智能测评是什么？</div>
-                    <p class="mt-1 text-sm leading-relaxed text-gray-600">智能测评中心通过 AI 调取企业数字档案，<b>逐项对标官方申报标准</b>（形式审查、创新能力、经营规模等），提前发现差距、给出整改建议，帮您判断「能不能报、差在哪、怎么补」。</p>
-                    <div class="mt-4 grid grid-cols-4 gap-3">
-                      <div class="rounded-lg border border-gray-100 bg-white p-3"><div class="flex items-center gap-2"><span class="flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white" style="background:#1677ff">1</span><span class="text-sm font-medium text-gray-800">选项目</span></div><div class="mt-1.5 pl-7 text-xs text-gray-400">选择要申报的政策项目</div></div>
-                      <div class="rounded-lg border border-gray-100 bg-white p-3"><div class="flex items-center gap-2"><span class="flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white" style="background:#1677ff">2</span><span class="text-sm font-medium text-gray-800">AI 测评</span></div><div class="mt-1.5 pl-7 text-xs text-gray-400">AI 调档或手动填报</div></div>
-                      <div class="rounded-lg border border-gray-100 bg-white p-3"><div class="flex items-center gap-2"><span class="flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white" style="background:#1677ff">3</span><span class="text-sm font-medium text-gray-800">出报告</span></div><div class="mt-1.5 pl-7 text-xs text-gray-400">评级 + 差距 + 建议</div></div>
-                      <div class="rounded-lg border border-gray-100 bg-white p-3"><div class="flex items-center gap-2"><span class="flex h-5 w-5 items-center justify-center rounded-full text-xs font-bold text-white" style="background:#1677ff">4</span><span class="text-sm font-medium text-gray-800">对服务</span></div><div class="mt-1.5 pl-7 text-xs text-gray-400">差距项匹配整改服务</div></div>
-                    </div>
+              <div class="health-home-intro">
+                <section aria-labelledby="health-intro-title">
+                  <div>
+                    <h2 id="health-intro-title">智能测评说明</h2>
+                    <p>准备申报高企、专精特新等资质时，可先用测评判断企业已满足哪些条件、还缺哪些指标或材料。AI 会读取企业档案并逐项对照申报要求，也可以手动填写企业数据。</p>
+                    <p class="health-intro-steps">选择申报项目 → 发起测评 → 查看达标情况、差距和整改建议</p>
                   </div>
-                </div>
+                </section>
+                <section aria-labelledby="health-sample-title">
+                  <div>
+                    <h2 id="health-sample-title">测评案例参考报告</h2>
+                    <p>小巨人案例 A · 7 条基本条件、23 项三级指标</p>
+                  </div>
+                  <button type="button" class="u-button ghost" onclick="openHealthWorkbookSample()">查看样例报告 <span aria-hidden="true">→</span></button>
+                </section>
               </div>
 
               <!-- 新建测评（置顶） -->
               <div class="rounded-lg bg-white p-6 shadow-sm">
-                <div class="mb-1 text-base font-semibold text-gray-800">新建测评</div>
+                <div class="health-catalog-header mb-1">
+                  <div class="text-base font-semibold text-gray-800">常用测评项目</div>
+                  <button type="button" class="u-button ghost" id="health-catalog-open" onclick="switchHealth('catalog');document.getElementById('health-catalog-title').focus()">查看全部测评项目 <span aria-hidden="true">→</span></button>
+                </div>
                 <div class="mb-4 text-sm text-gray-400">选择申报项目，AI 一键测评或手动填报</div>
-                <div class="grid grid-cols-3 gap-4" id="health-proj-grid"></div>
+                <div id="health-proj-grid"></div>
               </div>
 
               <div class="empty-only mt-4 rounded-2xl border border-dashed border-gray-200 bg-white px-8 py-14 text-center">
@@ -2344,13 +2391,6 @@
                 </div>
                 <h3 class="mt-4 text-lg font-semibold text-gray-800">还没有测评记录</h3>
                 <p class="mt-2 text-sm text-gray-500">从上方选择申报项目，发起一次 AI 测评或手动测评，系统将为您输出评级、差距与整改建议。</p>
-              </div>
-
-              <!-- 工作簿案例参考 -->
-              <div class="demo-only mt-4 rounded-lg bg-white p-6 shadow-sm">
-                <div class="mb-3 flex flex-wrap items-center justify-between gap-3"><div><h3 class="text-base font-semibold text-gray-800">小巨人测评 · 案例A参考报告</h3><p class="mt-1 text-sm text-gray-500">来源于提供的工作簿，包含基本条件、评分依据与支撑材料。</p></div><button type="button" class="eval-btn primary" onclick="openHealthWorkbookSample()">查看完整样例报告 →</button></div>
-                <div class="text-sm leading-relaxed text-gray-600">7 条基本条件 · 5 个维度 · 23 项三级指标<br>专业化 15% / 精细化 20% / 特色化 15% / 创新能力 35% / 成长性 15%</div>
-                <p class="mt-3 text-xs text-amber-600">案例分数含原表待复核口径，仅供参考；不代表本企业评分或认定结果。</p>
               </div>
 
               <div class="demo-only mt-4 rounded-lg bg-amber-50 p-4" style="border:1px solid #FFE7A6">
@@ -2374,6 +2414,32 @@
             </div>
 
             <!-- P5 评估进度 -->
+            <div id="health-catalog" class="health-view hidden">
+              <section class="rounded-lg bg-white p-6 shadow-sm" aria-labelledby="health-catalog-title">
+                <div class="health-catalog-header">
+                  <h2 id="health-catalog-title" tabindex="-1" class="text-lg font-semibold text-gray-800">全部测评项目</h2>
+                  <button type="button" class="u-button ghost" onclick="switchHealth('home');document.getElementById('health-catalog-open').focus()">返回常用测评</button>
+                </div>
+                <div class="health-catalog-header mt-4">
+                  <div class="health-catalog-filters">
+                    <input type="search" id="health-catalog-search" aria-label="搜索测评项目" placeholder="搜索资质、奖项、平台或项目" />
+                    <select id="health-catalog-level-filter" aria-label="按层级筛选">
+                      <option value="">全部层级</option>
+                      <option value="国家级">国家级</option>
+                      <option value="省级">省级</option>
+                    </select>
+                  </div>
+                  <span id="health-catalog-count" class="text-sm text-gray-500" aria-live="polite"></span>
+                </div>
+                <div class="health-catalog-table-wrap" role="region" aria-label="全部测评项目表格" tabindex="0">
+                  <table class="health-catalog-table" aria-labelledby="health-catalog-title">
+                    <thead><tr><th scope="col">编号</th><th scope="col">测评项目名称</th><th scope="col">层级</th><th scope="col">操作</th></tr></thead>
+                    <tbody id="health-catalog-list"></tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+
             <div id="health-progress" class="health-view hidden">
               <div class="mx-auto max-w-md rounded-lg bg-white p-8 text-center shadow-sm">
                 <div class="flex justify-center"><div class="health-ring" id="health-eval-ring"></div></div>
@@ -2426,9 +2492,17 @@
             <div id="health-result" class="health-view hidden">
               <div class="eval-toolbar">
                 <div class="eval-toolbar-title"><button type="button" class="eval-btn" onclick="switchHealth('home')">← 返回智能测评</button><div><h2>智能测评报告</h2><span id="health-result-project"></span></div></div>
-                <div class="eval-toolbar-actions"><button type="button" class="eval-btn" onclick="shareHealthReport()">分享链接</button><button type="button" class="eval-btn" onclick="downloadHealthReport()">下载报告</button><button type="button" class="eval-btn primary" onclick="addHealthProject(this)">添加到培育项目</button></div>
+                <div class="eval-toolbar-actions"><button type="button" class="eval-btn" onclick="shareHealthReport()">分享链接</button><button type="button" class="eval-btn" onclick="downloadHealthReport()">下载报告</button><button type="button" class="eval-btn primary" aria-haspopup="dialog" onclick="addHealthProject()">添加到培育项目</button></div>
               </div>
               <div id="health-workbook-report"></div>
+              <dialog id="health-project-mode" aria-labelledby="health-project-mode-title">
+                <form method="dialog" id="health-project-mode-form">
+                  <h3 id="health-project-mode-title">选择培育方式</h3>
+                  <label class="eval-mode-choice"><input type="radio" name="health-project-kind" value="自主" checked><span><b>自主培育</b><small>企业自行跟进补强任务和申报材料。</small></span></label>
+                  <label class="eval-mode-choice"><input type="radio" name="health-project-kind" value="托管"><span><b>托管培育</b><small>创建托管项目，由顾问协助安排后续培育。</small></span></label>
+                  <div class="eval-batch-bar"><button type="submit" value="cancel" class="eval-btn">取消</button><button type="submit" value="add" class="eval-btn primary">确认添加</button></div>
+                </form>
+              </dialog>
             </div>
 
           </div>
@@ -3213,11 +3287,9 @@
             <!-- 内容区 -->
             <main class="content">
               <section class="archive-company-header" aria-label="当前企业与科创标签"><div class="archive-company-symbol">企</div><div><div class="archive-company-kicker">当前企业</div><h1 id="archive-current-company">武汉汉企业科技有限公司</h1><div class="archive-company-tags" id="archive-company-tags"></div></div></section>
-              <section class="archive-purpose" id="archive-purpose" aria-labelledby="archive-purpose-title">
-                <div class="archive-purpose-head">
-                  <h2 id="archive-purpose-title">为什么要补充企业档案？</h2>
-                  <button type="button" class="archive-purpose-close" id="archive-purpose-close" aria-label="关闭企业档案补充说明" aria-controls="archive-purpose" title="关闭说明">×</button>
-                </div>
+              <details class="archive-purpose" id="archive-purpose">
+                <summary class="archive-purpose-summary">为什么要补充企业档案？</summary>
+                <div class="archive-purpose-body">
                 <p class="archive-purpose-intro">企业档案是智能测评、政策匹配和培育规划的共同依据。补充企业资质、知识产权、研发、财务及团队信息与证明材料，有助于系统了解企业现状、识别条件差距，并给出更有针对性的建议。</p>
                 <ul class="archive-purpose-benefits">
                   <li><strong>测评有依据</strong><span>识别企业优势、条件差距与证据缺口。</span></li>
@@ -3225,13 +3297,17 @@
                   <li><strong>培育有计划</strong><span>明确目标梯度、项目组合和补强优先级。</span></li>
                 </ul>
                 <p class="archive-purpose-tip">建议先补齐当前目标所需的关键指标与证明材料，再逐步完善其他信息。上传后请核对 AI 识别结果，确认后再更新档案；已归档资料可供后续测评与申报准备复用。</p>
-              </section>
+                </div>
+              </details>
 
               <!-- 画像雷达总览 -->
               <section class="card radar-card">
                 <div class="card-head">
                   <div class="card-title">企业画像雷达<span class="hint">💡 数据更新于 2026-11-13</span></div>
-                  <div class="hint">示例企业数据 · 依据档案状态展示能力</div>
+                  <div class="archive-profile-actions">
+                    <span class="hint">示例企业数据 · 依据档案状态展示能力</span>
+                    <button type="button" id="archiveProfileOpen">查看企业完整画像 <span aria-hidden="true">→</span></button>
+                  </div>
                 </div>
                 <div class="radar-body">
                   <div class="radar-left" id="radarBox"></div>
@@ -3351,6 +3427,37 @@
               <button type="button" class="btn btn-primary" id="mSave" disabled>确认并回填</button>
             </div>
           </div>
+          </div>
+        </div>
+
+        <div class="page hidden" id="page-archive-profile" aria-labelledby="archiveProfileTitle">
+          <header class="archive-profile-head">
+            <div>
+              <h1 id="archiveProfileTitle" tabindex="-1">企业完整画像</h1>
+              <p><strong id="archiveProfileCompany"></strong><span id="archiveProfileSample">原型示例数据</span></p>
+            </div>
+            <button type="button" id="archiveProfileBack"><span aria-hidden="true">←</span> 返回企业数字档案</button>
+          </header>
+          <div class="archive-profile-body">
+            <section class="archive-profile-wide" aria-labelledby="archiveProfileBasicsTitle">
+              <h2 id="archiveProfileBasicsTitle">企业基本信息</h2><dl id="archiveProfileBasics"></dl>
+            </section>
+            <section aria-labelledby="archiveProfileHonorsTitle">
+              <h2 id="archiveProfileHonorsTitle">荣誉资质</h2><ul id="archiveProfileHonors"></ul>
+            </section>
+            <section aria-labelledby="archiveProfileTechTitle">
+              <h2 id="archiveProfileTechTitle">企业技术领域</h2><ul id="archiveProfileTech"></ul>
+            </section>
+            <section class="archive-profile-wide" aria-labelledby="archiveProfileGraphTitle">
+              <div class="archive-profile-graph-head">
+                <h2 id="archiveProfileGraphTitle">企业图谱</h2>
+                <div class="archive-profile-switch" role="group" aria-label="图谱关系类型">
+                  <button type="button" data-profile-graph="resources" aria-pressed="true">科创资源关系</button>
+                  <button type="button" data-profile-graph="supplyChain" aria-pressed="false">上下游关系</button>
+                </div>
+              </div>
+              <div id="archiveProfileGraph" aria-live="polite"></div>
+            </section>
           </div>
         </div>
 
@@ -3888,7 +3995,7 @@
 
         <!-- 智能体广场 -->
         <div id="page-tasks" class="page hidden">
-          <div class="cult-task-heading"><div><h2>任务清单</h2><p>汇总培育项目任务，统一查看进度、交付成果与截止时间</p></div><button type="button" onclick="goToPage('page-project','培育项目')">查看培育项目 →</button></div>
+          <div class="cult-task-heading"><div><h2>任务中心</h2><p>汇总培育项目任务，统一查看进度、交付成果与截止时间</p></div><button type="button" onclick="goToPage('page-project','培育项目')">查看培育项目 →</button></div>
           <div id="cult-task-stats" class="cult-task-stats"></div>
           <div class="cult-task-workspace"><div class="cult-task-filters"><input id="cult-task-search" type="search" placeholder="搜索任务、交付成果或所属项目" aria-label="搜索任务"><select id="cult-task-project" aria-label="筛选所属项目"><option value="">全部项目</option></select><select id="cult-task-status" aria-label="筛选任务状态"><option value="">全部状态</option><option>待处理</option><option>进行中</option><option>待审核</option><option>已完成</option></select><select id="cult-task-deadline" aria-label="筛选截止情况"><option value="">全部截止时间</option><option value="overdue">已逾期</option><option value="week">未来七天</option><option value="none">未设置截止时间</option></select><button id="cult-task-reset" type="button">重置</button></div>
           <div class="cult-task-table-wrap"><table class="cult-task-table"><thead><tr><th>任务名称 / 交付成果</th><th>所属培育项目</th><th>负责人</th><th>截止时间</th><th>状态</th><th>操作</th></tr></thead><tbody id="cult-task-body"></tbody></table></div><footer id="cult-task-total" aria-live="polite"></footer></div>
@@ -6502,23 +6609,22 @@
   </div>
 
   <!-- 智能测评：AI 建议抽屉 -->
-  <div class="health-overlay" id="health-ai-overlay" onclick="closeHealthAIAdvice()"></div>
+  <div class="health-overlay" id="health-ai-overlay" onclick="closeHealthAdvisor()"></div>
   <div class="health-drawer" id="health-ai-drawer" style="width:520px">
-    <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><div><b>AI 建议</b><div class="text-xs text-gray-400" id="health-ai-ctx">差距项 · 红 · 不达标</div></div><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthAIAdvice()">✕</button></div>
+    <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><div><b>联系咨询顾问</b><div class="text-xs text-gray-400" id="health-ai-ctx"></div></div><button type="button" aria-label="关闭顾问咨询" class="text-gray-400 hover:text-gray-600" onclick="closeHealthAdvisor()">✕</button></div>
     <div class="flex-1 overflow-auto p-5">
       <div id="health-ai-body"></div>
     </div>
-    <div class="border-t border-gray-100 bg-gray-50 px-5 py-3 text-xs text-gray-400">AI 建议基于企业档案与测评结果生成，仅供参考，不构成申报承诺。</div>
   </div>
 
   <!-- 智能测评：订单确认抽屉 -->
   <div class="health-overlay" id="health-ord-overlay" onclick="closeHealthOrder()"></div>
-  <div class="health-drawer" id="health-ord-drawer" style="width:560px">
+  <div class="health-drawer" id="health-ord-drawer" style="width:min(560px,100vw)">
     <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><b>确认下单</b><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthOrder()">✕</button></div>
     <div class="flex-1 overflow-auto p-5">
       <div class="rounded-lg bg-gray-50 p-3"><b id="health-ord-name">研发费用归集整改服务</b><div id="health-ord-price-sub" class="mt-1 text-xs text-gray-400">￥2,000 / 次</div></div>
-      <div class="mt-3 grid grid-cols-2 gap-3"><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>数量：1</option><option>数量：2</option></select></div><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>标准服务</option><option>加急服务（+￥500）</option></select></div></div>
-      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">关联问题清单（只读）</label><div class="rounded-md border border-gray-100 p-3 text-sm text-gray-600">对应差距项（由服务入口带入）</div></div>
+      <div id="health-ord-options" class="mt-3 grid grid-cols-2 gap-3"><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>数量：1</option><option>数量：2</option></select></div><div><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>标准服务</option><option>加急服务（+￥500）</option></select></div></div>
+      <div class="mt-3"><div class="mb-1 block text-xs text-gray-500" id="health-ord-issues-title">关联问题清单</div><div class="rounded-md border border-gray-100 p-3 text-sm text-gray-600" id="health-ord-issues" aria-labelledby="health-ord-issues-title">对应差距项（由服务入口带入）</div></div>
       <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">关联测评单</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>JC-2024-1102</option></select></div>
       <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">发票信息</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>不开票</option><option>普票</option><option>专票</option></select></div>
       <div class="mt-3">
@@ -6608,7 +6714,8 @@
 
     function goToPage(target, title) {
       navItems.forEach((i) => i.classList.remove('nav-active'));
-      const nav = document.querySelector('.nav-item[data-target="' + target + '"]');
+      const navTarget = target === 'page-archive-profile' ? 'page-archive' : target;
+      const nav = document.querySelector('.nav-item[data-target="' + navTarget + '"]');
       if (nav) nav.classList.add('nav-active');
 
       pages.forEach((p) => p.classList.toggle('hidden', p.id !== target));
@@ -8793,45 +8900,97 @@
       goToPage('page-cultivation', '智能测评');
       switchHealth('result');
     }
-    function setHealthResultMode(mode) {
-      healthResultMode = mode === 'case' ? 'case' : 'company';
-      renderHealthWorkbookResult();
-    }
-    function healthWorkbookItems() { return SMALL_GIANT_TEMPLATE.dimensions.flatMap(function(d) { return d.items; }); }
     // ABC 为页面内部展示等级，不将工作簿案例分数作为企业实际结果。
     const HEALTH_GRADE_MAX = {12:2,13:3,14:5,15:5,16:2,17:2,18:2,19:4,20:10,21:10,22:5,23:5,24:2,25:5,26:5,27:5,28:5,29:5,30:10,31:5,32:5,33:5,34:5};
     function healthCaseGrade(items) {
       const ratio = items.reduce(function(sum,i){return sum+Math.min(i.caseScore,HEALTH_GRADE_MAX[i.row]);},0) / items.reduce(function(sum,i){return sum+HEALTH_GRADE_MAX[i.row];},0);
       return ratio >= .8 ? 'A' : ratio >= .4 ? 'B' : 'C';
     }
-    function healthGradeLabel(grade){return {A:'基础较好',B:'需要补强',C:'差距较大'}[grade] || '待核验';}
+    function healthGradeLabel(grade){return {A:'基础较好',B:'需要补强',C:'差距较大'}[grade];}
     function healthGradeBadge(grade) {return '<span class="eval-letter grade-'+grade+'">'+grade+'</span>';}
     function healthIndicatorBasis(i) {
       const custom = {12:'结合企业从事细分市场的时间与经营年限判断。',15:'结合标准级别、主持或参与角色及标准数量判断。',20:'结合有效质量管理认证与质量管理能力等级判断，同类成果不重复累计。',21:'结合有效产品认证及认证机构权威性判断，并与质量管理认证统筹核验。',23:'已完成数字化测评，尚需补充资质认定及行业对比佐证。',24:'尚未取得工作簿列示的绿色资质，建议补充绿色化建设及认定材料。',25:'结合有效PCT专利数量及申请或授权凭证判断。',26:'结合研发投入规模及研发项目资料判断。',27:'结合研发投入占比及各年度研发费用材料判断。',28:'结合授权数量、授权年份及相关专利凭证判断。',30:'结合研发机构的认定级别、场地与设备条件判断。',31:'结合研发人员数量、占比及人员证明判断。'};
       return custom[i.row] || i.basis;
     }
-    function renderHealthWorkbookResult() {
-      const host = document.getElementById('health-workbook-report');if(!host)return;
-      const e=evalEscape,configured=healthHasWorkbookTemplate(),giant=healthIsGiant(),isCase=true;
-      document.getElementById('health-result-project').textContent=currentHealthProject;
-      document.querySelectorAll('[data-health-result-mode]').forEach(function(b){const active=b.dataset.healthResultMode===healthResultMode;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active));});
-      HEALTH_GAPS.length=0;
-      if(!configured){host.innerHTML='<section class="eval-section eval-unconfigured"><h3>当前项目待配置专属指标</h3><p>当前项目“'+e(currentHealthProject)+'”尚未提供对应指标表，配置专属指标后再生成等级与结论。</p><button class="eval-btn primary" type="button" onclick="openHealthWorkbookSample()">查看小巨人指标案例</button></section>';return;}
-      const items=healthWorkbookItems(),grade=isCase?healthCaseGrade(items):null;
-      host.innerHTML='<div class="eval-source"><b>'+(isCase?'测评报告演示 · 装备制造企业':'本企业结果 · 待材料核验')+'</b><span>指标来源：小巨人测评结果指标.xlsx / Sheet1</span><p>基于提供的工作簿案例展示完整报告：逐项等级、差距与补强服务。此页为原型演示。</p></div>'+
-        '<section class="eval-section"><div class="eval-section-head"><h3>一、测评综述</h3><span class="eval-chip">'+(isCase?'案例参考':'待核验')+'</span></div><div class="eval-overview"><div class="eval-score"><strong>'+(grade||'待核验')+'</strong><span>'+(grade?healthGradeLabel(grade):'本企业等级')+'</span><small>'+(isCase?'案例综合等级 · 展示参考':'材料确认后形成 ABC 等级')+'</small></div><div class="eval-conclusion"><b>'+(isCase?'已有一定基础，建议按项补强':'材料未齐，暂不生成等级与申报结论')+'</b><p>'+(isCase?'按专业化、精细化、特色化、创新能力、成长性逐项展示等级与补强方向。':'请补齐企业实际值、行业比较数据及支撑材料，核验后形成综合等级和分项等级。')+'</p><div class="eval-grade-key"><span>'+healthGradeBadge('A')+' 基础较好</span><span>'+healthGradeBadge('B')+' 需要补强</span><span>'+healthGradeBadge('C')+' 差距较大</span></div><p>A 表示基础较好，B 表示需要补强，C 表示差距较大。可从差距项直接查看推荐服务或 AI 建议。</p><div class="eval-stat-grid"><div><b>'+(giant?7:'—')+'</b><span>基本条件</span></div><div><b>'+items.length+'</b><span>三级指标</span></div><div><b>'+items.filter(function(i){return healthCaseGrade([i])!=='A';}).length+'</b><span>需补强指标</span></div><div><b>'+items.length+'</b><span>材料清单</span></div></div></div></div></section>'+
-        '<section class="eval-section"><div class="eval-section-head"><h3>二、基本条件评判</h3><span class="eval-meta">逐项展示等级与判断要求</span></div>'+(giant?'<div class="eval-condition-list">'+SMALL_GIANT_TEMPLATE.conditions.map(function(c,index){const standard=index===6?'发展评价应满足相应要求，复核企业按适用年度评价结果判断。':c.standard;const related=[[12],[13,16,17,18,32],[26,27],[14,28],[13,22],[14,28],[]][index];const conditionGrade=healthCaseGrade(related.length?items.filter(function(i){return related.includes(i.row);}):items);return '<article class="eval-condition"><span class="eval-number">'+(index+1)+'</span><div><b>'+e(c.title.replace('得分','等级'))+'</b><p>'+e(standard)+'</p><small>支撑材料：'+e(c.evidence)+'</small></div>'+healthGradeBadge(conditionGrade)+'</article>';}).join('')+'</div>':'<p class="eval-meta">小巨人的基本条件不套用于当前项目，专属条件待配置。</p>')+'</section>'+
-        '<section class="eval-section"><div class="eval-section-head"><h3>三、分项指标与等级评判</h3><span class="eval-meta">'+(isCase?'案例A等级参考':'本企业等级待核验')+'</span></div><div class="eval-dimensions">'+SMALL_GIANT_TEMPLATE.dimensions.map(function(d){const g=isCase?healthCaseGrade(d.items):null;return '<div><b>'+e(d.name)+'</b><span>'+d.items.length+' 项指标</span><strong>'+(g||'待核验')+'<small> '+healthGradeLabel(g)+'</small></strong></div>';}).join('')+'</div><div class="eval-filter" role="group" aria-label="分项指标筛选"><button type="button" class="eval-btn is-active" data-eval-filter="all" aria-pressed="true">全部指标（23）</button><button type="button" class="eval-btn" data-eval-filter="B" aria-pressed="false">B 级 · 需要补强</button><button type="button" class="eval-btn" data-eval-filter="C" aria-pressed="false">C 级 · 差距较大</button></div><div id="health-criteria"></div></section>'+
-        '<section class="eval-section"><div class="eval-section-head"><h3>四、差距分析与补强建议</h3><span class="eval-meta">按等级查看补强方向</span></div><div id="health-gaps"></div></section>'+
-        '<section class="eval-section"><div class="eval-section-head"><h3>五、证据缺口清单</h3><span class="eval-meta">23 项指标对应的支撑材料</span></div><p class="eval-meta">按指标逐项确认本企业已上传的有效凭证。</p><div id="health-evidence"></div></section>'+
-        '<section class="eval-section eval-next"><h3>六、结论与下一步</h3><p>'+(isCase?'案例综合等级为 '+grade+'（'+healthGradeLabel(grade)+'）。建议优先处理 C 级指标，再补强 B 级指标；按项查看推荐服务或获取 AI 建议。':'本企业综合等级与分项等级待核验。材料齐备后，按 ABC 等级形成差距分析与培育任务。')+'</p><ol><li>按指标补齐企业实际值与材料，核验基本条件。</li><li>复核行业比较数据、指标口径及材料有效性。</li><li>结合综合等级与分项等级安排补强任务。</li></ol><button type="button" class="eval-btn primary" onclick="goToPage(\'page-archive\',\'企业数字档案\')">去补充企业档案</button></section>';
-      renderHealthCriteria();renderHealthGaps();
-      document.getElementById('health-evidence').innerHTML=SMALL_GIANT_TEMPLATE.dimensions.map(function(d){return '<details class="eval-evidence"><summary>'+e(d.name)+'<span>'+d.items.length+' 项支撑材料</span></summary>'+d.items.map(function(i){return '<div class="eval-evidence-item"><div><b>'+e(i.name)+'</b><p>'+e(i.materials)+'</p></div><button type="button" class="eval-btn" onclick="goToPage(\'page-archive\',\'企业数字档案\')">补充材料</button></div>';}).join('')+'</details>';}).join('');
+    const HEALTH_COMPANY_FACTS = {
+      22:['毛利率'], 25:['PCT国际专利申请量'], 26:['近三年研发费用总额'],
+      27:['研发费用占营收比'], 28:['有效发明专利数量'], 29:['专利被引次数'],
+      30:['省级工程技术研究中心'], 31:['研发人员总数','研发人员占比'],
+      32:['营收复合增长率'], 33:['净利润增长率']
+    };
+    const HEALTH_COMPARISON_ROWS = new Set([13,16,17,18,19,22,32,33,34]);
+    function healthReportTable(label, columns, rows) {
+      return '<div class="eval-table-scroll" tabindex="0" role="region" aria-label="'+evalEscape(label)+'"><table class="eval-report-table"><thead><tr>'+
+        columns.map(column=>'<th scope="col">'+column+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';
     }
-    function renderHealthCriteria(){
-      const host=document.getElementById('health-criteria');if(!host)return;
-      const e=evalEscape,isCase=true;
-      host.innerHTML=SMALL_GIANT_TEMPLATE.dimensions.map(function(d){return '<details class="eval-dimension" open><summary><b>'+e(d.name)+'</b><span>'+d.items.length+' 项指标</span></summary><div class="eval-table-scroll" tabindex="0" aria-label="'+e(d.name)+'指标表"><table class="eval-table"><thead><tr><th>二级指标</th><th>三级指标</th><th>'+(isCase?'案例A企业情况':'企业实际情况')+'</th><th>评价等级</th><th>判断依据</th><th>支撑材料清单</th></tr></thead><tbody>'+d.items.map(function(i){const g=isCase?healthCaseGrade([i]):null;const actual=i.row===23?'已完成数字化测评，未获得其他相关资质称号':i.caseValue;return '<tr data-eval-row="'+i.row+'" data-grade="'+g+'"><td>'+e(i.secondary)+'</td><td><b>'+e(i.name.replace('得分','评价'))+'</b></td><td>'+(isCase?e(actual):'<span class="eval-meta">待补全企业数据</span>')+'</td><td>'+(g?healthGradeBadge(g):'<span class="eval-meta">待核验</span>')+'</td><td>'+(isCase?e(healthIndicatorBasis(i)):'待核验企业数据与支撑材料')+'</td><td>'+e(i.materials)+'</td></tr>';}).join('')+'</tbody></table></div></details>';}).join('');
+    function healthReportIndicators(isCase) {
+      const enterprise = document.getElementById('current-enterprise')?.textContent.trim();
+      const facts = enterprise === '武汉汉企业科技有限公司' ? (window.getArchiveGraphFacts?.() || []) : [];
+      return SMALL_GIANT_TEMPLATE.dimensions.flatMap(dimension => dimension.items.map(indicator => {
+        const archiveFacts = (HEALTH_COMPANY_FACTS[indicator.row] || [])
+          .map(name => facts.find(fact => fact.name === name)).filter(Boolean);
+        return {
+          ...indicator,
+          dimension:dimension.name,
+          grade:healthCaseGrade([indicator]),
+          actual:isCase ? indicator.caseValue : archiveFacts.map(fact => fact.name+'：'+fact.value).join('；'),
+          missingData:isCase
+            ? (HEALTH_COMPARISON_ROWS.has(indicator.row) ? '行业基准或排名原始数据未附'
+              : indicator.row === 12 ? '细分市场经营起始时间未单列'
+              : indicator.row === 23 ? '缺少相关资质认定记录'
+              : indicator.row === 24 ? '案例未取得相关绿色资质'
+              : indicator.row === 29 ? '专利引用网络原始数据未附' : '')
+            : (archiveFacts.length ? '可补充测评年度、统计口径及明细' : '缺少可用于本次测评的企业数据')
+              +(HEALTH_COMPARISON_ROWS.has(indicator.row) ? '；待补行业基准或排名' : '')
+        };
+      }));
+    }
+    function renderHealthWorkbookResult() {
+      const host = document.getElementById('health-workbook-report');
+      if (!host) return;
+      const e = evalEscape;
+      const isCase = healthResultMode === 'case';
+      const giant = healthIsGiant();
+      document.getElementById('health-result-project').textContent = currentHealthProject;
+      HEALTH_GAPS.length = 0;
+      if (!healthHasWorkbookTemplate()) {
+        host.innerHTML = '<section class="eval-section eval-unconfigured"><h3>测评结论 · 待配置指标</h3><p>'+e(currentHealthProject)+'的专属指标与材料清单待配置。</p></section>';
+        return;
+      }
+      const items = healthReportIndicators(isCase);
+      const grade = healthCaseGrade(items);
+      const gaps = items.filter(item => item.grade !== 'A');
+      const conditions = giant ? SMALL_GIANT_TEMPLATE.conditions : [];
+      host.innerHTML =
+        '<section class="eval-section" aria-labelledby="health-summary-title"><div class="eval-section-head"><h3 id="health-summary-title">一、测评结论总览</h3></div>'+
+        '<div class="eval-overview"><div class="eval-score"><strong>'+grade+'</strong><span>'+(isCase ? '案例综合等级' : '示例综合等级')+' · '+healthGradeLabel(grade)+'</span></div>'+
+        '<div class="eval-conclusion"><b>优先处理一票否决项，再补强 C 级指标</b>'+
+        '<p>'+(isCase ? '装备制造企业案例 A · 依据小巨人测评工作簿展示。' : '等级采用工作簿案例数据演示，现状栏展示本企业档案数据。')+'</p>'+
+        '<div class="eval-stat-grid"><div><b>'+(giant ? conditions.length : '—')+'</b><span>一票否决项</span></div><div><b>'+items.length+'</b><span>分项指标</span></div>'+
+        '<div><b>'+gaps.length+'</b><span>补强项</span></div><div><b>'+items.length+'</b><span>涉及补充材料的指标</span></div></div></div></div></section>'+
+        '<section class="eval-section eval-veto" aria-labelledby="health-veto-title"><div class="eval-section-head"><h3 id="health-veto-title">二、一票否决项</h3>'+
+        '<span class="eval-veto-tag">'+(giant ? '任一适用项不满足即未通过门槛' : '专属条件待配置')+'</span></div>'+
+        (giant ? conditions.map((condition,index) => '<article class="eval-condition"><span class="eval-number">'+(index+1)+'</span><div><h4>'+e(condition.title)+'</h4><p>'+e(condition.standard)+'</p><small>证明材料：'+e(condition.evidence)+'</small></div></article>').join('')
+          : '<p>当前项目的一票否决条件待补充。</p>')+'</section>'+
+        '<section class="eval-section eval-breakdown" aria-labelledby="health-breakdown-title"><div class="eval-section-head"><h3 id="health-breakdown-title">三、分项指标与差距分析</h3><span class="eval-meta">A 基础较好 · B 需要补强 · C 差距较大</span></div>'+
+        '<div class="eval-dimensions">'+SMALL_GIANT_TEMPLATE.dimensions.map(dimension => {
+          const level = healthCaseGrade(dimension.items);
+          return '<div><b>'+e(dimension.name)+'</b><span>'+dimension.items.length+' 项指标</span><strong>'+level+'<small> '+healthGradeLabel(level)+'</small></strong></div>';
+        }).join('')+'</div>'+
+        '<details class="eval-dimension"><summary><b>查看全部分项指标</b><span>'+items.length+' 项</span></summary>'+
+        (isCase ? '<div class="eval-filter" role="group" aria-label="分项指标等级筛选"><button type="button" class="eval-btn is-active" data-eval-filter="all" aria-pressed="true">全部等级</button><button type="button" class="eval-btn" data-eval-filter="B" aria-pressed="false">B 级</button><button type="button" class="eval-btn" data-eval-filter="C" aria-pressed="false">C 级</button></div>' : '')+
+        '<div id="health-criteria"></div></details>'+
+        '<h4>差距分析与补强建议</h4><div id="health-gaps"></div>'+
+        '<h4>缺失数据与材料</h4><p class="eval-meta">'+(isCase ? '案例工作簿未附原始凭证。下表列出缺少的数据、资质和建议补充的材料。' : '下表按指标列出数据缺口和建议补充的材料。')+'</p><div id="health-evidence"></div></section>'+
+        '<section class="eval-section eval-next" aria-labelledby="health-tasks-title"><div class="eval-section-head"><h3 id="health-tasks-title">四、补强任务与推荐服务</h3><button type="button" class="eval-btn" onclick="goToPage(&quot;page-archive&quot;,&quot;企业数字档案&quot;)">去补充企业档案</button></div>'+
+        '<p>'+(isCase ? '优先核验一票否决项，再处理 C 级和 B 级差距。' : '优先核验关键条件和缺失材料，再安排分项补强。')+'可勾选多项推荐服务，合并下单。</p><div id="health-repair-tasks"></div></section>';
+
+      document.getElementById('health-criteria').innerHTML = healthReportTable('全部分项指标', ['维度','指标','现状','等级','评判依据'],
+        items.map(item => '<tr data-grade="'+item.grade+'"><td>'+e(item.dimension)+'</td><th scope="row">'+e(item.name)+'</th><td>'+e(item.actual || '缺少企业数据')+'</td><td class="eval-nowrap">'+healthGradeBadge(item.grade)+'</td><td>'+e(isCase ? healthIndicatorBasis(item) : item.method)+'</td></tr>'));
+      document.getElementById('health-evidence').innerHTML = healthReportTable('缺失数据与材料', ['指标','数据缺口','建议补充的材料','指标等级'],
+        items.map(item => '<tr><th scope="row">'+e(item.name)+'</th><td>'+e(item.missingData || '案例已列指标值')+'</td><td>'+e(item.materials)+'</td><td class="eval-nowrap">'+healthGradeBadge(item.grade)+'</td></tr>'));
+      renderHealthGaps(gaps);
+      renderHealthRepairTasks(giant);
     }
     const HEALTH_GAP_SERVICES = {
       15:{name:'科创专家一对一辅导',price:'¥1,000',solve:'梳理标准参与路径、申报条件与佐证材料。'},
@@ -8845,24 +9004,99 @@
       29:{name:'知识产权布局规划',price:'¥8,000',solve:'分析专利组合、引用关系与核心技术布局。'},
       30:{name:'科创专家一对一辅导',price:'¥1,000',solve:'评估研发机构建设基础，规划平台培育及认定路径。'}
     };
-    function renderHealthGaps(){
-      const host=document.getElementById('health-gaps');if(!host)return;const e=evalEscape;HEALTH_GAPS.length=0;
-      const gaps=healthWorkbookItems().filter(function(i){return healthCaseGrade([i])!=='A';}).sort(function(a,b){return healthCaseGrade([b]).localeCompare(healthCaseGrade([a]));});
-      gaps.forEach(function(i){
-        const grade=healthCaseGrade([i]),svc=HEALTH_GAP_SERVICES[i.row];
-        const direction=healthGapAdvice(i);
-        HEALTH_GAPS.push({row:i.row,item:i.name,grade:grade,lv:grade==='C'?'red':'yellow',dim:'指标补强',current:i.row===23?'已完成数字化测评，相关资质不足':i.caseValue,gap:grade+' · '+healthGradeLabel(grade),rate:null,priority:grade==='C'?'高':'中',impact:healthIndicatorBasis(i),direction:direction,solvable:!!svc,service:svc?svc.name:'',price:svc?svc.price:'',solve:svc?svc.solve:'',ai:direction+'\n建议准备：'+i.materials+'。\n先明确目标与责任人，再分阶段检查进展。'});
+    function renderHealthGaps(items) {
+      const e = evalEscape;
+      const host = document.getElementById('health-gaps');
+      items.sort((left,right) => (right.grade || '').localeCompare(left.grade || ''));
+      items.forEach(item => {
+        const service = HEALTH_GAP_SERVICES[item.row];
+        const direction = healthGapAdvice(item);
+        HEALTH_GAPS.push({
+          row:item.row, item:item.name, grade:item.grade, lv:item.grade==='C'?'red':'yellow', dim:item.dimension,
+          current:item.actual || '缺少企业数据', gap:item.grade+' · '+healthGradeLabel(item.grade),
+          rate:null, priority:item.grade==='C'?'高':'中',
+          impact:item.grade ? healthIndicatorBasis(item) : item.missingData, direction,
+          solvable:!!service, service:service?.name || '', price:service?.price || '', solve:service?.solve || '',
+          ai:direction+'\n建议准备：'+item.materials+'。'
+        });
       });
-      host.innerHTML=HEALTH_GAPS.map(function(g){return '<article class="eval-review" data-gap-row="'+g.row+'"><div class="eval-section-head"><b>'+e(g.item.replace('得分','评价'))+'</b>'+healthGradeBadge(g.grade)+'</div><p>'+e(g.impact)+'</p><small>补强方向：'+e(g.direction)+'</small>'+(g.solvable?'<div class="eval-gap-action"><div><b>推荐服务 · '+e(g.service)+'</b><p>'+e(g.solve)+'</p></div><div class="eval-gap-buttons"><button type="button" class="eval-btn" data-gap-detail="'+g.row+'">查看服务</button><button type="button" class="eval-btn primary" data-gap-service="'+g.row+'">委托服务</button></div></div>':'<div class="eval-gap-action"><div><b>暂无直接匹配服务</b><p>可通过 AI 获取分阶段的补强建议与行动清单。</p></div><button type="button" class="eval-btn primary" data-gap-ai="'+g.row+'">AI 建议</button></div>')+'</article>';}).join('');
+      host.innerHTML = HEALTH_GAPS.length ? healthReportTable('差距分析与补强建议', ['指标','企业现状','差距与等级','补强建议'],
+        HEALTH_GAPS.map(gap => '<tr data-gap-row="'+gap.row+'"><th scope="row">'+e(gap.item)+'<div class="eval-muted">'+e(gap.dim)+'</div></th><td>'+e(gap.current)+'</td>'+
+          '<td>'+(gap.grade ? healthGradeBadge(gap.grade)+' ' : '')+e(gap.impact)+'</td><td>'+e(gap.direction)+'</td></tr>'))
+        : '<p class="eval-meta">当前暂无需补强的指标。</p>';
+    }
+    const HEALTH_ADVISOR_TASKS = new Set([17,22,23,24]);
+    function renderHealthRepairTasks(giant) {
+      const e = evalEscape;
+      const headCheckbox = '<input type="checkbox" id="health-task-select-all" aria-label="全选推荐服务任务">';
+      const rows = giant ? ['<tr><td>—</td><th scope="row">核验一票否决项</th><td class="eval-priority">优先</td><td>逐项补齐认定文件、财务和市场佐证</td><td>—</td><td class="eval-nowrap">企业自办</td></tr>'] : [];
+      rows.push(...HEALTH_GAPS.map(gap => '<tr><td>'+(gap.solvable ? '<input type="checkbox" data-health-task="'+gap.row+'" aria-label="'+e('选择 '+gap.item+' · '+gap.service)+'">' : '—')+'</td>'+
+        '<th scope="row">'+e(gap.item)+'</th><td class="eval-nowrap">'+e(gap.priority)+'</td><td>'+e(gap.direction)+'</td>'+
+        '<td class="eval-nowrap">'+e(gap.price || '—')+'</td>'+
+        '<td>'+(gap.solvable ? '<button type="button" class="eval-btn" data-gap-detail="'+gap.row+'">'+e(gap.service)+'</button><div class="eval-muted">'+e(gap.solve)+'</div>' :
+          HEALTH_ADVISOR_TASKS.has(gap.row) ? '<button type="button" class="eval-btn" data-gap-advisor="'+gap.row+'">联系咨询顾问</button>' : '企业自办')+'</td></tr>'));
+      const anyServices = HEALTH_GAPS.some(gap=>gap.solvable);
+      document.getElementById('health-repair-tasks').innerHTML =
+        healthReportTable('补强任务与推荐服务', [anyServices ? headCheckbox : '选择','关联指标','优先级','补强任务','参考价','平台推荐服务'],rows)+
+        (anyServices ? '<div class="eval-batch-bar"><div id="health-task-selection" aria-live="polite"></div><button type="button" class="eval-btn primary" id="health-batch-order" disabled>合并下单</button></div>' : '');
+      if (anyServices) updateHealthTaskSelection();
+    }
+    function selectedHealthTaskServices() {
+      const services = new Map();
+      document.querySelectorAll('[data-health-task]:checked').forEach(input => {
+        const gap = HEALTH_GAPS.find(item => item.row === Number(input.dataset.healthTask));
+        if (!gap?.solvable) return;
+        if (!services.has(gap.service)) services.set(gap.service,{name:gap.service,price:gap.price,issues:[]});
+        services.get(gap.service).issues.push(gap.item);
+      });
+      return [...services.values()];
+    }
+    function healthServiceTotal(services) {
+      const amount = services.reduce((sum, service) => sum + Number(service.price.replace(/[^\d.]/g,'')), 0);
+      return '¥'+amount.toLocaleString('zh-CN');
+    }
+    function updateHealthTaskSelection() {
+      const inputs = [...document.querySelectorAll('[data-health-task]')];
+      const checked = inputs.filter(input=>input.checked).length;
+      const selectAll = document.getElementById('health-task-select-all');
+      selectAll.checked = checked === inputs.length;
+      selectAll.indeterminate = checked > 0 && checked < inputs.length;
+      const services = selectedHealthTaskServices();
+      document.getElementById('health-task-selection').innerHTML = '已选 '+checked+' 项任务 · '+services.length+' 项服务 · 合计 <strong>'+healthServiceTotal(services)+'</strong>'+
+        (checked > services.length ? ' <small>（同一服务合并计价）</small>' : '');
+      document.getElementById('health-batch-order').disabled = !services.length;
     }
     function healthGapAdvice(i){
       const advice={12:'保持细分市场经营积累，整理历年合同、产品记录和客户案例，形成长期经营佐证。',15:'明确企业可参与的标准领域和技术贡献，评估标准制修订参与路径。',17:'分析资产使用效率、净利润与资本结构，围绕经营效率制定改善计划。',22:'拆解产品成本与定价结构，识别高毛利产品、工艺降本及客户结构优化空间。',23:'梳理数字化应用场景，制定分阶段改造计划并积累应用成效。',24:'开展能源、环保与资源利用诊断，优先形成绿色化改进清单。',25:'围绕目标海外市场与核心技术制定PCT布局计划。',26:'结合经营计划安排研发项目，建立投入台账并检查费用归集完整性。',27:'完善研发费用辅助账与项目关联材料，检查年度投入结构。',29:'围绕核心技术形成关联专利组合，梳理专利引用与技术影响力佐证。',30:'梳理研发场地、设备、制度及项目成果，规划研发机构建设路径。',31:'评估研发岗位与项目需求，制定人员培养、招聘和研发活动记录计划。',32:'按产品、客户和渠道拆解收入增长动力，制定可跟踪的增长计划。',33:'分析利润增长受限的成本与产品因素，制定经营改善任务。'};
       return advice[i.row]||'围绕该指标制定补强计划，明确责任人、完成时间及验收材料。';
     }
-    document.getElementById('health-result').addEventListener('click',function(event){
-      const action=event.target.closest('[data-gap-service],[data-gap-ai],[data-gap-detail]');
-      if(action){const row=Number(action.dataset.gapService||action.dataset.gapAi||action.dataset.gapDetail);const gap=HEALTH_GAPS.find(function(g){return g.row===row;});if(!gap)return;if(action.hasAttribute('data-gap-ai'))openHealthAIAdvice(gap.item);else if(action.hasAttribute('data-gap-detail'))openMallDetail(gap.service);else openHealthService(gap.item);}
-      const filter=event.target.closest('[data-eval-filter]');if(filter){const grade=filter.dataset.evalFilter;document.querySelectorAll('[data-eval-filter]').forEach(function(b){const active=b===filter;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active));});document.querySelectorAll('#health-criteria [data-eval-row]').forEach(function(row){row.hidden=grade!=='all'&&row.dataset.grade!==grade;});document.querySelectorAll('#health-criteria .eval-dimension').forEach(function(dim){dim.hidden=grade!=='all'&&![...dim.querySelectorAll('tr[data-grade]')].some(function(row){return row.dataset.grade===grade;});});}
+    document.getElementById('health-result').addEventListener('click', event => {
+      const filter = event.target.closest('[data-eval-filter]');
+      if (filter) {
+        document.querySelectorAll('[data-eval-filter]').forEach(button=>{
+          button.classList.toggle('is-active',button===filter);
+          button.setAttribute('aria-pressed',String(button===filter));
+        });
+        document.querySelectorAll('#health-criteria [data-grade]').forEach(row=>{
+          row.hidden = filter.dataset.evalFilter !== 'all' && row.dataset.grade !== filter.dataset.evalFilter;
+        });
+      }
+      const action = event.target.closest('[data-gap-advisor],[data-gap-detail]');
+      if (action) {
+        const gap = HEALTH_GAPS.find(item=>item.row===Number(action.dataset.gapAdvisor || action.dataset.gapDetail));
+        if (gap && action.dataset.gapAdvisor) openHealthAdvisor(gap);
+        if (gap && action.dataset.gapDetail) openMallDetail(gap.service);
+      }
+      if (event.target.closest('#health-batch-order')) {
+        const services = selectedHealthTaskServices();
+        if (services.length) openHealthOrder('补强服务组合',healthServiceTotal(services),services);
+      }
+    });
+    document.getElementById('health-result').addEventListener('change', event => {
+      if (event.target.id === 'health-task-select-all') {
+        document.querySelectorAll('[data-health-task]').forEach(input=>{input.checked = event.target.checked;});
+      }
+      if (event.target.matches('#health-task-select-all,[data-health-task]')) updateHealthTaskSelection();
     });
 
     function switchHealth(view) {
@@ -8888,17 +9122,184 @@
 
     // P2 新建测评
     const HEALTH_PROJECTS = [
-      { n:'专精特新“小巨人”企业', m:68, tag:'指标已配置', desc:'按提供的工作簿核验 7 条基本条件，以及专业化、精细化、特色化、创新能力、成长性 23 项三级指标。', note:'5 个维度 · 23 项指标 · 支撑材料核验', color:'#1677ff', bg:'#f4f8ff' },
       { n:'高新技术企业认定', m:87, tag:'高企认定', desc:'对标知识产权、成果转化、研发组织管理和成长性，输出达标预警及一票否决监测。', note:'4 类核心指标 · 专家复核', color:'#2563eb', bg:'#f4f8ff' },
-      { n:'科技型中小企业评价', m:92, tag:'梯度前置', desc:'检查科技人员、研发投入、科技成果、主体信用和规模条件，适合作为轻量首诊入口。', note:'轻量测评 · 材料补齐', color:'#059669', bg:'#f2fbf7' },
       { n:'专精特新中小企业', m:72, tag:'年度培育', desc:'拆解专业化、精细化、特色化、创新能力与成长性，形成 6-12 个月培育路线。', note:'5 个维度 · 主观项复核', color:'#d97706', bg:'#fffaf0' },
+      { n:'科技型中小企业评价', m:92, tag:'梯度前置', desc:'检查科技人员、研发投入、科技成果、主体信用和规模条件，适合作为轻量首诊入口。', note:'轻量测评 · 材料补齐', color:'#059669', bg:'#f2fbf7' },
       { n:'创新型中小企业', m:81, tag:'梯度前置', desc:'评估创新能力、成长性、产品技术先进性和专业化基础，为专精特新培育提供前置判断。', note:'可复用高企材料', color:'#2563eb', bg:'#f5f8ff' },
+      { n:'专精特新“小巨人”企业', m:68, tag:'指标已配置', desc:'按提供的工作簿核验 7 条基本条件，以及专业化、精细化、特色化、创新能力、成长性 23 项三级指标。', note:'5 个维度 · 23 项指标 · 支撑材料核验', color:'#1677ff', bg:'#f4f8ff' },
       { n:'省市重点研发计划', m:65, tag:'政策项目', desc:'围绕研发投入与创新产出评估项目申报匹配度，输出立项建议与材料清单。', note:'研发项目 · 政策匹配', color:'#7c3aed', bg:'#f5f3ff' },
       { n:'研发费用加计扣除', m:95, tag:'财税政策', desc:'核验研发费用归集口径、辅助账与人员证明，识别可享受加计扣除的额度。', note:'财税口径 · 长期有效', color:'#0891b2', bg:'#ecfeff' },
     ];
+    const HEALTH_CATALOG = `科技型中小企业评价入库
+创新型中小企业认定
+高新技术企业认定
+专精特新中小企业
+专精特新小巨人企业
+重点小巨人企业
+制造业单项冠军
+湖北省隐形冠军企业
+瞪羚企业
+独角兽企业
+未来之鹰企业
+技术创新示范企业
+科改示范企业
+知识产权示范企业
+工业设计中心
+绿色工厂
+绿色供应链管理企业
+国家科学技术奖
+省部级科学技术奖（湖北省科学技术奖）
+中国专利奖
+创新创业大赛获奖
+行业权威技术奖项
+工业互联网试点示范
+首台（套）重大技术装备
+智能制造试点示范
+智能工厂与数字化车间
+服务型制造示范
+大数据产业发展试点示范
+5G工厂
+重点新材料首批次应用示范
+质量标杆企业
+全国质量奖与长江质量奖
+湖北精品与武汉精品
+软件企业认定与评估
+信创产品目录与适配认证
+技术先进型服务企业
+软件产品登记与评估
+海关AEO高级认证
+上市后备企业金种子
+全国重点实验室
+国家产业技术工程化中心（原国家工程研究中心）
+国家工程技术研究中心
+国家企业技术中心
+国家技术创新中心与国家产业创新中心
+省级重点实验室
+省产业技术工程化中心（原省工程研究中心）
+省级工程技术研究中心
+省级企业技术中心
+博士后科研工作站
+博士后创新实践基地
+院士工作站与院士专家工作站
+研究生工作站
+专家工作站
+科技副总
+校企联合实验室
+产学研合作基地与实践教学基地
+技术转移示范机构
+中试基地与中试平台
+科技成果转化基地
+公共技术服务平台
+概念验证中心
+科技企业孵化器与众创空间
+国际科技合作基地
+国家重点研发计划
+国家科技重大专项
+国家自然科学基金
+工信部高质量发展专项
+中央预算内投资专项
+国防科工局专项
+揭榜挂帅
+湖北省重点研发计划
+湖北省自然科学基金
+湖北省重大科技成果转化专项
+湖北省工业和信息产业转型专项
+湖北省战略性新兴产业专项
+武汉市科技计划项目
+区县级科技创新与产业扶持专项
+武汉市科技成果转化专项
+国家级人才计划
+省级人才计划
+市级人才计划
+海外高层次人才
+创始人行业荣誉
+国家级技能大师工作室与全国技术能手
+省级技能大师与首席技师
+专利密集型产品认定
+中国驰名商标
+技术合同认定登记
+科技成果登记
+主导参与制定国际标准
+主导参与制定国家标准
+主导参与制定行业标准
+主导参与制定地方标准
+主导参与制定团体标准
+企业标准与团体标准领跑者
+国家级与省级标准化试点
+省级高新技术产品认定
+绿色设计产品
+产业链链主与龙头企业认定
+知识产权质押融资贴息`.split('\n');
+    const healthCatalogSearch = document.getElementById('health-catalog-search');
+    const healthCatalogLevelFilter = document.getElementById('health-catalog-level-filter');
+    const healthCatalogList = document.getElementById('health-catalog-list');
+    const healthCatalogAliases = new Map([
+      ['高新技术企业认定', '高企'],
+      ['科技型中小企业评价入库', '科小'],
+      ['创新型中小企业认定', '创新性中小企业']
+    ]);
+    const nationalHealthCatalogProjects = new Set([
+      '科技型中小企业评价入库', '高新技术企业认定', '专精特新小巨人企业',
+      '重点小巨人企业', '制造业单项冠军', '技术创新示范企业', '科改示范企业',
+      '5G工厂', '海关AEO高级认证', '博士后科研工作站', '专利密集型产品认定',
+      '主导参与制定国际标准', '主导参与制定国家标准', '主导参与制定行业标准'
+    ]);
+    function healthCatalogLevel(name) {
+      // 目录只显示两级。明确含国家级项目的合并条目取国家级，地方项目统一归入省级。
+      const national = /^(国家|全国|中央|中国|工信部|国防科工局)/.test(name) || nationalHealthCatalogProjects.has(name);
+      return national ? '国家级' : '省级';
+    }
+    function renderHealthCatalog() {
+      const query = healthCatalogSearch.value.trim().toLowerCase();
+      const selectedLevel = healthCatalogLevelFilter.value;
+      const projects = HEALTH_CATALOG.map((name, index) => ({name, number:index + 6, level:healthCatalogLevel(name)}))
+        .filter(({name, level}) => (!selectedLevel || level === selectedLevel) &&
+          (name.toLowerCase().includes(query) || healthCatalogAliases.get(name)?.includes(query)));
+      document.getElementById('health-catalog-count').textContent = '显示 ' + projects.length + ' / ' + HEALTH_CATALOG.length + ' 项';
+      healthCatalogList.replaceChildren(...projects.map(({name, number, level}) => {
+        const row = document.createElement('tr');
+        const numberCell = row.insertCell();
+        numberCell.className = 'health-catalog-no';
+        numberCell.textContent = String(number).padStart(2, '0');
+        const titleCell = document.createElement('th');
+        titleCell.scope = 'row';
+        titleCell.textContent = name;
+        row.append(titleCell);
+        const levelCell = row.insertCell();
+        levelCell.className = 'health-catalog-level';
+        levelCell.textContent = level;
+        const actions = document.createElement('div');
+        actions.className = 'health-catalog-actions';
+        const configured = name === '专精特新小巨人企业';
+        const ai = document.createElement('button');
+        ai.type = 'button';
+        ai.className = 'u-button';
+        ai.textContent = 'AI测评';
+        ai.setAttribute('aria-label', 'AI测评 · ' + name);
+        if (configured) ai.addEventListener('click', () => healthRunEval('专精特新“小巨人”企业'));
+        const self = document.createElement('button');
+        self.type = 'button';
+        self.className = 'u-button ghost';
+        self.textContent = '自主测评';
+        self.setAttribute('aria-label', '自主测评 · ' + name);
+        self.addEventListener('click', () => openSelfAssess(name));
+        actions.append(ai, self);
+        row.insertCell().append(actions);
+        return row;
+      }));
+      if (!projects.length) {
+        const cell = healthCatalogList.insertRow().insertCell();
+        cell.colSpan = 4;
+        cell.textContent = '未找到匹配的测评项目';
+      }
+    }
+    healthCatalogSearch.addEventListener('input', renderHealthCatalog);
+    healthCatalogLevelFilter.addEventListener('change', renderHealthCatalog);
+    renderHealthCatalog();
+
     let currentHealthProject = '专精特新“小巨人”企业';
     function renderHealthProjects() {
-      document.getElementById('health-proj-grid').innerHTML = HEALTH_PROJECTS.map((p) =>
+      document.getElementById('health-proj-grid').innerHTML = HEALTH_PROJECTS.slice(0,5).map((p) =>
         '<article class="u-assess-card assessment-project-card-v2" style="--card:' + p.color + ';--card-bg:' + p.bg + '">' +
           '<div class="u-assess-v2-head"><div class="u-tags"><span class="u-chip blue">' + p.tag + '</span></div><div class="u-assess-v2-ready"><b>' + (p.m == null ? '待核验' : p.m + '%') + '</b><span>匹配度</span></div></div>' +
           '<div class="u-assess-v2-title"><h3>' + p.n + '</h3><span class="u-assess-v2-ai-mark">AI</span></div>' +
@@ -8910,12 +9311,12 @@
             '</div>' +
           '</div>' +
         '</article>').join('') +
-        '<article class="u-assess-card u-assess-add-card assessment-project-card-v2" onclick="openSelfAssess()" role="button" tabindex="0">' +
+        '<article class="u-assess-card u-assess-add-card assessment-project-card-v2">' +
           '<div class="u-assess-add-icon">+</div>' +
           '<h3>自主测评</h3>' +
           '<p>选择线上链接项目测评，或上传线下项目文件进行 AI 测评。</p>' +
           '<div class="u-assess-meta"><span class="u-chip blue">线上链接</span><span class="u-chip green">线下文件</span></div>' +
-          '<div class="u-assess-actions"><button type="button" class="u-button" onclick="event.stopPropagation();openSelfAssess()">自主测评</button></div>' +
+          '<div class="u-assess-actions"><button type="button" class="u-button" onclick="openSelfAssess()">自主测评</button></div>' +
         '</article>';
     }
     function healthManualEval(name) {
@@ -8932,7 +9333,8 @@
 
     // 自主测评
     let selfAssessMode = 'link';
-    function openSelfAssess() {
+    function openSelfAssess(name = '') {
+      document.getElementById('self-assess-name').value = name;
       document.getElementById('self-assess-overlay').classList.remove('pointer-events-none', 'opacity-0');
       document.getElementById('self-assess-modal').classList.remove('pointer-events-none', 'opacity-0', 'scale-95');
     }
@@ -8956,13 +9358,22 @@
       showToast('已发起「' + name + '」自主测评', 'success');
     }
 
-    function shareHealthReport() { showToast('分享演示：' + currentHealthProject + ' · ' + (healthResultMode === 'case' ? '案例A参考报告' : '待核验报告'), 'info'); }
+    function shareHealthReport() { showToast('分享演示：' + currentHealthProject + ' · 测评报告', 'info'); }
     function downloadHealthReport() { showToast('报告下载已开始（演示）', 'success'); }
-    function addHealthProject(btn) {
-      showToast('已添加到培育项目', 'success');
-      btn.textContent = '已添加，去培育项目查看';
-      btn.onclick = function () { goToPage('page-project', '培育项目'); };
+    const healthProjectMode = document.getElementById('health-project-mode');
+    function addHealthProject() {
+      healthProjectMode.querySelector('form').reset();
+      healthProjectMode.showModal();
     }
+    document.getElementById('health-project-mode-form').addEventListener('submit',event=>{
+      if (event.submitter?.value !== 'add') return;
+      event.preventDefault();
+      const kind = new FormData(event.currentTarget).get('health-project-kind');
+      const added = addProjectFromHealth('', false, kind);
+      healthProjectMode.close();
+      showToast(added ? '已添加'+kind+'培育项目' : '已存在该方式的培育项目', added ? 'success' : 'info');
+      goToPage('page-project', '培育项目');
+    });
 
     // 抽屉：服务与差距项一一对应
     function openHealthService(item) {
@@ -8982,25 +9393,39 @@
       document.getElementById('health-svc-drawer').classList.add('health-open');
     }
     function closeHealthService() { document.getElementById('health-svc-overlay').classList.remove('health-open'); document.getElementById('health-svc-drawer').classList.remove('health-open'); }
-    function openHealthAIAdvice(item) {
-      const gap = HEALTH_GAPS.find(g => g.item === item) || HEALTH_GAPS[0];
-      document.getElementById('health-ai-ctx').textContent = gap.item + ' · ' + (gap.grade || (gap.lv === 'red' ? 'C' : 'B')) + ' · ' + healthGradeLabel(gap.grade || (gap.lv === 'red' ? 'C' : 'B'));
+    function openHealthAdvisor(gap) {
+      document.getElementById('health-ai-ctx').textContent = currentHealthProject + ' · ' + gap.item;
       document.getElementById('health-ai-body').innerHTML =
-        '<div class="rounded-lg border border-gray-100 bg-gray-50 p-4"><div class="text-sm font-medium text-gray-800">现状与差距</div><div class="mt-2 grid grid-cols-2 gap-3 text-sm"><div><div class="text-xs text-gray-400">企业现状</div><div class="mt-1 font-medium text-gray-800">' + gap.current + '</div></div><div><div class="text-xs text-gray-400">差距值</div><div class="mt-1 font-bold ' + (gap.lv === 'red' ? 'text-red-500' : 'text-amber-500') + '">' + gap.gap + '</div></div></div></div>' +
-        '<div class="mt-4 rounded-lg border border-primary/20 bg-primary-light/30 p-4"><div class="flex items-center gap-2 text-sm font-semibold text-gray-800"><span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">AI</span>AI 建议</div><div class="mt-2 text-sm leading-relaxed text-gray-600" style="white-space:pre-line">' + (gap.ai || gap.direction) + '</div></div>' +
-        '<div class="mt-4 flex items-center justify-between rounded-lg border border-gray-100 p-3"><span class="text-xs text-gray-500">希望顾问进一步跟进？</span><button class="rounded-md bg-primary px-3 py-1.5 text-xs text-white transition hover:bg-primary-hover" onclick="closeHealthAIAdvice(); showToast(\'已提交需求，顾问将在 1 个工作日内联系您\', \'success\')">提交需求给顾问</button></div>';
+        '<div class="rounded-lg border border-gray-100 bg-gray-50 p-4"><b>'+evalEscape(gap.gap)+'</b><p class="mt-2">'+evalEscape(gap.direction)+'</p></div>'+
+        '<form id="health-advisor-request" class="mt-4"><label for="health-advisor-note">希望咨询的问题（选填）</label>'+
+        '<textarea id="health-advisor-note" class="mt-2 w-full rounded-lg border border-gray-200 p-2" rows="4"></textarea>'+
+        '<button type="submit" class="u-button mt-3">提交咨询需求</button></form>';
+      document.getElementById('health-advisor-request').addEventListener('submit',event=>{
+        event.preventDefault();
+        closeHealthAdvisor();
+        showToast('咨询需求已提交（演示）','success');
+      });
       document.getElementById('health-ai-overlay').classList.add('health-open');
       document.getElementById('health-ai-drawer').classList.add('health-open');
     }
-    function closeHealthAIAdvice() { document.getElementById('health-ai-overlay').classList.remove('health-open'); document.getElementById('health-ai-drawer').classList.remove('health-open'); }
+    function closeHealthAdvisor() { document.getElementById('health-ai-overlay').classList.remove('health-open'); document.getElementById('health-ai-drawer').classList.remove('health-open'); }
     let currentHealthService = '';
     let currentHealthPrice = '';
-    function openHealthOrder(name, price) {
+    let currentHealthOrderItems = [];
+    function openHealthOrder(name, price, services = []) {
       currentHealthService = name;
       currentHealthPrice = price || '';
+      currentHealthOrderItems = services;
       document.getElementById('health-ord-name').textContent = name;
+      const options = document.getElementById('health-ord-options');
+      options.classList.toggle('hidden', services.length > 0);
+      document.getElementById('health-agree').checked = false;
+      const issues = document.getElementById('health-ord-issues');
+      issues.innerHTML = services.length
+        ? '<ul>'+services.map(service=>'<li class="border-b border-gray-100 py-2"><div class="flex justify-between gap-3"><b>'+orderEscape(service.name)+'</b><span>'+orderEscape(service.price)+'</span></div><p>'+orderEscape(service.issues.join('、'))+'</p></li>').join('')+'</ul>'
+        : '对应差距项（由服务入口带入）';
       const sub = document.getElementById('health-ord-price-sub');
-      if (sub) sub.textContent = currentHealthPrice || '按方案定价';
+      if (sub) sub.textContent = services.length ? services.length+' 项服务 · '+currentHealthPrice : currentHealthPrice || '按方案定价';
       const amount = document.getElementById('health-ord-price');
       if (amount) amount.textContent = currentHealthPrice || '￥2,000';
       const online = document.querySelector('input[name="pay-channel"][value="online"]');
@@ -9016,6 +9441,7 @@
       if (payBtn) payBtn.textContent = (channel && channel.value === 'offline') ? '提交并咨询线下支付' : ('直接支付 ' + (currentHealthPrice || '￥2,000'));
     }
     function healthSubmitOrder() {
+      if (!currentHealthService || !document.getElementById('health-ord-drawer').classList.contains('health-open')) return;
       if (!document.getElementById('health-agree').checked) { showToast('请先勾选服务协议', 'warning'); return; }
       const channel = document.querySelector('input[name="pay-channel"]:checked');
       if (channel && channel.value === 'offline') {
@@ -9024,9 +9450,7 @@
         return;
       }
       closeHealthOrder();
-      addHealthOrder(currentHealthService);
-      if (!trustOrderFlow) addProjectFromHealth(currentHealthService);
-      trustOrderFlow = false;
+      completeHealthOrder(false);
       showToast('支付成功，已生成订单', 'success');
       goToPage('page-my-orders', '我的订单');
     }
@@ -9039,10 +9463,9 @@
       document.getElementById('offline-pay-modal').classList.add('scale-95', 'opacity-0');
     }
     function submitOfflinePayConsult() {
+      if (!currentHealthService || document.getElementById('offline-pay-overlay').classList.contains('pointer-events-none')) return;
       closeOfflinePayConsult();
-      addHealthOrder(currentHealthService);
-      if (!trustOrderFlow) addProjectFromHealth(currentHealthService);
-      trustOrderFlow = false;
+      completeHealthOrder(true);
       showToast('已提交线下支付咨询，运营人员将尽快与您联系', 'success');
       goToPage('page-my-orders', '我的订单');
     }
@@ -9051,72 +9474,99 @@
     });
     document.getElementById('offline-pay-close').addEventListener('click', closeOfflinePayConsult);
     document.getElementById('offline-pay-overlay').addEventListener('click', function (e) { if (e.target === this) closeOfflinePayConsult(); });
-    function addHealthOrder(service) {
-      const anchor = document.getElementById('first-project-orders');
-      const listView = document.getElementById('order-list-view');
-      if (!anchor || !listView) return;
-      const name = currentHealthProject || '制造业单项冠军企业（国家级）';
-      const orderId = 'FW-' + Date.now();
+    function completeHealthOrder(offline) {
+      const batch = currentHealthOrderItems.length > 0;
       const amount = currentHealthPrice || '—';
-      ORDER_PACKAGES.push({
+      const services = batch ? currentHealthOrderItems : [{name:currentHealthService,price:amount,issues:[]}];
+      addHealthOrder(services, amount, batch, offline);
+      if (!trustOrderFlow) addProjectFromHealth(services.map(service=>service.name).join('、'), batch && offline);
+      trustOrderFlow = false;
+      currentHealthService = '';
+      currentHealthPrice = '';
+      currentHealthOrderItems = [];
+    }
+    function addHealthOrder(services, amount, batch, offline) {
+      const name = currentHealthProject || '制造业单项冠军企业（国家级）';
+      const orderId = 'FW-' + Date.now() + '-' + ORDER_PACKAGES.length;
+      const orderDate = new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'});
+      const pending = batch && offline;
+      const order = {
         id: orderId,
         project: name,
-        name: name + ' · 托管整包',
-        time: '2026-11-11',
+        name: name + (batch ? ' · 补强服务组合' : ' · 托管整包'),
+        time: orderDate,
         amount: amount,
-        status: '服务中',
-        tasks: [
-          {
-            name: service, price: amount, status: '进行中',
-            acceptance: { status: '验收中', steps: [['服务方提交', true, '2026-11-11'], ['平台质检', false, ''], ['企业验收', false, ''], ['验收完成', false, '']] },
+        status: pending ? '待开始' : '服务中',
+        tasks: services.map(service => ({
+            name: service.name, price: service.price, status: pending ? '待开始' : '进行中',
+            acceptance: { status: '待提交', steps: [['服务方提交', false, ''], ['平台质检', false, ''], ['企业验收', false, ''], ['验收完成', false, '']] },
             checklist: [
               ['需求对接与方案确认', true],
               ['服务实施', false],
               ['成果交付与质检', false],
             ],
             logs: [
-              ['2026-11-11', '订单已创建，等待顾问分配'],
+              [orderDate, pending ? '已提交线下支付咨询' : '订单已创建，等待顾问分配'],
+              ...service.issues.map(issue=>[orderDate,'关联测评指标：'+issue]),
             ],
             files: [],
-          },
-        ],
-      });
-      const section = document.createElement('div');
-      section.className = 'order-project';
-      section.innerHTML = renderProjectOrder(ORDER_PACKAGES[ORDER_PACKAGES.length - 1]);
-      listView.insertBefore(section, anchor);
-      lucide.createIcons();
+        })),
+      };
+      ORDER_PACKAGES.push(order);
+      healthCreatedOrders.unshift(order);
+      refreshOrderList();
     }
-    function addProjectFromHealth(service) {
+    function addProjectFromHealth(service, pending, kind) {
       const list = document.getElementById('project-inprogress-list');
       if (!list) return;
-      const name = currentHealthProject || '制造业单项冠军企业（国家级）';
+      const reportName = currentHealthProject || '制造业单项冠军企业（国家级）';
+      const type = kind || '托管';
+      const name = kind ? reportName+' · '+type : reportName;
+      if (kind && CULTIVATION_PROJECTS.has(name)) return false;
+      const autonomous = type === '自主';
+      const status = pending ? '待开始' : '进行中';
+      const grade = document.querySelector('#health-workbook-report .eval-score strong')?.textContent || '';
       const card = document.createElement('div');
-      card.className = 'u-project-card cultivation-project-card-v2 project-card'; card.style.setProperty('--project-accent', '#7c3aed');
+      card.className = 'u-project-card cultivation-project-card-v2 project-card';
+      card.style.setProperty('--project-accent', autonomous ? '#2563eb' : '#7c3aed');
       card.setAttribute('data-name', name);
-      card.setAttribute('data-type', '托管');
-      card.setAttribute('data-status', '进行中');
+      card.setAttribute('data-type', type);
+      card.setAttribute('data-status', status);
       card.innerHTML =
-        '<div class="u-flex"><div class="u-project-tags"><span class="u-chip violet">托管培育项目</span></div><span class="u-chip amber">进行中</span></div>' +
-        '<h3>' + name + '</h3>' +
-        '<p>已下单服务：' + service + '，专业顾问将全程托管培育。</p>' +
-        '<div class="u-project-result">' +
-          '<div><span>测评结果</span><strong>A <small>符合</small></strong></div>' +
-          '<div><span>满足条件</span><strong class="good">2 项</strong></div>' +
-          '<div><span>不满足条件</span><strong class="warn">1 项</strong></div>' +
-          '<div><span>一票否决</span><strong class="bad">0 项</strong></div>' +
-        '</div>' +
+        '<div class="u-flex"><div class="u-project-tags"><span class="u-chip '+(autonomous?'blue':'violet')+'">'+type+'培育项目</span></div><span class="u-chip amber">'+status+'</span></div>' +
+        '<h3>' + orderEscape(name) + '</h3>' +
+        '<p>'+(service ? (pending?'待支付服务：':'已下单服务：')+orderEscape(service) : autonomous ? '企业自行跟进测评补强任务。' : '待顾问协助安排培育任务。')+'</p>' +
+        (grade ? '<div class="u-project-result"><div><span>测评示例等级</span><strong>'+orderEscape(grade)+'</strong></div></div>' : '')+
         '<div class="u-project-bar">' +
-          '<div class="u-flex"><span>任务进度 10% · 已创建</span><span>待排期</span></div>' +
-          '<div class="u-progress green"><i style="width:10%"></i></div>' +
-          '<small class="cultivation-project-task-count">顾问：待分配</small>' +
+          '<div class="u-flex"><span>任务进度 0% · 已创建</span><span>待排期</span></div>' +
+          '<div class="u-progress green"><i style="width:0"></i></div>' +
+        '<small class="cultivation-project-task-count">'+(autonomous?'负责人':'顾问')+'：待分配</small>' +
         '</div>' +
         '<div class="u-actions cultivation-project-actions-v2">' +
-          '<button type="button" class="u-button ghost" onclick="openHealthResult(\'' + name + '\')">测评详情</button>' +
+          '<button type="button" class="u-button ghost" data-health-project-report>测评详情</button>' +
           '<button type="button" class="u-button js-open-drawer">培育任务</button>' +
           '<button type="button" class="u-button ghost" onclick="goToPage(\'page-doc-expert\',\'AI 申报书专家\')">AI申报书撰写</button>' +
         '</div>';
+      card.querySelector('[data-health-project-report]').addEventListener('click',()=>openHealthResult(reportName));
       list.insertBefore(card, list.firstChild);
+      if (kind) {
+        const row = document.querySelector('#project-list tbody').insertRow();
+        row.className = 'project-card';
+        Object.assign(row.dataset,{name,type,status});
+        [name,type,status,'0/'+HEALTH_GAPS.length,'—','未分配'].forEach(value=>{
+          const cell = row.insertCell();
+          cell.className = 'px-4 py-3';
+          cell.textContent = value;
+        });
+        row.insertCell().innerHTML = '<button type="button" class="js-open-drawer u-button ghost">查看任务清单</button>';
+        syncCultivationProjects();
+        const project = CULTIVATION_PROJECTS.get(name);
+        project.tasks = HEALTH_GAPS.map((gap,index)=>({
+          id:project.id+'-T'+String(index+1).padStart(2,'0'),projectId:project.id,
+          name:gap.item,output:gap.direction,deadline:'',status:'待处理',owner:project.owner
+        }));
+      }
+      return true;
     }
     function orderService(title, price) {
       openHealthOrder(title, price);
@@ -9203,6 +9653,14 @@
     const structureRectify = {id:'FW-GQ-2026-002',project:structureMain.project,name:'研发管理体系建设单',time:'2026-11-16',amount:'待合同确认',status:'待开始',tasks:[structureTask('研发管理制度与辅助账建设','待开始','制度与辅助账清单','文件定稿类','docx')]};
     const structureTool = {id:'FW-GQ-2026-003',project:structureMain.project,name:'政策测评报告',time:'2026-11-16',amount:'工具消费',status:'已完成',tasks:[structureTask('政策适配测评','已完成','政策测评报告','系统生成类','pdf')]};
     ORDER_PACKAGES.push(structureMain,structureRectify,structureTool);
+    const healthCreatedOrders = [];
+    function orderMatchesFilters(order, type) {
+      const search = document.getElementById('orders-search').value.trim().toLowerCase();
+      const selectedType = document.getElementById('orders-type').value;
+      const status = document.querySelector('[data-order-status].active')?.dataset.orderStatus;
+      return (!status || order.status === status) && (!selectedType || type === selectedType) &&
+        (!search || (order.id+' '+order.name+' '+order.project+' '+order.tasks.map(task=>task.name).join(' ')).toLowerCase().includes(search));
+    }
     function renderProjectOrder(pkg, extras) {
       extras = extras || [];
       const e=orderEscape, root='order-'+pkg.id;
@@ -9210,14 +9668,9 @@
       const actionHTML=gaps.length?'<details id="'+e(root+'-action')+'" style="margin-top:10px"><summary style="cursor:pointer;color:#1677ff;font-size:15px">人员占比偏低 · 查看行动清单</summary><p class="op-note" style="padding:10px 0 0">核对科技人员名册与人员口径 → 补齐劳动合同、社保及研发岗位证明 → 复核人员占比并更新档案。</p></details>':'';
       const gapHTML='<details class="op-gaps"><summary><b>测评差距清单</b><span class="op-gap-hint">'+(gaps.length?gaps.length+' 项待补强':'待确认')+'</span></summary>'+(gaps.length?'<div class="op-gap-grid">'+gaps.map(function(g){return '<div class="op-gap"><span class="op-gap-icon">＋</span>'+e(g[0])+' <a href="#'+e(root+'-'+g[2])+'">→ '+e(g[1])+'</a></div>';}).join('')+'</div>'+actionHTML:'<div class="op-muted">待顾问结合项目测评确认差距，后续关联整改服务或主单任务。</div>')+'</details>';
       const allOrders=[{pkg:pkg,type:'主单',key:'main'}].concat(extras.map(function(p,i){return {pkg:p,type:i===0?'整改单':'工具消费单',key:i===0?'rectify':'tool'};}));
-      const search=(document.getElementById('orders-search').value||'').trim().toLowerCase();
-      const type=document.getElementById('orders-type').value;
-      const active=document.querySelector('[data-order-status].active');
-      const status=active?active.dataset.orderStatus:'';
-      const orders=allOrders.filter(function(item){const p=item.pkg;return (!status||p.status===status)&&(!type||item.type===type)&&(!search||(p.id+' '+p.name+' '+p.project).toLowerCase().includes(search));});
+      const orders=allOrders.filter(item=>orderMatchesFilters(item.pkg,item.type));
       const direction=document.getElementById('orders-sort').value==='asc'?1:-1;
       orders.sort(function(a,b){return direction*a.pkg.time.localeCompare(b.pkg.time);});
-      document.getElementById('orders-result-count').textContent='共 '+orders.length+' 笔订单';
       const rows=orders.map(function(item){
         const p=item.pkg,done=p.tasks.filter(function(t){return t.status==='已完成';}).length;
         const progress=typeof p.progress==='number'?p.progress:Math.round(done/Math.max(p.tasks.length,1)*100);
@@ -9228,7 +9681,7 @@
       return '<header class="orders-project-header"><div><span class="orders-project-icon">▣</span>关联项目：<b>'+e(pkg.project)+'</b><span class="orders-project-count">主单 1 · 整改单 '+extras.filter(function(p){return p===extras[0];}).length+' · 工具消费单 '+Math.max(extras.length-1,0)+'</span></div><button type="button" class="orders-text-action" onclick="goToPage(\'page-project\',\'培育项目\')">查看项目 →</button></header><div class="orders-table-scroll"><table class="orders-data-table"><caption class="orders-sr-only">项目关联订单列表</caption><colgroup><col style="width:19%"><col style="width:22%"><col style="width:9%"><col style="width:10%"><col style="width:11%"><col style="width:8%"><col style="width:12%"><col style="width:9%"></colgroup><thead><tr><th scope="col">订单编号 / 关联</th><th scope="col">服务名称</th><th scope="col">订单类型</th><th scope="col">下单时间</th><th scope="col">订单金额</th><th scope="col">订单状态</th><th scope="col">履约进度</th><th scope="col">操作</th></tr></thead><tbody>'+(rows||'<tr><td colspan="8" class="orders-no-results">未找到符合条件的订单，请调整筛选条件或搜索关键词。</td></tr>')+'</tbody></table></div>'+'<div class="orders-project-gaps">'+gapHTML+'</div>';
     }
     function refreshOrderList(){
-      const orders=[structureMain,structureRectify,structureTool];
+      const orders=[structureMain,structureRectify,structureTool,...healthCreatedOrders];
       document.querySelectorAll('#page-my-orders [data-order-stat]').forEach(function(counter){
         const status=counter.dataset.orderStat;
         counter.textContent=orders.filter(function(order){return !status||order.status===status;}).length;
@@ -9237,7 +9690,22 @@
         const status=tab.dataset.orderStatus;
         tab.querySelector('span').textContent=orders.filter(function(order){return !status||order.status===status;}).length;
       });
-      document.getElementById('first-project-orders').innerHTML=renderProjectOrder(structureMain,[structureRectify,structureTool]);
+      const anchor = document.getElementById('first-project-orders');
+      const list = document.getElementById('order-list-view');
+      list.querySelectorAll('.health-created-order').forEach(section=>section.remove());
+      const sortDirection = document.getElementById('orders-sort').value === 'asc' ? 1 : -1;
+      const visibleHealth = healthCreatedOrders.filter(order=>orderMatchesFilters(order,'主单'))
+        .sort((left,right)=>sortDirection*left.time.localeCompare(right.time));
+      visibleHealth.forEach(order=>{
+        const section = document.createElement('div');
+        section.className = 'order-project health-created-order';
+        section.innerHTML = renderProjectOrder(order);
+        list.insertBefore(section,anchor);
+      });
+      anchor.innerHTML=renderProjectOrder(structureMain,[structureRectify,structureTool]);
+      const visibleSample = [[structureMain,'主单'],[structureRectify,'整改单'],[structureTool,'工具消费单']]
+        .filter(([order,type])=>orderMatchesFilters(order,type)).length;
+      document.getElementById('orders-result-count').textContent='共 '+(visibleSample+visibleHealth.length)+' 笔订单';
     }
     refreshOrderList();
     document.querySelectorAll('[data-order-status]').forEach(function(button){button.addEventListener('click',function(){document.querySelectorAll('[data-order-status]').forEach(function(tab){tab.classList.toggle('active',tab===button);tab.setAttribute('aria-selected',String(tab===button));});refreshOrderList();});});
@@ -11529,9 +11997,6 @@
         (tags.length?tags:['暂无科创标签']).forEach(function(tag){const chip=document.createElement('span');chip.textContent=tag;if(!tags.length)chip.className='neutral';host.appendChild(chip);});
       }
       updateArchiveCompany();new MutationObserver(updateArchiveCompany).observe(enterpriseLabel,{childList:true,subtree:true,characterData:true});
-      document.getElementById('archive-purpose-close').addEventListener('click', () => {
-        document.getElementById('archive-purpose').hidden = true;
-      });
 
       /* 字段来源：指标字典表.xlsx / Sheet1。空白三级指标行的说明并入上一指标。 */
       const ARCHIVE_DICTIONARY = {
@@ -12180,6 +12645,94 @@
         const indicator=Array.from(dBody.querySelectorAll('[data-indicator-code]')).find(el=>el.dataset.indicatorCode===code);
         if(indicator){indicator.open=true;indicator.scrollIntoView({block:'center'});indicator.querySelector('summary')?.focus({preventScroll:true});}
       };
+      const profilePage = document.getElementById('page-archive-profile');
+      const profileOpen = document.getElementById('archiveProfileOpen');
+      const profileCompany = document.getElementById('archiveProfileCompany');
+      const profileGraphButtons = profilePage.querySelectorAll('[data-profile-graph]');
+      const profileRelations = {
+        resources: [
+          ['工业视觉联合实验室', '联合共建', '产学研合作', '档案记录了校企联合实验室，合作高校与协议待补全。'],
+          ['企业智能装备技术中心', '建设平台', '研发平台', '档案记录为国家级企业技术中心。'],
+          ['智能装备视觉感知与在线检测技术研发', '参与研发', '科技项目', '档案记录为已立项的国家重点研发计划项目，企业承担角色为参与单位。']
+        ],
+        supplyChain: [
+          ['武汉某芯片供应商', '供应芯片', '上游供应商', '芯片用于视觉检测设备及边缘计算终端。'],
+          ['深圳某传感器供应商', '供应传感器', '上游供应商', '传感器用于产线数据采集与设备状态监测。'],
+          ['武汉某智能制造集团', '应用检测设备', '下游客户', '示例应用场景为智能制造产线的在线视觉检测。'],
+          ['湖北某汽车零部件公司', '应用检测方案', '下游客户', '示例应用场景为汽车零部件缺陷识别与质量追溯。']
+        ]
+      };
+      const profileTechAreas = [
+        ['工业视觉检测', '面向制造产线，利用图像识别开展在线检测与缺陷识别。', '智能图像识别系统 V3.1、高精度缺陷检测算法研究'],
+        ['边缘计算', '在设备侧完成数据采集与计算，支持工业现场的实时处理。', '工业物联网采集平台 V1.0、工业视觉边缘计算平台研发'],
+        ['智能装备与设备集成', '将检测模块、状态监测与运维软件接入生产设备。', '智能产线视觉模块开发、设备远程运维平台 V2.3']
+      ];
+      function renderProfileGraph(type) {
+        profileGraphButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.profileGraph === type)));
+        const graph = document.getElementById('archiveProfileGraph');
+        if (!isSampleProfile()) {
+          graph.textContent = '暂无该企业的关系记录';
+          return;
+        }
+        const relations = profileRelations[type];
+        const left = type === 'resources' ? [0] : [0, 1];
+        const right = type === 'resources' ? [1, 2] : [2, 3];
+        const renderBranch = (indexes, side) => '<ul class="archive-profile-branch ' + side + '">' + indexes.map(index => {
+          const [name, relation, category] = relations[index];
+          const arrow = type === 'resources' && side === 'left' ? '←' : '→';
+          return '<li><button type="button" class="archive-profile-node" data-profile-node="' + index + '" aria-pressed="false"><small>' + category + '</small><strong>' + name + '</strong></button>' +
+            '<span class="archive-profile-link"><span>' + relation + '</span><b aria-hidden="true"' + (arrow === '←' ? ' data-outbound' : '') + '>' + arrow + '</b></span></li>';
+        }).join('') + '</ul>';
+        graph.innerHTML = '<div class="archive-profile-network">' + renderBranch(left, 'left') +
+          '<div class="archive-profile-hub"><small>当前企业</small><strong>' + escapeArchiveHTML(profileCompany.textContent) +
+          '</strong></div>' + renderBranch(right, 'right') + '</div><div class="archive-profile-node-detail" aria-live="polite"></div>';
+        const nodes = graph.querySelectorAll('[data-profile-node]');
+        const detail = graph.querySelector('.archive-profile-node-detail');
+        function selectNode(selected) {
+          nodes.forEach(node => node.setAttribute('aria-pressed', String(node === selected)));
+          const [name, , category, description] = relations[selected.dataset.profileNode];
+          detail.innerHTML = '<strong>' + name + ' <small>' + category + '</small></strong><p>' + description + '</p>';
+        }
+        nodes.forEach(node => node.addEventListener('click', () => selectNode(node)));
+        selectNode(nodes[0]);
+      }
+      function isSampleProfile() {
+        return profileCompany.textContent === '武汉汉企业科技有限公司';
+      }
+      profileGraphButtons.forEach(button => button.addEventListener('click', () => renderProfileGraph(button.dataset.profileGraph)));
+      profileOpen.addEventListener('click', () => {
+        profileCompany.textContent = enterpriseLabel.textContent.trim();
+        const sample = isSampleProfile();
+        const facts = sample ? confirmedArchiveRows() : [];
+        document.getElementById('archiveProfileSample').hidden = !sample;
+        const basics = [
+          ['企业名称', profileCompany.textContent],
+          ['统一社会信用代码', '待补全'],
+          ['成立年份', sample ? '2015 年' : '待补全'],
+          ['注册地', sample ? '武汉市东湖新技术开发区' : '待补全'],
+          ...['企业类型', '注册资本', '实缴资本', '经营状态'].map(name => [name, facts.find(row => row.dimension === '企业基础' && row.name === name)?.value || '待补全']),
+          ...['企业员工总数', '年产值/产能规模'].map(name => [name, facts.find(row => row.dimension === '经营市场' && row.name === name)?.value || '待补全'])
+        ];
+        document.getElementById('archiveProfileBasics').innerHTML = basics.map(([name, value]) =>
+          '<div><dt>' + escapeArchiveHTML(name) + '</dt><dd>' + escapeArchiveHTML(value) + '</dd></div>'
+        ).join('');
+        const honors = facts.filter(row => row.dimension === '科创资质' && /已入库|已认定|已获批/.test(row.value));
+        document.getElementById('archiveProfileHonors').innerHTML = honors.length ? honors.map(row =>
+          '<li><strong>' + escapeArchiveHTML(row.name) + '</strong><span>' + escapeArchiveHTML(row.value) + '</span></li>'
+        ).join('') : '<li>暂无荣誉资质记录</li>';
+        document.getElementById('archiveProfileTech').innerHTML = sample ? profileTechAreas.map(([name, description, examples]) =>
+          '<li><strong>' + name + '</strong><p>' + description + '</p><small>档案成果 · ' + examples + '</small></li>'
+        ).join('') : '<li>暂无技术领域记录</li>';
+        renderProfileGraph('resources');
+        goToPage('page-archive-profile', '企业完整画像');
+        profilePage.scrollIntoView({block:'start'});
+        document.getElementById('archiveProfileTitle').focus({preventScroll:true});
+      });
+      document.getElementById('archiveProfileBack').addEventListener('click', () => {
+        goToPage('page-archive', '企业数字档案');
+        profileOpen.focus();
+      });
+
       const totalIndicators = CARDS.reduce((sum, card) => sum + card.total, 0);
       /* 能力分与资料完整度独立；平台展示参考模型，不作为官方评审标准。 */
       function abilityNumber(value){
@@ -12305,47 +12858,48 @@
 
       const IP_DETAIL = {
         charts:`
-        <div class="chart-row">
+        <div class="chart-row archive-ip-charts">
           <div class="mini-card">
-            <div class="mini-title">年度申请数量</div>
-            ${barChart([['2022',3],['2023',5],['2024',7],['2025',6],['2026',4]])}
+            <div class="mini-title">年度申请与授权（件）</div>
+            ${barChart([['2022',3,2],['2023',5,3],['2024',7,3],['2025',6,2],['2026',4,0]])}
+            <div class="archive-ip-legend">${ipChartKey('申请量','#2856ea')}${ipChartKey('授权量','#009469')}</div>
+            <p class="archive-ip-note">累计授权 10 件 · 审查中 2 件 · 申请量含发明 + 实用新型 · 授权轨迹由国知局同步自动回填</p>
           </div>
           <div class="mini-card">
-            <div class="mini-title">专利法律状态</div>
-            <div class="donut-wrap">
-              ${donut(78)}
-              <div class="legend">
-                <div class="li"><span class="dotmark" style="background:#2EA121"></span>有效&nbsp;&nbsp;<b class="num">7 件</b></div>
-                <div class="li"><span class="dotmark" style="background:#C9CDD4"></span>无效&nbsp;&nbsp;<b class="num">2 件</b></div>
-              </div>
+            <div class="mini-title">专利类型分析</div>
+            <div class="archive-ip-rings">
+              ${donut('专利 · 法律状态',[['有效',8,'#009469'],['失效',2,'#e7464e'],['审查中',2,'#f5a420']])}
+              ${donut('专利 · 类型',[['发明',4,'#1758dc'],['实用新型',8,'#7b58df']])}
             </div>
+            <p class="archive-ip-note">统计口径为 12 件专利申请（含审查中 2 件），已授权 10 件；另有软著 2、集成电路布图 1，知识产权合计 13 件。失效 2 件 = 未缴年费 1 + 期限届满 1 · 年费与法律状态每周自动校对。</p>
           </div>
         </div>`,
       };
 
       function barChart(data){
-        const W=520,H=220,pad=30,bw=44,gap=(W-pad*2-bw*data.length)/(data.length-1);
-        const max=Math.max(...data.map(d=>d[1]));
-        let bars='';
-        data.forEach((d,i)=>{
-          const x=pad+i*(bw+gap), h=(d[1]/max)*(H-78), y=H-34-h;
-          bars+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="6" fill="url(#bgrad)"/>
-            <text x="${x+bw/2}" y="${y-8}" text-anchor="middle" font-size="13" font-weight="600" fill="#1F2329">${d[1]}</text>
-            <text x="${x+bw/2}" y="${H-14}" text-anchor="middle" font-size="13" fill="#8F959E">${d[0]}</text>`;
-        });
-        return `<svg viewBox="0 0 ${W} ${H}" style="width:100%">
-          <defs><linearGradient id="bgrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#5C8CFF"/><stop offset="1" stop-color="#3370FF"/></linearGradient></defs>
-          ${[0.33,0.66,1].map(f=>`<line x1="${pad-10}" x2="${W-10}" y1="${H-34-(H-78)*f}" y2="${H-34-(H-78)*f}" stroke="#EFF0F1" stroke-dasharray="4 4"/>`).join('')}
-          ${bars}</svg>`;
+        const max = Math.max(...data.flatMap(([, applications, grants]) => [applications, grants]));
+        return `<ul class="archive-ip-bars">${data.map(([year, applications, grants]) => `
+          <li aria-label="${year} 年申请 ${applications} 件，授权 ${grants} 件">
+            <div class="archive-ip-counts" aria-hidden="true"><span>${applications} 件</span><span>${grants} 件</span></div>
+            <div class="archive-ip-columns" aria-hidden="true"><i style="height:${applications / max * 100}%"></i><i style="height:${grants / max * 100}%"></i></div>
+            <span aria-hidden="true">${year}</span>
+          </li>`).join('')}</ul>`;
       }
-      function donut(pct){
-        const r=52, c=2*Math.PI*r, off=c*(1-pct/100);
-        return `<svg width="130" height="130" viewBox="0 0 130 130">
-          <circle cx="65" cy="65" r="${r}" fill="none" stroke="#EFF0F1" stroke-width="14"/>
-          <circle cx="65" cy="65" r="${r}" fill="none" stroke="#3370FF" stroke-width="14" stroke-linecap="round"
-            stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 65 65)"/>
-          <text x="65" y="71" text-anchor="middle" font-size="20" font-weight="700" fill="#1F2329">${pct}%</text></svg>`;
+      function ipChartKey(label, color){
+        return `<span><i style="background:${color}" aria-hidden="true"></i>${label}</span>`;
+      }
+      function donut(label, segments){
+        const total = segments.reduce((sum, [, count]) => sum + count, 0);
+        let offset = 0;
+        const stops = segments.map(([, count, color]) => {
+          const start = offset;
+          offset += count;
+          return `${color} ${start / total * 100}% ${offset / total * 100}%`;
+        });
+        return `<div class="archive-ip-ring-group">
+          <div class="archive-ip-ring" style="background:conic-gradient(${stops.join(',')})"><div><strong>${total}</strong><small>${label}</small></div></div>
+          <div class="archive-ip-legend">${segments.map(([name, count, color]) => ipChartKey(name + ' ' + count, color)).join('')}</div>
+        </div>`;
       }
       function escapeArchiveHTML(value){
         return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
