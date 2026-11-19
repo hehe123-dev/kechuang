@@ -423,6 +423,43 @@
     .policy-ai-footnote{font-size:14px;color:#94a0b3;margin-top:10px}
     @media(max-width:1250px){.u-policy-card.has-ai-summary{grid-template-columns:minmax(0,1fr) 100px;gap:18px}.policy-ai-summary{grid-column:1/-1;grid-row:2}.u-policy-card.has-ai-summary>.u-policy-match{grid-column:2;grid-row:1}}
     @media(max-width:640px){.u-policy-card.has-ai-summary{grid-template-columns:minmax(0,1fr);gap:14px}.u-policy-card.has-ai-summary>.u-policy-match{grid-column:1;grid-row:3;flex-direction:row;justify-content:flex-start;border-left:0;padding-left:0}.policy-ai-summary{padding:14px}.u-policy-card.has-ai-summary .u-actions{flex-wrap:wrap}.policy-ai-text{font-size:16px}}
+    #page-policy :is(#policy-card-list,#policy-card-grid){container:policy-cards / inline-size}
+    #page-policy .u-policy-card.has-top-actions{
+      --policy-ink:#172943;--policy-muted:#526278;--policy-accent:#304fac;--policy-line:#e2e8f2;--policy-tint:#f3f6fc;
+      grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);align-items:stretch;gap:18px 26px;
+      padding:22px 24px;border:1px solid var(--policy-line);border-radius:16px;box-shadow:0 4px 14px #18294908
+    }
+    #page-policy .u-policy-card.has-top-actions:hover{border-color:#bccbe5;box-shadow:0 8px 24px #18294912}
+    #page-policy .u-policy-card.has-top-actions.high{border-left:3px solid #5771bf}
+    #page-policy .policy-card-header{grid-column:1/-1;grid-row:1;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;padding-bottom:16px;border-bottom:1px solid var(--policy-line)}
+    #page-policy .policy-card-heading{flex:1 1 285px;min-width:0}
+    #page-policy .policy-card-heading h3{font-size:clamp(18px,2vw,22px);font-weight:700;line-height:1.4;color:var(--policy-ink)}
+    #page-policy .policy-card-heading p{margin:5px 0 0;color:var(--policy-muted);font-size:14px;line-height:1.55}
+    #page-policy .policy-card-top-actions{margin-left:auto;justify-content:flex-end;flex-wrap:wrap;gap:6px;max-width:100%}
+    #page-policy .policy-card-top-actions .u-button{padding:7px 11px;font-size:13px;white-space:nowrap;border-radius:7px}
+    #page-policy .policy-card-top-actions .u-button.ghost{border-color:transparent;color:var(--policy-muted)}
+    #page-policy .policy-card-top-actions .u-button.ghost:hover,#page-policy .policy-card-top-actions [data-fav="1"]{background:var(--policy-tint);color:var(--policy-accent)}
+    #page-policy .policy-card-top-actions .u-button.primary{background:var(--policy-accent)}
+    #page-policy .policy-card-top-actions .u-button.primary:hover{background:#263f90}
+    #page-policy .policy-card-main{grid-column:1;grid-row:2;display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0}
+    #page-policy .policy-card-main>.u-tags{flex-wrap:wrap;gap:6px}
+    #page-policy .has-top-actions .u-chip{background:#f0f3f8;color:#495c75;box-shadow:none;font-size:13px}
+    #page-policy .has-top-actions .u-chip.peer{font-weight:500}
+    #page-policy .has-top-actions .policy-ai-summary{grid-column:2;grid-row:2;padding:15px 17px;background:var(--policy-tint);border:0;border-radius:10px}
+    #page-policy .has-top-actions .policy-ai-heading{gap:8px;margin-bottom:8px;color:var(--policy-ink)}
+    #page-policy .has-top-actions .policy-ai-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:7px;background:#e4ebfb;color:var(--policy-accent);font-size:16px;flex:none}
+    #page-policy .has-top-actions .policy-ai-caption,#page-policy .has-top-actions .policy-ai-footnote{color:var(--policy-muted);font-size:13px}
+    #page-policy .has-top-actions .policy-ai-advice{margin-top:10px;padding-top:9px;border-color:var(--policy-line);color:var(--policy-muted)}
+    #page-policy .policy-card-main .u-policy-match{flex-direction:row;flex-wrap:wrap;justify-content:flex-start;gap:8px;width:100%;margin-top:auto;padding:10px 0 0;border:0;border-top:1px solid var(--policy-line)}
+    #page-policy .policy-card-main .u-policy-match b{font-size:23px;line-height:1.3;color:var(--policy-accent)}
+    #page-policy .policy-card-match-track{position:relative;width:72px;height:4px;margin-left:auto;border-radius:99px;background:#e4eafa;overflow:hidden}
+    #page-policy .policy-card-match-track::before{content:"";position:absolute;inset-block:0;left:0;width:var(--policy-match-score);border-radius:inherit;background:var(--policy-accent)}
+    @container policy-cards (max-width:690px){
+      #page-policy .u-policy-card.has-top-actions{grid-template-columns:minmax(0,1fr);gap:14px;padding:16px}
+      #page-policy .has-top-actions .policy-ai-summary{grid-column:1;grid-row:3}
+      #page-policy .policy-card-heading h3{font-size:18px}
+      #page-policy .policy-card-header{padding-bottom:12px}
+    }
     .u-policy-card:hover { box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08); border-color: #2563eb; }
     .u-policy-card.high { border-color: #2563eb; }
     .u-policy-card h3 { font-size: 17px; font-weight: 600; color: #1f2937; }
@@ -837,15 +874,15 @@
     }
 
     /* 悬浮服务台：固定页头、独立功能卡、固定帮助入口 */
-    #service-rail{position:fixed;right:18px;top:88px;bottom:20px;width:300px;max-height:860px;z-index:35;background:#f4f6fa;border:1px solid #dde5f0;border-radius:16px;box-shadow:0 12px 38px #203d6b18;display:flex;flex-direction:column;color:#25344b;overflow:hidden}
+    #service-rail{position:fixed;right:18px;top:88px;bottom:20px;width:256px;max-height:660px;z-index:35;background:#f4f6fa;border:1px solid #dde5f0;border-radius:14px;box-shadow:0 12px 38px #203d6b18;display:flex;flex-direction:column;color:#25344b;overflow:hidden}
     #service-rail[hidden],#service-rail-open[hidden]{display:none!important}
     #service-rail svg,#service-rail-open svg{width:17px;height:17px;flex-shrink:0}
     #service-rail button:focus-visible,#service-rail-open:focus-visible{outline:2px solid #1677ff;outline-offset:3px}
-    .sr-header{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;background:#fff;border-bottom:1px solid #e5eaf2;flex-shrink:0}
+    .sr-header{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;background:#fff;border-bottom:1px solid #e5eaf2;flex-shrink:0}
     .sr-brand{display:flex;align-items:center;gap:10px}.sr-brand-icon{display:grid;place-items:center;width:34px;height:34px;background:#eaf2ff;color:#3078e6;border-radius:10px}
     .sr-header h2{font-size:17px;font-weight:600;line-height:1.5;color:#293b55}.sr-header p{font-size:14px;color:#97a3b5;margin-top:3px}.sr-header>button{padding:6px;color:#94a2b7;border-radius:6px}.sr-header>button:hover{background:#f0f4fa;color:#5276a9}
-    .sr-body{overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0;padding:12px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:#d7e1ef transparent}
-    .sr-section{padding:14px;background:#fff;border:1px solid #e5eaf2;border-radius:11px;flex-shrink:0}
+    .sr-body{overflow-y:auto;overscroll-behavior:contain;flex:1;min-height:0;padding:8px;display:flex;flex-direction:column;gap:8px;scrollbar-width:thin;scrollbar-color:#d7e1ef transparent}
+    .sr-section{padding:10px;background:#fff;border:1px solid #e5eaf2;border-radius:9px;flex-shrink:0}
     .sr-card-heading{display:flex;align-items:center;gap:8px;margin-bottom:14px}.sr-card-heading h3{font-size:16px;line-height:1.5;color:#35475f;font-weight:600;display:flex;align-items:center;gap:5px}.sr-card-heading p{font-size:14px;line-height:1.5;color:#99a4b5;margin-top:2px}.sr-module-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:8px;flex-shrink:0}.sr-human-icon{background:#ebf3ff;color:#5485cf}.sr-task-icon{background:#fff4e5;color:#cf963f}.sr-bot-icon{background:#f1edff;color:#9674d4}
     .sr-tag,.sr-ai-tag{font-size:14px;line-height:1.4;font-weight:400;padding:3px 6px;border-radius:4px;margin-left:auto}.sr-tag{color:#7594c0;background:#f0f5fc}.sr-ai-tag{color:#8c77be;background:#f5f1ff}
     .sr-advisor{display:flex;align-items:center;gap:9px;padding:11px 10px;background:#f8fafd;border:1px solid #eef2f7;border-radius:8px;margin-bottom:12px}.sr-avatar{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#dfeaff;color:#5b83bb;font-size:18px;flex-shrink:0}.sr-advisor b{font-size:15px;font-weight:600;color:#465b78}.sr-advisor p{font-size:14px;color:#98a4b5;margin-top:3px}.sr-assigned{font-size:14px;color:#9aa9bd;margin-left:auto;white-space:nowrap}
@@ -854,10 +891,10 @@
     #service-todos{border-top:1px solid #edf1f6}.sr-todo{display:block;width:100%;position:relative;text-align:left;padding:10px 14px 10px 18px;border-bottom:1px solid #f0f3f7;cursor:pointer}.sr-todo:last-child{border-bottom:0;padding-bottom:0}.sr-todo:before{content:'';position:absolute;left:1px;top:16px;width:7px;height:7px;border:1px solid #c7d3e6;border-radius:2px}.sr-todo:after{content:'›';position:absolute;right:0;top:13px;font-size:17px;color:#b7c4d6}.sr-todo:hover{background:#f8faff}.sr-todo b{display:block;font-size:14px;font-weight:400;color:#52647e;line-height:1.65}.sr-todo span{display:block;font-size:14px;color:#a2adbc;line-height:1.6;margin-top:3px}
     .sr-ai-prompts{display:grid;gap:6px;margin-bottom:12px}.sr-ai-prompts button{display:flex;align-items:center;justify-content:space-between;gap:6px;text-align:left;padding:8px 9px;background:#f7f8fc;border:1px solid #edf0f6;border-radius:6px;color:#8090a8;font-size:14px;cursor:pointer}.sr-ai-prompts button svg{width:13px!important;height:13px!important;color:#a1afc3}.sr-ai-prompts button:hover{background:#eff5ff;border-color:#d5e3fa}
     .sr-guide-entry{padding:12px;background:#fff;border-top:1px solid #e1e7f0;flex-shrink:0}.sr-guide-entry button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:9px 10px;border:1px solid #e6ebf2;border-radius:8px;background:#fafbfd;cursor:pointer}.sr-guide-entry button:hover{background:#f1f6ff;border-color:#cadcf7}.sr-guide-icon{display:grid;place-items:center;width:30px;height:30px;background:#eef2f8;border-radius:8px;color:#7e96b9;flex-shrink:0}.sr-guide-entry b{display:block;font-size:14px;color:#5d7292;font-weight:500}.sr-guide-entry small{display:block;font-size:14px;color:#a1adbd;margin-top:3px}.sr-guide-entry button>svg{margin-left:auto;color:#a6b6cc}
-    #service-rail-open{position:fixed;right:18px;bottom:28px;z-index:35;display:flex;align-items:center;gap:8px;border:1px solid #d7e5ff;background:#fff;color:#1677ff;box-shadow:0 4px 20px #1c4e8f18;border-radius:12px;padding:14px;font-size:15px}
+    #service-rail-open{position:fixed;right:18px;bottom:28px;z-index:35;display:flex;align-items:center;gap:6px;border:1px solid #d7e5ff;background:#fff;color:#1677ff;box-shadow:0 4px 20px #1c4e8f18;border-radius:9px;padding:9px 10px;font-size:14px}
     #cs-panel{max-height:calc(100dvh - 32px);border:1px solid #e0e8f5}#cs-panel>div{height:min(560px,calc(100dvh - 34px))}
-    @media(min-width:1200px){body.service-rail-expanded #enterprise-shell>div.flex-1{padding-right:330px}}
-    @media(max-width:600px){#service-rail{top:76px;right:12px;bottom:16px;width:min(300px,calc(100vw - 24px))}}
+    @media(min-width:1200px){body.service-rail-expanded #enterprise-shell>div.flex-1{padding-right:282px}}
+    @media(max-width:600px){#service-rail{top:76px;right:12px;bottom:16px;width:min(256px,calc(100vw - 24px))}}
     body:has(#enterprise-shell[style*='display:none']) #service-rail,body:has(#enterprise-shell[style*='display:none']) #service-rail-open,body:has(#enterprise-shell[style*='display: none']) #service-rail,body:has(#enterprise-shell[style*='display: none']) #service-rail-open{display:none!important}
     #new-user-onboarding{max-height:calc(100dvh - 32px);overflow-y:auto}
     #new-user-onboarding .onboarding-step{text-align:left;cursor:pointer;transition:border-color .15s,background .15s}
@@ -866,7 +903,11 @@
     /* 免申即享以条件和办理渠道为核心，其他标签保留原卡片 */
     #page-policy .benefit-layout{display:none}
     #page-policy.policy-benefits-mode #policy-card-list .u-policy-card{display:block;border-color:#e3eaf3;padding:22px 24px}
-    #page-policy.policy-benefits-mode #policy-card-list .u-policy-card> :not(.benefit-layout){display:none}
+    #page-policy.policy-benefits-mode #policy-card-list .u-policy-card> :not(.benefit-layout,.policy-card-header){display:none}
+    #page-policy.policy-benefits-mode .policy-card-header{margin-bottom:12px}
+    #page-policy.policy-benefits-mode .policy-card-heading>p{display:none}
+    #page-policy .has-top-actions .benefit-overview h3{display:none}
+    #page-policy .benefit-bottom .js-policy-detail{display:none}
     #page-policy.policy-benefits-mode .benefit-layout{display:grid;grid-template-columns:minmax(230px,.85fr) minmax(0,1.4fr);gap:20px 28px}
     #page-policy .benefit-overview h3{font-size:18px;line-height:1.6;margin-top:12px}
     #page-policy .benefit-overview>p{margin-top:8px;color:#8b98ab}
@@ -1715,20 +1756,16 @@
   </style>
 
   <style id="policy-key-metrics-style">
-    #page-policy .policy-key-metrics{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;margin-bottom:10px}
-    #page-policy .policy-key-metric{display:flex;align-items:center;gap:14px;min-width:180px;border:1px solid;border-radius:9px;padding:9px 14px;font-variant-numeric:tabular-nums}
-    #page-policy .policy-metric-label{font-size:15px;font-weight:600;white-space:nowrap}
-    #page-policy .policy-key-metric strong{font-size:23px;line-height:1.3;font-weight:750;white-space:nowrap;letter-spacing:.2px}
-    #page-policy .policy-key-metric small{font-size:16px;margin-left:5px;font-weight:600}
-    #page-policy .policy-subsidy{background:linear-gradient(100deg,#fff7e8,#fffaf1);border-color:#ffdb9e;color:#c66b08}
-    #page-policy .policy-subsidy strong{color:#d76b00}
-    #page-policy .policy-countdown{background:#edf5ff;border-color:#c5dcff;color:#2463bd}
-    #page-policy .policy-countdown strong{color:#1677ff}
-    #page-policy .policy-countdown.is-urgent{background:#fff0ed;border-color:#ffc7bd;color:#cf4936}
-    #page-policy .policy-countdown.is-urgent strong{color:#e44830}
-    #page-policy .policy-countdown.is-closed{background:#f3f5f8;border-color:#e0e5ec;color:#8993a2}
-    #page-policy .policy-countdown.is-closed strong{font-size:19px;color:#8993a2}
-    @media(max-width:640px){#page-policy .u-policy-card{gap:12px;padding:15px;align-items:flex-start}#page-policy .policy-key-metrics{gap:8px}#page-policy .policy-key-metric{min-width:0;padding:8px 10px;gap:10px;flex-wrap:wrap}#page-policy .policy-key-metric strong{font-size:20px}}
+    #page-policy .policy-key-metrics{display:flex;flex-wrap:wrap;gap:10px;width:100%}
+    #page-policy .policy-key-metric{display:flex;flex:1 1 120px;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;padding:9px 12px;border:1px solid var(--policy-line);border-radius:8px;background:#fff;color:var(--policy-muted);font-variant-numeric:tabular-nums}
+    #page-policy .policy-metric-label{font-size:13px;font-weight:500}
+    #page-policy .policy-key-metric strong{font-size:23px;line-height:1.3;font-weight:700;color:var(--policy-ink)}
+    #page-policy .policy-key-metric small{font-size:14px;margin-left:4px;font-weight:550}
+    #page-policy .policy-subsidy strong{color:var(--policy-accent)}
+    #page-policy .policy-countdown.is-urgent{background:#fffaf1;border-color:#f2e3c8}
+    #page-policy .policy-countdown.is-urgent strong{color:#8a4e12}
+    #page-policy .policy-countdown.is-closed{background:#f6f7f9}
+    #page-policy .policy-countdown.is-closed strong{font-size:18px;color:var(--policy-muted)}
 
   </style>
   <style>
@@ -3456,7 +3493,84 @@
                   <button type="button" data-profile-graph="supplyChain" aria-pressed="false">上下游关系</button>
                 </div>
               </div>
-              <div id="archiveProfileGraph" aria-live="polite"></div>
+                <div id="archiveProfileGraph"></div>
+              <template id="archiveProfileResourceMap">
+                <p class="archive-resource-caption">武汉光谷芯联 · 科创资源关系示例</p>
+                <div class="archive-resource-scroll" role="region" aria-label="科创资源关系图，可横向滚动" tabindex="0">
+                  <svg viewBox="0 0 1140 470" class="sv-svg" aria-label="企业主体、研发团队、研发项目、产品与技术方向、知识产权及逐件清单">
+                    <text x="16" y="24" font-size="11" fill="#8D96A8">企业主体</text>
+                    <text x="216" y="24" font-size="11" fill="#8D96A8">研发团队</text>
+                    <text x="416" y="24" font-size="11" fill="#8D96A8">研发项目</text>
+                    <text x="616" y="24" font-size="11" fill="#8D96A8">产品 / 技术方向</text>
+                    <text x="816" y="24" font-size="11" fill="#8D96A8">知识产权</text>
+                    <text x="1016" y="24" font-size="11" fill="#8D96A8">IP 清单（逐件）</text>
+                    <path class="sv-link" data-ends="ent t1" d="M128.0,40.0 C167.6,40.0 176.4,40.0 216.0,40.0 L216.0,202.4 C176.4,202.4 167.6,218.2 128.0,218.2 Z"></path>
+                    <path class="sv-link" data-ends="t1 p1" d="M328.0,40.0 C367.6,40.0 376.4,40.0 416.0,40.0 L416.0,148.3 C376.4,148.3 367.6,148.3 328.0,148.3 Z"></path>
+                    <path class="sv-link" data-ends="p1 d1" d="M528.0,40.0 C567.6,40.0 576.4,40.0 616.0,40.0 L616.0,175.4 C576.4,175.4 567.6,175.4 528.0,175.4 Z"></path>
+                    <path class="sv-link" data-ends="d1 i1" d="M728.0,40.0 C767.6,40.0 776.4,40.0 816.0,40.0 L816.0,96.9 C776.4,96.9 767.6,78.7 728.0,78.7 Z"></path>
+                    <path class="sv-link" data-ends="i1 j1" d="M928.0,40.0 C967.6,40.0 976.4,40.0 1016.0,40.0 L1016.0,76.2 C976.4,76.2 967.6,68.5 928.0,68.5 Z"></path>
+                    <path class="sv-link" data-ends="ent t2" d="M128.0,218.2 C167.6,218.2 176.4,214.4 216.0,214.4 L216.0,295.7 C176.4,295.7 167.6,307.4 128.0,307.4 Z"></path>
+                    <path class="sv-link" data-ends="t1 p2" d="M328.0,148.3 C367.6,148.3 376.4,241.5 416.0,241.5 L416.0,277.6 C376.4,277.6 367.6,184.4 328.0,184.4 Z"></path>
+                    <path class="sv-link" data-ends="p1 d2" d="M528.0,175.4 C567.6,175.4 576.4,187.4 616.0,187.4 L616.0,241.5 C576.4,241.5 567.6,229.5 528.0,229.5 Z"></path>
+                    <path class="sv-link" data-ends="d1 i2" d="M728.0,78.7 C767.6,78.7 776.4,137.4 816.0,137.4 L816.0,251.2 C776.4,251.2 767.6,156.0 728.0,156.0 Z"></path>
+                    <path class="sv-link" data-ends="i1 j2" d="M928.0,68.5 C967.6,68.5 976.4,86.2 1016.0,86.2 L1016.0,122.4 C976.4,122.4 967.6,96.9 928.0,96.9 Z"></path>
+                    <path class="sv-link" data-ends="ent t3" d="M128.0,307.4 C167.6,307.4 176.4,307.7 216.0,307.7 L216.0,379.9 C176.4,379.9 167.6,386.6 128.0,386.6 Z"></path>
+                    <path class="sv-link" data-ends="t1 p3" d="M328.0,184.4 C367.6,184.4 376.4,316.7 416.0,316.7 L416.0,334.7 C376.4,334.7 367.6,202.4 328.0,202.4 Z"></path>
+                    <path class="sv-link" data-ends="i1 j3" d="M928.0,96.9 C967.6,96.9 976.4,132.4 1016.0,132.4 L1016.0,168.7 C976.4,168.7 967.6,125.4 928.0,125.4 Z"></path>
+                    <path class="sv-link" data-ends="ent t4" d="M128.0,386.6 C167.6,386.6 176.4,391.9 216.0,391.9 L216.0,446.0 C176.4,446.0 167.6,446.0 128.0,446.0 Z"></path>
+                    <path class="sv-link" data-ends="d1 i4" d="M728.0,156.0 C767.6,156.0 776.4,417.5 816.0,417.5 L816.0,447.5 C776.4,447.5 767.6,175.4 728.0,175.4 Z"></path>
+                    <path class="sv-link" data-ends="t2 p1" d="M328.0,214.4 C367.6,214.4 376.4,148.3 416.0,148.3 L416.0,184.4 C376.4,184.4 367.6,250.5 328.0,250.5 Z"></path>
+                    <path class="sv-link" data-ends="d2 i1" d="M728.0,187.4 C767.6,187.4 776.4,96.9 816.0,96.9 L816.0,125.4 C776.4,125.4 767.6,226.5 728.0,226.5 Z"></path>
+                    <path class="sv-link" data-ends="t2 p2" d="M328.0,250.5 C367.6,250.5 376.4,277.6 416.0,277.6 L416.0,304.7 C376.4,304.7 367.6,277.6 328.0,277.6 Z"></path>
+                    <path class="sv-link" data-ends="p2 d2" d="M528.0,241.5 C567.6,241.5 576.4,241.5 616.0,241.5 L616.0,304.7 C576.4,304.7 567.6,304.7 528.0,304.7 Z"></path>
+                    <path class="sv-link" data-ends="d2 i2" d="M728.0,226.5 C767.6,226.5 776.4,251.2 816.0,251.2 L816.0,308.2 C776.4,308.2 767.6,304.7 728.0,304.7 Z"></path>
+                    <path class="sv-link" data-ends="t2 p3" d="M328.0,277.6 C367.6,277.6 376.4,334.7 416.0,334.7 L416.0,352.8 C376.4,352.8 367.6,295.7 328.0,295.7 Z"></path>
+                    <path class="sv-link" data-ends="i2 j4" d="M928.0,137.4 C967.6,137.4 976.4,178.7 1016.0,178.7 L1016.0,214.9 C976.4,214.9 967.6,222.8 928.0,222.8 Z"></path>
+                    <path class="sv-link" data-ends="i2 j5" d="M928.0,222.8 C967.6,222.8 976.4,224.9 1016.0,224.9 L1016.0,261.1 C976.4,261.1 967.6,308.2 928.0,308.2 Z"></path>
+                    <path class="sv-link" data-ends="i2 j6" d="M928.0,308.2 C967.6,308.2 976.4,271.1 1016.0,271.1 L1016.0,307.3 C976.4,307.3 967.6,336.6 928.0,336.6 Z"></path>
+                    <path class="sv-link" data-ends="t3 p1" d="M328.0,307.7 C367.6,307.7 376.4,184.4 416.0,184.4 L416.0,211.5 C376.4,211.5 367.6,334.7 328.0,334.7 Z"></path>
+                    <path class="sv-link" data-ends="d3 i2" d="M728.0,316.7 C767.6,316.7 776.4,308.2 816.0,308.2 L816.0,336.6 C776.4,336.6 767.6,352.8 728.0,352.8 Z"></path>
+                    <path class="sv-link" data-ends="t3 p3" d="M328.0,334.7 C367.6,334.7 376.4,352.8 416.0,352.8 L416.0,388.9 C376.4,388.9 367.6,370.8 328.0,370.8 Z"></path>
+                    <path class="sv-link" data-ends="p3 d3" d="M528.0,316.7 C567.6,316.7 576.4,316.7 616.0,316.7 L616.0,388.9 C576.4,388.9 567.6,388.9 528.0,388.9 Z"></path>
+                    <path class="sv-link" data-ends="d3 i3" d="M728.0,352.8 C767.6,352.8 776.4,348.6 816.0,348.6 L816.0,377.1 C776.4,377.1 767.6,388.9 728.0,388.9 Z"></path>
+                    <path class="sv-link" data-ends="t3 p4" d="M328.0,370.8 C367.6,370.8 376.4,400.9 416.0,400.9 L416.0,409.9 C376.4,409.9 367.6,379.9 328.0,379.9 Z"></path>
+                    <path class="sv-link" data-ends="i3 j7" d="M928.0,348.6 C967.6,348.6 976.4,317.3 1016.0,317.3 L1016.0,353.6 C976.4,353.6 967.6,377.1 928.0,377.1 Z"></path>
+                    <path class="sv-link" data-ends="i3 j8" d="M928.0,377.1 C967.6,377.1 976.4,363.6 1016.0,363.6 L1016.0,399.8 C976.4,399.8 967.6,405.5 928.0,405.5 Z"></path>
+                    <path class="sv-link" data-ends="t4 p1" d="M328.0,391.9 C367.6,391.9 376.4,211.5 416.0,211.5 L416.0,229.5 C376.4,229.5 367.6,409.9 328.0,409.9 Z"></path>
+                    <path class="sv-link" data-ends="d4 i3" d="M728.0,400.9 C767.6,400.9 776.4,377.1 816.0,377.1 L816.0,405.5 C776.4,405.5 767.6,446.0 728.0,446.0 Z"></path>
+                    <path class="sv-link" data-ends="t4 p4" d="M328.0,409.9 C367.6,409.9 376.4,409.9 416.0,409.9 L416.0,446.0 C376.4,446.0 367.6,446.0 328.0,446.0 Z"></path>
+                    <path class="sv-link" data-ends="p4 d4" d="M528.0,400.9 C567.6,400.9 576.4,400.9 616.0,400.9 L616.0,446.0 C576.4,446.0 567.6,446.0 528.0,446.0 Z"></path>
+                    <path class="sv-link" data-ends="i4 j9" d="M928.0,417.5 C967.6,417.5 976.4,409.8 1016.0,409.8 L1016.0,446.0 C976.4,446.0 967.6,447.5 928.0,447.5 Z"></path>
+                    <g class="sv-node sv-ent" data-sv="ent" data-path="武汉光谷芯联 › 光谷芯联"><rect x="16" y="40.0" width="112" height="406.0" rx="8" fill="#2A5BEA" stroke="#2A5BEA"></rect><text x="28" y="237.0" font-size="11.5" font-weight="600" fill="#FFFFFF">光谷芯联</text><text x="28" y="249.0" font-size="9.5" fill="#FFFFFF" opacity=".72">41 人 · 13 件</text></g>
+                    <g class="sv-node" data-sv="t1" data-path="武汉光谷芯联 › 光模块芯片组"><rect x="216" y="40.0" width="112" height="162.4" rx="8" fill="#FDF3E0" stroke="#E3C48F"></rect><text x="228" y="115.2" font-size="11.5" font-weight="600" fill="#7A4C12">光模块芯片组</text><text x="228" y="127.2" font-size="9.5" fill="#7A4C12" opacity=".72">18 人</text></g>
+                    <g class="sv-node" data-sv="t2" data-path="武汉光谷芯联 › 封装工艺组"><rect x="216" y="214.4" width="112" height="81.2" rx="8" fill="#FDF3E0" stroke="#E3C48F"></rect><text x="228" y="249.0" font-size="11.5" font-weight="600" fill="#7A4C12">封装工艺组</text><text x="228" y="261.0" font-size="9.5" fill="#7A4C12" opacity=".72">9 人</text></g>
+                    <g class="sv-node" data-sv="t3" data-path="武汉光谷芯联 › 测试验证组"><rect x="216" y="307.7" width="112" height="72.2" rx="8" fill="#FDF3E0" stroke="#E3C48F"></rect><text x="228" y="337.8" font-size="11.5" font-weight="600" fill="#7A4C12">测试验证组</text><text x="228" y="349.8" font-size="9.5" fill="#7A4C12" opacity=".72">8 人</text></g>
+                    <g class="sv-node" data-sv="t4" data-path="武汉光谷芯联 › 算法与固件组"><rect x="216" y="391.9" width="112" height="54.1" rx="8" fill="#FDF3E0" stroke="#E3C48F"></rect><text x="228" y="412.9" font-size="11.5" font-weight="600" fill="#7A4C12">算法与固件组</text><text x="228" y="424.9" font-size="9.5" fill="#7A4C12" opacity=".72">6 人</text></g>
+                    <g class="sv-node" data-sv="p1" data-path="武汉光谷芯联 › 800G 芯片研发"><rect x="416" y="40.0" width="112" height="189.5" rx="8" fill="#F1ECFC" stroke="#C6B4EC"></rect><text x="428" y="128.8" font-size="11.5" font-weight="600" fill="#4B2F91">800G 芯片研发</text><text x="428" y="140.8" font-size="9.5" fill="#4B2F91" opacity=".72">RD-01 · 21 人</text></g>
+                    <g class="sv-node" data-sv="p2" data-path="武汉光谷芯联 › 25G 探测器"><rect x="416" y="241.5" width="112" height="63.2" rx="8" fill="#F1ECFC" stroke="#C6B4EC"></rect><text x="428" y="267.1" font-size="11.5" font-weight="600" fill="#4B2F91">25G 探测器</text><text x="428" y="279.1" font-size="9.5" fill="#4B2F91" opacity=".72">RD-02 · 7</text></g>
+                    <g class="sv-node" data-sv="p3" data-path="武汉光谷芯联 › 光模块测试平台"><rect x="416" y="316.7" width="112" height="72.2" rx="8" fill="#F1ECFC" stroke="#C6B4EC"></rect><text x="428" y="346.8" font-size="11.5" font-weight="600" fill="#4B2F91">光模块测试平台</text><text x="428" y="358.8" font-size="9.5" fill="#4B2F91" opacity=".72">RD-03 · 8</text></g>
+                    <g class="sv-node" data-sv="p4" data-path="武汉光谷芯联 › 监控固件算法"><rect x="416" y="400.9" width="112" height="45.1" rx="8" fill="#F1ECFC" stroke="#C6B4EC"></rect><text x="428" y="417.4" font-size="11.5" font-weight="600" fill="#4B2F91">监控固件算法</text><text x="428" y="429.4" font-size="9.5" fill="#4B2F91" opacity=".72">RD-04 · 5</text></g>
+                    <g class="sv-node" data-sv="d1" data-path="武汉光谷芯联 › XM-800G-SR8"><rect x="616" y="40.0" width="112" height="135.4" rx="8" fill="#E6F5EF" stroke="#A5D3C1"></rect><text x="628" y="101.7" font-size="11.5" font-weight="600" fill="#1E5F49">XM-800G-SR8</text><text x="628" y="113.7" font-size="9.5" fill="#1E5F49" opacity=".72">量产 · 15 人</text></g>
+                    <g class="sv-node" data-sv="d2" data-path="武汉光谷芯联 › XM-400G-DR4"><rect x="616" y="187.4" width="112" height="117.3" rx="8" fill="#E6F5EF" stroke="#A5D3C1"></rect><text x="628" y="240.0" font-size="11.5" font-weight="600" fill="#1E5F49">XM-400G-DR4</text><text x="628" y="252.0" font-size="9.5" fill="#1E5F49" opacity=".72">在研 · 13</text></g>
+                    <g class="sv-node" data-sv="d3" data-path="武汉光谷芯联 › XM-T100 平台"><rect x="616" y="316.7" width="112" height="72.2" rx="8" fill="#E6F5EF" stroke="#A5D3C1"></rect><text x="628" y="346.8" font-size="11.5" font-weight="600" fill="#1E5F49">XM-T100 平台</text><text x="628" y="358.8" font-size="9.5" fill="#1E5F49" opacity=".72">内部 + 外销</text></g>
+                    <g class="sv-node" data-sv="d4" data-path="武汉光谷芯联 › 监控固件 V2.0"><rect x="616" y="400.9" width="112" height="45.1" rx="8" fill="#E6F5EF" stroke="#A5D3C1"></rect><text x="628" y="417.4" font-size="11.5" font-weight="600" fill="#1E5F49">监控固件 V2.0</text><text x="628" y="429.4" font-size="9.5" fill="#1E5F49" opacity=".72">随产品交付</text></g>
+                    <g class="sv-node" data-sv="i1" data-path="武汉光谷芯联 › 发明专利"><rect x="816" y="40.0" width="112" height="85.4" rx="8" fill="#FBECF2" stroke="#E8B7CB"></rect><text x="828" y="76.7" font-size="11.5" font-weight="600" fill="#7C2C4C">发明专利</text><text x="828" y="88.7" font-size="9.5" fill="#7C2C4C" opacity=".72">3 件</text></g>
+                    <g class="sv-node" data-sv="i2" data-path="武汉光谷芯联 › 实用新型"><rect x="816" y="137.4" width="112" height="199.2" rx="8" fill="#FBECF2" stroke="#E8B7CB"></rect><text x="828" y="231.0" font-size="11.5" font-weight="600" fill="#7C2C4C">实用新型</text><text x="828" y="243.0" font-size="9.5" fill="#7C2C4C" opacity=".72">7 件</text></g>
+                    <g class="sv-node" data-sv="i3" data-path="武汉光谷芯联 › 软件著作权"><rect x="816" y="348.6" width="112" height="56.9" rx="8" fill="#FBECF2" stroke="#E8B7CB"></rect><text x="828" y="371.1" font-size="11.5" font-weight="600" fill="#7C2C4C">软件著作权</text><text x="828" y="383.1" font-size="9.5" fill="#7C2C4C" opacity=".72">2 件</text></g>
+                    <g class="sv-node" data-sv="i4" data-path="武汉光谷芯联 › 集成电路布图"><rect x="816" y="417.5" width="112" height="30.0" rx="8" fill="#FBECF2" stroke="#E8B7CB"></rect><text x="828" y="432.5" font-size="11.5" font-weight="600" fill="#7C2C4C">集成电路布图</text></g>
+                    <g class="sv-node sv-item" data-sv="j1" data-path="武汉光谷芯联 › 知识产权 › 清单 › 耦合对准方法"><rect x="1016" y="40.0" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="52.1" font-size="10" font-weight="600" fill="#7C2C4C">耦合对准方法</text><text x="1026" y="64.1" font-size="8.5" fill="#7C2C4C" opacity=".72">发明 · 2023</text></g>
+                    <g class="sv-node sv-item" data-sv="j2" data-path="武汉光谷芯联 › 知识产权 › 清单 › 光引擎散热结构"><rect x="1016" y="86.2" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="98.3" font-size="10" font-weight="600" fill="#7C2C4C">光引擎散热结构</text><text x="1026" y="110.3" font-size="8.5" fill="#7C2C4C" opacity=".72">发明 · 2024</text></g>
+                    <g class="sv-node sv-item" data-sv="j3" data-path="武汉光谷芯联 › 知识产权 › 清单 › 前放探测器封装"><rect x="1016" y="132.4" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="144.6" font-size="10" font-weight="600" fill="#7C2C4C">前放探测器封装</text><text x="1026" y="156.6" font-size="8.5" fill="#7C2C4C" opacity=".72">发明 · 2022</text></g>
+                    <g class="sv-node sv-item" data-sv="j4" data-path="武汉光谷芯联 › 知识产权 › 清单 › 散热结构系列"><rect x="1016" y="178.7" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="190.8" font-size="10" font-weight="600" fill="#7C2C4C">散热结构系列</text><text x="1026" y="202.8" font-size="8.5" fill="#7C2C4C" opacity=".72">实新 · 3 件</text></g>
+                    <g class="sv-node sv-item" data-sv="j5" data-path="武汉光谷芯联 › 知识产权 › 清单 › 封装结构系列"><rect x="1016" y="224.9" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="237.0" font-size="10" font-weight="600" fill="#7C2C4C">封装结构系列</text><text x="1026" y="249.0" font-size="8.5" fill="#7C2C4C" opacity=".72">实新 · 3 件</text></g>
+                    <g class="sv-node sv-item" data-sv="j6" data-path="武汉光谷芯联 › 知识产权 › 清单 › 多工位测试夹具"><rect x="1016" y="271.1" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="283.2" font-size="10" font-weight="600" fill="#7C2C4C">多工位测试夹具</text><text x="1026" y="295.2" font-size="8.5" fill="#7C2C4C" opacity=".72">实新 · 1 件</text></g>
+                    <g class="sv-node sv-item" data-sv="j7" data-path="武汉光谷芯联 › 知识产权 › 清单 › 监控系统 V2.0"><rect x="1016" y="317.3" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="329.4" font-size="10" font-weight="600" fill="#7C2C4C">监控系统 V2.0</text><text x="1026" y="341.4" font-size="8.5" fill="#7C2C4C" opacity=".72">软著 · 2025</text></g>
+                    <g class="sv-node sv-item" data-sv="j8" data-path="武汉光谷芯联 › 知识产权 › 清单 › 测试平台 V1.2"><rect x="1016" y="363.6" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="375.7" font-size="10" font-weight="600" fill="#7C2C4C">测试平台 V1.2</text><text x="1026" y="387.7" font-size="8.5" fill="#7C2C4C" opacity=".72">软著 · 2026</text></g>
+                    <g class="sv-node sv-item" data-sv="j9" data-path="武汉光谷芯联 › 知识产权 › 清单 › 驱动芯片版图"><rect x="1016" y="409.8" width="112" height="36.2" rx="8" fill="#FEF9FB" stroke="#EBC5D5"></rect><text x="1026" y="421.9" font-size="10" font-weight="600" fill="#7C2C4C">驱动芯片版图</text><text x="1026" y="433.9" font-size="8.5" fill="#7C2C4C" opacity=".72">布图 · 2024</text></g>
+                  </svg>
+                </div>
+                <div class="archive-profile-node-detail" aria-live="polite">点击节点可查看关联路径</div>
+              </template>
             </section>
           </div>
         </div>
@@ -8079,6 +8193,39 @@
     document.getElementById('policy-detail-back').addEventListener('click', () => {
       document.getElementById('policy-detail-view').classList.add('hidden');
       document.getElementById('policy-list-view').classList.remove('hidden');
+    });
+
+    document.querySelectorAll('#policy-card-list .u-policy-card, #policy-card-grid .u-policy-card').forEach(card=>{
+      const main = card.firstElementChild;
+      const actions = main.querySelector(':scope > .u-actions');
+      const title = main.querySelector(':scope > h3');
+      if (!actions || !title) return;
+      const header = document.createElement('header');
+      header.className = 'policy-card-header';
+      const heading = document.createElement('div');
+      heading.className = 'policy-card-heading';
+      title.style.removeProperty('margin-top');
+      actions.style.removeProperty('margin-top');
+      actions.classList.add('policy-card-top-actions');
+      main.classList.add('policy-card-main');
+      card.classList.add('has-top-actions');
+      heading.append(title);
+      const metadata = main.querySelector(':scope > p');
+      if (metadata) heading.append(metadata);
+      header.append(heading,actions);
+      card.prepend(header);
+      const match = card.querySelector(':scope > .u-policy-match');
+      if (match) {
+        const score = Number(card.dataset.match);
+        if (Number.isFinite(score) && score >= 0 && score <= 100) {
+          const track = document.createElement('span');
+          track.className = 'policy-card-match-track';
+          track.setAttribute('aria-hidden','true');
+          track.style.setProperty('--policy-match-score',score+'%');
+          match.append(track);
+        }
+        main.append(match);
+      }
     });
 
     // 收藏政策
@@ -12705,24 +12852,51 @@
       const profileOpen = document.getElementById('archiveProfileOpen');
       const profileCompany = document.getElementById('archiveProfileCompany');
       const profileGraphButtons = profilePage.querySelectorAll('[data-profile-graph]');
-      const profileRelations = {
-        resources: [
-          ['工业视觉联合实验室', '联合共建', '产学研合作', '档案记录了校企联合实验室，合作高校与协议待补全。'],
-          ['企业智能装备技术中心', '建设平台', '研发平台', '档案记录为国家级企业技术中心。'],
-          ['智能装备视觉感知与在线检测技术研发', '参与研发', '科技项目', '档案记录为已立项的国家重点研发计划项目，企业承担角色为参与单位。']
-        ],
-        supplyChain: [
+      const profileSupplyChain = [
           ['武汉某芯片供应商', '供应芯片', '上游供应商', '芯片用于视觉检测设备及边缘计算终端。'],
           ['深圳某传感器供应商', '供应传感器', '上游供应商', '传感器用于产线数据采集与设备状态监测。'],
           ['武汉某智能制造集团', '应用检测设备', '下游客户', '示例应用场景为智能制造产线的在线视觉检测。'],
           ['湖北某汽车零部件公司', '应用检测方案', '下游客户', '示例应用场景为汽车零部件缺陷识别与质量追溯。']
-        ]
-      };
+      ];
       const profileTechAreas = [
         ['工业视觉检测', '面向制造产线，利用图像识别开展在线检测与缺陷识别。', '智能图像识别系统 V3.1、高精度缺陷检测算法研究'],
         ['边缘计算', '在设备侧完成数据采集与计算，支持工业现场的实时处理。', '工业物联网采集平台 V1.0、工业视觉边缘计算平台研发'],
         ['智能装备与设备集成', '将检测模块、状态监测与运维软件接入生产设备。', '智能产线视觉模块开发、设备远程运维平台 V2.3']
       ];
+      function renderProfileResourceMap(graph) {
+        graph.replaceChildren(document.getElementById('archiveProfileResourceMap').content.cloneNode(true));
+        const links = [...graph.querySelectorAll('[data-ends]')];
+        const nodes = [...graph.querySelectorAll('[data-sv]')];
+        const detail = graph.querySelector('.archive-profile-node-detail');
+        function selectNode(selected) {
+          const id = selected.getAttribute('aria-pressed') === 'true' ? '' : selected.dataset.sv;
+          const connected = new Set(id ? [id] : []);
+          links.forEach(link=>{
+            const ends = link.dataset.ends.split(' ');
+            const active = !!id && ends.includes(id);
+            if (active) ends.forEach(end=>connected.add(end));
+            link.classList.toggle('is-active',active);
+            link.classList.toggle('is-muted',!!id && !active);
+          });
+          nodes.forEach(node=>{
+            node.setAttribute('aria-pressed',String(node.dataset.sv === id));
+            node.classList.toggle('is-muted',!!id && !connected.has(node.dataset.sv));
+          });
+          detail.textContent = id ? selected.dataset.path : '点击节点可查看关联路径';
+        }
+        nodes.forEach(node=>{
+          node.setAttribute('role','button');
+          node.setAttribute('tabindex','0');
+          node.setAttribute('aria-label',node.dataset.path);
+          node.setAttribute('aria-pressed','false');
+          node.addEventListener('click',()=>selectNode(node));
+          node.addEventListener('keydown',event=>{
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            selectNode(node);
+          });
+        });
+      }
       function renderProfileGraph(type) {
         profileGraphButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.profileGraph === type)));
         const graph = document.getElementById('archiveProfileGraph');
@@ -12730,18 +12904,19 @@
           graph.textContent = '暂无该企业的关系记录';
           return;
         }
-        const relations = profileRelations[type];
-        const left = type === 'resources' ? [0] : [0, 1];
-        const right = type === 'resources' ? [1, 2] : [2, 3];
+        if (type === 'resources') {
+          renderProfileResourceMap(graph);
+          return;
+        }
+        const relations = profileSupplyChain;
         const renderBranch = (indexes, side) => '<ul class="archive-profile-branch ' + side + '">' + indexes.map(index => {
           const [name, relation, category] = relations[index];
-          const arrow = type === 'resources' && side === 'left' ? '←' : '→';
           return '<li><button type="button" class="archive-profile-node" data-profile-node="' + index + '" aria-pressed="false"><small>' + category + '</small><strong>' + name + '</strong></button>' +
-            '<span class="archive-profile-link"><span>' + relation + '</span><b aria-hidden="true"' + (arrow === '←' ? ' data-outbound' : '') + '>' + arrow + '</b></span></li>';
+            '<span class="archive-profile-link"><span>' + relation + '</span><b aria-hidden="true">→</b></span></li>';
         }).join('') + '</ul>';
-        graph.innerHTML = '<div class="archive-profile-network">' + renderBranch(left, 'left') +
+        graph.innerHTML = '<div class="archive-profile-network">' + renderBranch([0,1], 'left') +
           '<div class="archive-profile-hub"><small>当前企业</small><strong>' + escapeArchiveHTML(profileCompany.textContent) +
-          '</strong></div>' + renderBranch(right, 'right') + '</div><div class="archive-profile-node-detail" aria-live="polite"></div>';
+          '</strong></div>' + renderBranch([2,3], 'right') + '</div><div class="archive-profile-node-detail" aria-live="polite"></div>';
         const nodes = graph.querySelectorAll('[data-profile-node]');
         const detail = graph.querySelector('.archive-profile-node-detail');
         function selectNode(selected) {
@@ -12888,12 +13063,26 @@
         <rect x="7"  y="3"  width="4" height="14" rx="1.5" fill="${color}" opacity=".75"/>
         <rect x="13" y="6"  width="4" height="11" rx="1.5" fill="${color}" opacity=".45"/></svg>`;
 
-      document.getElementById('cardGrid').innerHTML = CARDS.map(c=>`
+      const priorityDimensions = ['企业基础', '人才团队', '财务成长'];
+      const combinedArchiveDimensions = ['企业基础', '信用合规'];
+      const orderedCards = [
+        ...priorityDimensions.map(name => CARDS.find(card => card.name === name)).filter(Boolean),
+        ...CARDS.filter(card => !priorityDimensions.includes(card.name) && card.name !== '信用合规')
+      ];
+      function archiveDisplayCard(name) {
+        if (!combinedArchiveDimensions.includes(name)) return CARDS.find(card=>card.name===name);
+        const members = combinedArchiveDimensions.map(dimension=>CARDS.find(card=>card.name===dimension));
+        const total = members.reduce((sum,card)=>sum+card.total,0);
+        const cover = members.reduce((sum,card)=>sum+card.cover,0);
+        return {...members[0], title:'企业基础与信用合规', desc:'工商信息、信用情况与合规记录',
+          total,cover,todo:total-cover,pct:Math.round(cover/total*100),members};
+      }
+      document.getElementById('cardGrid').innerHTML = orderedCards.map(card=>archiveDisplayCard(card.name)).map(c=>`
         <div class="card dim-card ${c.no==='01'?'selected':''}" data-name="${c.name}">
           <div class="dim-top">
             <div class="dim-icon" style="background:${c.color}14">${barIcon(c.color)}</div>
             <div class="dim-head">
-              <div class="dim-name">${c.name}<span class="dim-no num">${c.no}</span></div>
+              <div class="dim-name">${c.title || c.name}<span class="dim-no num">${c.no}</span></div>
               <div class="dim-desc">${c.desc}</div>
             </div>
             <div class="dim-pct">
@@ -13007,7 +13196,8 @@
         const db=await archiveOriginalDb;if(!db)return;
         try{const files=await new Promise((resolve,reject)=>{const req=db.transaction('files','readonly').objectStore('files').getAll();req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
           files.sort((a,b)=>a.savedAt-b.savedAt).forEach(entry=>{archiveOriginalMemory.set(entry.id,entry);const card=CARDS.find(c=>c.name===entry.dimension);if(!card)return;card.sections.flatMap(section=>section.rows).filter(row=>entry.codes.includes(row.code)).forEach(row=>{row.attachments=row.attachments||[];if(!row.attachments.some(file=>file.id===entry.id))row.attachments.push({id:entry.id,name:entry.name});row.links=[...new Set([...row.links,entry.name])];});});
-          const title=document.getElementById('dTitle').textContent;if(document.getElementById('drawer').classList.contains('show')&&CARDS.some(card=>card.name===title))openDrawer(title);
+          const activeDrawer=document.getElementById('drawer');
+          if(activeDrawer.classList.contains('show')&&activeDrawer.dataset.dimension)openDrawer(activeDrawer.dataset.dimension);
         }catch(error){}
       }
       restoreArchiveOriginals();
@@ -13283,6 +13473,8 @@
           card.cover = card.sections.flatMap(section => section.rows).filter(row => row.st === 'ok').length;
           card.todo = card.total - card.cover;
           card.pct = Math.round(card.cover / card.total * 100);
+        });
+        orderedCards.map(card=>archiveDisplayCard(card.name)).forEach(card=>{
           const element = document.querySelector('#cardGrid .dim-card[data-name="' + card.name + '"]');
           element.querySelector('.dim-pct .p').textContent = card.pct + '%';
           element.querySelector('.dim-meta .mi b').textContent = card.cover + ' / ' + card.total;
@@ -13472,8 +13664,10 @@
       });
 
       function openDrawer(name){
-        const c = CARDS.find(x=>x.name===name);
-        dTitle.textContent = c.name;
+        const c = archiveDisplayCard(name);
+        if(!c) return;
+        drawer.dataset.dimension = c.name;
+        dTitle.textContent = c.title || c.name;
         dSub.textContent = `已覆盖 ${c.cover} / ${c.total} · 待补全 ${c.todo} 项`;
         const progress = `
           <div class="d-progress">
@@ -13481,7 +13675,8 @@
             <div class="bar"><div class="fill" style="width:${c.pct}%"></div></div>
             <span class="pp num" style="color:${c.color}">${c.pct}%</span>
           </div>`;
-        dBody.innerHTML = progress + (name === '知识产权' ? IP_DETAIL.charts : '') + c.sections.map(secHTML).join('');
+        const sections = c.members ? c.members.map(member=>'<section class="archive-dimension-group"><h3>'+member.name+'</h3>'+member.sections.map(secHTML).join('')+'</section>').join('') : c.sections.map(secHTML).join('');
+        dBody.innerHTML = progress + (name === '知识产权' ? IP_DETAIL.charts : '') + sections;
         dBody.scrollTop = 0;
         drawer.classList.add('show'); mask.classList.add('show');
       }
