@@ -8923,9 +8923,7 @@
       return '<div class="eval-table-scroll" tabindex="0" role="region" aria-label="'+evalEscape(label)+'"><table class="eval-report-table"><thead><tr>'+
         columns.map(column=>'<th scope="col">'+column+'</th>').join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';
     }
-    function healthReportIndicators(isCase) {
-      const enterprise = document.getElementById('current-enterprise')?.textContent.trim();
-      const facts = enterprise === '武汉汉企业科技有限公司' ? (window.getArchiveGraphFacts?.() || []) : [];
+    function healthReportIndicators(isCase, facts) {
       return SMALL_GIANT_TEMPLATE.dimensions.flatMap(dimension => dimension.items.map(indicator => {
         const archiveFacts = (HEALTH_COMPANY_FACTS[indicator.row] || [])
           .map(name => facts.find(fact => fact.name === name)).filter(Boolean);
@@ -8945,6 +8943,58 @@
         };
       }));
     }
+    function compareHealthRequirements(isCase, facts, demoCompany = false) {
+      const value = name => facts.find(fact=>fact.name===name)?.value;
+      const percentage = name => {
+        const match = String(value(name) || '').match(/^\s*(\d+(?:\.\d+)?)\s*[%％]\s*$/);
+        return match ? Number(match[1]) : null;
+      };
+      const qualification = value('专精特新中小企业');
+      const revenues = [...String(value('近三年营业收入') || '').matchAll(/(\d{4})\s*年\s*(\d+(?:\.\d+)?)\s*万元/g)]
+        .map(([,year,amount])=>({year:Number(year),amount:Number(amount)})).sort((a,b)=>b.year-a.year);
+      const latest = revenues[0];
+      const base = latest && revenues.find(entry=>entry.year===latest.year-2);
+      const growth = base?.amount > 0 ? (Math.sqrt(latest.amount/base.amount)-1)*100 : null;
+      const financialChecks = [
+        [latest?.amount ?? null, 10000, '上年度营业收入', '万元', false],
+        [percentage('主营业务收入占比'),50,'主营业务收入占比','%',false],
+        [percentage('资产负债率'),75,'上年末资产负债率','%',true]
+      ];
+      const financialFailures = financialChecks.filter(([actual,limit,,,maximum])=>actual!==null && (maximum ? actual>limit : actual<limit));
+      const marketValue = String(value('主导产品市场占有率') || '');
+      const domestic = marketValue.match(/国内(?:市场)?占有率\s*(\d+(?:\.\d+)?)\s*[%％]/);
+      const overseas = marketValue.match(/(?:国外|海外)(?:市场)?占有率\s*(\d+(?:\.\d+)?)\s*[%％]/);
+      const rank = marketValue.match(/国内(?:排名)?\s*第\s*(\d+)\s*名?/);
+      const market = isCase || (!marketValue && demoCompany) ? {domestic:8,overseas:6,rank:8,demo:true} :
+        domestic && overseas && rank ? {domestic:Number(domestic[1]),overseas:Number(overseas[1]),rank:Number(rank[1])} : null;
+      const marketFailure = market && market.domestic<10 && market.overseas<10 && market.rank>3;
+      const demo = isCase || demoCompany;
+      const rAndD = demo ? [{year:2024,expense:300,revenue:8400},{year:2025,expense:350,revenue:10025.28}] : [];
+      const researchTotal = rAndD.reduce((sum,entry)=>sum+entry.expense,0);
+      const researchRatio = entry=>entry.expense/entry.revenue*100;
+      const researchMissesRatio = rAndD.filter(entry=>researchRatio(entry)<4);
+      const classIP = demo ? {count:3,exempt:false} : null;
+      const comparisons = [
+        {actual:qualification, gap:/尚未认定|未获认定/.test(qualification || '') ? '尚未取得专精特新中小企业称号' : '', missing:'专精特新中小企业认定材料及细分市场经营起始时间'},
+        {actual:financialFailures.map(([actual,,name,unit])=>name+' '+actual+unit).join('；'),
+          gap:financialFailures.map(([,limit,name,unit,maximum])=>name+(maximum?'高于':'低于')+limit+unit).join('；'),
+          missing:financialChecks.filter(([actual])=>actual===null).map(([, ,name])=>name)
+            .concat(growth===null ? '近两年营收复合增长率（适用时）' : growth<3 ? '申请或复核类型，以判断低于 3% 的营收增长率是否适用' : []).join('、')},
+        {actual:rAndD.length ? rAndD.map(entry=>entry.year+' 年 '+entry.expense+' 万元，占营收 '+researchRatio(entry).toFixed(2)+'%').join('；')+'（演示数据）' : '',
+          gap:rAndD.length ? [researchTotal<1200 ? '两年合计 '+researchTotal+' 万元，距 1,200 万元差 '+(1200-researchTotal)+' 万元' : '',
+            researchMissesRatio.length ? researchMissesRatio.map(entry=>entry.year).join('、')+' 年研发费用占比低于 4%' : ''].filter(Boolean).join('；') : '',
+          missing:rAndD.length ? '' : '近两年逐年研发费用和同期营收'},
+        {actual:classIP ? '与主导产品相关且已应用的Ⅰ类知识产权 '+classIP.count+' 项，无适用豁免（演示数据）' : '',
+          gap:classIP && !classIP.exempt && classIP.count<4 ? '距至少 4 项的要求还差 '+(4-classIP.count)+' 项' : '',
+          missing:classIP ? '' : '符合口径的Ⅰ类知识产权总数、应用收益或适用豁免的获奖证明'},
+        {actual:market ? '国内占有率 '+market.domestic+'%，国外占有率 '+market.overseas+'%，国内第 '+market.rank+' 名'+(market.demo?'（演示数据）':'') : '',
+          gap:marketFailure ? '国内外占有率均低于 10%，国内排名未进入前三' : '',
+          missing:market ? '' : '主导产品国内外市场占有率及国内排名'},
+        {missing:'主导产品所属领域及产业链关键环节证明'},
+        {missing:'适用年度的专精特新发展评价结果'}
+      ];
+      return SMALL_GIANT_TEMPLATE.conditions.map((condition,index)=>({...condition,...comparisons[index]}));
+    }
     function renderHealthWorkbookResult() {
       const host = document.getElementById('health-workbook-report');
       if (!host) return;
@@ -8957,21 +9007,25 @@
         host.innerHTML = '<section class="eval-section eval-unconfigured"><h3>测评结论 · 待配置指标</h3><p>'+e(currentHealthProject)+'的专属指标与材料清单待配置。</p></section>';
         return;
       }
-      const items = healthReportIndicators(isCase);
+      const enterprise = document.getElementById('current-enterprise')?.textContent.trim();
+      const facts = !isCase && enterprise === '武汉汉企业科技有限公司' ? (window.getArchiveGraphFacts?.() || []) : [];
+      const items = healthReportIndicators(isCase, facts);
       const grade = healthCaseGrade(items);
       const gaps = items.filter(item => item.grade !== 'A');
-      const conditions = giant ? SMALL_GIANT_TEMPLATE.conditions : [];
+      const conditions = giant ? compareHealthRequirements(isCase, facts, enterprise === '武汉汉企业科技有限公司') : [];
+      const vetoes = conditions.filter(condition=>condition.gap);
+      const requirementsMissing = conditions.filter(condition=>condition.missing);
       host.innerHTML =
         '<section class="eval-section" aria-labelledby="health-summary-title"><div class="eval-section-head"><h3 id="health-summary-title">一、测评结论总览</h3></div>'+
         '<div class="eval-overview"><div class="eval-score"><strong>'+grade+'</strong><span>'+(isCase ? '案例综合等级' : '示例综合等级')+' · '+healthGradeLabel(grade)+'</span></div>'+
-        '<div class="eval-conclusion"><b>优先处理一票否决项，再补强 C 级指标</b>'+
+        '<div class="eval-conclusion"><b>'+(vetoes.length ? '未达到申报必要条件，优先补齐一票否决项' : '按缺口清单补充申报资料，再处理分项差距')+'</b>'+
         '<p>'+(isCase ? '装备制造企业案例 A · 依据小巨人测评工作簿展示。' : '等级采用工作簿案例数据演示，现状栏展示本企业档案数据。')+'</p>'+
-        '<div class="eval-stat-grid"><div><b>'+(giant ? conditions.length : '—')+'</b><span>一票否决项</span></div><div><b>'+items.length+'</b><span>分项指标</span></div>'+
+        '<div class="eval-stat-grid"><div><b>'+(giant ? vetoes.length : '—')+'</b><span>一票否决项</span></div><div><b>'+items.length+'</b><span>分项指标</span></div>'+
         '<div><b>'+gaps.length+'</b><span>补强项</span></div><div><b>'+items.length+'</b><span>涉及补充材料的指标</span></div></div></div></div></section>'+
         '<section class="eval-section eval-veto" aria-labelledby="health-veto-title"><div class="eval-section-head"><h3 id="health-veto-title">二、一票否决项</h3>'+
-        '<span class="eval-veto-tag">'+(giant ? '任一适用项不满足即未通过门槛' : '专属条件待配置')+'</span></div>'+
-        (giant ? conditions.map((condition,index) => '<article class="eval-condition"><span class="eval-number">'+(index+1)+'</span><div><h4>'+e(condition.title)+'</h4><p>'+e(condition.standard)+'</p><small>证明材料：'+e(condition.evidence)+'</small></div></article>').join('')
-          : '<p>当前项目的一票否决条件待补充。</p>')+'</section>'+
+        '<span class="eval-veto-tag">'+(giant ? vetoes.length+' 项未达标' : '专属条件待配置')+'</span></div>'+
+        (vetoes.length ? vetoes.map((condition,index) => '<article class="eval-condition"><span class="eval-number">'+(index+1)+'</span><div><h4>'+e(condition.title)+'</h4><p><b>申报要求</b>　'+e(condition.standard)+'</p><p><b>企业实际</b>　'+e(condition.actual)+'</p><p><b>未达差距</b>　'+e(condition.gap)+'</p><small>证明材料：'+e(condition.evidence)+'</small></div></article>').join('')
+          : giant ? '<p>根据已有数据，暂未发现明确未达标的必要条件。缺少的数据和材料见下方清单。</p>' : '<p>当前项目的一票否决条件待补充。</p>')+'</section>'+
         '<section class="eval-section eval-breakdown" aria-labelledby="health-breakdown-title"><div class="eval-section-head"><h3 id="health-breakdown-title">三、分项指标与差距分析</h3><span class="eval-meta">A 基础较好 · B 需要补强 · C 差距较大</span></div>'+
         '<div class="eval-dimensions">'+SMALL_GIANT_TEMPLATE.dimensions.map(dimension => {
           const level = healthCaseGrade(dimension.items);
@@ -8981,16 +9035,18 @@
         (isCase ? '<div class="eval-filter" role="group" aria-label="分项指标等级筛选"><button type="button" class="eval-btn is-active" data-eval-filter="all" aria-pressed="true">全部等级</button><button type="button" class="eval-btn" data-eval-filter="B" aria-pressed="false">B 级</button><button type="button" class="eval-btn" data-eval-filter="C" aria-pressed="false">C 级</button></div>' : '')+
         '<div id="health-criteria"></div></details>'+
         '<h4>差距分析与补强建议</h4><div id="health-gaps"></div>'+
-        '<h4>缺失数据与材料</h4><p class="eval-meta">'+(isCase ? '案例工作簿未附原始凭证。下表列出缺少的数据、资质和建议补充的材料。' : '下表按指标列出数据缺口和建议补充的材料。')+'</p><div id="health-evidence"></div></section>'+
-        '<section class="eval-section eval-next" aria-labelledby="health-tasks-title"><div class="eval-section-head"><h3 id="health-tasks-title">四、补强任务与推荐服务</h3><button type="button" class="eval-btn" onclick="goToPage(&quot;page-archive&quot;,&quot;企业数字档案&quot;)">去补充企业档案</button></div>'+
-        '<p>'+(isCase ? '优先核验一票否决项，再处理 C 级和 B 级差距。' : '优先核验关键条件和缺失材料，再安排分项补强。')+'可勾选多项推荐服务，合并下单。</p><div id="health-repair-tasks"></div></section>';
+        '<div class="eval-section-head"><h4>缺失数据与材料</h4><button type="button" class="eval-btn" id="health-fill-evidence" onclick="goToPage(&quot;page-archive&quot;,&quot;企业数字档案&quot;)">补全材料 <span aria-hidden="true">→</span></button></div>'+
+        '<p class="eval-meta">'+(isCase ? '案例工作簿未附原始凭证。下表列出缺少的数据、资质和建议补充的材料。' : '下表按指标列出数据缺口和建议补充的材料。')+'</p><div id="health-evidence"></div></section>'+
+        '<section class="eval-section eval-next" aria-labelledby="health-tasks-title"><div class="eval-section-head"><h3 id="health-tasks-title">四、补强任务与推荐服务</h3></div>'+
+        '<p>'+(vetoes.length ? '先整改未达标的必要条件，再处理分项差距。' : '先补充缺失数据和材料，再安排分项补强。')+'可勾选多项推荐服务，合并下单。</p><div id="health-repair-tasks"></div></section>';
 
       document.getElementById('health-criteria').innerHTML = healthReportTable('全部分项指标', ['维度','指标','现状','等级','评判依据'],
         items.map(item => '<tr data-grade="'+item.grade+'"><td>'+e(item.dimension)+'</td><th scope="row">'+e(item.name)+'</th><td>'+e(item.actual || '缺少企业数据')+'</td><td class="eval-nowrap">'+healthGradeBadge(item.grade)+'</td><td>'+e(isCase ? healthIndicatorBasis(item) : item.method)+'</td></tr>'));
-      document.getElementById('health-evidence').innerHTML = healthReportTable('缺失数据与材料', ['指标','数据缺口','建议补充的材料','指标等级'],
-        items.map(item => '<tr><th scope="row">'+e(item.name)+'</th><td>'+e(item.missingData || '案例已列指标值')+'</td><td>'+e(item.materials)+'</td><td class="eval-nowrap">'+healthGradeBadge(item.grade)+'</td></tr>'));
+      document.getElementById('health-evidence').innerHTML = healthReportTable('缺失数据与材料', ['指标','数据缺口','建议补充的材料'],
+        requirementsMissing.map(condition=>'<tr><th scope="row">申报必要条件 · '+e(condition.title)+'</th><td>'+e(condition.missing)+'</td><td>'+e(condition.evidence)+'</td></tr>')
+          .concat(items.map(item => '<tr><th scope="row">'+e(item.name)+'</th><td>'+e(item.missingData || '案例已列指标值')+'</td><td>'+e(item.materials)+'</td></tr>')));
       renderHealthGaps(gaps);
-      renderHealthRepairTasks(giant);
+      renderHealthRepairTasks(vetoes);
     }
     const HEALTH_GAP_SERVICES = {
       15:{name:'科创专家一对一辅导',price:'¥1,000',solve:'梳理标准参与路径、申报条件与佐证材料。'},
@@ -9026,10 +9082,10 @@
         : '<p class="eval-meta">当前暂无需补强的指标。</p>';
     }
     const HEALTH_ADVISOR_TASKS = new Set([17,22,23,24]);
-    function renderHealthRepairTasks(giant) {
+    function renderHealthRepairTasks(vetoes) {
       const e = evalEscape;
       const headCheckbox = '<input type="checkbox" id="health-task-select-all" aria-label="全选推荐服务任务">';
-      const rows = giant ? ['<tr><td>—</td><th scope="row">核验一票否决项</th><td class="eval-priority">优先</td><td>逐项补齐认定文件、财务和市场佐证</td><td>—</td><td class="eval-nowrap">企业自办</td></tr>'] : [];
+      const rows = vetoes.map(condition=>'<tr><td>—</td><th scope="row">'+e(condition.title)+'</th><td class="eval-priority">优先</td><td>'+e(condition.gap+'。补充'+condition.evidence)+'。</td><td>—</td><td class="eval-nowrap">企业自办</td></tr>');
       rows.push(...HEALTH_GAPS.map(gap => '<tr><td>'+(gap.solvable ? '<input type="checkbox" data-health-task="'+gap.row+'" aria-label="'+e('选择 '+gap.item+' · '+gap.service)+'">' : '—')+'</td>'+
         '<th scope="row">'+e(gap.item)+'</th><td class="eval-nowrap">'+e(gap.priority)+'</td><td>'+e(gap.direction)+'</td>'+
         '<td class="eval-nowrap">'+e(gap.price || '—')+'</td>'+
