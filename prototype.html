@@ -3333,7 +3333,7 @@
                   <li><strong>匹配有方向</strong><span>结合企业实际情况，发现适合的政策项目。</span></li>
                   <li><strong>培育有计划</strong><span>明确目标梯度、项目组合和补强优先级。</span></li>
                 </ul>
-                <p class="archive-purpose-tip">建议先补齐当前目标所需的关键指标与证明材料，再逐步完善其他信息。上传后请核对 AI 识别结果，确认后再更新档案；已归档资料可供后续测评与申报准备复用。</p>
+                <p class="archive-purpose-tip">公开直采数据直接展示。企业可先补齐当前目标所需的手动填报项和证明材料，上传后确认 AI 识别结果即可更新档案。</p>
                 </div>
               </details>
 
@@ -3395,7 +3395,7 @@
               <label class="export-option" for="archiveExportFormat"><span>演示导出格式</span><select id="archiveExportFormat"><option value="pdf">PDF 报告（.pdf）</option><option value="docx">Word 文档（.docx）</option></select></label>
               <div class="m-sec-title">报告包含</div>
               <div class="export-contents"><span>企业画像概览</span><span>各维度指标明细</span><span>待补全指标清单</span><span>关联材料索引</span></div>
-              <div class="m-notice">画像完整度按已确认指标占比计算。本次仅演示报告生成与下载流程，不会生成或下载实际文件。</div>
+              <div class="m-notice">填报完成率仅统计企业手动填报项。演示流程展示报告生成与下载步骤。</div>
               <div class="m-steps" id="archiveExportSteps"><div class="m-step active">1 汇总档案</div><div class="m-step">2 生成报告</div><div class="m-step">3 模拟下载</div></div>
               <div class="export-progress" id="archiveExportProgress" hidden>
                 <div class="export-progress-head"><span id="archiveExportMessage">正在汇总企业档案…</span><span class="num" id="archiveExportPercent">0%</span></div>
@@ -3611,8 +3611,8 @@
           <div class="demo-only policy-primary-tabs" role="tablist" aria-label="政策一级筛选">
             <button type="button" role="tab" aria-selected="false" data-policy-tab="opportunity" class="policy-tab">政策机会（申报期内）</button>
             <button type="button" role="tab" aria-selected="false" data-policy-tab="calculator" class="policy-tab">政策计算器（不限期内）</button>
-            <button type="button" role="tab" aria-selected="true" data-policy-tab="all" class="policy-tab policy-tab-active">全部政策</button>
             <button type="button" role="tab" aria-selected="false" data-policy-tab="benefits" class="policy-tab">免申即享</button>
+            <button type="button" role="tab" aria-selected="true" data-policy-tab="all" class="policy-tab policy-tab-active">全部政策</button>
           </div>
 
           <!-- 全部政策 -->
@@ -3622,9 +3622,15 @@
               <button class="policy-region-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-region="湖北省">湖北省</button>
               <button class="policy-region-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-region="武汉市">武汉市</button>
               <button class="policy-region-chip rounded-full px-3 py-1 text-xs transition bg-white text-gray-600 border border-gray-200 hover:border-primary hover:text-primary" data-region="东湖高新区">东湖高新区</button>
+              <label class="ml-2 flex items-center gap-2 text-sm text-gray-600" for="policy-issuer-filter">
+                发文单位
+                <select id="policy-issuer-filter" class="max-w-full rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm">
+                  <option value="">全部发文单位</option>
+                </select>
+              </label>
             </div>
-            <div class="policy-results-info"><span id="policy-filter-summary" aria-live="polite"></span><button type="button" class="policy-reset" data-policy-reset-region hidden>清除地区筛选</button></div>
-            <div class="policy-filter-empty" id="policy-filter-empty" hidden>当前地区下暂无符合筛选的政策。<br><button type="button" class="policy-reset" data-policy-reset-region>查看全部地区</button></div>
+            <div class="policy-results-info"><span id="policy-filter-summary" aria-live="polite"></span><button type="button" class="policy-reset" data-policy-reset-region hidden>清除地区筛选</button><button type="button" class="policy-reset" id="policy-reset-issuer" hidden>清除发文单位筛选</button></div>
+            <div class="policy-filter-empty" id="policy-filter-empty" hidden>当前筛选条件下暂无符合的政策。<br><button type="button" class="policy-reset" id="policy-reset-filters">清除筛选</button></div>
             <div class="space-y-3" id="policy-card-list"><article class="u-policy-card has-ai-summary high" data-policy="2026年湖北省专精特新中小企业认定" data-match="92" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 23 家已申报</span></div><h3 style="margin-top:10px">2026年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2026-11-20</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>50 万元</strong></div><div class="policy-key-metric policy-countdown is-urgent"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">9</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">聚焦细分领域的专业化发展，适合持续研发、具备特色产品与市场竞争力的企业。</div><div class="policy-ai-advice"><b>申报建议</b> 重点梳理主营业务、研发投入和知识产权，形成专业化与创新能力的证明材料。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>92%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card has-ai-summary high" data-policy="2026年高新技术企业认定（第二批）" data-match="87" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">高企认定</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 156 家已申报</span></div><h3 style="margin-top:10px">2026年高新技术企业认定（第二批）</h3><p>湖北省科学技术厅 · 截止 2026-11-30</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>30 万元</strong></div><div class="policy-key-metric policy-countdown"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">19</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">围绕企业的核心技术与成果转化能力开展认定，重点关注知识产权、研发投入和高新业务。</div><div class="policy-ai-advice"><b>申报建议</b> 建议先核对研发费用归集口径，整理知识产权、科技成果转化和高新收入证明。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>87%</b><span class="u-chip green">重点机会</span></div></article><article class="u-policy-card has-ai-summary" data-policy="东湖高新区瞪羚企业认定" data-match="78" data-region="东湖高新区"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">区级</span><span class="u-chip violet">瞪羚企业</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 47 家已申报</span></div><h3 style="margin-top:10px">东湖高新区瞪羚企业认定</h3><p>东湖高新区管委会 · 截止 2026-11-22</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>100 万元</strong></div><div class="policy-key-metric policy-countdown"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">11</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">面向具有成长潜力与创新能力的企业，重点展示业务增长与持续创新表现。</div><div class="policy-ai-advice"><b>申报建议</b> 建议梳理近年营收、研发投入及核心产品，形成企业成长性与创新优势的材料。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>78%</b><span class="u-chip blue">机会</span></div></article><article class="u-policy-card has-ai-summary" data-policy="武汉市科技型中小企业入库评价" data-match="65" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">科小入库</span><span class="u-chip green">研发加计扣除</span><span class="u-chip blue">申报中</span><span class="u-chip peer">同赛道 320 家已申报</span></div><h3 style="margin-top:10px">武汉市科技型中小企业入库评价</h3><p>武汉市科学技术局 · 截止 2026-12-08</p><div class="policy-key-metrics"><div class="policy-key-metric policy-countdown"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">27</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">通过科技型中小企业评价入库展示企业科技创新能力，为后续培育与政策衔接做好准备。</div><div class="policy-ai-advice"><b>申报建议</b> 优先核查人员、经营规模和研发活动信息，准备评价表及相关证明材料。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>65%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card has-ai-summary" data-policy="2026年湖北省重点研发计划项目" data-match="54" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">重点研发</span><span class="u-chip violet">即将开始</span><span class="u-chip peer">同赛道 88 家已申报</span></div><h3 style="margin-top:10px">2026年湖北省重点研发计划项目</h3><p>湖北省科学技术厅 · 截止 2026-12-01</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>500 万元</strong></div><div class="policy-key-metric policy-countdown"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">20</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">围绕重点研发任务组织项目申报，突出技术攻关目标、实施路径与预期成果。</div><div class="policy-ai-advice"><b>申报建议</b> 建议先对照项目指南确认研究方向，完善技术方案、预算及团队分工。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>54%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card has-ai-summary" data-policy="2026年武汉市人工智能创新专项" data-match="61" data-region="武汉市"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">人工智能</span><span class="u-chip violet">即将开始</span><span class="u-chip peer">同赛道 64 家已申报</span></div><h3 style="margin-top:10px">2026年武汉市人工智能创新专项</h3><p>武汉市科学技术局 · 截止 2026-12-15</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>300 万元</strong></div><div class="policy-key-metric policy-countdown"><span class="policy-metric-label">申报倒计时</span><strong><span class="policy-days">34</span><small>天</small></strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">聚焦人工智能领域的创新项目，申报材料应清晰呈现技术亮点与应用价值。</div><div class="policy-ai-advice"><b>申报建议</b> 建议对照专项指南确认支持方向，整理技术成果、应用场景和项目实施计划。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>61%</b><span class="u-chip gray">常规</span></div></article><article class="u-policy-card has-ai-summary" data-policy="2025年湖北省专精特新中小企业认定" data-match="88" data-region="湖北省"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">专精特新</span><span class="u-chip gray">已截止</span><span class="u-chip peer">同赛道 128 家已申报</span></div><h3 style="margin-top:10px">2025年湖北省专精特新中小企业认定</h3><p>湖北省经济和信息化厅 · 截止 2025-08-31</p><div class="policy-key-metrics"><div class="policy-key-metric policy-subsidy"><span class="policy-metric-label">最高补贴</span><strong>50 万元</strong></div><div class="policy-key-metric policy-countdown is-closed"><span class="policy-metric-label">申报状态</span><strong>已截止</strong></div></div><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">往年专精特新认定政策，可用于了解申报方向、复盘条件与提前规划。</div><div class="policy-ai-advice"><b>申报建议</b> 本批次已结束，建议参考历史要求整理资料，并关注新年度申报通知。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip gray">已截止</span></div></article><article class="u-policy-card has-ai-summary" data-policy="研发费用税前加计扣除" data-match="96" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 2,410 家已享受</span></div><h3 style="margin-top:10px">研发费用税前加计扣除</h3><p>国家税务总局 · 汇算清缴时自动享受 · 无需申报</p><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">围绕符合条件的研发活动及相关费用提供税收支持，关键在于研发活动识别和费用归集。</div><div class="policy-ai-advice"><b>申报建议</b> 建议完善研发立项资料与辅助账，核对人员、设备和材料费用的分摊依据。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>96%</b><span class="u-chip green">普惠</span></div><div class="benefit-layout"><div class="benefit-overview"><div class="u-tags"><span class="u-chip green">普惠政策</span><span class="u-chip blue">自行判别 · 申报享受</span></div><h3>研发费用税前加计扣除</h3><p>国家税务总局</p><div class="benefit-process"><b>办理方式</b><span>通过企业所得税申报享受，相关资料留存备查，并非不填报自动减免。</span></div></div><section class="benefit-conditions" aria-label="研发费用税前加计扣除适用条件"><h4>申报 / 享受核心条件<span>逐项核对</span></h4><ul><li>会计核算健全、实行查账征收，能够准确归集研发费用。</li><li>开展符合政策范围的研发活动，且不属于不适用优惠的负面清单行业。</li><li>按研发项目设置辅助账，分别核算研发费用与生产经营费用。</li></ul></section><div class="benefit-bottom"><span>条件摘要以官方政策原文及当地执行口径为准</span><div class="u-actions"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><a class="u-button primary benefit-official" href="https://www.chinatax.gov.cn/chinatax/c103110/c5252669/content.html" target="_blank" rel="noopener noreferrer" aria-label="在新窗口打开研发费用税前加计扣除官方政策">前往官网 <span aria-hidden="true">↗</span></a></div></div></div></article><article class="u-policy-card has-ai-summary" data-policy="小型微利企业所得税减免" data-match="93" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 5,320 家已享受</span></div><h3 style="margin-top:10px">小型微利企业所得税减免</h3><p>国家税务总局 · 符合条件自动享受优惠税率 · 无需申报</p><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">面向符合条件的小型微利企业，通过所得税优惠减轻经营负担。</div><div class="policy-ai-advice"><b>申报建议</b> 建议先核对所得额、从业人数与资产数据，再结合所属期政策确认适用口径。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>93%</b><span class="u-chip green">普惠</span></div><div class="benefit-layout"><div class="benefit-overview"><div class="u-tags"><span class="u-chip green">普惠政策</span><span class="u-chip blue">申报享受</span></div><h3>小型微利企业所得税减免</h3><p>国家税务总局</p><div class="benefit-process"><b>办理方式</b><span>在企业所得税预缴、汇算清缴时按规定填报享受；人数和资产按规定口径计算。</span></div></div><section class="benefit-conditions" aria-label="小型微利企业所得税减免适用条件"><h4>申报 / 享受核心条件<span>逐项核对</span></h4><ul><li>从事国家非限制和禁止行业。</li><li>年度应纳税所得额不超过 300 万元。</li><li>从业人数不超过 300 人，资产总额不超过 5,000 万元；各项条件须同时满足。</li></ul></section><div class="benefit-bottom"><span>条件摘要以官方政策原文及当地执行口径为准</span><div class="u-actions"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><a class="u-button primary benefit-official" href="https://www.chinatax.gov.cn/chinatax/n810356/n3255681/c5240479/content.html" target="_blank" rel="noopener noreferrer" aria-label="在新窗口打开小型微利企业所得税减免官方政策">前往官网 <span aria-hidden="true">↗</span></a></div></div></div></article><article class="u-policy-card has-ai-summary" data-policy="增值税期末留抵退税" data-match="88" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">国家级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 1,890 家已享受</span></div><h3 style="margin-top:10px">增值税期末留抵退税</h3><p>国家税务总局 · 符合条件的留抵税额自动退还 · 无需申报</p><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">针对符合条件的期末留抵税额办理退还，帮助企业改善资金周转。</div><div class="policy-ai-advice"><b>申报建议</b> 建议核对留抵税额、纳税信用及所属行业等信息，确认申请范围与办理材料。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>88%</b><span class="u-chip green">普惠</span></div><div class="benefit-layout"><div class="benefit-overview"><div class="u-tags"><span class="u-chip green">普惠政策</span><span class="u-chip blue">需申请退税</span></div><h3>增值税期末留抵退税</h3><p>国家税务总局</p><div class="benefit-process"><b>办理方式</b><span>需符合所属行业及留抵税额等具体规则，完成当期增值税申报后按规定提交退（抵）税申请表。</span></div></div><section class="benefit-conditions" aria-label="增值税期末留抵退税适用条件"><h4>申报 / 享受核心条件<span>逐项核对</span></h4><ul><li>属于符合留抵退税政策的增值税一般纳税人，纳税缴费信用为 A 级或 B 级。</li><li>申请前 36 个月无骗取留抵退税、出口退税或虚开增值税专用发票情形，且未因偷税被处罚两次及以上。</li><li>自 2019 年 4 月 1 日起未享受增值税即征即退、先征后返（退）政策，政策另有规定的除外。</li></ul></section><div class="benefit-bottom"><span>条件摘要以官方政策原文及当地执行口径为准</span><div class="u-actions"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><a class="u-button primary benefit-official" href="https://fgk.chinatax.gov.cn/zcfgk/c100024/c5245252/content.html" target="_blank" rel="noopener noreferrer" aria-label="在新窗口打开增值税期末留抵退税官方政策">前往官网 <span aria-hidden="true">↗</span></a></div></div></div></article><article class="u-policy-card has-ai-summary" data-policy="失业保险稳岗返还" data-match="91" data-region="武汉市" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">市级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 8,620 家已享受</span></div><h3 style="margin-top:10px">失业保险稳岗返还</h3><p>武汉市人社局 · 参保企业自动返还 · 无需申报</p><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">面向稳定就业岗位的企业，重点关注参保缴费和稳岗情况。</div><div class="policy-ai-advice"><b>申报建议</b> 建议核查参保记录与人员变动信息，确认本年度适用条件及办理方式。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>91%</b><span class="u-chip green">普惠</span></div><div class="benefit-layout"><div class="benefit-overview"><div class="u-tags"><span class="u-chip green">普惠政策</span><span class="u-chip blue">免申即享 · 信息确认</span></div><h3>失业保险稳岗返还</h3><p>湖北省人力资源和社会保障厅</p><div class="benefit-process"><b>办理方式</b><span>按经办机构通知核对企业及银行账户信息、确认返还信息，具体以当地推送流程为准。</span></div></div><section class="benefit-conditions" aria-label="失业保险稳岗返还适用条件"><h4>申报 / 享受核心条件<span>逐项核对</span></h4><ul><li>参保企业足额缴纳失业保险费 12 个月以上。</li><li>上年度未裁员或裁员率不高于 5.5%。</li><li>参保职工 30 人（含）以下的企业，裁员率不高于参保职工总数的 20%；按对应规模口径核验。</li></ul></section><div class="benefit-bottom"><span>条件摘要以官方政策原文及当地执行口径为准</span><div class="u-actions"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><a class="u-button primary benefit-official" href="https://rst.hubei.gov.cn/zfxxgk/zc/qtzdgkwj/202608/t20260825_6000528.shtml" target="_blank" rel="noopener noreferrer" aria-label="在新窗口打开失业保险稳岗返还官方政策">前往官网 <span aria-hidden="true">↗</span></a></div></div></div></article><article class="u-policy-card has-ai-summary" data-policy="首台（套）重大技术装备保险补偿" data-match="85" data-region="湖北省" data-cat="免申即享"><div style="flex:1;min-width:0"><div class="u-tags"><span class="u-chip">省级</span><span class="u-chip violet">免申即享</span><span class="u-chip green">普惠</span><span class="u-chip peer">同赛道 36 家已享受</span></div><h3 style="margin-top:10px">首台（套）重大技术装备保险补偿</h3><p>湖北省经信厅 · 投保企业自动享受保费补贴 · 无需申报</p><div class="u-actions" style="margin-top:11px"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><button type="button" class="u-button ghost js-policy-favorite">收藏</button><button type="button" class="u-button primary js-create-project">加入培育项目</button></div></div><div class="policy-ai-summary"><div class="policy-ai-heading"><span class="policy-ai-icon">✦</span>AI 政策解读<span class="policy-ai-caption">要点提炼</span></div><div class="policy-ai-text">围绕首台（套）重大技术装备的推广应用，通过保险补偿支持相关风险保障。</div><div class="policy-ai-advice"><b>申报建议</b> 建议核查装备与投保信息，整理产品技术资料、保单和保费支付凭证。</div><div class="policy-ai-footnote">AI 摘要供参考，具体以政策原文为准</div></div><div class="u-policy-match"><span style="font-size:14px;color:#7c8b9d">AI匹配度</span><b>85%</b><span class="u-chip green">普惠</span></div><div class="benefit-layout"><div class="benefit-overview"><div class="u-tags"><span class="u-chip green">普惠政策</span><span class="u-chip blue">资格审定后申请</span></div><h3>首台（套）重大技术装备保险补偿</h3><p>工业和信息化部等三部门</p><div class="benefit-process"><b>办理方式</b><span>需按年度通知完成资格审定与资金申请，不能仅凭投保自动领取；以当期申报窗口为准。</span></div></div><section class="benefit-conditions" aria-label="首台（套）重大技术装备保险补偿适用条件"><h4>申报 / 享受核心条件<span>逐项核对</span></h4><ul><li>制造企业生产的装备属于《首台（套）重大技术装备推广应用指导目录（2024版）》支持范围。</li><li>已通过保险补偿资格审定，核定的保费补助资金额度在有效期内。</li><li>完成装备制造、交付、投保与全额保费缴纳，按要求提交真实、完整的申请材料。</li></ul></section><div class="benefit-bottom"><span>条件摘要以官方政策原文及当地执行口径为准</span><div class="u-actions"><button type="button" class="u-button ghost js-policy-detail">查看详情</button><a class="u-button primary benefit-official" href="https://www.miit.gov.cn/zwgk/zcwj/wjfb/tz/art/2026/art_fefca99ac5934ebd905b2232e417e317.html" target="_blank" rel="noopener noreferrer" aria-label="在新窗口打开首台（套）重大技术装备保险补偿官方政策">前往官网 <span aria-hidden="true">↗</span></a></div></div></div></article></div>
           </div>
 
@@ -8040,20 +8046,39 @@
       });
     });
 
-    // 一级筛选共用政策列表，地区作为叠加条件。
+    // 全部政策与免申即享共用地区和发文单位筛选。
     let policyRegion = '全部';
     let policyCat = '全部';
+    const policyIssuerFilter = document.getElementById('policy-issuer-filter');
+    const policyRows = [...document.querySelectorAll('#policy-card-list .u-policy-card')].map(card=>{
+      const issuer = card.querySelector(':scope > div > p')?.textContent.split('·')[0].trim() || '';
+      const benefitIssuer = card.querySelector('.benefit-overview > p')?.textContent.trim() || issuer;
+      return {card,issuer,benefitIssuer};
+    });
+    let policyIssuerOptionCategory;
     function applyPolicyFilters() {
+      const categoryMatches = row => policyCat === '全部' || row.card.dataset.cat === policyCat;
+      const getIssuer = row => policyCat === '免申即享' ? row.benefitIssuer : row.issuer;
+      if (policyIssuerOptionCategory !== policyCat) {
+        policyIssuerOptionCategory = policyCat;
+        const previous = policyIssuerFilter.value;
+        const issuers = [...new Set(policyRows.filter(categoryMatches).map(getIssuer).filter(Boolean))]
+          .sort((a,b)=>a.localeCompare(b,'zh-CN'));
+        policyIssuerFilter.replaceChildren(new Option('全部发文单位',''),...issuers.map(issuer=>new Option(issuer,issuer)));
+        if (issuers.includes(previous)) policyIssuerFilter.value = previous;
+      }
+      const issuer = policyIssuerFilter.value;
       let visible = 0;
-      document.querySelectorAll('#policy-card-list .u-policy-card').forEach((row) => {
-        const regionOk = policyRegion === '全部' || row.dataset.region === policyRegion;
-        const catOk = policyCat === '全部' || row.dataset.cat === policyCat;
-        row.classList.toggle('hidden', !(regionOk && catOk));
-        if(regionOk && catOk) visible++;
+      policyRows.forEach(row => {
+        const matches = categoryMatches(row) && (policyRegion === '全部' || row.card.dataset.region === policyRegion) &&
+          (!issuer || getIssuer(row) === issuer);
+        row.card.classList.toggle('hidden',!matches);
+        if (matches) visible++;
       });
-      document.getElementById('policy-filter-summary').textContent = (policyCat === '免申即享' ? '免申即享' : '全部政策') + ' · ' + (policyRegion === '全部' ? '全部地区' : policyRegion) + ' · 共 ' + visible + ' 条';
+      document.getElementById('policy-filter-summary').textContent = (policyCat === '免申即享' ? '免申即享' : '全部政策') + ' · ' + (policyRegion === '全部' ? '全部地区' : policyRegion) + ' · ' + (issuer || '全部发文单位') + ' · 共 ' + visible + ' 条';
       document.getElementById('policy-filter-empty').hidden = visible !== 0;
       document.querySelector('.policy-results-info [data-policy-reset-region]').hidden = policyRegion === '全部';
+      document.getElementById('policy-reset-issuer').hidden = !issuer;
       document.querySelectorAll('.policy-region-chip').forEach(chip => chip.setAttribute('aria-pressed',String(chip.dataset.region===policyRegion)));
     }
     document.querySelectorAll('.policy-region-chip').forEach((chip) => {
@@ -8067,6 +8092,15 @@
       });
     });
     document.querySelectorAll('[data-policy-reset-region]').forEach(button => button.addEventListener('click',()=>document.querySelector('.policy-region-chip[data-region="全部"]').click()));
+    policyIssuerFilter.addEventListener('change',applyPolicyFilters);
+    document.getElementById('policy-reset-issuer').addEventListener('click',()=>{
+      policyIssuerFilter.value = '';
+      applyPolicyFilters();
+    });
+    document.getElementById('policy-reset-filters').addEventListener('click',()=>{
+      policyIssuerFilter.value = '';
+      document.querySelector('.policy-region-chip[data-region="全部"]').click();
+    });
     applyPolicyFilters();
 
     const POLICY_GRAPH_STATE={name:'',layer:'overlay',filter:'',selected:null,items:[]};
@@ -12510,7 +12544,8 @@
           { title: "利润成长", rows: [
             {"name":"净利润增长率","description":"近三年净利润年均复合增长率(%)"},
             {"name":"净利润率","description":"净利润/营业收入×100%"},
-            {"name":"毛利率","description":"（营业收入-营业成本）/营业收入×100%"}
+            {"name":"毛利率","description":"（营业收入-营业成本）/营业收入×100%"},
+            {"name":"近三年净利润","description":"按年度列示企业净利润（万元）"}
           ] },
           { title: "资产质量", rows: [
             {"name":"净资产增长率","description":"近三年净资产年均增长率(%)"},
@@ -12746,7 +12781,14 @@
           '科创数据中台软件 V2.0','工业物联网采集平台 V1.0','智能图像识别系统 V3.1',
           '数据可视化大屏系统 V1.2','设备远程运维平台 V2.3','供应链协同系统 V1.0',
           '智能客服机器人系统 V1.5','知识图谱构建平台 V1.0'
-        ].map(name=>({'软件名称及版本':name,'权利状态':'已登记'}))
+        ].map(name=>({'软件名称及版本':name,'权利状态':'已登记'})),
+        '核心软件产品认证': [
+          '工业视觉检测软件 V3.0','边缘计算平台软件 V2.1','设备远程运维软件 V2.3',
+          '质量追溯软件 V1.6','智能产线控制软件 V2.0','AI 质检软件 V3.2',
+          '工业物联网采集软件 V2.4','供应链协同软件 V1.9','知识图谱构建软件 V1.7',
+          '智能客服机器人软件 V1.5','数据分析可视化软件 V2.6','云平台服务软件 V1.4',
+          '数字孪生仿真软件 V1.2','数据安全治理软件 V1.1'
+        ].map(name=>({'软件名称及版本':name,'权利状态':'已列入信创目录'}))
       };
       Object.entries(ARCHIVE_ASSET_EXAMPLES).forEach(([name,records])=>{
         EXISTING_FACTS['知识产权'][name].records=records;
@@ -12760,13 +12802,13 @@
         '科技项目':{'国家重点研发计划':'已立项，参与 1 项','省重点研发计划':'已立项，主持 2 项','市科技计划项目':'已立项，主持 3 项','科技成果登记':'5 项','项目验收评级':'优秀 2 项、合格 1 项','纵向项目经费总额':'850 万元','项目经费执行率':'82%'},
         '人才团队':{'创始人/CEO学历与背景':'硕士，工业视觉行业 12 年经验','省级人才计划入选':'1 人','市级及以下人才计划入选':'2 人','研发人员总数':'36 人','研发人员占比':'30%','博士学历人数':'4 人','硕士及以上学历占比':'50%','高级职称人员数量':'6 人','AI专业技术人员数':'12 人'},
         '科研投入':{'近三年研发费用总额':'2477.66 万元','研发费用占营收比':'8.6%','研发费用近三年复合增长率':'18%','研发费用加计扣除额':'2100 万元','研发仪器设备原值':'680 万元','产学研合作经费':'120 万元','委托外部研发费用':'85 万元','研发投入产出比':'3.2'},
-        '财务成长':{'近三年营业收入':'2023 年 7200 万元；2024 年 8400 万元；2025 年 10025.28 万元','营收复合增长率':'18%','主营业务收入占比':'92%','高新技术产品(服务)收入占比':'76%','新产品销售收入占比':'35%','净利润增长率':'12%','净利润率':'14%','毛利率':'38%','资产负债率':'42%','流动比率':'1.8'},
+        '财务成长':{'近三年营业收入':'2023 年 7200 万元；2024 年 8400 万元；2025 年 10025.28 万元','近三年净利润':'2023 年 1008 万元；2024 年 1176 万元；2025 年 1403.54 万元','净资产规模':'2023 年 6500 万元；2024 年 7100 万元；2025 年 7800 万元','营收复合增长率':'18%','主营业务收入占比':'92%','高新技术产品(服务)收入占比':'76%','新产品销售收入占比':'35%','净利润增长率':'12%','净利润率':'14%','毛利率':'38%','资产负债率':'42%','流动比率':'1.8'},
         '资本融资':{'融资轮次':'A 轮','累计股权融资额':'2500 万元','最新投后估值':'18000 万元','国资/政府基金持股比':'12%','银行综合授信额度':'3000 万元'},
         '标准资质':{'主导制定国家标准':'1 项','参与制定国家标准':'2 项','主导制定行业标准':'1 项','参与制定国际标准':'1 项'},
         '经营市场':{'企业员工总数':'120 人','年产值/产能规模':'年产工业视觉检测设备 600 台','产能利用率':'82%','产业链关键环节':'工业视觉检测、边缘计算与设备集成','进口替代产品数量':'2 项'},
         '绿色发展':{'单位产值综合能耗':'0.032 吨标准煤 / 万元','能耗同比下降率':'8%','主要污染物排放达标':'是','工业固体废物综合利用率':'96%','水资源重复利用率':'85%'},
         '企业基础':{'注册资本':'2000 万元','实缴资本':'1800 万元','企业类型':'有限责任公司','经营状态':'存续','经营范围与申报领域匹配度':'覆盖智能装备与软件研发领域','注册资本实缴率':'90%'},
-        '信用合规':{'纳税信用评级':'A 级','一般纳税人资格':'是','近三年纳税总额':'1680 万元','是否为失信被执行人':'否','是否为被执行人':'否','经营异常名录记录':'无','行政处罚记录':'0 条','严重违法失信企业名单':'否','欠税公告/重大税收违法':'无'}
+        '信用合规':{'纳税信用评级':'A 级','一般纳税人资格':'是','近三年纳税总额':'2023 年 480 万元；2024 年 560 万元；2025 年 640 万元','是否为失信被执行人':'否','是否为被执行人':'否','经营异常名录记录':'无','行政处罚记录':'0 条','严重违法失信企业名单':'否','欠税公告/重大税收违法':'无'}
       };
       const MOCK_PROJECT_NAMES={
         '国家重点研发计划':['智能装备视觉感知与在线检测技术研发'],
@@ -12788,6 +12830,29 @@
         if(additions.length)groups.push({title:'六维画像关联指标',rows:additions.map(name=>({name,description:'用于六维企业能力画像的企业台账指标；原型示例数据。'}))});
         Object.assign(ARCHIVE_MOCK_VALUES[dimension]||(ARCHIVE_MOCK_VALUES[dimension]={}),values);
       });
+      function talentRoleLabel(name){
+        if(/创始人|CEO/.test(name))return '创始人 / CEO';
+        if(/国家级人才|院士|杰青|优青|万人|千人/.test(name))return '国家级领军人才';
+        if(/省级人才|双创|333工程|省领军/.test(name))return '省级领军人才';
+        if(/市级|黄鹤|3551/.test(name))return '市级人才';
+        if(/海外高层次|海归|外籍高端/.test(name))return '海外高层次人才';
+        if(/技能大师|技术能手|工匠|首席技师/.test(name))return '技能大师';
+        if(/博士/.test(name))return '博士研究员';
+        if(/高级职称/.test(name))return '高级工程师';
+        if(/外籍/.test(name))return '外籍研发人员';
+        if(/中级/.test(name))return '工程师';
+        if(/AI/.test(name))return 'AI 算法工程师';
+        return '研发工程师';
+      }
+      function talentEduLabel(name){
+        if(/博士/.test(name))return '博士';
+        if(/硕士/.test(name))return '硕士';
+        if(/高级职称/.test(name))return '高级工程师';
+        if(/中级职称/.test(name))return '工程师';
+        if(/技能大师|技术能手|工匠|首席技师/.test(name))return '高级技师';
+        if(/创始人|CEO/.test(name))return '硕士';
+        return '本科及以上';
+      }
       Object.entries(ARCHIVE_MOCK_VALUES).forEach(([dimension,values])=>{
         EXISTING_FACTS[dimension]=EXISTING_FACTS[dimension]||{};
         Object.entries(values).forEach(([name,value])=>{
@@ -12795,7 +12860,8 @@
           if(!group)return;
           const schema=archiveRecordSchema({name},{title:group.title});
           const count=/^(\d+)\s*(件|项|人|个|名)$/.exec(value);
-          const titles=MOCK_PROJECT_NAMES[name]||(count&&Number(count[1])>0&&Number(count[1])<=36?Array.from({length:Number(count[1])},(_,i)=>name.replace(/数量|人数|总数|入选|总量/g,'')+' · 示例 '+String(i+1).padStart(2,'0')):[name]);
+          const countTitles=count&&Number(count[1])>0&&Number(count[1])<=36?Array.from({length:Number(count[1])},(_,i)=>({'专利':'示例专利','软件著作权':'示例软件','商标':'示例商标','人员':'示例人员','项目 / 成果':'示例项目','机构 / 平台':'示例平台','资质 / 认定':'示例资质','融资 / 投资':'示例融资'}[schema.kind]||'示例记录')+' '+String(i+1).padStart(2,'0')):[name];
+          const titles=MOCK_PROJECT_NAMES[name]||countTitles;
           const records=titles.map((title,i)=>{
             const record={[schema.fields[0]]:title};
             if(schema.kind==='机构 / 平台'){record[schema.fields[0]]=name==='国家企业技术中心'?'企业智能装备技术中心':name;record['认定级别']=/国家级/.test(value)?'国家级':/省级/.test(value)?'省级':'联合共建';record['认定单位']='示例认定单位';record['认定时间']='2025 年';record['有效状态']='有效';}
@@ -12803,8 +12869,10 @@
             else if(schema.kind==='专利'){record['申请号 / 专利号']='DEMO-PAT-'+String(i+1).padStart(3,'0');record['专利类型']=/外观/.test(name)?'外观设计':/实用/.test(name)?'实用新型':'发明专利';record['权利人']='当前企业（示例）';record['申请日期']='2025 年';record['法律状态']=/失效/.test(name)?'失效':/申请/.test(name)?'申请中':'有效';}
             else if(schema.kind==='资质 / 认定'){record['编号']='DEMO-CERT-'+String(i+1).padStart(3,'0');record['等级 / 类型']=value;record['颁发单位']='示例认定单位';record['取得日期']='2025 年';record['有效期 / 状态']=/未认定/.test(value)?'未取得':'有效';}
             else if(schema.kind==='融资 / 投资'){record['交易 / 合作方']='示例合作机构';record['金额及单位']=/万元/.test(value)?value:'按融资台账记录';record['发生日期']='2025 年';record['进展状态']=value;}
-            else if(schema.kind==='人员'){record[schema.fields[0]]='示例人员 '+String(i+1).padStart(2,'0');record['岗位 / 人才类别']=name;record['学历 / 职称']=/博士/.test(name)?'博士':/高级职称/.test(name)?'高级工程师':'按人员台账记录';record['在职 / 有效状态']='在职';}
+            else if(schema.kind==='人员'){record[schema.fields[0]]='示例人员 '+String(i+1).padStart(2,'0');record['岗位 / 人才类别']=talentRoleLabel(name);record['学历 / 职称']=talentEduLabel(name);record['在职 / 有效状态']='在职';}
             else if(schema.kind==='数据构成'){record['统计年度 / 期间']='2025 年';record['数值及单位']=value;record['统计口径']='企业年度示例台账';record['依据材料']='经营与研发统计示例';}
+            else if(schema.kind==='商标'){record['注册号']='DEMO-TM-'+String(i+1).padStart(3,'0');record['国际分类']='第 9 类';record['权利人']='当前企业（示例）';record['有效期']='2025—2035 年';record['注册状态']='有效';}
+            else if(schema.kind==='软件著作权'){record['登记号']='DEMO-SW-'+String(i+1).padStart(3,'0');record['著作权人']='当前企业（示例）';record['登记日期']='2024 年';record['权利状态']='已登记';}
             else{record[schema.fields[1]]=value;record[schema.fields[schema.fields.length-1]]='示例档案记录';}
             return record;
           });
@@ -12814,10 +12882,36 @@
       // 以年报逐年展示，不将三年金额混为单一年度。
       EXISTING_FACTS['财务成长']['近三年营业收入'].records=[['2023 年','7200 万元'],['2024 年','8400 万元'],['2025 年','10025.28 万元']].map(([year,value])=>({'统计项目':'营业收入','统计年度 / 期间':year,'数值及单位':value,'统计口径':'企业年度营业收入','依据材料':'年度财务报表示例'}));
       EXISTING_FACTS['科研投入']['近三年研发费用总额'].records=[['2023 年','619.2 万元'],['2024 年','996.29 万元'],['2025 年','862.17 万元']].map(([year,value])=>({'统计项目':'研发费用','统计年度 / 期间':year,'数值及单位':value,'统计口径':'年度研发费用归集','依据材料':'研发辅助账示例'}));
+      EXISTING_FACTS['财务成长']['近三年净利润'].records=[['2023 年','1008 万元'],['2024 年','1176 万元'],['2025 年','1403.54 万元']].map(([year,value])=>({'统计项目':'净利润','统计年度 / 期间':year,'数值及单位':value,'统计口径':'企业年度净利润','依据材料':'年度财务报表示例'}));
+      EXISTING_FACTS['财务成长']['净资产规模'].records=[['2023 年','6500 万元'],['2024 年','7100 万元'],['2025 年','7800 万元']].map(([year,value])=>({'统计项目':'净资产','统计年度 / 期间':year,'数值及单位':value,'统计口径':'企业年末净资产','依据材料':'年度财务报表示例'}));
+      EXISTING_FACTS['信用合规']['近三年纳税总额'].records=[['2023 年','480 万元'],['2024 年','560 万元'],['2025 年','640 万元']].map(([year,value])=>({'统计项目':'纳税总额','统计年度 / 期间':year,'数值及单位':value,'统计口径':'年度实际缴纳税费','依据材料':'年度纳税申报示例'}));
       Object.entries(EXISTING_FACTS['知识产权']).forEach(([name,fact])=>{fact.src='模拟数据 · 企业 IP 台账';fact.recordSource='原型示例台账';});
       ['有效发明专利数量','实用新型专利数量'].forEach(name=>EXISTING_FACTS['知识产权'][name].records.forEach((record,index)=>{record['申请号 / 专利号']='DEMO-'+(name==='有效发明专利数量'?'INV':'UM')+'-'+String(index+1).padStart(3,'0');record['权利人']='当前企业（示例）';record['申请日期']='2023 年';record['授权日期']='2024 年';}));
       EXISTING_FACTS['知识产权']['软件著作权登记数量'].records.forEach((record,index)=>{record['登记号']='DEMO-SW-'+String(index+1).padStart(3,'0');record['著作权人']='当前企业（示例）';record['登记日期']='2024 年';});
       const CARD_COLORS = ["#3370FF","#FF8800","#2EA121","#2EA121","#F54DAE","#2EA121","#D46B08","#7F3BF5","#2EA121","#14C0FF","#2EA121","#3370FF","#2EA121"];
+      const publicArchiveGroups = {
+        '知识产权': ['专利资产','软件著作权','商标品牌','集成电路布图','植物新品种'],
+        '科创资质': ['基础资质','梯度培育','创新能力','设计能力','绿色制造','科技荣誉','先进制造'],
+        '科创平台': ['国家级研发机构','省级研发机构'],
+        '企业基础': ['股权结构'],
+        '信用合规': ['司法风险','经营合规','关联投资']
+      };
+      const publicArchiveIndicators = new Set([
+        '注册资本','企业类型','经营状态','纳税信用评级','一般纳税人资格',
+        '国家重点研发计划','省重点研发计划','市科技计划项目',
+        '主导制定国家标准','参与制定国家标准','主导制定行业标准','参与制定国际标准',
+        '招投标中标项目数量/金额','行政许可数量','进出口信用评级','域名/网站备案数量','作品著作权/版权登记',
+        '知识产权示范/优势企业','专利密集型产品认定','国内注册商标数量'
+      ]);
+      function isArchivePublic(dimension,group,name) {
+        return publicArchiveIndicators.has(name) || (publicArchiveGroups[dimension]?.includes(group) ?? false);
+      }
+      function archiveManualStats(rows) {
+        const manual = rows.filter(row=>!row.publicSource);
+        const total = manual.length;
+        const cover = manual.filter(row=>row.st==='ok').length;
+        return {total,cover,todo:total-cover,pct:total ? Math.round(cover/total*100) : 0};
+      }
       const CARDS = Object.entries(ARCHIVE_DICTIONARY).map(([name, groups], dimIndex) => {
         const no = String(dimIndex + 1).padStart(2, '0');
         const sections = groups.map((group, groupIndex) => ({
@@ -12828,15 +12922,13 @@
             // 展示序号按字典顺序生成，非官方指标编码。
             code: [no, String(groupIndex + 1).padStart(2, '0'), String(indicatorIndex + 1).padStart(2, '0')].join('.'),
             value: '待补全', links: [], src: '待补全', st: 'missing',
-            ...(EXISTING_FACTS[name]?.[indicator.name] || {})
+            ...(EXISTING_FACTS[name]?.[indicator.name] || {}),
+            publicSource:isArchivePublic(name,group.title,indicator.name)
           }))
         }));
-        const indicators = sections.flatMap(section => section.rows);
-        const total = indicators.length;
-        const cover = indicators.filter(indicator => indicator.st === 'ok').length;
         return {
-          no, name, color: CARD_COLORS[dimIndex], sections, total, cover,
-          todo: total - cover, pct: total ? Math.round(cover / total * 100) : 0,
+          no, name, color: CARD_COLORS[dimIndex], sections,
+          ...archiveManualStats(sections.flatMap(section=>section.rows)),
           desc: groups.map(group => group.title).join('、')
         };
       });
@@ -12964,7 +13056,6 @@
         profileOpen.focus();
       });
 
-      const totalIndicators = CARDS.reduce((sum, card) => sum + card.total, 0);
       /* 能力分与资料完整度独立；平台展示参考模型，不作为官方评审标准。 */
       function abilityNumber(value){
         const text=String(value).replace(/,/g,'').trim();
@@ -13075,7 +13166,7 @@
         const total = members.reduce((sum,card)=>sum+card.total,0);
         const cover = members.reduce((sum,card)=>sum+card.cover,0);
         return {...members[0], title:'企业基础与信用合规', desc:'工商信息、信用情况与合规记录',
-          total,cover,todo:total-cover,pct:Math.round(cover/total*100),members};
+          total,cover,todo:total-cover,pct:total ? Math.round(cover/total*100) : 0,members};
       }
       document.getElementById('cardGrid').innerHTML = orderedCards.map(card=>archiveDisplayCard(card.name)).map(c=>`
         <div class="card dim-card ${c.no==='01'?'selected':''}" data-name="${c.name}">
@@ -13085,16 +13176,16 @@
               <div class="dim-name">${c.title || c.name}<span class="dim-no num">${c.no}</span></div>
               <div class="dim-desc">${c.desc}</div>
             </div>
-            <div class="dim-pct">
+            ${c.total ? `<div class="dim-pct">
               <div class="p num" style="color:${c.color}">${c.pct}%</div>
-              <div class="l">画像完整度</div>
-            </div>
+              <div class="l">填报完成率</div>
+            </div>` : ''}
           </div>
-          <div class="dim-meta">
-            <div class="mi"><span class="k">已覆盖</span><b class="num">${c.cover} / ${c.total}</b></div>
+          ${c.total ? `<div class="dim-meta">
+            <div class="mi"><span class="k">已填 / 应填</span><b class="num">${c.cover} / ${c.total}</b></div>
             <div class="mi warn"><span class="k">待补全</span><b class="num">${c.todo} 项</b></div>
           </div>
-          <div class="dim-progress"><div class="fill" style="width:${c.pct}%;background:${c.color}"></div></div>
+          <div class="dim-progress"><div class="fill" style="width:${c.pct}%;background:${c.color}"></div></div>` : '<span class="archive-source-tag">公开直采</span>'}
         </div>`).join('');
 
       /* ================= 明细抽屉 ================= */
@@ -13229,18 +13320,44 @@
           return '<details class="archive-record"><summary><span class="archive-record-number">'+String(index+1).padStart(2,'0')+'</span><b>'+e(title)+'</b>'+(status?'<span class="archive-record-state">'+e(status)+'</span>':'')+'<span class="archive-record-edit">查看详情 ›</span></summary><dl class="archive-record-properties">'+fields.map(field=>'<div><dt>'+e(field)+'</dt><dd>'+e(record[field])+'</dd></div>').join('')+'</dl></details>';
         }).join('');
         const summary='<div class="archive-record-toolbar"><div><b>'+e(schema.kind)+'明细</b><span>'+(records.length?'共 '+records.length+' 条':'企业档案记录')+'</span></div>'+(row.recordSource?'<span class="archive-record-source">'+e(row.recordSource)+'</span>':'')+'</div>';
-        const facts='<dl class="archive-record-properties"><div><dt>指标</dt><dd>'+e(row.name)+'</dd></div><div><dt>企业现状</dt><dd>'+e(row.value)+'</dd></div><div><dt>数据来源</dt><dd>'+e(row.src)+'</dd></div>'+(row.links.length?'<div><dt>关联凭证</dt><dd>'+archiveAttachmentHTML(row)+'</dd></div>':'')+'</dl>';
+        const value=row.publicSource && row.st!=='ok' ? '暂无公开数据' : row.value;
+        const source=row.publicSource ? '公开直采' : '企业手动填报'+(row.st==='ok'?' · '+row.src:'');
+        const facts='<dl class="archive-record-properties"><div><dt>指标</dt><dd>'+e(row.name)+'</dd></div><div><dt>企业现状</dt><dd>'+e(value)+'</dd></div><div><dt>数据来源</dt><dd>'+e(source)+'</dd></div>'+(row.links.length?'<div><dt>关联凭证</dt><dd>'+archiveAttachmentHTML(row)+'</dd></div>':'')+'</dl>';
         return '<div class="archive-indicator-content">'+summary+(list||facts)+'</div>';
-      }      function secHTML(s){
+      }
+      function secBasicsHTML(s){
+        const e=escapeArchiveHTML;
+        const items=s.rows.map(r=>{
+          const status=r.publicSource ? (r.st==='ok'?'已采集':'暂无公开数据') : (r.st==='ok'?'已填报':r.st==='wait'?'待确认':'待补全');
+          const value=r.publicSource && r.st!=='ok' ? '—' : r.value;
+          const source=r.publicSource ? '公开直采' : '企业手动填报';
+          const edit=!r.publicSource ? '<button type="button" class="btn-mini js-indicator-upload" data-dimension="'+e(s.dimension)+'" data-category="'+e(s.title)+'" data-code="'+e(r.code)+'" data-sec="'+e(s.dimension+' · '+s.title+' · '+r.name)+'">编辑</button>' : '';
+          return '<div class="archive-basic-item"><dt>'+e(r.name)+'</dt><dd>'+e(value)+'<span class="archive-basic-meta"><span class="archive-source-tag">'+e(source)+'</span><span class="pill '+r.st+'">'+status+'</span>'+edit+'</span></dd></div>';
+        }).join('');
+        const edit=s.rows.some(r=>!r.publicSource) ? '<button type="button" class="btn-upload" data-dimension="'+e(s.dimension)+'" data-category="'+e(s.title)+'" data-sec="'+e(s.dimension+' · '+s.title)+'">编辑填报</button>' : '';
+        return '<div class="detail-sec"><div class="sec-head"><div class="sec-title">'+e(s.title)+'</div>'+edit+'</div><dl class="archive-basics-grid">'+items+'</dl></div>';
+      }
+      function secHTML(s){
+        if(s.dimension==='企业基础')return secBasicsHTML(s);
         const e=escapeArchiveHTML,context=s.dimension+' · '+s.title;
         const scopeAttrs=' data-dimension="'+e(s.dimension)+'" data-category="'+e(s.title)+'"';
         const head='<div class="thead"><span>指标 / 展开明细</span><span>企业现状 / 汇总</span><span>关联材料凭证</span><span>数据来源</span><span>状态</span></div>';
-        const body=s.rows.map(r=>{
+        const renderRow=r=>{
           const rowContext=context+' · '+r.name;
-          const materials=archiveAttachmentHTML(r)+'<button type="button" class="btn-mini js-indicator-upload"'+scopeAttrs+' data-code="'+e(r.code)+'" data-sec="'+e(rowContext)+'">编辑</button>';
-          return '<details class="archive-indicator" data-indicator-code="'+e(r.code)+'"><summary class="trow"><div class="archive-indicator-name"><span class="archive-indicator-chevron" aria-hidden="true">›</span><div><span class="code">'+e(r.code)+'</span><span class="nm">'+e(r.name)+'</span>'+(r.description?'<div class="indicator-note">'+e(r.description)+'</div>':'')+'<span class="archive-indicator-hint">展开逐条明细</span></div></div><div class="num">'+e(r.value)+'</div><div>'+materials+'</div><div style="color:var(--t2);font-size:15px">'+e(r.src)+'</div><div><span class="pill '+r.st+'">'+(r.st==='ok'?'已覆盖':r.st==='wait'?'待确认':'待补全')+'</span></div></summary>'+archiveRecordHTML(r,s)+'</details>';
-        }).join('');
-        return '<div class="detail-sec"><div class="sec-head"><div><div class="sec-title">'+e(s.title)+'</div><div class="sec-sub">'+s.rows.length+' 个指标 · 点击指标展开逐条明细</div></div><button type="button" class="btn-upload"'+scopeAttrs+' data-sec="'+e(context)+'">编辑</button></div><div class="detail-table">'+head+body+'</div></div>';
+          const attachments=archiveAttachmentHTML(r);
+          const materials=r.publicSource ? attachments || '—' : attachments+'<button type="button" class="btn-mini js-indicator-upload"'+scopeAttrs+' data-code="'+e(r.code)+'" data-sec="'+e(rowContext)+'">编辑</button>';
+          const status=r.publicSource ? (r.st==='ok'?'已采集':'暂无公开数据') : (r.st==='ok'?'已填报':r.st==='wait'?'待确认':'待补全');
+          const value=r.publicSource && r.st!=='ok' ? '—' : r.value;
+          const source=r.publicSource ? '公开直采' : '企业手动填报';
+          const sourceDetails = !r.publicSource && r.st==='ok' ? '<small class="archive-source-detail">'+e(r.src)+'</small>' : '';
+          return '<details class="archive-indicator" data-fill-source="'+(r.publicSource?'public':'manual')+'" data-indicator-code="'+e(r.code)+'"><summary class="trow"><div class="archive-indicator-name"><span class="archive-indicator-chevron" aria-hidden="true">›</span><div><span class="code">'+e(r.code)+'</span><span class="nm">'+e(r.name)+'</span>'+(r.description?'<div class="indicator-note">'+e(r.description)+'</div>':'')+'<span class="archive-indicator-hint">展开逐条明细</span></div></div><div class="num">'+e(value)+'</div><div>'+materials+'</div><div><span class="archive-source-tag">'+source+'</span>'+sourceDetails+'</div><div><span class="pill '+r.st+'">'+status+'</span></div></summary>'+archiveRecordHTML(r,s)+'</details>';
+        };
+        const publicRows=s.rows.filter(row=>row.publicSource);
+        const manualRows=s.rows.filter(row=>!row.publicSource);
+        const body=(publicRows.length ? '<div class="archive-source-heading">公开直采</div>'+head+publicRows.map(renderRow).join('') : '')+
+          (manualRows.length ? '<div class="archive-source-heading">企业手动填报</div>'+head+manualRows.map(renderRow).join('') : '');
+        const edit=manualRows.length ? '<button type="button" class="btn-upload"'+scopeAttrs+' data-sec="'+e(context)+'">编辑填报</button>' : '';
+        return '<div class="detail-sec"><div class="sec-head"><div class="sec-title">'+e(s.title)+'</div>'+edit+'</div><div class="detail-table">'+body+'</div></div>';
       }
       /* 上传 → AI 识别演示 → 逐项确认 / 人工补填 / 新旧值比对 → 回填档案 */
       const toastEl = document.createElement('div');
@@ -13308,11 +13425,12 @@
         const card = CARDS.find(item => item.name === button.dataset.dimension);
         const section = card?.sections.find(item => item.title === button.dataset.category);
         if(!section) return;
-        const targets = button.dataset.code ? section.rows.filter(row => row.code === button.dataset.code) : section.rows;
+        const targets = section.rows.filter(row => !row.publicSource && (!button.dataset.code || row.code === button.dataset.code));
         if(!targets.length) return;
         clearTimeout(recognitionTimer);
-        uploadState = { card, section, targets, file:null, phase:'select', results:[], trigger:button };
-        document.getElementById('mSub').textContent = '所属模块：' + button.dataset.sec;
+        uploadState = { card, section, targets, file:null, phase:'select', results:[], trigger:button, annual:button.dataset.annual==='true', viewDimension:drawer.dataset.dimension };
+        document.getElementById('mSub').textContent = '所属模块：' + button.dataset.sec +
+          (uploadState.annual ? ' · 按「年份 数值」填写，多年数据用分号分隔。' : '');
         fileInput.value = '';
         document.getElementById('mFileRow').style.display = 'none';
         resetRecognition();
@@ -13356,6 +13474,10 @@
       // 与上一版保持一致：此处演示识别与回填交互，不向外部服务发送材料。
       function demoIndicatorValue(indicator){
         const name = indicator.name, description = indicator.description;
+        if (uploadState?.annual) {
+          const field = archiveFinanceFields.find(item=>item.row===indicator);
+          if (field?.demo) return archiveFinanceLatestYear(archiveFinanceFields.map(archiveFinanceSeries))+' 年 '+field.demo;
+        }
         if(indicator.st === 'ok' && /^\d+(?:\.\d+)?\s*[^\d]+$/.test(indicator.value)){
           return indicator.value.replace(/^\d+(?:\.\d+)?/, number => String(Number(number) + 1));
         }
@@ -13470,11 +13592,10 @@
       }
       function refreshArchiveStats(){
         CARDS.forEach(card => {
-          card.cover = card.sections.flatMap(section => section.rows).filter(row => row.st === 'ok').length;
-          card.todo = card.total - card.cover;
-          card.pct = Math.round(card.cover / card.total * 100);
+          Object.assign(card,archiveManualStats(card.sections.flatMap(section=>section.rows)));
         });
         orderedCards.map(card=>archiveDisplayCard(card.name)).forEach(card=>{
+          if(!card.total) return;
           const element = document.querySelector('#cardGrid .dim-card[data-name="' + card.name + '"]');
           element.querySelector('.dim-pct .p').textContent = card.pct + '%';
           element.querySelector('.dim-meta .mi b').textContent = card.cover + ' / ' + card.total;
@@ -13490,13 +13611,20 @@
         if(!confirmed.length){ uploadError('请先确认需要回填的结果。'); return; }
         const run = uploadState;
         if(saveButton.disabled)return;
+        if (run.annual) {
+          const field = archiveFinanceFields.find(item=>item.row===run.targets[0]);
+          if (confirmed.some(result=>result.choice!=='keep' && !archiveFinanceInput(result.value,field.kind).size)) {
+            uploadError('请提供带年份和单位的数据，例如「2025 年 '+field.demo+'」。');
+            return;
+          }
+        }
         saveButton.disabled=true;saveButton.textContent='正在保存原文件…';
         const original=await retainArchiveOriginal(run.file,run.card,confirmed.map(result=>result.indicator));
         if(uploadState!==run)return;
         confirmed.forEach(result => {
           const row = result.indicator;
           if(result.choice !== 'keep'){
-            row.value = result.value.trim();
+            row.value = archiveFinanceUpdate(result) || result.value.trim();
             row.src = result.manual || result.edited ? '企业人工补填 / 材料核对' : 'AI 材料识别 · 企业已确认';
           }
           row.st = 'ok';
@@ -13509,7 +13637,7 @@
         const scrollTop = dBody.scrollTop;
         closeUploadModal();
         refreshArchiveStats();
-        openDrawer(run.card.name);
+        openDrawer(run.viewDimension || run.card.name);
         dBody.scrollTop = scrollTop;
         dBody.querySelector('[data-code="' + run.targets[0].code + '"]')?.focus({preventScroll:true});
         toast('已确认回填 '+confirmed.length+' 项，点击关联材料可查看原文件'+(original.persistent?'':'；文件仅保留在当前会话'));
@@ -13605,9 +13733,8 @@
         resetExportDemo();
         exportEnterprise = document.getElementById('current-enterprise')?.textContent.trim() || '示例企业';
         document.getElementById('archiveExportEnterprise').textContent = exportEnterprise;
-        const indicators = CARDS.flatMap(card => card.sections.flatMap(section => section.rows));
-        const covered = indicators.filter(row => row.st === 'ok').length;
-        document.getElementById('archiveExportStats').innerHTML = [[CARDS.length,'画像维度'],[indicators.length,'三级指标'],[covered,'已确认指标'],[indicators.length-covered,'待补全指标']].map(([value, label]) => '<div class="export-stat"><b class="num">' + value + '</b><span>' + label + '</span></div>').join('');
+        const stats = archiveManualStats(CARDS.flatMap(card => card.sections.flatMap(section => section.rows)));
+        document.getElementById('archiveExportStats').innerHTML = [[stats.total,'企业应填'],[stats.cover,'企业已填'],[stats.todo,'待补全'],[stats.total ? stats.pct+'%' : '—','填报完成率']].map(([value, label]) => '<div class="export-stat"><b class="num">' + value + '</b><span>' + label + '</span></div>').join('');
         updateExportFileName();
         exportModal.inert = false;
         exportMask.classList.add('show');
@@ -13663,20 +13790,141 @@
         else if(!event.shiftKey && document.activeElement === last){ event.preventDefault(); first.focus(); }
       });
 
+      const archiveFinanceFields = [
+        {label:'营业收入',dimension:'财务成长',name:'近三年营业收入',kind:'amount',demo:'11200 万元',aggregate:'series'},
+        {label:'净利润',dimension:'财务成长',name:'近三年净利润',kind:'amount',demo:'1600 万元',aggregate:'series'},
+        {label:'研发费用',dimension:'科研投入',name:'近三年研发费用总额',kind:'amount',demo:'1050 万元',aggregate:'sum'},
+        {label:'净资产',dimension:'财务成长',name:'净资产规模',kind:'amount',demo:'7800 万元'},
+        {label:'高新技术产品收入占比',dimension:'财务成长',name:'高新技术产品(服务)收入占比',kind:'percentage',demo:'77%'},
+        {label:'纳税信用等级',dimension:'信用合规',name:'纳税信用评级',kind:'rating'},
+        {label:'纳税总额',dimension:'信用合规',name:'近三年纳税总额',kind:'amount',demo:'640 万元',aggregate:'sum'}
+      ].map(field=>{
+        const dimension = CARDS.find(card=>card.name===field.dimension);
+        const section = dimension.sections.find(group=>group.rows.some(row=>row.name===field.name));
+        return {...field,section,row:section.rows.find(row=>row.name===field.name)};
+      });
+      const archiveFinanceTableDefs = {
+        '财务成长': {fields: archiveFinanceFields.filter(f=>f.name!=='近三年纳税总额'), title:'近三年核心财务数据'},
+        '科研投入': {fields: archiveFinanceFields.filter(f=>f.dimension==='科研投入'), title:'近三年研发费用'},
+        '信用合规': {fields: archiveFinanceFields.filter(f=>f.name==='近三年纳税总额'), title:'近三年纳税总额'}
+      };
+      const archiveFinanceNumber = new Intl.NumberFormat('zh-CN',{maximumFractionDigits:2});
+      function archiveFinanceMeasure(input, kind) {
+        const value = String(input || '').trim().replace(/,/g,'');
+        if (kind==='rating') return /^(?:A|B|C|D|M)\s*级$/i.test(value) ? {display:value.toUpperCase()} : null;
+        const pattern = kind==='percentage' ? /^([+-]?\d+(?:\.\d+)?)\s*[%％]$/ : /^([+-]?\d+(?:\.\d+)?)\s*(亿元|万元|万|元)$/;
+        const match = value.match(pattern);
+        if (!match) return null;
+        const number = Number(match[1]) * (match[2]==='亿元' ? 10000 : match[2]==='元' ? 0.0001 : 1);
+        if (!Number.isFinite(number)) return null;
+        return {number,display:archiveFinanceNumber.format(number)+(kind==='percentage'?'%':' 万元')};
+      }
+      function archiveFinanceInput(text,kind) {
+        const entries = new Map();
+        for (const [,year,value] of String(text || '').matchAll(/((?:19|20)\d{2})\s*年?\s*[:：]?\s*([^；;\n、]+)/g)) {
+          const measurement = archiveFinanceMeasure(value,kind);
+          if (measurement) entries.set(Number(year),measurement);
+        }
+        return entries;
+      }
+      function archiveFinanceSeries(field) {
+        const {row,kind} = field;
+        const series = new Map();
+        if (row.st!=='ok') return series;
+        (row.records || []).forEach(record=>{
+          const year = String(record['统计年度 / 期间'] || '').match(/^((?:19|20)\d{2})\s*年?$/);
+          const measurement = archiveFinanceMeasure(record['数值及单位'],kind);
+          if (year && measurement) series.set(Number(year[1]),{...measurement,source:record['填报来源'] || (row.publicSource?'公开直采':'示例台账')});
+        });
+        archiveFinanceInput(row.value,kind).forEach((measurement,year)=>{
+          if (!series.has(year)) series.set(year,{...measurement,source:row.publicSource?'公开直采':'企业手动填报'});
+        });
+        return series;
+      }
+      function archiveFinanceLatestYear(series) {
+        const years = series.flatMap(entries=>[...entries.keys()]);
+        return years.length ? Math.max(...years) : Number(cultivationTaskToday().slice(0,4))-1;
+      }
+      function archiveFinanceUpdate(result) {
+        const field = archiveFinanceFields.find(item=>item.row===result.indicator);
+        if (!field) return '';
+        const incoming = archiveFinanceInput(result.value,field.kind);
+        if (!incoming.size) return '';
+        const series = archiveFinanceSeries(field);
+        const source = result.manual || result.edited ? '企业手动填报' : '上传自动生成';
+        incoming.forEach((measurement,year)=>series.set(year,{...measurement,source}));
+        const entries = [...series.entries()].sort((left,right)=>left[0]-right[0]);
+        field.row.records = entries.map(([year,entry])=>({
+          '统计项目':field.label,'统计年度 / 期间':year+' 年','数值及单位':entry.display,
+          '填报来源':entry.source,'依据材料':entry.source==='示例台账'?'原型示例台账':'本次确认的档案材料'
+        }));
+        field.row.recordSource = '归档年度数据';
+        const latest = entries.at(-1);
+        const recent = entries.filter(([year])=>year>=latest[0]-2);
+        const rawDisplay = entry=>entry.display.replace(/,/g,'');
+        if (field.aggregate==='series') return recent.map(([year,entry])=>year+' 年 '+rawDisplay(entry)).join('；');
+        if (field.aggregate==='sum') {
+          if (recent.length!==3) return '三年合计缺少年度数据';
+          const total = recent.reduce((sum,[,entry])=>sum+entry.number,0);
+          return archiveFinanceNumber.format(total).replace(/,/g,'')+' 万元';
+        }
+        return rawDisplay(latest[1]);
+      }
+      function archiveFinanceTable(fields = archiveFinanceFields, title = '近三年核心财务数据') {
+        const e = escapeArchiveHTML;
+        const series = fields.map(archiveFinanceSeries);
+        const latest = archiveFinanceLatestYear(series);
+        const years = [latest-2,latest-1,latest];
+        const revenueField = archiveFinanceFields.find(f=>f.name==='近三年营业收入');
+        const revenueLatest = revenueField ? archiveFinanceSeries(revenueField).get(latest) : null;
+        const rows = fields.map((field,index)=>{
+          const values = series[index];
+          const current = values.get(latest);
+          const previous = values.get(latest-1);
+          const noted = [];
+          if (current && previous?.number>0 && field.kind==='amount') {
+            const difference = (current.number/previous.number-1)*100;
+            noted.push((difference>0?'+':'')+archiveFinanceNumber.format(difference)+'%');
+          }
+          if (current && previous && field.kind==='percentage') {
+            const difference = current.number-previous.number;
+            noted.push((difference>0?'+':'')+archiveFinanceNumber.format(difference)+' 个百分点');
+          }
+          if (field.name==='近三年研发费用总额' && current && revenueLatest?.number>0) {
+            noted.push('占营收 '+archiveFinanceNumber.format(current.number/revenueLatest.number*100)+'%');
+          }
+          if (field.kind==='rating' && !values.size && field.row.st==='ok') noted.push('当前评级 '+field.row.value+'（未标注年度）');
+          const sources = new Set(years.map(year=>values.get(year)?.source).filter(Boolean));
+          if (!sources.size) sources.add(field.row.publicSource ? '公开直采' : '企业手动填报');
+          const edit = field.row.publicSource ? '' : '<button type="button" class="btn-mini js-indicator-upload" data-annual="true" data-dimension="'+e(field.dimension)+'" data-category="'+e(field.section.title)+'" data-code="'+e(field.row.code)+'" data-sec="'+e(field.dimension+' · '+field.label)+'" aria-label="'+e('编辑'+field.label+'年度数据')+'">编辑</button>';
+          const cells = years.map(year=>'<td class="num">'+e(values.get(year)?.display || '—')+'</td>').join('');
+          return '<tr><th scope="row">'+e(field.label)+'</th>'+cells+'<td>'+e(noted.join(' · ') || '—')+'</td><td><div class="archive-finance-sources">'+
+            [...sources].map(source=>'<span class="archive-source-tag">'+e(source)+'</span>').join('')+edit+'</div></td></tr>';
+        });
+        return '<section class="archive-finance" aria-labelledby="archive-finance-title"><header><h3 id="archive-finance-title">'+e(title)+'</h3><p>按年度列示。上传材料并确认后更新对应年份，同比按相邻年度数据计算。</p></header>'+
+          '<div class="detail-table" tabindex="0" role="region" aria-label="可横向滚动的年度财务表"><table aria-labelledby="archive-finance-title"><thead><tr><th scope="col">指标</th>'+
+          years.map(year=>'<th scope="col" class="num">'+year+'</th>').join('')+'<th scope="col">同比 / 说明</th><th scope="col">来源</th></tr></thead><tbody>'+rows.join('')+'</tbody></table></div></section>';
+      }
       function openDrawer(name){
         const c = archiveDisplayCard(name);
         if(!c) return;
         drawer.dataset.dimension = c.name;
         dTitle.textContent = c.title || c.name;
-        dSub.textContent = `已覆盖 ${c.cover} / ${c.total} · 待补全 ${c.todo} 项`;
-        const progress = `
+        dSub.textContent = c.total ? `企业已填 ${c.cover} / 应填 ${c.total} · 待补全 ${c.todo} 项` : '公开直采';
+        const progress = c.total ? `
           <div class="d-progress">
-            <span>画像完整度</span>
+            <span>填报完成率</span>
             <div class="bar"><div class="fill" style="width:${c.pct}%"></div></div>
             <span class="pp num" style="color:${c.color}">${c.pct}%</span>
-          </div>`;
-        const sections = c.members ? c.members.map(member=>'<section class="archive-dimension-group"><h3>'+member.name+'</h3>'+member.sections.map(secHTML).join('')+'</section>').join('') : c.sections.map(secHTML).join('');
-        dBody.innerHTML = progress + (name === '知识产权' ? IP_DETAIL.charts : '') + sections;
+          </div>` : '';
+        const sections = c.members ? c.members.map(member=>{
+          const memberFinance = archiveFinanceTableDefs[member.name];
+          const finance = memberFinance ? archiveFinanceTable(memberFinance.fields, memberFinance.title) : '';
+          return '<section class="archive-dimension-group"><h3>'+member.name+'</h3>'+finance+member.sections.map(secHTML).join('')+'</section>';
+        }).join('') : c.sections.map(secHTML).join('');
+        const financeDef = archiveFinanceTableDefs[name];
+        const overview = financeDef ? archiveFinanceTable(financeDef.fields, financeDef.title) : (name==='知识产权' ? IP_DETAIL.charts : '');
+        dBody.innerHTML = overview + progress + sections;
         dBody.scrollTop = 0;
         drawer.classList.add('show'); mask.classList.add('show');
       }
