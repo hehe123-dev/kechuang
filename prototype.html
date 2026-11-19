@@ -353,6 +353,15 @@
     .u-select:focus { border-color: #2563eb; }
     .u-calculator-source { margin-top: 14px; display: flex; flex-direction: column; gap: 4px; font-size: 15px; color: #6b7280; background: #f8fafc; border-radius: 10px; padding: 10px 12px; }
     .u-calculator-source strong { color: #1f2937; }
+    .u-calc-custom-editor { display: flex; gap: 8px; align-items: center; }
+    .u-calc-custom-editor input { min-width: 0; }
+    .u-calc-custom-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+    .u-calc-custom-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border: 1px solid #eef1f5; border-radius: 8px; background: #f8fafc; font-size: 15px; }
+    .u-calc-custom-item b { color: #2563eb; font-weight: 500; }
+    .u-calc-custom-item span { color: #1f2937; }
+    .u-calc-custom-remove { border: none; background: none; color: #9ca3af; cursor: pointer; font-size: 18px; line-height: 1; padding: 0 4px; }
+    .u-calc-custom-remove:hover { color: #dc2626; }
+    .u-calc-custom-empty { font-size: 14px; color: #9ca3af; }
     .u-footer-actions { margin-top: 14px; display: flex; justify-content: flex-end; }
     .u-policy-breakdown { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
     .u-policy-breakdown > div { border: 1px solid #f1f4f8; border-radius: 12px; padding: 14px 16px; background: #fbfcfe; }
@@ -3663,31 +3672,63 @@
           <div id="policy-tab-calculator" class="demo-only hidden">
             <section class="u-policy-calculator">
               <div class="u-policy-calculator-head"><div><span class="u-section-kicker">功能一 · AI 预算测算</span><h3>宏观年度政策预测计算器</h3><p>结合企业画像、历史申报结果和当前年度政策库，估算可申报机会、奖励上限与申报准备预算。</p></div><span class="u-chip green">画像 + 历史 + 政策库</span></div>
-              <div class="u-grid u-grid-3">
-                <article class="u-kpi" style="--kpi:#059669"><span class="u-kpi-label">全年可申报政策总额</span><div class="u-kpi-value">620<small>万元</small></div><span class="u-kpi-note">按已发布政策奖励上限测算，不代表最终获批金额</span></article>
-                <article class="u-kpi" style="--kpi:#2563eb"><span class="u-kpi-label">匹配政策数量</span><div class="u-kpi-value">23<small>项</small></div><span class="u-kpi-note">其中匹配度超过 70% 共 8 项</span></article>
-                <article class="u-kpi" style="--kpi:#d97706"><span class="u-kpi-label">本年度建议预算</span><div class="u-kpi-value">18<small>万元</small></div><span class="u-kpi-note">材料、知识产权与专家服务准备投入</span></article>
-              </div>
-              <div class="u-grid u-grid-2 u-section-space">
-                <section class="u-policy-input">
-                  <div class="u-panel-head"><div><h3>测算口径</h3><p>修改参数后重新计算当前年度政策预算。</p></div></div>
-                  <div class="u-panel-body">
-                    <div class="u-form-grid">
-                      <div class="u-field"><label>测算年度</label><select class="u-select"><option>2026 年</option><option>2027 年</option></select></div>
-                      <div class="u-field"><label>企业阶段</label><select class="u-select"><option>高新技术企业 · 向专精特新成长</option><option>科技型中小企业</option></select></div>
-                      <div class="u-field"><label>历史申报情况</label><select class="u-select"><option>近三年已申报 8 项，获批 5 项</option><option>近三年暂无申报记录</option></select></div>
-                      <div class="u-field"><label>政策预算偏好</label><select class="u-select"><option>奖励金额优先</option><option>资质成长优先</option><option>研发项目优先</option></select></div>
-                    </div>
-                    <div class="u-calculator-source"><strong>AI 当前取数</strong><span>已读取 13 维画像、7 条历史项目记录和 83 条有效政策。</span></div>
-                    <div class="u-footer-actions"><button type="button" class="u-button " onclick="openPolicyCalcDetail()">查看测算详情</button><button type="button" class="u-button primary" onclick="openPolicyCalcDetail()">重新计算</button></div>
+
+              <!-- 测算窗口 -->
+              <section class="u-policy-input">
+                <div class="u-panel-head"><div><h3>测算窗口</h3><p>直接自定义多维度条件测算，保留一组基础测算条件；修改后点击「重新计算」刷新汇总与结果。</p></div><button type="button" id="calc-custom-toggle" class="u-button ghost" aria-expanded="false" aria-controls="calc-custom-fields">多维度自定义</button></div>
+                <div class="u-panel-body">
+                  <div class="u-form-grid">
+                    <div class="u-field"><label>测算年度</label><select class="u-select"><option>2026 年</option><option>2027 年</option></select></div>
+                    <div class="u-field"><label>企业阶段</label><select class="u-select"><option>高新技术企业 · 向专精特新成长</option><option>科技型中小企业</option></select></div>
+                    <div class="u-field"><label>历史申报情况</label><select class="u-select"><option>近三年已申报 8 项，获批 5 项</option><option>近三年暂无申报记录</option></select></div>
+                    <div class="u-field"><label>政策预算偏好</label><select class="u-select"><option>奖励金额优先</option><option>资质成长优先</option><option>研发项目优先</option></select></div>
                   </div>
-                </section>
+                  <div id="calc-custom-fields" class="hidden" style="margin-top:14px;border:1px dashed #dbe3ef;border-radius:10px;padding:14px">
+                    <div class="u-calc-custom-editor">
+                      <input id="calc-custom-name" type="text" class="u-select" placeholder="字段名称，如：营收增长率" aria-label="自定义字段名称" />
+                      <input id="calc-custom-value" type="text" class="u-select" placeholder="字段值，如：25%" aria-label="自定义字段值" />
+                      <button type="button" id="calc-custom-add" class="u-button ghost" style="flex:none">添加</button>
+                    </div>
+                    <div id="calc-custom-list" class="u-calc-custom-list">
+                      <div class="u-calc-custom-empty">还没有自定义条件，填写上方字段名称与字段值后点击「添加」。</div>
+                    </div>
+                  </div>
+                  <div class="u-calculator-source"><strong>AI 当前取数</strong><span>已读取 13 维画像、7 条历史项目记录和 83 条有效政策。</span></div>
+                  <div class="u-footer-actions"><button type="button" class="u-button " onclick="openPolicyCalcDetail()">查看测算详情</button><button type="button" class="u-button primary" onclick="openPolicyCalcDetail()">重新计算</button></div>
+                </div>
+              </section>
+
+              <!-- 测算汇总 -->
+              <div class="u-section-space" style="padding:20px 0 0">
+                <div class="u-grid u-grid-3">
+                  <article class="u-kpi" style="--kpi:#059669"><span class="u-kpi-label">全年可申报政策总额</span><div class="u-kpi-value">620<small>万元</small></div><span class="u-kpi-note">按已发布政策奖励上限测算，不代表最终获批金额</span></article>
+                  <article class="u-kpi" style="--kpi:#2563eb"><span class="u-kpi-label">匹配政策数量</span><div class="u-kpi-value">23<small>项</small></div><span class="u-kpi-note">其中匹配度超过 70% 共 8 项</span></article>
+                  <article class="u-kpi" style="--kpi:#d97706"><span class="u-kpi-label">本年度建议预算</span><div class="u-kpi-value">18<small>万元</small></div><span class="u-kpi-note">材料、知识产权与专家服务准备投入</span></article>
+                </div>
+                <div class="u-policy-breakdown">
+                  <div><strong>资质与梯度奖励</strong><span>高企、专精特新、科小及配套奖励</span><b>约 170 万元</b></div>
+                  <div><strong>研发与成果转化</strong><span>研发投入补助、科技计划、成果转化</span><b>约 320 万元</b></div>
+                  <div><strong>人才与知识产权</strong><span>人才计划、专利运营、标准奖励</span><b>约 130 万元</b></div>
+                </div>
               </div>
-              <div class="u-policy-breakdown">
-                <div><strong>资质与梯度奖励</strong><span>高企、专精特新、科小及配套奖励</span><b>约 170 万元</b></div>
-                <div><strong>研发与成果转化</strong><span>研发投入补助、科技计划、成果转化</span><b>约 320 万元</b></div>
-                <div><strong>人才与知识产权</strong><span>人才计划、专利运营、标准奖励</span><b>约 130 万元</b></div>
-              </div>
+
+              <!-- 测算结果列表 -->
+              <section class="u-panel" style="margin-top:18px">
+                <div class="u-panel-head"><div><h3>测算结果</h3><p>按匹配度从高到低排列，展示可申报政策与测算上限，具体以政策原文及当年度通知为准。</p></div><span class="u-chip green">23 项匹配</span></div>
+                <div class="u-panel-body" style="overflow-x:auto">
+                  <table class="w-full text-sm">
+                    <thead><tr class="border-b border-gray-100 text-left text-xs text-gray-500"><th class="py-2.5 font-medium">政策名称</th><th class="py-2.5 font-medium">类别</th><th class="py-2.5 font-medium">匹配度</th><th class="py-2.5 font-medium">测算上限</th><th class="py-2.5 font-medium">申报窗口</th></tr></thead>
+                    <tbody>
+                      <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-800">2026年湖北省专精特新中小企业认定</td><td class="py-2.5"><span class="u-chip violet">专精特新</span></td><td class="py-2.5"><span class="u-chip green">92%</span></td><td class="py-2.5 font-semibold text-gray-900">50 万元</td><td class="py-2.5 text-gray-600">截止 2026-11-20</td></tr>
+                      <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-800">2026年高新技术企业认定（第二批）</td><td class="py-2.5"><span class="u-chip violet">高企认定</span></td><td class="py-2.5"><span class="u-chip green">87%</span></td><td class="py-2.5 font-semibold text-gray-900">30 万元</td><td class="py-2.5 text-gray-600">截止 2026-11-30</td></tr>
+                      <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-800">东湖高新区瞪羚企业认定</td><td class="py-2.5"><span class="u-chip violet">瞪羚企业</span></td><td class="py-2.5"><span class="u-chip blue">78%</span></td><td class="py-2.5 font-semibold text-gray-900">100 万元</td><td class="py-2.5 text-gray-600">截止 2026-11-22</td></tr>
+                      <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-800">武汉市科技型中小企业入库评价</td><td class="py-2.5"><span class="u-chip violet">科小入库</span></td><td class="py-2.5"><span class="u-chip blue">65%</span></td><td class="py-2.5 font-semibold text-gray-900">5 万元</td><td class="py-2.5 text-gray-600">截止 2026-12-08</td></tr>
+                      <tr class="border-b border-gray-50"><td class="py-2.5 font-medium text-gray-800">2026年武汉市人工智能创新专项</td><td class="py-2.5"><span class="u-chip violet">人工智能</span></td><td class="py-2.5"><span class="u-chip blue">61%</span></td><td class="py-2.5 font-semibold text-gray-900">300 万元</td><td class="py-2.5 text-gray-600">截止 2026-12-15</td></tr>
+                      <tr><td class="py-2.5 font-medium text-gray-800">2026年湖北省重点研发计划项目</td><td class="py-2.5"><span class="u-chip violet">重点研发</span></td><td class="py-2.5"><span class="u-chip gray">54%</span></td><td class="py-2.5 font-semibold text-gray-900">500 万元</td><td class="py-2.5 text-gray-600">截止 2026-12-01</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
             </section>
           </div>
           </div>
@@ -8013,6 +8054,56 @@
         if(panelName === 'all'){policyCat = tabName === 'benefits' ? '免申即享' : '全部';applyPolicyFilters();}
       });
     });
+
+    // 政策计算器：多维度自定义（用户自定义字段名称与字段值）
+    const calcCustomToggle = document.getElementById('calc-custom-toggle');
+    const calcCustomFields = document.getElementById('calc-custom-fields');
+    const calcCustomName = document.getElementById('calc-custom-name');
+    const calcCustomValue = document.getElementById('calc-custom-value');
+    const calcCustomAdd = document.getElementById('calc-custom-add');
+    const calcCustomList = document.getElementById('calc-custom-list');
+    if (calcCustomToggle && calcCustomFields) {
+      calcCustomToggle.addEventListener('click', () => {
+        const expanded = calcCustomToggle.getAttribute('aria-expanded') === 'true';
+        calcCustomToggle.setAttribute('aria-expanded', String(!expanded));
+        calcCustomFields.classList.toggle('hidden', expanded);
+        calcCustomToggle.textContent = expanded ? '多维度自定义' : '收起自定义';
+      });
+    }
+    if (calcCustomAdd && calcCustomList && calcCustomName && calcCustomValue) {
+      const addCustomCondition = () => {
+        const name = calcCustomName.value.trim();
+        const value = calcCustomValue.value.trim();
+        if (!name || !value) { showToast('请先填写字段名称和字段值', 'warning'); return; }
+        const item = document.createElement('div');
+        item.className = 'u-calc-custom-item';
+        const label = document.createElement('div');
+        const b = document.createElement('b'); b.textContent = name;
+        const span = document.createElement('span'); span.textContent = ' · ' + value;
+        label.appendChild(b); label.appendChild(span);
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'u-calc-custom-remove';
+        removeBtn.setAttribute('aria-label', '删除自定义条件「' + name + '」');
+        removeBtn.textContent = '×';
+        item.appendChild(label); item.appendChild(removeBtn);
+        calcCustomList.appendChild(item);
+        calcCustomList.querySelector('.u-calc-custom-empty')?.remove();
+        calcCustomName.value = '';
+        calcCustomValue.value = '';
+        calcCustomName.focus();
+      };
+      calcCustomAdd.addEventListener('click', addCustomCondition);
+      [calcCustomName, calcCustomValue].forEach(input => input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addCustomCondition(); } }));
+      calcCustomList.addEventListener('click', e => {
+        const btn = e.target.closest('.u-calc-custom-remove');
+        if (!btn) return;
+        btn.closest('.u-calc-custom-item').remove();
+        if (!calcCustomList.querySelector('.u-calc-custom-item')) {
+          calcCustomList.insertAdjacentHTML('beforeend', '<div class="u-calc-custom-empty">还没有自定义条件，填写上方字段名称与字段值后点击「添加」。</div>');
+        }
+      });
+    }
 
     // 重新匹配
     document.getElementById('policy-rematch-btn').addEventListener('click', function () {
