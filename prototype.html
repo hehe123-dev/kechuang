@@ -1928,6 +1928,21 @@
 <link rel="stylesheet" href="prototype-archive-theme.css">
 <link rel="stylesheet" href="prototype-typography.css">
 <link rel="stylesheet" href="prototype-task-calendar.css">
+<style>
+    .cultivation-drawer-table th, .cultivation-drawer-table td { padding-inline: 8px; }
+    .cultivation-drawer-table .cult-task-open { font-size: 12px; white-space: nowrap; margin: 2px 4px 2px 0; }
+    .cultivation-drawer-table .cult-task-status-edit { font-size: 12px; }
+    .cultivation-drawer-table > thead th { white-space: nowrap; }
+    .cultivation-child-table { width: calc(100% - 28px); margin: 0 0 12px 28px; border-inline-start: 3px solid #2563eb; font-size: 12px; line-height: 1.5; color: #334155; }
+    .cultivation-child-table caption { caption-side: top; padding: 8px 0 7px; text-align: start; }
+    .cultivation-child-table caption span { display: inline-block; padding: 3px 9px; border: 1px solid #93c5fd; border-radius: 4px; color: #1e40af; font-size: 12px; font-weight: 700; }
+    .cultivation-child-table th, .cultivation-child-table td { padding-block: 7px; }
+    .cultivation-child-table thead th { color: #334155; font-weight: 600; border-bottom: 1px solid #94a3b8; }
+    .cultivation-child-table tbody td { border-bottom: 1px solid #cbd5e1; }
+    .cultivation-child-table tbody td:first-child { color: #1e40af; font-weight: 600; }
+    .cultivation-child-table .cult-task-open, .cultivation-drawer-table .cultivation-child-table .cult-task-open { font-size: 12px; }
+    .cultivation-drawer-table tr[data-cult-task-id]:has(+ tr[id^="cult-children-"]) > td { border-top: 2px solid #94a3b8; }
+  </style>
 </head>
 
 <body class="overflow-hidden">
@@ -4973,6 +4988,7 @@
             <div class="orders-tabs" role="tablist" aria-label="订单状态">
               <button type="button" role="tab" aria-selected="true" class="active" data-order-status="">全部订单 <span>3</span></button>
               <button type="button" role="tab" aria-selected="false" data-order-status="待开始">待开始 <span>1</span></button>
+              <button type="button" role="tab" aria-selected="false" data-order-status="待支付">待支付 <span>0</span></button>
               <button type="button" role="tab" aria-selected="false" data-order-status="服务中">服务中 <span>1</span></button>
               <button type="button" role="tab" aria-selected="false" data-order-status="已完成">已完成 <span>1</span></button>
             </div>
@@ -5576,7 +5592,7 @@
 
   <!-- ==================== 项目详情抽屉 ==================== -->
   <div id="drawer-overlay" class="pointer-events-none fixed inset-0 z-40 bg-black/40 opacity-0 transition-opacity duration-300"></div>
-  <div id="project-drawer" class="fixed inset-y-0 right-0 z-50 flex w-1/2 min-w-[560px] max-w-full translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300">
+  <div id="project-drawer" class="fixed inset-y-0 right-0 z-50 flex w-[96vw] max-w-[1600px] translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300">
     <!-- 头部 -->
     <div class="flex items-start justify-between gap-4 border-b border-gray-200 px-6 py-4">
       <div class="flex items-center gap-3">
@@ -5697,31 +5713,6 @@
         </table>
       </div>
 
-      <!-- 关联订单 -->
-      <div id="order-section" class="mt-4">
-        <div class="mb-2 flex items-center justify-between">
-          <span class="text-sm font-semibold text-gray-800">关联订单</span>
-          <button class="js-quick-nav flex items-center gap-1 text-xs text-primary transition hover:underline" data-target="page-my-orders">查看全部订单 →</button>
-        </div>
-        <div class="overflow-hidden rounded-lg border border-gray-100">
-          <table class="w-full text-sm">
-            <thead>
-              <tr class="bg-gray-50 text-left text-xs text-gray-500">
-                <th class="px-4 py-2.5 font-medium">订单编号</th>
-                <th class="px-4 py-2.5 font-medium">服务名称</th>
-                <th class="px-4 py-2.5 font-medium">金额</th>
-                <th class="px-4 py-2.5 font-medium">状态</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100 text-gray-700">
-              <tr><td class="px-4 py-3">FW-2024-1110-01</td><td class="px-4 py-3">高企认定审计服务</td><td class="px-4 py-3">¥8,000</td><td class="px-4 py-3"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td></tr>
-              <tr><td class="px-4 py-3">FW-2024-1110-02</td><td class="px-4 py-3">发明专利快速预审代办</td><td class="px-4 py-3">¥5,000</td><td class="px-4 py-3"><span class="rounded bg-blue-50 px-1.5 py-0.5 text-xs text-blue-600">服务中</span></td></tr>
-              <tr><td class="px-4 py-3">FW-2024-1108-01</td><td class="px-4 py-3">知识产权贯标认证</td><td class="px-4 py-3">¥30,000</td><td class="px-4 py-3"><span class="rounded bg-amber-50 px-1.5 py-0.5 text-xs text-amber-600">待支付</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
       <!-- 项目结果登记 -->
       <div id="result-register-section" class="mt-4">
         <div class="mb-2 flex items-center justify-between">
@@ -5773,7 +5764,7 @@
         <button id="task-log-close" class="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition hover:bg-gray-100 hover:text-gray-600">✕</button>
       </div>
       <div class="flex gap-1 border-b border-gray-100 px-4">
-        <button class="task-log-tab task-log-tab-active" data-tab="qc">质检过程日志</button>
+        <button class="task-log-tab task-log-tab-active" data-tab="activity">执行日志</button>
         <button class="task-log-tab" data-tab="review">审核日志</button>
         <button class="task-log-tab" data-tab="version">历史版本</button>
       </div>
@@ -6984,9 +6975,7 @@
     <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4"><b>确认下单</b><button class="text-gray-400 hover:text-gray-600" onclick="closeHealthOrder()">✕</button></div>
     <div class="flex-1 overflow-auto p-5">
       <div class="rounded-lg bg-gray-50 p-3"><b id="health-ord-name">研发费用归集整改服务</b><div id="health-ord-price-sub" class="mt-1 text-xs text-gray-400">￥2,000 / 次</div></div>
-      <div class="mt-3"><div class="mb-1 block text-xs text-gray-500" id="health-ord-issues-title">关联问题清单</div><div class="rounded-md border border-gray-100 p-3 text-sm text-gray-600" id="health-ord-issues" aria-labelledby="health-ord-issues-title">对应差距项（由服务入口带入）</div></div>
-      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">关联测评单</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>JC-2024-1102</option></select></div>
-      <div class="mt-3"><label class="mb-1 block text-xs text-gray-500">发票信息</label><select class="h-9 w-full rounded-lg border border-gray-200 px-3 text-sm outline-none focus:border-primary"><option>不开票</option><option>普票</option><option>专票</option></select></div>
+      <div class="mt-3"><div class="mb-1 block text-xs text-gray-500" id="health-ord-issues-title">关联服务清单</div><div class="rounded-md border border-gray-100 p-3 text-sm text-gray-600" id="health-ord-issues" aria-labelledby="health-ord-issues-title">对应差距项（由服务入口带入）</div></div>
       <div class="mt-3">
         <label class="mb-1 block text-xs text-gray-500">支付方式</label>
         <div class="grid grid-cols-2 gap-3">
@@ -7495,13 +7484,13 @@
     const editorProjectName = document.getElementById('editor-project-name');
 
     let trustSelecting = false;
-    let trustOrderFlow = false;
+    let cultivationPaymentOrder = null;
     function renderTrustBtn() {
       if (trustSelecting) {
         const n = document.querySelectorAll('.task-select:checked').length;
         drawerUpgradeBtn.innerHTML = '确认托管（已选 ' + n + ' 项）';
       } else {
-        drawerUpgradeBtn.innerHTML = '升级托管服务 <span class="rounded bg-white/20 px-1.5 py-0.5">¥9,800</span>';
+        drawerUpgradeBtn.innerHTML = '选择任务下单托管';
       }
     }
 
@@ -7522,7 +7511,7 @@
       });
     }
     syncCultivationProjects();
-    function cultivationTaskRows(){return Array.from(CULTIVATION_PROJECTS.values()).flatMap(project=>project.tasks.map(task=>({...task,project:project.name,type:project.type})));}
+    function cultivationTaskRows(){return Array.from(CULTIVATION_PROJECTS.values()).flatMap(project=>project.tasks.map(task=>({...task,project:project.name,type:task.orderId?'托管':'自主',status:task.orderId && getOrderPackage(task.orderId)?.status==='待支付'?'待支付':task.status})));}
     function cultivationTaskToday(){return new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Shanghai',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());}
     function isCultivationTaskOverdue(task,today){return task.status!=='已完成'&&/^\d{4}-\d{2}-\d{2}$/.test(task.deadline)&&task.deadline<today;}
     function filteredCultivationTasks(tasks,filters,today){
@@ -7582,12 +7571,6 @@
       window.TaskCalendar?.render(tasks,all);
     }
     let currentCultivationProject=null;
-    function renderCultivationProjectTasks(project){
-      currentCultivationProject=project;
-      if(!cultivationTaskBody)return;
-      const e=orderEscape;
-      cultivationTaskBody.innerHTML=project.tasks.map(task=>'<tr data-cult-task-id="'+e(task.id)+'"><td class="task-select-col hidden px-3 py-3"><input type="checkbox" class="task-select" aria-label="选择'+e(task.name)+'"></td><td class="px-4 py-3">'+e(task.name)+'</td><td class="px-4 py-3 text-gray-500">'+e(task.output)+'</td><td class="px-4 py-3 text-gray-500">'+e(task.deadline||'未设置')+'</td><td class="px-4 py-3"><select class="cult-task-status-edit" data-cult-task-status="'+e(task.id)+'" aria-label="'+e(task.name)+'状态">'+['待处理','进行中','待审核','已完成'].map(status=>'<option'+(task.status===status?' selected':'')+'>'+status+'</option>').join('')+'</select></td><td class="log-col px-4 py-3"><button class="cult-task-open" type="button" data-cult-task-log="'+e(task.id)+'">查看日志</button></td><td class="deliverable-col hidden px-4 py-3"><button class="cult-task-open" type="button" data-cult-task-output="'+e(task.id)+'">查看交付物</button></td><td class="upload-col px-4 py-3"><button class="cult-task-open" type="button" data-cult-task-upload="'+e(task.id)+'">上传材料</button></td></tr>').join('');
-    }
     function findCultivationTask(id){for(const project of CULTIVATION_PROJECTS.values()){const task=project.tasks.find(t=>t.id===id);if(task)return {project,task};}return null;}
     function openCultivationTask(id){const found=findCultivationTask(id);if(!found)return;openDrawer({dataset:{name:found.project.name,type:found.project.type,status:found.project.status}});const row=Array.from(cultivationTaskBody.rows).find(row=>row.dataset.cultTaskId===id);if(row){row.scrollIntoView({block:'center'});row.classList.add('cult-task-focus');row.querySelector('select')?.focus({preventScroll:true});}}
     document.getElementById('page-tasks').addEventListener('click',event=>{const btn=event.target.closest('[data-cult-task-open]');if(btn)openCultivationTask(btn.dataset.cultTaskOpen);});
@@ -7603,14 +7586,14 @@
       });
     });
     document.getElementById('project-drawer').addEventListener('change',event=>{
-      const input=event.target.closest('[data-cult-task-status]');if(!input)return;const found=findCultivationTask(input.dataset.cultTaskStatus);if(!found)return;found.task.status=input.value;renderCultivationTasks();
+      const input=event.target.closest('[data-cult-task-status]');if(!input)return;const found=findCultivationTask(input.dataset.cultTaskStatus);if(!found)return;if(found.task.status!==input.value) appendTaskLog(found.task,'状态更新',found.task.status+' → '+input.value);found.task.status=input.value;renderCultivationTasks();
       const completed=found.project.tasks.filter(t=>t.status==='已完成').length;
-      document.querySelectorAll('#project-list .project-card').forEach(row=>{if(row.dataset.name===found.project.name)row.cells[3].textContent=completed+'/'+found.project.tasks.length;});
+      document.querySelectorAll('#project-list .project-card').forEach(row=>{if(row.dataset.name===found.project.name && row.cells)row.cells[3].textContent=completed+'/'+found.project.tasks.length;});
     });
     document.getElementById('project-drawer').addEventListener('click',event=>{
       const btn=event.target.closest('[data-cult-task-log],[data-cult-task-output],[data-cult-task-upload]');if(!btn)return;
       const found=findCultivationTask(btn.dataset.cultTaskLog||btn.dataset.cultTaskOutput||btn.dataset.cultTaskUpload);if(!found)return;
-      if(btn.dataset.cultTaskLog)openTaskLog(found.task.name);else if(btn.dataset.cultTaskOutput)openDeliverableDetail(found.task.output);else openUploadModal(found.task.output);
+      if(btn.dataset.cultTaskLog)openTaskLog(found.task.name,found.task);else if(btn.dataset.cultTaskOutput)openDeliverableDetail(found.task.output);else openUploadModal(found.task.output);
     });
     renderCultivationTasks();
     startSidebarTodoAutoScroll();
@@ -7634,21 +7617,7 @@
       drawerStatus.className = statusStyles[status] || statusStyles['进行中'];
       editorProjectName.textContent = name + ' · 申报书';
 
-      const isSelf = type === '自主';
-      drawerUpgradeBtn.classList.toggle('hidden', !isSelf);
-
-      // 订单/结果登记仅托管（下单）项目有，自主项目去掉
-      const orderSection = document.getElementById('order-section');
-      const resultSection = document.getElementById('result-register-section');
-      if (orderSection) orderSection.classList.toggle('hidden', isSelf);
-      if (resultSection) resultSection.classList.toggle('hidden', isSelf);
-
-      // 托管项目由服务人员上传材料，隐藏用户自行上传列
-      document.querySelectorAll('.upload-col').forEach(function (el) { el.classList.toggle('hidden', !isSelf); });
-      // 托管项目显示交付物操作列，自主项目隐藏
-      document.querySelectorAll('.deliverable-col').forEach(function (el) { el.classList.toggle('hidden', isSelf); });
-      // 日志列（质检/审核/版本）仅托管项目显示
-      document.querySelectorAll('.log-col').forEach(function (el) { el.classList.toggle('hidden', isSelf); });
+      document.getElementById('result-register-section')?.classList.toggle('hidden',type==='自主');
 
       drawerOverlay.classList.remove('pointer-events-none', 'opacity-0');
       projectDrawer.classList.remove('translate-x-full');
@@ -7719,20 +7688,16 @@
       }
     });
 
-    // 升级托管服务 → 勾选要托管的单独任务 → 确认后进入支付与订单
     drawerUpgradeBtn.addEventListener('click', () => {
       if (trustSelecting) {
-        const n = document.querySelectorAll('.task-select:checked').length;
-        if (n === 0) { showToast('请先勾选需要托管的任务', 'warning'); return; }
-        currentHealthProject = drawerName.textContent;
-        trustOrderFlow = true;
-        closeDrawer();
-        openHealthOrder('全程托管服务', '¥9,800', [], 'page-project');
-      } else {
-        trustSelecting = true;
-        document.querySelectorAll('.task-select-col').forEach((el) => el.classList.remove('hidden'));
-        renderTrustBtn();
+        const ids=Array.from(cultivationTaskBody.querySelectorAll('.task-select:checked'),input=>input.closest('tr').dataset.cultTaskId);
+        if (!ids.length) { showToast('请先勾选需要托管的任务','warning'); return; }
+        createTaskOrder(ids);
+        return;
       }
+      trustSelecting=true;
+      projectDrawer.querySelectorAll('.task-select-col').forEach(cell=>cell.classList.remove('hidden'));
+      renderTrustBtn();
     });
     document.addEventListener('change', (e) => {
       if (e.target.classList.contains('task-select')) renderTrustBtn();
@@ -8772,57 +8737,31 @@
     document.getElementById('version-modal-overlay').addEventListener('click', function (e) { if (e.target === this) closeVersionHistory(); });
 
     // ==================== 任务日志（质检 / 审核 / 版本） ====================
-    function openTaskLog(name) {
-      const title = document.getElementById('task-log-title');
-      if (title) title.textContent = name;
-      switchTaskLogTab('qc');
+    let activeTaskLog = null;
+    function appendTaskLog(task, title, detail, review=false) {
+      const key=review?'reviewLogs':'activityLogs';
+      (task[key] ||= []).push([cultivationTaskToday(),title,detail]);
+    }
+    function openTaskLog(name, task=null) {
+      activeTaskLog=task;
+      document.getElementById('task-log-title').textContent=name;
+      document.querySelector('#task-log-modal [data-tab="review"]').hidden=!task?.orderId;
+      document.querySelector('#task-log-modal [data-tab="version"]').hidden=!task?.orderId;
+      switchTaskLogTab('activity');
       document.getElementById('task-log-overlay').classList.remove('pointer-events-none', 'opacity-0');
       document.getElementById('task-log-modal').classList.remove('scale-95', 'opacity-0');
     }
     function switchTaskLogTab(tab) {
-      document.querySelectorAll('.task-log-tab').forEach(function (b) {
-        b.classList.toggle('task-log-tab-active', b.dataset.tab === tab);
+      if (tab!=='activity' && !activeTaskLog?.orderId) return;
+      document.querySelectorAll('.task-log-tab').forEach(button=>{
+        button.classList.toggle('task-log-tab-active',button.dataset.tab===tab);
       });
-      const body = document.getElementById('task-log-body');
-      const title = document.getElementById('task-log-title');
-      const name = title ? title.textContent : '';
-      if (body) body.innerHTML = renderTaskLogTab(tab, name);
-    }
-    function renderTaskLogTab(tab, name) {
-      if (tab === 'qc') {
-        const rows = [
-          ['2024-11-12 09:30', '资料完整性校验', '通过 · 12 项字段齐全'],
-          ['2024-11-12 11:00', '申报口径核对', '通过 · 与当年度口径一致'],
-          ['2024-11-13 15:20', '数据交叉验证', '通过 · 与官方数据源比对一致'],
-          ['2024-11-14 10:00', '格式与签章检查', '通过 · 附件齐全、签章有效'],
-        ];
-        return renderLogTimeline(rows, 'bg-green-500');
-      }
-      if (tab === 'review') {
-        const rows = [
-          ['2024-11-12 14:00', '顾问初审 · 张伟', '通过'],
-          ['2024-11-13 09:00', '专家复审 · 陈明远', '提出 2 处修订意见，已退回修订'],
-          ['2024-11-14 16:00', '评审专家终审', '通过 · 口径无误'],
-        ];
-        return renderLogTimeline(rows, 'bg-blue-500');
-      }
-      if (tab === 'version') {
-        const versions = [
-          { v: 'v3', label: '定稿', who: '评审专家终审', time: '2024-11-14 16:00', note: '口径无误，交付前锁定' },
-          { v: 'v2', label: '人审修订稿', who: '顾问 张伟 修订', time: '2024-11-13 09:00', note: '按复审意见修订' },
-          { v: 'v1', label: 'AI 生成稿', who: 'AI 引擎自动生成', time: '2024-11-12 09:30', note: '基于企业档案生成' },
-        ];
-        return versions.map(function (x, i) {
-          const latest = i === 0;
-          return '<div class="flex items-center gap-3 rounded-lg border border-gray-100 px-3 py-2.5">' +
-            '<span class="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full text-xs font-semibold ' + (latest ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500') + '">' + x.v + '</span>' +
-            '<div class="min-w-0 flex-1"><div class="flex items-center gap-2"><span class="text-sm font-medium text-gray-800">' + x.label + '</span>' + (latest ? '<span class="rounded bg-green-50 px-1.5 py-0.5 text-[10px] text-green-600">当前</span>' : '') + '</div>' +
-            '<div class="mt-0.5 text-xs text-gray-400">' + x.who + ' · ' + x.time + '</div>' +
-            '<div class="mt-0.5 text-xs text-gray-400">' + x.note + '</div></div>' +
-            '</div>';
-        }).join('');
-      }
-      return '';
+      const task=activeTaskLog;
+      const logs=task?.logs?.map(([date,detail])=>[date,'执行记录',detail])||[];
+      const rows=tab==='review' ? task?.reviewLogs : tab==='version' ? task?.versionLogs : [...logs,...(task?.activityLogs||[])];
+      document.getElementById('task-log-body').innerHTML=rows?.length
+        ? renderLogTimeline(rows.map(row=>row.map(orderEscape)),'bg-blue-500')
+        : '<p class="text-sm text-gray-500">暂无'+({activity:'执行记录',review:'审核记录',version:'历史版本'}[tab])+'</p>';
     }
     function renderLogTimeline(rows, dotClass) {
       return '<div>' + rows.map(function (r, i) {
@@ -9889,7 +9828,10 @@
 
     let currentHealthProject = '专精特新“小巨人”企业';
     function renderHealthProjects() {
-      document.getElementById('health-proj-grid').innerHTML = HEALTH_PROJECTS.slice(0,5).map((p) =>
+      const commonProjects = HEALTH_PROJECTS.slice(0, 5);
+      const featuredIndex = commonProjects.findIndex(project => project.n === '专精特新“小巨人”企业');
+      if (featuredIndex > 0) commonProjects.unshift(...commonProjects.splice(featuredIndex, 1));
+      document.getElementById('health-proj-grid').innerHTML = commonProjects.map((p) =>
         '<article class="u-assess-card assessment-project-card-v2" style="--card:' + p.color + ';--card-bg:' + p.bg + '">' +
           '<div class="u-assess-v2-head"><div class="u-tags"><span class="u-chip blue">' + p.tag + '</span></div><div class="u-assess-v2-ready"><b>' + (p.m == null ? '待核验' : p.m + '%') + '</b><span>匹配度</span></div></div>' +
           '<div class="u-assess-v2-title"><h3>' + p.n + '</h3><span class="u-assess-v2-ai-mark">AI</span></div>' +
@@ -10003,6 +9945,7 @@
     let currentHealthPrice = '';
     let currentHealthOrderItems = [];
     function openHealthOrder(name, price, services = []) {
+      cultivationPaymentOrder=null;
       currentHealthService = name;
       currentHealthPrice = price || '';
       currentHealthOrderItems = services;
@@ -10065,12 +10008,25 @@
     document.getElementById('offline-pay-close').addEventListener('click', closeOfflinePayConsult);
     document.getElementById('offline-pay-overlay').addEventListener('click', function (e) { if (e.target === this) closeOfflinePayConsult(); });
     function completeHealthOrder(offline) {
+      if (cultivationPaymentOrder) {
+        const order=cultivationPaymentOrder;
+        cultivationPaymentOrder=null;
+        if (!offline && order.status==='待支付') {
+          order.status='服务中';
+          order.tasks.forEach(task=>{if(task.status!=='已完成') task.status='进行中';appendTaskLog(task,'订单支付成功',order.id);});
+        }
+        currentHealthService='';
+        currentHealthPrice='';
+        currentHealthOrderItems=[];
+        refreshLinkedTasks();
+        return order;
+      }
       const batch = currentHealthOrderItems.length > 0;
       const amount = currentHealthPrice || '—';
       const services = batch ? currentHealthOrderItems : [{name:currentHealthService,price:amount,issues:[]}];
       const order = addHealthOrder(services, amount, batch, offline);
-      if (!trustOrderFlow) addProjectFromHealth(services.map(service=>service.name).join('、'), batch && offline);
-      trustOrderFlow = false;
+      addProjectFromHealth(services.map(service=>service.name).join('、'), offline);
+      linkHealthProjectOrder(order);
       currentHealthService = '';
       currentHealthPrice = '';
       currentHealthOrderItems = [];
@@ -10080,14 +10036,14 @@
       const name = currentHealthProject || '制造业单项冠军企业（国家级）';
       const orderId = 'FW-' + Date.now() + '-' + ORDER_PACKAGES.length;
       const orderDate = new Date().toLocaleDateString('sv-SE',{timeZone:'Asia/Shanghai'});
-      const pending = batch && offline;
+      const pending = offline;
       const order = {
         id: orderId,
         project: name,
         name: name + (batch ? ' · 补强服务组合' : ' · 托管整包'),
         time: orderDate,
         amount: amount,
-        status: pending ? '待开始' : '服务中',
+        status: pending ? '待支付' : '服务中',
         tasks: services.map(service => ({
             name: service.name, price: service.price, status: pending ? '待开始' : '进行中',
             acceptance: { status: '待提交', steps: [['服务方提交', false, ''], ['平台质检', false, ''], ['企业验收', false, ''], ['验收完成', false, '']] },
@@ -10114,7 +10070,7 @@
       const reportName = currentHealthProject || '制造业单项冠军企业（国家级）';
       const type = kind || '托管';
       const name = kind ? reportName+' · '+type : reportName;
-      if (kind && CULTIVATION_PROJECTS.has(name)) return false;
+      if (CULTIVATION_PROJECTS.has(name)) return false;
       const autonomous = type === '自主';
       const status = pending ? '待开始' : '进行中';
       const grade = document.querySelector('#health-workbook-report .eval-score strong')?.textContent || '';
@@ -10141,7 +10097,7 @@
         '</div>';
       card.querySelector('[data-health-project-report]').addEventListener('click',()=>openHealthResult(reportName));
       list.insertBefore(card, list.firstChild);
-      if (kind) {
+      {
         const row = document.querySelector('#project-list tbody').insertRow();
         row.className = 'project-card';
         Object.assign(row.dataset,{name,type,status});
@@ -10158,6 +10114,12 @@
           name:gap.item,output:gap.direction,deadline:'',status:'待处理',owner:project.owner
         }));
       }
+      if (kind==='托管') {
+        const project=CULTIVATION_PROJECTS.get(name);
+        newTaskOrder(project,project.tasks,'整包托管');
+        refreshOrderList();
+      }
+      renderCultivationTasks();
       return true;
     }
     function orderService(title, price) {
@@ -10271,9 +10233,9 @@
       const rows=orders.map(function(item){
         const p=item.pkg,done=p.tasks.filter(function(t){return t.status==='已完成';}).length;
         const progress=typeof p.progress==='number'?p.progress:Math.round(done/Math.max(p.tasks.length,1)*100);
-        const tasks=p.tasks.map(function(t){return '<div class="op-task"><span>'+e(t.name)+'</span><button type="button" class="op-file" data-order-output="'+e(p.id)+'">▤ '+e(t.output||t.files[0]?.[0]||'待交付成果')+'</button><span class="op-task-status">'+e(t.status)+'</span></div>';}).join('');
+        const tasks=p.tasks.map(function(t){return '<div class="op-task"><span>'+e(t.name)+'</span><button type="button" class="op-file" data-order-output="'+e(p.id)+'">▤ '+e(t.output||t.files?.[0]?.[0]||'待交付成果')+'</button><span class="op-task-status">'+e(t.status)+'</span></div>';}).join('');
         const taskId=root+'-'+item.key+'-tasks';
-        return '<tr class="orders-table-row" id="'+e(root+'-'+item.key)+'"><td><button type="button" class="orders-number js-order-detail" data-order-id="'+e(p.id)+'">'+e(p.id)+'</button><div class="orders-cell-note">'+(pkg.standalone?'独立服务订单':(item.type==='主单'?'项目主单':'关联主单 '+e(pkg.id)))+'</div></td><td><button type="button" class="orders-service-name js-order-detail" data-order-id="'+e(p.id)+'">'+e(p.name)+'</button><div class="orders-cell-note">'+p.tasks.length+' 项服务任务</div></td><td><span class="orders-kind '+item.key+'">'+item.type+'</span></td><td class="orders-date">'+e(p.time)+'</td><td class="orders-table-amount">'+e(p.amount)+'<div class="orders-cell-note">'+(p.amount.startsWith('¥')?'订单金额':'以订单约定为准')+'</div></td><td><span class="orders-status-badge '+(p.status==='已完成'?'done':p.status==='待开始'?'pending':'serving')+'">'+e(p.status)+'</span></td><td><div class="orders-progress-label"><span>'+done+'/'+p.tasks.length+' 项完成</span><b>'+progress+'%</b></div><div class="op-progress" role="progressbar" aria-label="服务任务进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress+'"><i style="width:'+progress+'%"></i></div></td><td class="orders-table-actions"><button type="button" class="orders-link js-order-detail" data-order-id="'+e(p.id)+'">订单详情</button><button type="button" class="orders-text-action" data-order-toggle="'+e(taskId)+'" aria-controls="'+e(taskId)+'" aria-expanded="false">展开任务</button></td></tr><tr id="'+e(taskId)+'" class="orders-task-row" hidden><td colspan="8"><div class="orders-task-heading">'+e(item.type)+'服务任务 <span>各任务独立跟踪进度与交付成果</span></div><div class="op-tasks">'+tasks+'</div></td></tr>';
+        return '<tr class="orders-table-row" id="'+e(root+'-'+item.key)+'"><td><button type="button" class="orders-number js-order-detail" data-order-id="'+e(p.id)+'">'+e(p.id)+'</button><div class="orders-cell-note">'+(p.kind?e(p.kind):pkg.standalone?'独立服务订单':(item.type==='主单'?'项目主单':'关联主单 '+e(pkg.id)))+'</div></td><td><button type="button" class="orders-service-name js-order-detail" data-order-id="'+e(p.id)+'">'+e(p.name)+'</button><div class="orders-cell-note">'+p.tasks.length+' 项服务任务</div></td><td><span class="orders-kind '+item.key+'">'+item.type+'</span></td><td class="orders-date">'+e(p.time)+'</td><td class="orders-table-amount">'+e(p.amount)+'<div class="orders-cell-note">'+(p.amount.startsWith('¥')?'订单金额':'以订单约定为准')+'</div></td><td><span class="orders-status-badge '+(p.status==='已完成'?'done':['待支付','待开始','已取消'].includes(p.status)?'pending':'serving')+'">'+e(p.status)+'</span></td><td><div class="orders-progress-label"><span>'+done+'/'+p.tasks.length+' 项完成</span><b>'+progress+'%</b></div><div class="op-progress" role="progressbar" aria-label="服务任务进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+progress+'"><i style="width:'+progress+'%"></i></div></td><td class="orders-table-actions"><button type="button" class="orders-link js-order-detail" data-order-id="'+e(p.id)+'">订单详情</button><button type="button" class="orders-text-action" data-order-toggle="'+e(taskId)+'" aria-controls="'+e(taskId)+'" aria-expanded="false">展开任务</button></td></tr><tr id="'+e(taskId)+'" class="orders-task-row" hidden><td colspan="8"><div class="orders-task-heading">'+e(item.type)+'服务任务 <span>各任务独立跟踪进度与交付成果</span></div><div class="op-tasks">'+tasks+'</div></td></tr>';
       }).join('');
       const header=pkg.standalone?'<header class="orders-project-header"><div><span class="orders-project-icon">▤</span>独立订单<span class="orders-project-count">不关联培育项目 · 独立服务</span></div></header>':'<header class="orders-project-header"><div><span class="orders-project-icon">▣</span>关联项目：<b>'+e(pkg.project)+'</b><span class="orders-project-count">主单 1 · 整改单 '+extras.filter(function(p){return p===extras[0];}).length+' · 工具消费单 '+Math.max(extras.length-1,0)+'</span></div><button type="button" class="orders-text-action" onclick="goToPage(\'page-project\',\'培育项目\')">查看项目 →</button></header>';
       return header+'<div class="orders-table-scroll"><table class="orders-data-table"><caption class="orders-sr-only">'+(pkg.standalone?'独立订单列表':'项目关联订单列表')+'</caption><colgroup><col style="width:19%"><col style="width:22%"><col style="width:9%"><col style="width:10%"><col style="width:11%"><col style="width:8%"><col style="width:12%"><col style="width:9%"></colgroup><thead><tr><th scope="col">订单编号 / 关联</th><th scope="col">服务名称</th><th scope="col">订单类型</th><th scope="col">下单时间</th><th scope="col">订单金额</th><th scope="col">订单状态</th><th scope="col">履约进度</th><th scope="col">操作</th></tr></thead><tbody>'+(rows||'<tr><td colspan="8" class="orders-no-results">未找到符合条件的订单，请调整筛选条件或搜索关键词。</td></tr>')+'</tbody></table></div>'+(pkg.standalone?'':'<div class="orders-project-gaps">'+gapHTML+'</div>');
@@ -10314,6 +10276,207 @@
       const visibleStandalone = standaloneOrders.filter(order=>orderMatchesFilters(order,'主单')).length;
       document.getElementById('orders-result-count').textContent='共 '+(visibleSample+visibleHealth.length+visibleStandalone)+' 笔订单';
     }
+    const taskLink=(label,action,id)=>'<button type="button" class="cult-task-open" data-cult-action="'+action+'" data-id="'+orderEscape(id)+'">'+label+'</button>';
+    const taskHeaders=labels=>labels.map(label=>'<th scope="col" class="px-3 py-2">'+label+'</th>').join('');
+    const taskCells=values=>values.map(value=>'<td class="px-3 py-3">'+value+'</td>').join('');
+    function taskOrderActions(order){
+      return order.status==='待支付' ? taskLink('去支付','pay',order.id)+(order.kind==='单项托管'?' '+taskLink('取消订单','cancel',order.id):'') : taskLink('查看订单进度','order',order.id);
+    }
+    function taskDelivery(task,parent){
+      const file=task.files?.[0]?.[0];
+      return file?taskLink(orderEscape(file),'delivery',parent?parent.id+'|'+task.id:task.id):orderEscape(task.orderId?'—':task.output||'—');
+    }
+    function taskChildren(task){
+      return '<table class="cultivation-child-table"><caption><span>子任务 · 共 '+task.children.length+' 项</span></caption><thead><tr class="text-left text-gray-500">'+taskHeaders(['子任务编号','子任务名称','负责人','截止时间','任务状态','交付物','操作'])+'</tr></thead><tbody>'+task.children.map(child=>'<tr>'+taskCells([orderEscape(child.id),orderEscape(child.name),orderEscape(child.owner),orderEscape(child.deadline||'以订单为准'),orderEscape(child.status),taskDelivery(child,task),taskLink('查看日志','log',task.id+'|'+child.id)+(child.status==='待验收'?' '+taskLink('确认验收','accept',task.id+'|'+child.id):'')])+'</tr>').join('')+'</tbody></table>';
+    }
+    function renderCultivationProjectTasks(project){
+      currentCultivationProject=project;
+      const e=orderEscape;
+      const table=cultivationTaskBody.closest('table');
+      table.style.minWidth='960px';
+      table.style.fontSize='12px';
+      table.classList.add('cultivation-drawer-table');
+      table.parentElement.style.overflowX='auto';
+      table.tHead.innerHTML='<tr class="bg-gray-50 text-left text-xs text-gray-500"><th class="task-select-col hidden"><span class="sr-only">选择任务</span></th>'+taskHeaders(['任务编号','任务名称','任务类型','关联订单号','执行方式 / 负责人','截止时间','任务状态','交付物','操作'])+'</tr>';
+      cultivationTaskBody.innerHTML=project.tasks.map(task=>{
+        const order=task.orderId && getOrderPackage(task.orderId);
+        const eligible=!order && task.status!=='已完成' && project.type==='自主';
+        const status=order?e(order.status==='待支付'?'已下单 · 待支付':task.status):'<select class="cult-task-status-edit" data-cult-task-status="'+e(task.id)+'" aria-label="'+e(task.name)+'状态">'+['待处理','进行中','待审核','已完成'].map(state=>'<option'+(task.status===state?' selected':'')+'>'+state+'</option>').join('')+'</select>';
+        const childId='cult-children-'+task.id;
+        const children=task.children?.length;
+        let actions=taskLink('查看日志','log',task.id)+' '+(order?taskOrderActions(order):taskLink('上传材料','upload',task.id));
+        if(eligible) actions+=' '+taskLink('下单托管','create',task.id);
+        if(children) actions+=' <button type="button" class="cult-task-open" data-cult-action="expand" data-id="'+e(task.id)+'" aria-expanded="true" aria-controls="'+e(childId)+'">收起具体清单</button>';
+        return '<tr data-cult-task-id="'+e(task.id)+'"><td class="task-select-col hidden px-3">'+(eligible?'<input type="checkbox" class="task-select" aria-label="选择'+e(task.name)+'">':'')+'</td>'+taskCells([e(task.id),'<b>'+e(task.name)+'</b>',order?'托管完成':'企业自主完成',order?taskLink(e(order.id),'order',order.id):'—',(order?'托管 · ':'企业自行执行 · ')+e(task.owner),e(task.deadline||(order?'以订单为准':'未设置')),status,taskDelivery(task),actions])+'</tr>'+(children?'<tr id="'+e(childId)+'"><td colspan="10" class="px-4">'+taskChildren(task)+'</td></tr>':'');
+      }).join('');
+      drawerUpgradeBtn.classList.toggle('hidden',project.type!=='自主'||!project.tasks.some(task=>!task.orderId&&task.status!=='已完成'));
+    }
+    function renderLinkedOrder(order){
+      const e=orderEscape;
+      return '<div class="flex gap-4 py-3">'+taskLink('查看项目任务','project',order.id)+(order.status==='待支付'?taskOrderActions(order):'')+'</div><ul class="order-checklist">'+order.tasks.map(task=>'<li class="oc-item"><div class="oc-body"><div class="oc-title"><b>'+e(task.id)+' · '+e(task.name)+'</b></div><div class="oc-meta">'+e(task.owner)+' · '+e(task.deadline||'以订单为准')+' · '+e(order.status==='待支付'?'待支付':task.status)+'</div>'+taskLink('查看日志','log',task.id)+' '+taskDelivery(task)+(task.children?.length?taskChildren(task):'')+'</div></li>').join('')+'</ul>';
+    }
+    function bindTaskOrder(order,project,tasks,kind){
+      order.projectId=project.id;
+      order.kind=kind;
+      order.tasks=tasks;
+      tasks.forEach(task=>{
+        if (!task.orderId) appendTaskLog(task,'关联托管订单',order.id);
+        task.previousOwner=task.owner;
+        task.previousStatus=task.status;
+        task.orderId=order.id;
+        task.owner='平台交付团队';
+        if(order.status==='服务中' && task.status!=='已完成') task.status='进行中';
+      });
+    }
+    function newTaskOrder(project,tasks,kind,status='待支付'){
+      const order={id:'DD-'+Date.now()+'-'+ORDER_PACKAGES.length,project:project.name,name:project.name+' · '+kind,time:cultivationTaskToday(),amount:kind==='整包托管'?'¥9,800':'¥'+(tasks.length*2000).toLocaleString('en-US'),status};
+      bindTaskOrder(order,project,tasks,kind);
+      ORDER_PACKAGES.push(order);
+      healthCreatedOrders.unshift(order);
+      return order;
+    }
+    function refreshLinkedTasks(){
+      trustSelecting=false;
+      renderTrustBtn();
+      if(currentCultivationProject && !projectDrawer.classList.contains('translate-x-full')) renderCultivationProjectTasks(currentCultivationProject);
+      renderCultivationTasks();
+      refreshOrderList();
+    }
+    function createTaskOrder(ids){
+      const project=currentCultivationProject;
+      if(project?.type!=='自主') return;
+      const tasks=project.tasks.filter(task=>ids.includes(task.id)&&!task.orderId&&task.status!=='已完成');
+      if(!tasks.length) return;
+      newTaskOrder(project,tasks,'单项托管');
+      refreshLinkedTasks();
+    }
+    function linkHealthProjectOrder(order){
+      const project=CULTIVATION_PROJECTS.get(order.project);
+      if(project?.type!=='托管') return;
+      const serviceTasks=order.tasks;
+      const tasks=project.tasks.filter(task=>!task.orderId);
+      if(tasks.length){
+        tasks[0].children=serviceTasks.map((task,index)=>({...task,id:tasks[0].id+'-'+(index+1),projectId:project.id,orderId:order.id,owner:'平台交付团队'}));
+        bindTaskOrder(order,project,tasks,'整包托管');
+      } else {
+        serviceTasks.forEach((task,index)=>Object.assign(task,{id:project.id+'-'+order.id+'-'+(index+1),projectId:project.id}));
+        project.tasks.push(...serviceTasks);
+        bindTaskOrder(order,project,serviceTasks,'补强服务');
+      }
+      refreshLinkedTasks();
+    }
+    document.addEventListener('click',event=>{
+      const button=event.target.closest('[data-cult-action]');
+      if(!button) return;
+      const {cultAction:action,id}=button.dataset;
+      if(action==='expand'){
+        const row=document.getElementById(button.getAttribute('aria-controls'));
+        row.hidden=!row.hidden;
+        button.setAttribute('aria-expanded',String(!row.hidden));
+        button.textContent=row.hidden?'展开具体清单':'收起具体清单';
+        return;
+      }
+      if(action==='create'){createTaskOrder([id]);return;}
+      if(['log','upload','delivery','accept'].includes(action)){
+        const [parentId,childId]=id.split('|');
+        const found=findCultivationTask(parentId);
+        if(!found) return;
+        const parent=found.task;
+        const task=childId?parent.children.find(child=>child.id===childId):parent;
+        if(!task) return;
+        if(action==='log') openTaskLog(task.name,task);
+        if(action==='upload' && !task.orderId) {
+          const picker=document.createElement('input');
+          picker.type='file';
+          picker.addEventListener('change',()=>{
+            if(!picker.files.length || task.orderId) return;
+            task.files=[[picker.files[0].name,'']];
+            appendTaskLog(task,'上传交付物',picker.files[0].name);
+            refreshLinkedTasks();
+            showToast('已记录交付物','success');
+          });
+          picker.click();
+        }
+        if(action==='delivery') openDeliverableDetail(task.files[0][0]);
+        if(action==='accept' && task.status==='待验收'){
+          task.status='已完成';
+          appendTaskLog(task,'交付物验收','企业确认通过',true);
+          appendTaskLog(parent,'子任务验收',task.name+' · 企业确认通过',true);
+          if(parent.children.every(child=>child.status==='已完成')) parent.status='已完成';
+          const order=getOrderPackage(parent.orderId);
+          if(order.tasks.every(item=>item.status==='已完成')) order.status='已完成';
+          refreshLinkedTasks();
+          if(!document.getElementById('order-detail-view').classList.contains('hidden')) openOrderDetailById(order.id);
+        }
+        return;
+      }
+      const order=getOrderPackage(id);
+      if(!order || order.status==='已取消') return;
+      if(action==='order'){
+        closeDrawer();
+        goToPage('page-my-orders','我的订单');
+        openOrderDetailById(id);
+      }
+      if(action==='project' && order.tasks.length){
+        goToPage('page-project','培育项目');
+        openCultivationTask(order.tasks[0].id);
+      }
+      if(action==='pay' && order.status==='待支付'){
+        closeDrawer();
+        openHealthOrder(order.name,order.amount,order.tasks.map(task=>({name:task.name,price:'',issues:[]})));
+        cultivationPaymentOrder=order;
+      }
+      if(action==='cancel' && order.status==='待支付' && order.kind==='单项托管'){
+        order.tasks.forEach(task=>{
+          appendTaskLog(task,'取消托管订单',order.id);
+          delete task.orderId;
+          task.owner=task.previousOwner;
+          task.status=task.previousStatus;
+          delete task.previousOwner;
+          delete task.previousStatus;
+        });
+        order.tasks=[];
+        order.status='已取消';
+        refreshLinkedTasks();
+        if(!document.getElementById('order-detail-view').classList.contains('hidden')) closeOrderDetail();
+      }
+    });
+    function seedCultivationOrders(){
+      CULTIVATION_PROJECTS.forEach(project=>{
+        if(project.type==='托管') newTaskOrder(project,project.tasks,'整包托管',project.status==='已完成'?'已完成':'服务中');
+      });
+      const project=CULTIVATION_PROJECTS.get('2024年高新技术企业认定');
+      if(!project) return;
+      const demo=[
+        ['知识产权梳理与布局规划','已完成','2026-11-25','知识产权清单.pdf'],
+        ['研发费用归集辅导','进行中','2026-12-05'],
+        ['高企认定申请书撰写','进行中',''],
+        ['科技成果转化证明材料整理','待处理','2026-12-10'],
+        ['年度审计报告对接','待处理','']
+      ];
+      project.tasks=demo.map(([name,status,deadline,file],index)=>({id:'PY-00'+(index+1),projectId:project.id,name,status,deadline,owner:'张伟',files:file?[[file,'PDF']]:[]}));
+      project.tasks[0].activityLogs=[
+        ['2026-11-16 09:30','开始执行','张伟领取任务，梳理企业现有专利及软件著作权。'],
+        ['2026-11-17 15:20','上传交付物','张伟上传《知识产权清单.pdf》。'],
+        ['2026-11-18 10:00','完成任务','张伟核对清单后将任务状态更新为已完成。']
+      ];
+      project.tasks[1].activityLogs=[
+        ['2026-11-18 09:15','开始执行','张伟整理本年度研发项目台账。'],
+        ['2026-11-19 14:40','更新执行进度','已收集研发人员工时记录，正在核对费用凭证。']
+      ];
+      project.tasks[3].activityLogs=[
+        ['2026-11-19 16:00','创建任务','已将成果转化证明材料整理纳入培育计划。']
+      ];
+      const writing=project.tasks[2];
+      const order=newTaskOrder(project,[writing],'单项托管','服务中');
+      writing.children=[
+        {id:'PY-003-1',name:'梳理申报材料与填报口径',projectId:project.id,orderId:order.id,owner:'平台张三',deadline:'2026-11-25',status:'进行中',files:[]},
+        {id:'PY-003-2',name:'提交申请书初稿',projectId:project.id,orderId:order.id,owner:'平台李四',deadline:'2026-11-25',status:'待验收',files:[['高企认定申请书初稿.docx','DOCX']]}
+      ];
+      newTaskOrder(project,[project.tasks[4]],'单项托管');
+    }
+    seedCultivationOrders();
+    renderCultivationTasks();
     refreshOrderList();
     document.querySelectorAll('[data-order-status]').forEach(function(button){button.addEventListener('click',function(){document.querySelectorAll('[data-order-status]').forEach(function(tab){tab.classList.toggle('active',tab===button);tab.setAttribute('aria-selected',String(tab===button));});refreshOrderList();});});
     document.getElementById('orders-search').addEventListener('input',refreshOrderList);
@@ -10324,13 +10487,13 @@
       const toggle=event.target.closest('[data-order-toggle]');
       if(toggle){const panel=document.getElementById(toggle.dataset.orderToggle);panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',String(!panel.hidden));toggle.textContent=panel.hidden?'展开任务':'收起任务';}
       const output=event.target.closest('[data-order-output]');
-      if(output){const task=output.closest('.op-task');const pkg=getOrderPackage(output.dataset.orderOutput);const index=Array.from(task.parentElement.children).indexOf(task);const t=pkg.tasks[index];showToast(t.files.length?'交付物查看演示：'+t.files.map(function(f){return f[0];}).join('、'):'该任务正在处理中，交付物待生成','info');}
+      if(output){const task=output.closest('.op-task');const pkg=getOrderPackage(output.dataset.orderOutput);const index=Array.from(task.parentElement.children).indexOf(task);const t=pkg.tasks[index];showToast(t?.files?.length?'交付物查看演示：'+t.files.map(function(f){return f[0];}).join('、'):'该任务正在处理中，交付物待生成','info');}
       const detail=event.target.closest('.js-order-detail');if(detail)event.preventDefault();
       const action=event.target.closest('a[href$="-action"]');if(action){const target=document.getElementById(action.getAttribute('href').slice(1));if(target)target.open=true;}
     });
 
     function getOrderPackage(id) {
-      return ORDER_PACKAGES.find(function (p) { return p.id === id; }) || ORDER_PACKAGES[0];
+      return ORDER_PACKAGES.find(function (p) { return p.id === id; });
     }
     function openOrderDetailById(id) {
       const holder = document.createElement('span');
@@ -10352,7 +10515,7 @@
       document.getElementById('order-detail-price').textContent = pkg.amount;
       document.getElementById('order-detail-timeline').innerHTML = renderOrderTimeline(pkg.status);
       document.getElementById('order-detail-task-count').textContent = pkg.tasks.length + ' 项';
-      document.getElementById('order-detail-tasks').innerHTML = renderOrderTasks(pkg);
+      document.getElementById('order-detail-tasks').innerHTML = pkg.projectId ? renderLinkedOrder(pkg) : renderOrderTasks(pkg);
       lucide.createIcons();
 
       document.getElementById('order-list-view').classList.add('hidden');
